@@ -1,0 +1,23 @@
+mat-card{
+  width: fit-content;
+  height: fit-content;
+  max-width: 300px;
+  max-height: 450px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+mat-card-header{
+  width: fit-content;
+}
+mat-card-content{
+  background-color: #333333;
+  border-radius: 10px;
+  width: 100%
+}
+img{
+  max-height: 20%;
+  max-width: 20%;
+}

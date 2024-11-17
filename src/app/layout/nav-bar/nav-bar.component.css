@@ -1,0 +1,36 @@
+mat-toolbar {
+    background-color: #A1C084;
+    justify-content: space-between;
+}
+
+.btn {
+  color: black !important;
+  background-color: #A1C084 !important;
+  border: none !important;
+  box-shadow: none !important;
+  float: left;
+}
+.btn:hover {
+  background-color: #556B2F !important;
+}
+
+.account_button{
+  color: black !important;
+  transform: scale(1.65);
+}
+
+div {
+    width: fit-content;
+    justify-content: flex-end;
+    align-items: center;
+    justify-self: center;
+}
+
+button {
+    margin-right: 10px;
+}
+
+span {
+    color: white;
+    justify-content: center;
+}

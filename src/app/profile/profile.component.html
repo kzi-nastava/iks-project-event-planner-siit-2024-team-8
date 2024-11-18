@@ -1,0 +1,55 @@
+<div class="outer-container">
+  <div class="profile-container">
+    <div class="user-info">
+      <div class="user-details">
+        <h2>User Name</h2>
+        <p>Type of User</p>
+      </div>
+
+      <div class="additional-info">
+        <h3>Email</h3>
+        <p>user.com</p>
+
+        <h3>Name and Surname</h3>
+        <p>Full Name</p>
+
+        <h3>Address</h3>
+        <p>123 Bla Bla</p>
+
+        <h3>Phone Number</h3>
+        <p>613089</p>
+
+        <h3>Account Status</h3>
+        <p>Verified</p>
+      </div>
+
+      <div class="company-info">
+        <h3>Company Name</h3>
+        <p>Company ABC</p>
+
+        <h3>Description</h3>
+        <p>Description of the company goes here.</p>
+      </div>
+
+      <div class="user-actions">
+        <button mat-raised-button class="btn action-button">
+          <img src="assets/asset1.png" alt="Edit" />
+        </button>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <div class="profile-picture-container">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+          alt="Profile Picture"
+          class="profile-picture"
+        />
+        <div class="button-container">
+          <button mat-raised-button color="primary" class="btn my-assets-btn">My Assets</button>
+          <button mat-raised-button color="primary" class="btn create-asset-btn" (click)="navigateToCreateAsset()">Create Asset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

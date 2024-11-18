@@ -1,0 +1,165 @@
+.outer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    margin: 40px;
+  }
+  
+  .service-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    align-items: flex-start;
+  }
+  
+  .upload-section {
+    padding: 20px;
+    text-align: center; 
+  }
+  
+  .carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  
+  .carousel-images {
+    display: flex;
+    overflow: hidden;
+  }
+  
+  .carousel-image {
+    display: none;
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carousel-image.active {
+    display: block;
+  }
+  
+  button {
+    background: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    margin: 0 20px;
+    border: none;
+  }
+  
+  button:hover {
+    color: #d3d3d3;
+    
+  }
+  
+  .service-details {
+    width: 60%;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-style: italic;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  select,
+  input[type="date"],
+  textarea {
+    width: 100%;
+    max-width: 250px; 
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  textarea {
+    resize: vertical;
+    height: 100px; 
+  }
+  
+  .btn {
+    background-color: #A1C084;
+    color: black;
+    border: none;
+    box-shadow: none !important;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .custom-file-input {
+    background-color: #A1C084;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    width: 120px;
+  }
+  
+  .custom-file-input:hover {
+    background-color: #556B2F;
+    color: black; 
+  }
+  
+  .btn:hover {
+    background-color: #556B2F;
+    color: black; 
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .submit-btn {
+    width: 150px;
+    margin-top: 40px;
+    margin-left: 0px;
+    margin-right: auto;
+    display: block;
+  }
+  
+  .upload-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .upload-section .custom-file-input {
+    display: block;
+    margin: 60px auto 0;
+  }
+  
+  .upload-section .submit-btn {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block; 
+  }
+  

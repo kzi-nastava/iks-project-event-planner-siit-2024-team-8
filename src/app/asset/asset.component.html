@@ -1,0 +1,79 @@
+<div class="outer-container">
+    <div class="service-container">
+      <div class="upload-section">
+      
+        <div *ngIf="images.length > 0" class="carousel">
+          <button (click)="prevImage()">&#10094;</button>
+          <div class="carousel-images">
+            <img *ngFor="let image of images; let i = index" [src]="image" alt="Image {{i+1}}" class="carousel-image" [class.active]="i === currentImageIndex" />
+          </div>
+          <button (click)="nextImage()">&#10095;</button>
+        </div>
+    
+      </div>
+  
+      <div class="service-details">
+        <h2>Service Name</h2>
+  
+        <div class="form-group">
+          <label for="category">Service Category</label>
+          <p id="category">Example Category</p>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Service Name</label>
+          <p id="name">Example Service Name</p>
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Description</label>
+          <p id="description">This is an example description for the service. It gives a brief overview of the service.</p>
+        </div>
+  
+        <div class="form-group">
+          <label for="price">Price</label>
+          <p id="price">$100</p>
+        </div>
+  
+        <div class="form-group">
+          <label for="discount">Discount</label>
+          <p id="discount">10%</p>
+        </div>
+  
+        <div class="form-group">
+          <label for="visibility">Visibility</label>
+          <p id="visibility">Visible</p>
+        </div>
+  
+        <div class="form-group">
+          <label for="availability">Availability</label>
+          <p id="availability">Available</p>
+        </div>
+
+        <div class="form-group">
+          <label for="duration">Duration</label>
+          <p id="duration">2 hours</p>
+        </div>
+  
+        <div class="form-group">
+          <label for="bookingDeadline">Booking Deadline</label>
+          <p id="bookingDeadline">2024-12-01</p>
+        </div>
+          
+        <div class="form-group">
+          <label for="cancellationDeadline">Cancellation Deadline</label>
+          <p id="cancellationDeadline">2024-12-05</p>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmationMethod">Confirmation Method</label>
+          <p id="confirmationMethod">Automatic</p>
+        </div>
+  
+        <div class="button-group">
+          <button mat-raised-button color="primary" class="btn delete-btn" type="delete" disabled>Delete</button>
+          <button mat-raised-button color="primary" class="btn edit-btn" type="edit" disabled>Edit</button>
+        </div>
+      </div>
+    </div>
+</div>

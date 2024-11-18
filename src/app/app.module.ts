@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';  
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,22 +9,27 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { LayoutModule } from './layout/layout.module';
 import { WineModule } from './wine/wine.module';
 import { HomeCardComponent } from './home-card/home-card.component';
-import {MatCard, MatCardContent, MatCardHeader, MatCardImage} from "@angular/material/card";
+import { ProfileComponent } from './profile/profile.component';
+import { CreateAssetComponent } from './create-asset/create-asset.component';
+import { EditAssetComponent } from './edit-asset/edit-asset.component';
+import { AssetComponent } from './asset/asset.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeCardComponent
+    HomeCardComponent,
+    ProfileComponent,
+    CreateAssetComponent,
+    EditAssetComponent,
+    AssetComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
     WineModule,
-    MatCard,
-    MatCardContent,
-    MatCardHeader,
-    MatCardImage
+    MatCardModule,  
   ],
   providers: [
     provideAnimationsAsync()

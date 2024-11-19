@@ -7,33 +7,36 @@
       </div>
 
       <div class="additional-info">
-        <h3>Email</h3>
+        <h3>EMAIL</h3>
         <p>user.com</p>
 
-        <h3>Name and Surname</h3>
+        <h3>NAME AND SURNAME</h3>
         <p>Full Name</p>
 
-        <h3>Address</h3>
+        <h3>ADDRESS</h3>
         <p>123 Bla Bla</p>
 
-        <h3>Phone Number</h3>
+        <h3>PHONE NUMBER</h3>
         <p>613089</p>
 
-        <h3>Account Status</h3>
-        <p>Verified</p>
+        <h3>ACCOUNT STATUS</h3>
+        <p style="font-weight: 500;">Verified</p>
       </div>
 
       <div class="company-info">
-        <h3>Company Name</h3>
+        <h3>COMPANY NAME</h3>
         <p>Company ABC</p>
 
-        <h3>Description</h3>
+        <h3>ABOUT</h3>
         <p>Description of the company goes here.</p>
       </div>
 
-      <div class="user-actions">
+      <div class="profile-actions">
         <button mat-raised-button class="btn action-button">
-          <img src="assets/asset1.png" alt="Edit" />
+          <mat-icon>delete</mat-icon> 
+        </button>
+        <button mat-raised-button class="btn action-button">
+          <mat-icon>edit</mat-icon>  
         </button>
       </div>
     </div>
@@ -45,7 +48,7 @@
           alt="Profile Picture"
           class="profile-picture"
         />
-        <div class="button-container">
+        <div class="specific-actions">
           <button mat-raised-button color="primary" class="btn my-assets-btn">My Assets</button>
           <button mat-raised-button color="primary" class="btn create-asset-btn" (click)="navigateToCreateAsset()">Create Asset</button>
         </div>

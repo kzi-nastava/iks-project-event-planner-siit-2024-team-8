@@ -1,101 +1,101 @@
 <div class="outer-container">
-    <div class="service-container">
-      <div class="upload-section">
-        <h2>Upload Service Images</h2>
-      
-        <div *ngIf="images.length > 0" class="carousel">
-          <button (click)="prevImage()">&#10094;</button>
-          <div class="carousel-images">
-            <img *ngFor="let image of images; let i = index" [src]="image" alt="Image {{i+1}}" class="carousel-image" [class.active]="i === currentImageIndex" />
-          </div>
-          <button (click)="nextImage()">&#10095;</button>
+  <div class="service-container">
+    <div class="upload-section">
+      <h2>Upload Service Images</h2>
+
+      <div *ngIf="images.length > 0" class="carousel">
+        <button (click)="prevImage()">&#10094;</button>
+        <div class="carousel-images">
+          <img *ngFor="let image of images; let i = index" [src]="image" alt="Image {{i+1}}" class="carousel-image" [class.active]="i === currentImageIndex" />
         </div>
-        
-        <label for="fileInput" class="custom-file-input">Choose Files</label>
-        <input type="file" id="fileInput" (change)="onFileSelected($event)" multiple class="file-input" />
+        <button (click)="nextImage()">&#10095;</button>
       </div>
-  
-      <div class="service-details">
-        <h2>Create New Service</h2>
-  
-        <form (ngSubmit)="onSubmit()" #serviceForm="ngForm">
-          <div class="form-group">
-            <label for="category">Service Category</label>
-            <select id="category" name="category" [(ngModel)]="service.category" (change)="onCategoryChange()" required class="form-control">
-              <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-              <option value="none">None of the above</option>
-            </select>
-          </div>
 
-          <div *ngIf="showNewCategoryField" class="form-group">
-            <label for="newCategory">Suggest a New Category</label>
-            <input type="text" id="newCategory" name="newCategory" [(ngModel)]="serviceType.newCategory" class="form-control" />
-          </div>
-  
-          <div class="form-group">
-            <label for="name">Service Name</label>
-            <input type="text" id="name" name="name" [(ngModel)]="service.name" required class="form-control" />
-          </div>
-  
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" [(ngModel)]="service.description" required class="form-control"></textarea>
-          </div>
-  
-          <div class="form-group">
-            <label for="price">Price</label>
-            <input type="number" id="price" name="price" [(ngModel)]="service.price" required class="form-control" />
-          </div>
-  
-          <div class="form-group">
-            <label for="discount">Discount</label>
-            <input type="number" id="discount" name="discount" [(ngModel)]="service.discount" max="100" class="form-control" />
-          </div>
-  
-          <div class="form-group">
-            <label for="visibility">Visibility</label>
-            <select id="visibility" name="visibility" [(ngModel)]="service.visibility" required class="form-control">
-              <option value="visible">Visible</option>
-              <option value="hidden">Hidden</option>
-            </select>
-          </div>
-  
-          <div class="form-group">
-            <label for="availability">Availability</label>
-            <select id="availability" name="availability" [(ngModel)]="service.availability" required class="form-control">
-              <option value="available">Available</option>
-              <option value="unavailable">Unavailable</option>
-            </select>
-          </div>
+      <label for="fileInput" class="custom-file-input">Choose Files</label>
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" multiple class="file-input" />
+    </div>
 
-          <div class="form-group">
-            <label for="duration">Duration</label>
-            <input type="number" id="duration" name="duration" [(ngModel)]="service.duration" required min="1" step="1" class="form-control" />
-          </div>
-  
-          <div class="form-group">
-            <label for="bookingDeadline">Booking Deadline</label>
-            <input type="date" id="bookingDeadline" name="bookingDeadline" [(ngModel)]="service.bookingDeadline" required class="form-control" />
-          </div>
-          
-          <div class="form-group">
-            <label for="cancellationDeadline">Cancellation Deadline</label>
-            <input type="date" id="cancellationDeadline" name="cancellationDeadline" [(ngModel)]="service.cancellationDeadline" required class="form-control" />
-          </div>
+    <div class="service-details">
+      <h2>Create New Service</h2>
 
-          <div class="form-group">
-            <label for="confirmationMethod">Confirmation Method</label>
-            <select id="confirmationMethod" name="confirmationMethod" [(ngModel)]="service.confirmationMethod" required class="form-control">
-              <option value="automatic">Automatic</option>
-              <option value="manual">Manual</option>
-            </select>
-          </div>
-  
-          <div class="form-group">
-            <button mat-raised-button color="primary" class="btn submit-btn" type="submit">Submit</button>
-          </div>
-        </form>
-      </div>
+      <form (ngSubmit)="onSubmit()" #serviceForm="ngForm">
+        <div class="form-group">
+          <label for="category">Service Category</label>
+          <select id="category" name="category" [(ngModel)]="service.category" (change)="onCategoryChange()" required class="form-control">
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            <option value="none">None of the above</option>
+          </select>
+        </div>
+
+        <div *ngIf="showNewCategoryField" class="form-group">
+          <label for="newCategory">Suggest a New Category</label>
+          <input type="text" id="newCategory" name="newCategory" [(ngModel)]="serviceType.newCategory" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="name">Service Name</label>
+          <input type="text" id="name" name="name" [(ngModel)]="service.name" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" [(ngModel)]="service.description" required class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" id="price" name="price" [(ngModel)]="service.price" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="discount">Discount</label>
+          <input type="number" id="discount" name="discount" [(ngModel)]="service.discount" max="100" class="form-control" />
+        </div>
+
+        <!-- Replacing select options with mat-slide-toggle for Visibility -->
+        <div class="form-group">
+          <label for="visibility">Visibility</label>
+          <mat-slide-toggle id="visibility" name="visibility" [(ngModel)]="service.visibility" [checked]="service.visibility" class="toggle-switch">
+            {{ service.visibility ? 'Visible' : 'Hidden' }}
+          </mat-slide-toggle>
+        </div>
+
+        <!-- Replacing select options with mat-slide-toggle for Availability -->
+        <div class="form-group">
+          <label for="availability">Availability</label>
+          <mat-slide-toggle id="availability" name="availability" [(ngModel)]="service.availability" [checked]="service.availability" class="toggle-switch">
+            {{ service.availability ? 'Available' : 'Unavailable' }}
+          </mat-slide-toggle>
+        </div>
+
+        <div class="form-group">
+          <label for="duration">Duration</label>
+          <input type="number" id="duration" name="duration" [(ngModel)]="service.duration" required min="1" step="1" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="bookingDeadline">Booking Deadline</label>
+          <input type="date" id="bookingDeadline" name="bookingDeadline" [(ngModel)]="service.bookingDeadline" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="cancellationDeadline">Cancellation Deadline</label>
+          <input type="date" id="cancellationDeadline" name="cancellationDeadline" [(ngModel)]="service.cancellationDeadline" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="confirmationMethod">Confirmation Method</label>
+          <select id="confirmationMethod" name="confirmationMethod" [(ngModel)]="service.confirmationMethod" required class="form-control">
+            <option value="automatic">Automatic</option>
+            <option value="manual">Manual</option>
+          </select>
+        </div>
+
+        <div class="button-group">
+          <button mat-raised-button class="btn action-btn" type="submit">Submit</button>
+          <button mat-raised-button class="btn action-btn" type="button" (click)="navigateToProfile()">Cancel</button>
+        </div>
+      </form>
     </div>
   </div>
-  
+</div>

@@ -12,4 +12,7 @@ export class LoginComponent {
   navigateToRegister(): void {
     this.router.navigate(['/register']);
   }
+  navigateToKT1(): void {
+    this.router.navigate(['/profile']);
+  }
 }

@@ -3,6 +3,7 @@
   justify-content: space-between;
   gap: 32px;
   margin: 40px;
+  color:#44474E
 }
 
 .service-container {
@@ -34,7 +35,9 @@
   width: 400px;
   height: 300px;
   object-fit: cover;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, border-radius 0.5s ease, box-shadow 0.5s ease;
+  border-radius: 15% !important;
+
 }
 
 .carousel-image.active {
@@ -43,7 +46,7 @@
 
 button {
   background: none;
-  color: white;
+  color: #44474E;
   font-size: 24px;
   cursor: pointer;
   padding: 5px;
@@ -52,7 +55,7 @@ button {
 }
 
 button:hover {
-  color: #d3d3d3;
+  color: #000000;
 }
 
 .service-details {
@@ -100,8 +103,8 @@ textarea {
 }
 
 .btn {
-  background-color: #A1C084;
-  color: black;
+  background-color: #A1C084 !important;
+  color: #ffffff !important;
   border: none;
   box-shadow: none !important;
   display: inline-block;
@@ -109,35 +112,39 @@ textarea {
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
+  border-radius: 16px;
 }
 
 .custom-file-input {
   background-color: #A1C084;
-  color: black;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
-  border-radius: 4px;
+  border-radius: 16px;
   cursor: pointer;
   display: inline-block;
   width: 120px;
+
 }
 
 .custom-file-input:hover {
   background-color: #556B2F;
-  color: black; 
+  cursor: pointer;
+  color: rgb(255, 255, 255); 
 }
 
 .btn:hover {
-  background-color: #556B2F;
-  color: black; 
+  background-color: #556B2F !important;
+  cursor: pointer;
+  color: rgb(255, 255, 255) !important; 
 }
 
 .file-input {
   display: none;
 }
 
-.submit-btn {
+.action-btn {
   width: 150px;
   margin-top: 20px;
 }
@@ -152,9 +159,11 @@ textarea {
   margin: 60px auto 0; 
 }
 
-.upload-section .submit-btn {
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  display: inline-block;
+.button-group {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 0;
+  margin-bottom: 50px;
 }
+

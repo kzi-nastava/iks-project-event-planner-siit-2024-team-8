@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-asset',
   templateUrl: './create-asset.component.html',
   styleUrls: ['./create-asset.component.css']
 })
 export class CreateAssetComponent {
+  constructor(private router: Router) {}
   service = {
     category: '',
     name: '',
@@ -71,5 +72,9 @@ export class CreateAssetComponent {
 
   onSubmit(): void {
     console.log('Form submitted with data:', this.service);
+  }
+
+  navigateToProfile(): void {
+    this.router.navigate(['/profile']);
   }
 }

@@ -5,6 +5,7 @@ import { MaterialModule } from '../infrastructure/material/material.module';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {MatIcon} from "@angular/material/icon";
+import {AppModule} from '../app.module';
 
 
 
@@ -13,12 +14,12 @@ import {MatIcon} from "@angular/material/icon";
     NavBarComponent,
     HomeComponent
   ],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        RouterModule,
-        MatIcon
-    ],
-  exports: [NavBarComponent]
+  imports: [
+    CommonModule,
+    MaterialModule,
+    RouterModule,
+    MatIcon,
+  ],
+  exports: [NavBarComponent, HomeComponent]
 })
 export class LayoutModule { }

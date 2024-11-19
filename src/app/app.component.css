@@ -1,3 +1,8 @@
 h1 {
     color: blue
 }
+hr{
+  transform: scale(2);
+  color: black;
+  background: black;
+}

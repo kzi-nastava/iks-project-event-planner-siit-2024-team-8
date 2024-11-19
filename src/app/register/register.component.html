@@ -1,0 +1,70 @@
+<div class="flex-container">
+<div class="register_div">
+  <h1><strong>Join us</strong></h1>
+  <button (click)="navigateToLogin()" id="link_bttn">Already have an account?</button>
+</div>
+<br>
+<mat-vertical-stepper #stepper>
+  <mat-step label="1 Basic info">
+    <p>*All fields required unless noted</p>
+    <mat-form-field>
+      <mat-label>*First Name</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>*Last Name</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Address</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone number</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="2 Profile image">
+    <p>*Choose your profile image:</p>
+    <div class="image-container">
+      <img [src]="imageUrl" alt="Profile Image" class="profile-image">
+    </div>
+    <div style="align-content: center">
+      <input type="file" accept="image/*" (change)="onFileSelected($event)">
+    </div>
+    <div>
+      <button mat-raised-button matStepperNext [disabled]="!imageSelected">Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="3 Login info">
+    <p>*Enter your login info:</p>
+    <mat-form-field>
+      <mat-label>*Email</mat-label>
+      <input matInput type="email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>*Password</mat-label>
+      <input matInput type="password">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>*Repeat Password</mat-label>
+      <input matInput type="password">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>*Choose profile type:</mat-label>
+      <mat-select [(ngModel)]="profileType">
+        <mat-option value="USER">User</mat-option>
+        <mat-option value="PROVIDER">Provider</mat-option>
+        <mat-option value="ORGANIZER">Organizer</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>Confirm your registration</p>
+    <div>
+      <button mat-raised-button (click)="onSubmit()">Finish</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+</div>

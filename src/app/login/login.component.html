@@ -1,0 +1,22 @@
+<div class="flex-container">
+  <div class="login-div">
+    <h1><strong>Sign in</strong></h1>
+    <button (click)="navigateToRegister()" id="link_bttn" >Don't have an account?</button>
+  </div>
+  <br>
+  <br>
+  <div class="login-div">
+    <p>Please enter your credentials:</p>
+    <form>
+      <label for="email_input">Email address</label>
+      <br>
+      <input matInput id="email_input" name="email_input" type="email">
+      <br>
+      <label for="password_input">Password</label>
+      <br>
+      <input matInput id="password_input" name="password_input" type="password">
+      <br><br>
+      <button mat-raised-button>Enter</button>
+    </form>
+  </div>
+</div>

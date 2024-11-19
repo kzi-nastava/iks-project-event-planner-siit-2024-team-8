@@ -30,12 +30,6 @@ button {background-color: gray !important; color: white !important; font-size: 1
 #link_bttn:hover {
   color: lightgrey !important;
 }
-.image {
-  width: 400px;
-  height: 300px;
-  object-fit: cover;
-  transition: transform 0.5s ease-in-out;
-}
 .image-container {
   text-align: center;
   margin: 20px 0;

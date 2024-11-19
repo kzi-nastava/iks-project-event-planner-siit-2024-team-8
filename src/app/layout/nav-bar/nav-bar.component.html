@@ -1,11 +1,71 @@
+<!--
+
 <mat-toolbar>
-  <div>
-    <button [routerLink]="['wine']" class="btn" mat-raised-button>Events</button>
-    <button [routerLink]="['card']" class="btn" mat-raised-button>Services</button>
-    <button [routerLink]="['add']" class="btn" mat-raised-button>Products</button>
-    <button [routerLink]="['add']" class="btn" mat-raised-button>About</button>
+  <div style="margin-left:15pt">
+    <button  mat-icon-button [routerLink]="['home']">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onClickPlaceholder()">
+      <mat-icon>calendar_month</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onClickPlaceholder()">
+      <mat-icon>chat</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onClickPlaceholder()">
+      <mat-icon>notification_important</mat-icon>
+    </button>
   </div>
+  <div>
+  <button mat-icon-button (click)="onClickPlaceholder()">
+    <mat-icon>settings</mat-icon>
+  </button>
   <button mat-icon-button (click)="navigateToLogin()">
     <mat-icon class="account_button" fontIcon="account_circle"></mat-icon>
   </button>
+  </div>
+</mat-toolbar>
+
+-->
+
+<mat-toolbar>
+  <div class="toolbar-section">
+    <div class="toolbar-button">
+      <button mat-icon-button> <!--[routerLink]="['home']"-->
+        <mat-icon>home</mat-icon>
+      </button>
+      <span>Home</span>
+    </div>
+    <div class="toolbar-button">
+      <button mat-icon-button (click)="onClickPlaceholder()">
+        <mat-icon>calendar_month</mat-icon>
+      </button>
+      <span>Agenda</span>
+    </div>
+    <div class="toolbar-button">
+      <button mat-icon-button (click)="onClickPlaceholder()">
+        <mat-icon>chat</mat-icon>
+      </button>
+      <span>Chats</span>
+    </div>
+    <div class="toolbar-button">
+      <button mat-icon-button (click)="onClickPlaceholder()">
+        <mat-icon>notification_important</mat-icon>
+      </button>
+      <span>Notifications</span>
+    </div>
+  </div>
+  <div class="toolbar-section">
+    <div class="toolbar-button">
+      <button mat-icon-button (click)="onClickPlaceholder()">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <span>Settings</span>
+    </div>
+    <div class="toolbar-button">
+      <button mat-icon-button (click)="navigateToLogin()">
+        <mat-icon class="account_button" fontIcon="account_circle"></mat-icon>
+      </button>
+      <span>Profile</span>
+    </div>
+  </div>
 </mat-toolbar>

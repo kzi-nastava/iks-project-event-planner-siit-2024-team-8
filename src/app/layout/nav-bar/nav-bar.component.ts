@@ -12,4 +12,10 @@ export class NavBarComponent {
   navigateToLogin(): void {
     this.router.navigate(['/login']);
   }
+
+  onClickPlaceholder() {
+    // REMOVE FUNCTION ONCE ALL PAGES ADDED TO THE APP
+    alert("TODO")
+  }
+
 }

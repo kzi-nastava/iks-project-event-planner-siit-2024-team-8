@@ -12,7 +12,6 @@ import {AppModule} from '../app.module';
 @NgModule({
   declarations: [
     NavBarComponent,
-    HomeComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +19,6 @@ import {AppModule} from '../app.module';
     RouterModule,
     MatIcon,
   ],
-  exports: [NavBarComponent, HomeComponent]
+  exports: [NavBarComponent]
 })
 export class LayoutModule { }

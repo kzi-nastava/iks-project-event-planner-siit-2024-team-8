@@ -6,3 +6,13 @@ hr{
   color: black;
   background: black;
 }
+
+.outer-home-div{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+.page-div{
+  width: 100%;
+}

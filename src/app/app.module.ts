@@ -20,6 +20,8 @@ import { AssetCardComponent } from './asset/asset-card/asset-card.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import {MatFormField, MatPrefix} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
+import {HomeComponent} from './layout/home/home.component';
+import { NavBarSideComponent } from './nav-bar-side/nav-bar-side.component';
 
 @NgModule({
   declarations: [
@@ -31,13 +33,14 @@ import {MatInput} from '@angular/material/input';
     AssetComponent,
     HomeCardsComponent,
     AssetCardComponent,
-    SearchBarComponent
+    HomeComponent,
+    SearchBarComponent,
+    NavBarSideComponent,
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    LayoutModule,
     WineModule,
     MatCardModule,
     MatIcon,
@@ -46,13 +49,15 @@ import {MatInput} from '@angular/material/input';
     MatPrefix,
     MatInput,
     MatButton,
+    LayoutModule,
   ],
   providers: [
     provideAnimationsAsync()
   ],
-  exports: [
-    HomeCardsComponent
-  ],
+    exports: [
+        HomeCardsComponent,
+        SearchBarComponent
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

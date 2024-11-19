@@ -44,7 +44,7 @@ p {
   display: flex;
   justify-content: flex-start; 
   gap: 32px; 
-  margin-left: 70px; 
+  margin-left: 150px; 
   margin-top: 40px; 
   align-items: flex-start;
 }

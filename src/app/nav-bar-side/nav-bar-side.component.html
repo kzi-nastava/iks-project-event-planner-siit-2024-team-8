@@ -2,17 +2,21 @@
   <button  mat-icon-button [routerLink]="['home']">
     <mat-icon>home</mat-icon>
   </button>
-  <button mat-icon-button>
-    <mat-icon>search</mat-icon>
-  </button>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="onClickPlaceholder()">
     <mat-icon>calendar_month</mat-icon>
   </button>
-  <button mat-icon-button>
-    <mat-icon>favorite</mat-icon>
+  <button mat-icon-button (click)="onClickPlaceholder()">
+    <mat-icon>chat</mat-icon>
   </button>
-  <button mat-icon-button>
-    <mat-icon>account_circle</mat-icon>
+  <button mat-icon-button (click)="onClickPlaceholder()">
+    <mat-icon>notification_important</mat-icon>
   </button>
+  <div class="bottom-buttons">
+    <button mat-icon-button (click)="onClickPlaceholder()">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button [routerLink]="['login']">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
 </div>
-

@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './nav-bar-side.component.css'
 })
 export class NavBarSideComponent {
-
+  onClickPlaceholder() {
+    // REMOVE FUNCTION ONCE ALL THE PAGES ARE ADDED TO THE APP
+    alert('TODO');
+  }
 }

@@ -1,5 +1,6 @@
 .side-bar{
   display: flex;
+  position: fixed;
   flex-direction: column;
   align-items: center;
   width: 3.5em;
@@ -8,7 +9,7 @@
   background-color: #A1C084;
 }
 .side-bar button:first-child{
-  margin-top: 1.75em;
+  margin-top: 0.55em;
 }
 .side-bar button{
   margin-bottom: 1em;
@@ -21,4 +22,10 @@ mat-icon:hover{
 }
 .side-bar button:hover{
   background-color: transparent;
+}
+.side-bar .bottom-buttons {
+  margin-top: auto; /* Pushes buttons to the bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

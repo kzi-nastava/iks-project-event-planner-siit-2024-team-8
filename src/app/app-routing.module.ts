@@ -4,21 +4,25 @@ import { WinesComponent } from './wine/wines/wines.component';
 import { AddWineComponent } from './wine/add-wine/add-wine.component';
 import { HomeComponent } from './layout/home/home.component';
 import { HomeCardComponent } from './home-card/home-card.component';
-import { ProfileComponent } from './profile/profile.component'; 
+import { ProfileComponent } from './profile/profile.component';
 import { CreateAssetComponent } from './create-asset/create-asset.component';
 import { EditAssetComponent } from './edit-asset/edit-asset.component';
 import { AssetComponent } from './asset/asset.component';
+import { LoginComponent } from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 
 const routes: Routes = [
   { path: 'wine', component: WinesComponent },
   { path: 'add', component: AddWineComponent },
   { path: 'home', component: HomeComponent },
   { path: 'card', component: HomeCardComponent },
-  { path: 'profile', component: ProfileComponent }, 
+  { path: 'profile', component: ProfileComponent },
   { path: 'create-asset', component: CreateAssetComponent },
   { path: 'edit-asset', component: EditAssetComponent },
   { path: 'asset', component: AssetComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, 
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: '/home' }
 ];
 

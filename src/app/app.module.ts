@@ -29,6 +29,9 @@ import {MatIcon} from '@angular/material/icon';
 import {HomeCardsComponent} from './home-cards/home-cards.component';
 import {SearchBarComponent} from './search-bar/search-bar.component';
 import {AssetCardComponent} from './asset/asset-card/asset-card.component';
+import { DeleteConfirmationDialogComponent } from './dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import {AssetCardComponent} from './asset/asset-card/asset-card.component';
     LoginComponent,
     RegisterComponent,
     NavBarSideComponent,
-    AssetCardComponent
+    AssetCardComponent,
+    DeleteConfirmationDialogComponent
   ],
   imports: [
     FormsModule,
@@ -65,6 +69,8 @@ import {AssetCardComponent} from './asset/asset-card/asset-card.component';
     MatOption,
     MatSelect,
     MatIcon,
+    MatDialogModule,
+    MatSlideToggleModule,
   ],
   providers: [
     provideAnimationsAsync()

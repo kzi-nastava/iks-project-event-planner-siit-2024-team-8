@@ -1,0 +1,34 @@
+<div class="parent_div">
+  <div class="cards-div">
+    <p>Top 5 Events in #Your City#</p>
+    <div class="carousel">
+      <button mat-icon-button (click)="prevEvent()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="carousel-container" [style.transform]="getTransformEvent()">
+        <div *ngFor="let event of events" class="carousel-card">
+          <app-home-card (clicked)="onEventClicked($event)" [event]="event"></app-home-card>
+        </div>
+      </div>
+      <button mat-icon-button (click)="nextEvent()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="cards-div">
+    <p>Top 5 Assets in #Your City#</p>
+    <div class="carousel">
+      <button mat-icon-button (click)="prevAsset()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="carousel-container" [style.transform]="getTransformAsset()">
+        <div *ngFor="let asset of assets" class="carousel-card">
+          <app-asset-card [asset]="asset"></app-asset-card>
+        </div>
+      </div>
+      <button mat-icon-button (click)="nextAsset()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

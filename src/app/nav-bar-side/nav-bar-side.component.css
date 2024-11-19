@@ -1,0 +1,24 @@
+.side-bar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 3.5em;
+  max-width: 1200px;
+  height: 100%;
+  background-color: #A1C084;
+}
+.side-bar button:first-child{
+  margin-top: 1.75em;
+}
+.side-bar button{
+  margin-bottom: 1em;
+}
+mat-icon{
+  transform: scale(1.5);
+}
+mat-icon:hover{
+  background-color: transparent;
+}
+.side-bar button:hover{
+  background-color: transparent;
+}

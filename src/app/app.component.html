@@ -1,2 +1,6 @@
-<app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
+<div class="outer-home-div">
+  <app-nav-bar-side *ngIf="showSidebar"></app-nav-bar-side>
+  <div class="page-div">
+    <router-outlet></router-outlet>
+  </div>
+</div>

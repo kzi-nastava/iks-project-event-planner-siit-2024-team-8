@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AssetService } from '../asset.service';
 
 @Component({
   selector: 'app-edit-asset',
   templateUrl: './edit-asset.component.html',
   styleUrls: ['./edit-asset.component.css']
 })
-export class EditAssetComponent {
-  service = {
+export class EditAssetComponent implements OnInit {
+  service: any = {
     category: '',
     name: '',
     description: '',
     price: '',
     discount: '',
-    images: [] as string[],  
+    images: [] as string[],
     eventTypes: [] as string[],
     visibility: true,
     availability: true,
@@ -22,7 +24,7 @@ export class EditAssetComponent {
     confirmationMethod: 'automatic',
   };
 
-  categories: string[] = ['Health', 'Education', 'Technology', 'Lifestyle']; 
+  categories: string[] = ['Health', 'Education', 'Technology', 'Lifestyle'];
   serviceType = {
     category: '',
     newCategory: ''
@@ -33,12 +35,25 @@ export class EditAssetComponent {
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
   currentImageIndex: number = 0;
 
-  onCategoryChange() {
+  constructor(private assetService: AssetService, private router: Router) {}
+
+  ngOnInit(): void {
+    const selectedAsset = this.assetService.getSelectedAsset();
+    if (!selectedAsset) {
+      // Redirect back if no asset is selected
+      this.router.navigate(['/asset']);
+    } else {
+      this.service = { ...selectedAsset }; // Populate form with selected asset
+      this.images = this.service.images.length > 0 ? this.service.images : this.images;
+    }
+  }
+
+  onCategoryChange(): void {
     this.showNewCategoryField = this.service.category === 'none';
   }
 
   onFileSelected(event: any): void {
-    const files = event.target.files as FileList; 
+    const files = event.target.files as FileList;
     if (files && files.length > 0) {
       Array.from(files).forEach((file) => {
         if (file instanceof Blob) {
@@ -46,7 +61,7 @@ export class EditAssetComponent {
           reader.onload = () => {
             if (reader.result) {
               if (this.images[0].includes('placeholder')) {
-                this.images = []; 
+                this.images = [];
               }
               this.images.push(reader.result as string);
             }
@@ -70,6 +85,14 @@ export class EditAssetComponent {
   }
 
   onSubmit(): void {
-    console.log('Form submitted with data:', this.service);
+    const updatedAsset = { ...this.service, images: this.images };
+    this.assetService.setSelectedAsset(updatedAsset);
+    console.log('Updated asset:', updatedAsset);
+
+    this.navigateToAsset();
+  }
+
+  navigateToAsset(): void {
+    this.router.navigate(['/asset']);
   }
 }

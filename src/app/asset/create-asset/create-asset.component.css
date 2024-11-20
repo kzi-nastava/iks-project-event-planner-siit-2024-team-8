@@ -15,7 +15,7 @@
 
 .upload-section {
   padding: 20px;
-  text-align: center; 
+  text-align: center;
 }
 
 .carousel {
@@ -90,7 +90,7 @@ select,
 input[type="date"],
 textarea {
   width: 100%;
-  max-width: 250px; 
+  max-width: 250px;
   padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
@@ -99,7 +99,7 @@ textarea {
 
 textarea {
   resize: vertical;
-  height: 100px; 
+  height: 100px;
 }
 
 .btn {
@@ -131,13 +131,13 @@ textarea {
 .custom-file-input:hover {
   background-color: #556B2F;
   cursor: pointer;
-  color: rgb(255, 255, 255); 
+  color: rgb(255, 255, 255);
 }
 
 .btn:hover {
   background-color: #556B2F !important;
   cursor: pointer;
-  color: rgb(255, 255, 255) !important; 
+  color: rgb(255, 255, 255) !important;
 }
 
 .file-input {
@@ -156,14 +156,33 @@ textarea {
 
 .upload-section .custom-file-input {
   display: block;
-  margin: 60px auto 0; 
+  margin: 60px auto 0;
 }
 
 .button-group {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   margin-top: 0;
   margin-bottom: 50px;
 }
+
+.mat-accent.mat-mdc-slide-toggle {
+  --mdc-switch-selected-focus-state-layer-color: #A1C084;
+  --mdc-switch-selected-handle-color: #ffffff;
+  --mdc-switch-selected-hover-state-layer-color: #A1C084;
+  --mdc-switch-selected-pressed-state-layer-color: #A1C084;
+  --mdc-switch-selected-focus-handle-color: #e0e0ff;
+  --mdc-switch-selected-hover-handle-color: #e0e0ff;
+  --mdc-switch-selected-pressed-handle-color: #e0e0ff;
+  --mdc-switch-selected-focus-track-color: #A1C084;
+  --mdc-switch-selected-hover-track-color: #A1C084;
+  --mdc-switch-selected-pressed-track-color: #A1C084;
+  --mdc-switch-selected-track-color: #A1C084;
+  --mdc-switch-selected-icon-color: #44474E;
+  --mat-switch-track-outline-color: #74777f;
+  --mat-switch-disabled-unselected-track-outline-color: #1a1b1f;
+  --mat-switch-label-text-color: #1a1b1f;
+}
+
 

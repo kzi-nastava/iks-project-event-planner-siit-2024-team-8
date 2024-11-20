@@ -98,29 +98,29 @@
   justify-content: flex-end;
   color: #44474E !important;
 }
-#menu-events{
+.menu-events{
   display: flex;
   flex-direction: column;
   width: 10em;
 }
-#menu-events span{
+.menu-events span{
   color: #44474E !important;
   padding-left: 0.7rem;
 }
 
-#order-div{
+.order-div{
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-#order-div button{
+.order-div button{
   margin-left: 1rem;
 }
 
 .my-assets-heading {
   color: #44474E;
-  font-size: 30px; 
-  margin-top: 20px; 
+  font-size: 30px;
+  margin-top: 20px;
   margin-bottom: 0px;
 }
 

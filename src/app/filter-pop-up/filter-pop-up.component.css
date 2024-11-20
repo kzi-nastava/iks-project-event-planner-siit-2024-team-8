@@ -25,10 +25,11 @@
 .filter-title:hover {
   background-color: #bbb;
 }
-#down-button{
-  color: white;
+.down-button{
+  color: #44474E;
+  margin-right: 1em;
 }
-#down-button:hover{
+.down-button:hover{
   background-color: #A1C084;
 }
 .filter-options {
@@ -62,6 +63,8 @@
 }
 #applyButton{
   justify-self: flex-end;
+  align-self: center;
+  margin-top: 1em;
   width: 30%;
   background-color: #A1C084;
   color: white;

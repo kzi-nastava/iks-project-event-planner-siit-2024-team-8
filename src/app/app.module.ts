@@ -15,7 +15,7 @@ import { LoginComponent } from './login/login.component';
 import {MatFormField, MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import { RegisterComponent } from './register/register.component';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -57,30 +57,31 @@ import {MatCheckbox} from '@angular/material/checkbox';
     AllEventsComponent,
     FilterPopUpComponent
   ],
-  imports: [
-    FormsModule,
-    BrowserModule,
-    AppRoutingModule,
-    LayoutModule,
-    WineModule,
-    MatCardModule,
-    MatInput,
-    MatButton,
-    MatFormField,
-    CommonModule,
-    MatStepperModule,
-    MatInputModule,
-    MatButtonModule,
-    MatRadioGroup,
-    MatRadioButton,
-    MatOption,
-    MatSelect,
-    MatIcon,
-    MatDialogModule,
-    MatSlideToggleModule,
-    MatPaginator,
-    MatCheckbox,
-  ],
+    imports: [
+        FormsModule,
+        BrowserModule,
+        AppRoutingModule,
+        LayoutModule,
+        WineModule,
+        MatCardModule,
+        MatInput,
+        MatButton,
+        MatFormField,
+        CommonModule,
+        MatStepperModule,
+        MatInputModule,
+        MatButtonModule,
+        MatRadioGroup,
+        MatRadioButton,
+        MatOption,
+        MatSelect,
+        MatIcon,
+        MatDialogModule,
+        MatSlideToggleModule,
+        MatPaginator,
+        MatCheckbox,
+        NgOptimizedImage,
+    ],
   providers: [
     provideAnimationsAsync()
   ],

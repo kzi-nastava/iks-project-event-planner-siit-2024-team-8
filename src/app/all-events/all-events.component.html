@@ -1,21 +1,49 @@
 <div id="filter-popup" *ngIf="isFilterVisible">
   <div class="filter-container">
     <app-filter-pop-up></app-filter-pop-up>
+    <button (click)="onClosePopupClick()" style="color: #f5f5f5" id="close-button" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 </div>
+
+<!--Search bar and filter and sort div -->
 <div id="see-all-outer-div">
   <app-search-bar id="search-bar"></app-search-bar>
+  <!--Filter div! -->
   <div id="filter-div">
     <button mat-icon-button (click)="onClickFilterButton()">
       <mat-icon>filter_alt</mat-icon>
     </button>
-    <button mat-icon-button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>sort</mat-icon>
     </button>
+    <mat-menu  #menu="matMenu">
+      <div  id="menu-events">
+        <div id="order-div">
+          <span>Sort by</span>
+          <button (click)="orderButtonClicked()" mat-icon-button>
+            <mat-icon *ngIf="ascending">keyboard_arrow_up</mat-icon>
+            <mat-icon *ngIf="!ascending">keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-checkbox (click)="onItemClick($event)">Name</mat-checkbox>
+        <mat-checkbox (click)="onItemClick($event)">Price</mat-checkbox>
+        <mat-checkbox (click)="onItemClick($event)">Start Date</mat-checkbox>
+        <mat-checkbox (click)="onItemClick($event)">End Date</mat-checkbox>
+      </div>
+    </mat-menu>
   </div>
-  <div class="cards-view">
-    <div *ngFor="let event of currentPageEvents" id="card">
+
+  <!--Card view div that contains cards -->
+  <div class="cards-view" *ngIf="isEvents">
+    <div *ngFor="let event of currentPageEvents" class="card">
       <app-home-card [event]="event"></app-home-card>
+    </div>
+  </div>
+  <div *ngIf="!isEvents" class="cards-view">
+    <div *ngFor="let asset of currentPageEvents" class="card">
+      <app-asset-card [asset]="asset"></app-asset-card>
     </div>
   </div>
   <div id="paging-div">

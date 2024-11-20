@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; 
+import {ActivatedRoute, Router} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationDialogComponent } from '../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { AssetService } from './asset.service';
@@ -11,37 +11,26 @@ import { Asset, AssetType } from '../model/asset';
   styleUrls: ['./asset.component.css']
 })
 export class AssetComponent {
-  service: Asset = {
-    name: 'Luxury Spa Treatment',
-    type: AssetType.SERVICE, 
-    description: 'A relaxing spa treatment that includes a full body massage, facial, and aromatherapy.',
-    category: 'Health & Wellness',
-    price: 150,
-    discount: 10, 
-    images: [
-      'https://via.placeholder.com/800x500.png?text=Luxury+Spa+1',
-      'https://via.placeholder.com/800x500.png?text=Luxury+Spa+2'
-    ],
-    eventTypes: ['Private', 'Group'],  
-    visibility: true,
-    availability: true,
-    duration: 2,  
-    bookingDeadline: '2024-12-15',
-    cancellationDeadline: '2024-12-10',
-    confirmationMethod: 'manual',  
-  };
-
+  service: Asset ;
+  assetID: string;
   showNewCategoryField = false;
 
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
   currentImageIndex: number = 0;
 
   constructor(
-    private router: Router, 
-    private dialog: MatDialog, 
+    private router: Router,
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
     private assetService: AssetService
   ) {}
 
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.assetID = (params.get('id'));
+    });
+    this.service = this.assetService.get(parseInt(this.assetID));
+  }
   prevImage(): void {
     if (this.currentImageIndex > 0) this.currentImageIndex--;
   }
@@ -52,11 +41,11 @@ export class AssetComponent {
 
   onSubmit(): void {
     console.log('Form submitted with data:', this.service);
-    this.assetService.addAsset(this.service); 
+    this.assetService.addAsset(this.service);
   }
 
   navigateToEditAsset(): void {
-    this.assetService.setSelectedAsset(this.service); 
+    this.assetService.setSelectedAsset(this.service);
     this.router.navigate(['/edit-asset']);
   }
 
@@ -74,7 +63,7 @@ export class AssetComponent {
   }
 
   editAsset(asset: any): void {
-    this.assetService.setSelectedAsset(asset); 
+    this.assetService.setSelectedAsset(asset);
     this.router.navigate(['/edit-asset']);
   }
 }

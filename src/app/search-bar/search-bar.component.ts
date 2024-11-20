@@ -7,5 +7,4 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './search-bar.component.css'
 })
 export class SearchBarComponent {
-  imageUrl = "https://i.ibb.co/Nsv5dX9/BNCPlanner.png";
 }

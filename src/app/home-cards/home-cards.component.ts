@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {EventDTO} from '../event/domain/EventDTO.model';
+import {Event} from '../model/event';
 import {EventService} from '../event/event.service';
 import {Asset} from '../model/asset';
 import {AssetService} from '../asset/asset.service';
@@ -11,7 +11,7 @@ import {AssetService} from '../asset/asset.service';
 })
 export class HomeCardsComponent {
 
-  events : EventDTO[];
+  events : Event[];
   assets : Asset[];
 
   currentEvent : number = 0;
@@ -19,7 +19,6 @@ export class HomeCardsComponent {
 
   constructor(private eventService : EventService,private assetService: AssetService) {}
 
-  onEventClicked : (event : EventDTO) => void;
 
   ngOnInit() {
     this.events = this.eventService.getAll();

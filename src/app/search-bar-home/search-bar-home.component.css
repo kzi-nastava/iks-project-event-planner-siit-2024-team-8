@@ -1,0 +1,41 @@
+.search_bar_parent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4em;
+}
+
+.search_bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+  max-width: 600px;
+  border-radius: 4em;
+  background-color: #ffffff;
+}
+.search_bar input{
+  height: fit-content(30px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  margin-left: 2em;
+}
+
+div input:focus{
+  outline: none;
+}
+
+div button{
+  background-color: #A1C084;
+  color: white;
+}
+
+div button:hover{
+  border-color: #000000;
+}

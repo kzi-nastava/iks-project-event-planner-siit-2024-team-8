@@ -167,22 +167,4 @@ textarea {
   margin-bottom: 50px;
 }
 
-.mat-accent.mat-mdc-slide-toggle {
-  --mdc-switch-selected-focus-state-layer-color: #A1C084;
-  --mdc-switch-selected-handle-color: #ffffff;
-  --mdc-switch-selected-hover-state-layer-color: #A1C084;
-  --mdc-switch-selected-pressed-state-layer-color: #A1C084;
-  --mdc-switch-selected-focus-handle-color: #e0e0ff;
-  --mdc-switch-selected-hover-handle-color: #e0e0ff;
-  --mdc-switch-selected-pressed-handle-color: #e0e0ff;
-  --mdc-switch-selected-focus-track-color: #A1C084;
-  --mdc-switch-selected-hover-track-color: #A1C084;
-  --mdc-switch-selected-pressed-track-color: #A1C084;
-  --mdc-switch-selected-track-color: #A1C084;
-  --mdc-switch-selected-icon-color: #44474E;
-  --mat-switch-track-outline-color: #74777f;
-  --mat-switch-disabled-unselected-track-outline-color: #1a1b1f;
-  --mat-switch-label-text-color: #1a1b1f;
-}
-
 

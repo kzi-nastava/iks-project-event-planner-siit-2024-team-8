@@ -4,22 +4,24 @@ import { Asset, AssetType } from '../model/asset';
 export const assets: Asset[] = [
   // Products
   {
+    id: 1,
     name: 'Balloons',
     type: AssetType.PRODUCT,
     description: 'Colorful balloons for decoration at parties or events.',
     category: 'Decoration',
     price: 30,
     discount: 10,
-    images: ['url1', 'url2'], 
+    images: ['url1', 'url2'],
     eventTypes: ['Party', 'Wedding'],
     visibility: true,
     availability: true,
-    duration: 0, 
+    duration: 0,
     bookingDeadline: '',
     cancellationDeadline: '',
     confirmationMethod: 'automatic',
   },
   {
+    id: 2,
     name: 'Soundbar',
     type: AssetType.PRODUCT,
     description: 'A high-quality soundbar for audio enhancement at events.',
@@ -30,12 +32,13 @@ export const assets: Asset[] = [
     eventTypes: ['Conference', 'Wedding', 'Party'],
     visibility: true,
     availability: true,
-    duration: 0, 
+    duration: 0,
     bookingDeadline: '',
     cancellationDeadline: '',
     confirmationMethod: 'manual',
   },
   {
+    id: 3,
     name: 'LED Lights',
     type: AssetType.PRODUCT,
     description: 'Bright and colorful LED lights for event ambiance and decoration.',
@@ -46,12 +49,13 @@ export const assets: Asset[] = [
     eventTypes: ['Wedding', 'Party'],
     visibility: true,
     availability: true,
-    duration: 0, 
+    duration: 0,
     bookingDeadline: '',
     cancellationDeadline: '',
     confirmationMethod: 'automatic',
   },
   {
+    id: 4,
     name: 'Projector',
     type: AssetType.PRODUCT,
     description: 'A portable projector for displaying slideshows and presentations at events.',
@@ -62,12 +66,13 @@ export const assets: Asset[] = [
     eventTypes: ['Conference', 'Presentation'],
     visibility: true,
     availability: true,
-    duration: 0, 
+    duration: 0,
     bookingDeadline: '',
     cancellationDeadline: '',
     confirmationMethod: 'manual',
   },
   {
+    id: 5,
     name: 'Event Chairs',
     type: AssetType.PRODUCT,
     description: 'Comfortable chairs for guests to sit during an event.',
@@ -78,7 +83,7 @@ export const assets: Asset[] = [
     eventTypes: ['Wedding', 'Conference', 'Party'],
     visibility: true,
     availability: true,
-    duration: 0, 
+    duration: 0,
     bookingDeadline: '',
     cancellationDeadline: '',
     confirmationMethod: 'automatic',
@@ -86,6 +91,7 @@ export const assets: Asset[] = [
 
   // Services
   {
+    id: 6,
     name: 'Event Planning',
     type: AssetType.SERVICE,
     description: 'Complete event planning services, including venue selection, logistics, and coordination.',
@@ -96,12 +102,13 @@ export const assets: Asset[] = [
     eventTypes: ['Wedding', 'Conference', 'Party'],
     visibility: true,
     availability: true,
-    duration: 8, 
+    duration: 8,
     bookingDeadline: '2024-12-01',
     cancellationDeadline: '2024-12-05',
     confirmationMethod: 'manual',
   },
   {
+    id: 7,
     name: 'Catering',
     type: AssetType.SERVICE,
     description: 'Event catering services offering food and drink for events.',
@@ -118,6 +125,7 @@ export const assets: Asset[] = [
     confirmationMethod: 'automatic',
   },
   {
+    id: 8,
     name: 'Sound & Light Setup',
     type: AssetType.SERVICE,
     description: 'Service for setting up sound systems and lighting equipment for events.',
@@ -128,12 +136,13 @@ export const assets: Asset[] = [
     eventTypes: ['Wedding', 'Party', 'Concert'],
     visibility: true,
     availability: true,
-    duration: 6, 
+    duration: 6,
     bookingDeadline: '2024-12-02',
     cancellationDeadline: '2024-12-06',
     confirmationMethod: 'automatic',
   },
   {
+    id: 9,
     name: 'Photography',
     type: AssetType.SERVICE,
     description: 'Professional photography services to capture moments during the event.',
@@ -144,12 +153,13 @@ export const assets: Asset[] = [
     eventTypes: ['Wedding', 'Conference', 'Party'],
     visibility: true,
     availability: true,
-    duration: 5, 
+    duration: 5,
     bookingDeadline: '2024-12-03',
     cancellationDeadline: '2024-12-07',
     confirmationMethod: 'manual',
   },
   {
+    id: 10,
     name: 'Security',
     type: AssetType.SERVICE,
     description: 'Security services to ensure the safety of guests and the smooth operation of the event.',
@@ -160,12 +170,13 @@ export const assets: Asset[] = [
     eventTypes: ['Wedding', 'Conference', 'Concert'],
     visibility: true,
     availability: true,
-    duration: 6, 
+    duration: 6,
     bookingDeadline: '2024-12-05',
     cancellationDeadline: '2024-12-10',
     confirmationMethod: 'automatic',
   }
 ];
+
 
 @Injectable({
   providedIn: 'root'
@@ -180,6 +191,9 @@ export class AssetService {
 
   getAll(): Asset[] {
     return this.assets;
+  }
+  get(id:number) : Asset {
+    return this.assets.find(a => a.id === id);
   }
 
   addAsset(asset: Asset): void {

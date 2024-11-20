@@ -7,20 +7,23 @@ import { Component } from '@angular/core';
 })
 export class FilterPopUpComponent {
   ngAfterViewInit(): void {
+    // Select all filter-title elements
     const filterTitles: NodeListOf<HTMLElement> = document.querySelectorAll('.filter-title');
 
-
-    filterTitles.forEach((title: HTMLElement) => {
+    filterTitles.forEach((title, index) => {
       title.addEventListener('click', () => {
+        // Match the corresponding options based on index
+        const options = document.querySelectorAll('.filter-options')[index] as HTMLElement;
 
-        const optionsId: string = 'options' + title.id.slice(-1);
-        const options: HTMLElement | null = document.getElementById(optionsId);
-
-
+        // Toggle the visibility of the options (including mat-slider and mat-checkbox)
         if (options) {
           options.classList.toggle('show');
         }
       });
     });
+  }
+
+  onClosePopupClick() {
+
   }
 }

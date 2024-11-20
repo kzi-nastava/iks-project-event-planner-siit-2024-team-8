@@ -1,11 +1,17 @@
 .filter-container {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 25em;
   padding: 1%;
-  background-color: #44474E;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.filter-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 .filter-title h3 {
   cursor: pointer;
   padding: 1% ;
@@ -13,41 +19,74 @@
   border-radius: 2%;
   transition: background-color 0.3s ease;
   font-size: 1.5rem;
+  color: #44474E;
 }
 
-.filter-title h3:hover {
+.filter-title:hover {
   background-color: #bbb;
 }
-
+#down-button{
+  color: white;
+}
+#down-button:hover{
+  background-color: #A1C084;
+}
 .filter-options {
   display: none;
   padding-left: 20px;
   margin-top: 10px;
 }
+#filterPrivate{
+  justify-content: flex-start;
+}
 
+.filter-options {
+  display: none; /* Hide the options initially */
+}
 
 .filter-options.show {
-  display: block;
+  display: block; /* Show the options when the 'show' class is added */
 }
 .filter-options input {
   margin-right: 5px;
 }
-.filter-options mat-mdc-checkbox mat-accent{
-  background-color: #44474E;
-}
-.mat-accent.mat-mdc-checkbox {
-  --mdc-checkbox-selected-pressed-icon-color: #A1C084;
-  --mdc-checkbox-selected-checkmark-color: #ffffff;
-  --mdc-checkbox-selected-focus-icon-color: #A1C084;
-  --mdc-checkbox-selected-hover-icon-color: #A1C084;
-  --mdc-checkbox-selected-icon-color: #A1C084;
-  --mdc-checkbox-selected-focus-state-layer-color: #A1C084;
-  --mdc-checkbox-selected-hover-state-layer-color: #A1C084;
-  --mdc-checkbox-unselected-pressed-state-layer-color: #A1C084;
-  --mat-checkbox-disabled-label-color: rgba(26, 27, 31, 0.38);
-  --mat-checkbox-label-text-color: #f5f5f5;
+.mat-primary {
+  --mat-stepper-header-selected-state-icon-background-color: #A1C084;
+  --mat-stepper-header-selected-state-icon-foreground-color: #ffffff;
+  --mat-stepper-header-edit-state-icon-background-color: #A1C084;
+  --mat-stepper-header-edit-state-icon-foreground-color: #ffffff;
 }
 #filter-close-div{
   display:flex;
   flex-direction: row;
+}
+#applyButton{
+  justify-self: flex-end;
+  width: 30%;
+  background-color: #A1C084;
+  color: white;
+}
+#applyButton:hover{
+  background-color: #A1C084;
+}
+
+.filter-date-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.filter-date-div h3:hover{
+  background-color: #bbb;
+}
+.filter-date-div h3{
+  cursor: pointer;
+  padding: 1% ;
+  margin: 2%;
+  border-radius: 2%;
+  transition: background-color 0.3s ease;
+  font-size: 1.5rem;
+  color: #44474E;
+}
+.filter-date-div mat-form-field{
+  width: 60%;
 }

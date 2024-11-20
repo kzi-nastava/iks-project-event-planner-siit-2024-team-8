@@ -1,25 +1,27 @@
 import { Component } from '@angular/core';
-import { Event } from '../model/event'; 
+import { Event } from '../model/event';
+import {EventService} from './event.service';
+import {AssetService} from '../asset/asset.service';
+import {ActivatedRoute, Route} from '@angular/router';
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css'] 
+  styleUrls: ['./event.component.css']
 })
 export class EventComponent {
-  event: Event = {
-    name: '',
-    description: '',
-    capacity: 0,
-    isPrivate: false,
-    startDate: '', 
-    endDate: '',
-    budget: 0.0,
-    images: [
-      'https://via.placeholder.com/800x500.png?text=Event+1',
-      'https://via.placeholder.com/800x500.png?text=Event+2'] 
-  };
+  event: Event;
+  eventID: string;
 
+
+  constructor(private route: ActivatedRoute,private eventService: EventService) {}
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.eventID = (params.get('id'));
+    });
+
+    this.event = this.eventService.get(parseInt(this.eventID));
+  }
   currentImageIndex = 0;
 
   prevImage() {
@@ -31,10 +33,10 @@ export class EventComponent {
   }
 
   openDeleteDialog() {
-    
+
   }
 
   navigateToEditEvent() {
-    
+
   }
 }

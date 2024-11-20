@@ -10,7 +10,7 @@
       </button>
       <div class="carousel-container" [style.transform]="getTransformEvent()">
         <div *ngFor="let event of events" class="carousel-card">
-          <app-home-card (clicked)="onEventClicked($event)" [event]="event"></app-home-card>
+          <app-home-card [event]="event"></app-home-card>
         </div>
       </div>
       <button mat-icon-button (click)="nextEvent()" class="carousel_button">
@@ -21,7 +21,7 @@
   <div class="cards-div">
     <div class="header_div">
       <p>Top 5 Assets in #Your City#</p>
-      <button mat-raised-button class="see_all">See All</button>
+      <button mat-raised-button class="see_all" [routerLink]="['/all-assets']">See All</button>
     </div>
     <div class="carousel">
       <button mat-icon-button (click)="prevAsset()" class="carousel_button">

@@ -1,36 +1,51 @@
-<div id="filter-close-div">
-  <div class="filter-container">
-    <!-- Category 1 -->
-    <div class="filter-title" id="filter1">
-      <h3>Category 1</h3>
-    </div>
-    <div class="filter-options" id="options1">
-      <mat-checkbox id="option1-1">Option 1</mat-checkbox><br>
-      <mat-checkbox id="option1-2">Option 2</mat-checkbox><br>
-      <mat-checkbox id="option1-3">Option 3</mat-checkbox><br>
-    </div>
-
-    <!-- Category 2 -->
-    <div class="filter-title" id="filter2">
-      <h3>Category 2</h3>
-    </div>
-    <div class="filter-options" id="options2">
-      <mat-checkbox id="option2-1">Option A</mat-checkbox><br>
-      <mat-checkbox id="option2-2">Option B</mat-checkbox><br>
-      <mat-checkbox id="option2-3">Option C</mat-checkbox><br>
-    </div>
-
-    <!-- Category 3 -->
-    <div class="filter-title" id="filter3">
-      <h3>Category 3</h3>
-    </div>
-    <div class="filter-options" id="options3">
-      <mat-checkbox id="option3-1">Option X</mat-checkbox><br>
-      <mat-checkbox id="option3-2">Option Y</mat-checkbox><br>
-    </div>
+<div class="filter-container">
+  <!-- Category 1 -->
+  <div class="filter-title" id="filter1">
+    <h3>Event types</h3>
+    <button id="down-button" mat-icon-button>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
   </div>
-  <button mat-icon-button>
-    <mat-icon></mat-icon>
-  </button>
+  <div class="filter-options" id="options1">
+    <mat-checkbox id="option1-1">Wedding</mat-checkbox><br>
+    <mat-checkbox id="option1-2">Conference</mat-checkbox><br>
+    <mat-checkbox id="option1-3">Concert</mat-checkbox><br>
+  </div>
+
+  <br>
+  <!-- Category 3 -->
+  <div class="filter-title" id="filterPrivate">
+    <h3>Private</h3>
+    <mat-checkbox id="private-checkbox"></mat-checkbox>
+  </div>
+  <br>
+
+  <div class="filter-title">
+    <h3>Capacity</h3>
+    <mat-slider min="200" max="500" step="10" showTickMarks discrete >
+      <input value="300" matSliderStartThumb>
+      <input value="400" matSliderEndThumb>
+    </mat-slider>
+  </div>
+  <br>
+  <div class="filter-date-div">
+    <h3>Start Date</h3>
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="pickerStart">
+      <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
+      <mat-datepicker #pickerStart></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="filter-date-div">
+    <h3>End Date</h3>
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="pickerEnd">
+      <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+      <mat-datepicker #pickerEnd></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <button id="applyButton" mat-raised-button>Apply</button>
 </div>
 

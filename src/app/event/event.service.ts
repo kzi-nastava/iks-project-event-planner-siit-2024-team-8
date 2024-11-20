@@ -1,91 +1,181 @@
 import { Injectable } from '@angular/core';
-import {EventDTO} from './domain/EventDTO.model';
+import {Event} from '../model/event';
+import {Asset} from '../model/asset';
 
-const events = [
+const events: Event[] = [
   {
-    name: "Exit",
-    startDate: "2025-07-13",
-    endDate: "2025-07-15",
-    duration: 2
+    id: 1,
+    name: 'Wedding Celebration',
+    description: 'A beautiful wedding celebration with family and friends.',
+    capacity: 150,
+    isPrivate: true,
+    startDate: '2024-06-01T14:00:00',
+    endDate: '2024-06-01T22:00:00',
+    budget: 15000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=Wedding+1',
+      'https://via.placeholder.com/800x500.png?text=Wedding+2'
+    ]
   },
   {
-    name: "Meeting",
-    startDate: "2025-07-18",
-    endDate: "2025-07-20",
-    duration: 2
+    id: 2,
+    name: 'Corporate Conference 2024',
+    description: 'A conference for industry leaders and professionals in the tech field.',
+    capacity: 500,
+    isPrivate: false,
+    startDate: '2024-07-15T09:00:00',
+    endDate: '2024-07-15T18:00:00',
+    budget: 20000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=Conference+1',
+      'https://via.placeholder.com/800x500.png?text=Conference+2'
+    ]
   },
   {
-    name: "Workshop",
-    startDate: "2025-07-22",
-    endDate: "2025-07-24",
-    duration: 2
+    id: 3,
+    name: 'Music Festival',
+    description: 'An annual music festival featuring live performances from top artists.',
+    capacity: 10000,
+    isPrivate: false,
+    startDate: '2024-08-10T12:00:00',
+    endDate: '2024-08-10T23:00:00',
+    budget: 50000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=Festival+1',
+      'https://via.placeholder.com/800x500.png?text=Festival+2'
+    ]
   },
   {
-    name: "Conference",
-    startDate: "2025-07-25",
-    endDate: "2025-07-28",
-    duration: 3
+    id: 4,
+    name: 'Wedding Reception at The Grand Hall',
+    description: 'A stunning wedding reception in a luxurious grand hall with stunning décor.',
+    capacity: 200,
+    isPrivate: true,
+    startDate: '2024-09-10T18:00:00',
+    endDate: '2024-09-10T23:00:00',
+    budget: 30000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=Reception+1',
+      'https://via.placeholder.com/800x500.png?text=Reception+2'
+    ]
   },
   {
-    name: "Seminar",
-    startDate: "2025-08-01",
-    endDate: "2025-08-02",
-    duration: 1
+    id: 5,
+    name: 'Charity Gala 2024',
+    description: 'A glamorous charity gala raising funds for a worthy cause.',
+    capacity: 350,
+    isPrivate: true,
+    startDate: '2024-10-05T19:00:00',
+    endDate: '2024-10-05T23:00:00',
+    budget: 25000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=Gala+1',
+      'https://via.placeholder.com/800x500.png?text=Gala+2'
+    ]
   },
   {
-    name: "Holiday",
-    startDate: "2025-08-05",
-    endDate: "2025-08-10",
-    duration: 5
+    id: 6,
+    name: 'Tech Innovators Expo',
+    description: 'An exhibition showcasing the latest in technology and innovation.',
+    capacity: 3000,
+    isPrivate: false,
+    startDate: '2024-11-20T10:00:00',
+    endDate: '2024-11-22T17:00:00',
+    budget: 60000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=Tech+Expo+1',
+      'https://via.placeholder.com/800x500.png?text=Tech+Expo+2'
+    ]
   },
   {
-    name: "Team Building",
-    startDate: "2025-08-12",
-    endDate: "2025-08-14",
-    duration: 2
+    id: 7,
+    name: 'New Year’s Eve Party',
+    description: 'A glamorous New Year’s Eve party with a countdown celebration.',
+    capacity: 500,
+    isPrivate: false,
+    startDate: '2024-12-31T21:00:00',
+    endDate: '2025-01-01T01:00:00',
+    budget: 15000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=NYE+1',
+      'https://via.placeholder.com/800x500.png?text=NYE+2'
+    ]
   },
   {
-    name: "Training",
-    startDate: "2025-08-15",
-    endDate: "2025-08-17",
-    duration: 2
+    id: 8,
+    name: 'Product Launch: 2025 Edition',
+    description: 'A grand event to unveil the latest products from a major brand.',
+    capacity: 1000,
+    isPrivate: false,
+    startDate: '2024-05-20T09:00:00',
+    endDate: '2024-05-20T15:00:00',
+    budget: 40000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=Launch+1',
+      'https://via.placeholder.com/800x500.png?text=Launch+2'
+    ]
   },
   {
-    name: "Project Launch",
-    startDate: "2025-08-20",
-    endDate: "2025-08-21",
-    duration: 1
+    id: 9,
+    name: 'Annual Charity Run',
+    description: 'A 5K charity run to raise funds for health-related causes.',
+    capacity: 500,
+    isPrivate: false,
+    startDate: '2024-09-25T08:00:00',
+    endDate: '2024-09-25T12:00:00',
+    budget: 5000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=Run+1',
+      'https://via.placeholder.com/800x500.png?text=Run+2'
+    ]
   },
   {
-    name: "Exit Interview",
-    startDate: "2025-08-23",
-    endDate: "2025-08-25",
-    duration: 2
+    id: 10,
+    name: 'Luxury Fashion Show',
+    description: 'An exclusive fashion show featuring top luxury designers.',
+    capacity: 300,
+    isPrivate: true,
+    startDate: '2024-12-12T18:00:00',
+    endDate: '2024-12-12T21:00:00',
+    budget: 45000.0,
+    images: [
+      'https://via.placeholder.com/800x500.png?text=Fashion+Show+1',
+      'https://via.placeholder.com/800x500.png?text=Fashion+Show+2'
+    ]
   }
 ];
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  eventList: EventDTO[] = [];
+  eventList: Event[] = [];
   constructor() {
     for (let eventObj of events){
-      const event : EventDTO = {
+      const event : Event = {
+        id : eventObj.id,
         name : eventObj.name,
         startDate : eventObj.startDate,
         endDate : eventObj.endDate,
-        duration : eventObj.duration,
+        capacity : eventObj.capacity,
+        description : eventObj.description,
+        isPrivate: eventObj.isPrivate,
+        budget : eventObj.budget,
+        images : eventObj.images
       }
       this.eventList.push(event);
     }
   }
+  get(id:number) : Event {
+    return this.eventList.find(a => a.id === id);
+  }
 
-  getAll() : EventDTO[]{
+  getAll() : Event[]{
     return this.eventList;
   }
-  add(event : EventDTO) : void{
+  add(event : Event) : void{
     this.eventList.push(event);
   }
 }

@@ -4,6 +4,7 @@ export enum AssetType {
 }
 
 export interface Asset {
+  id: number;
   name: string;
   type: AssetType;
   description: string;
@@ -15,8 +16,8 @@ export interface Asset {
   visibility: boolean;
   availability: boolean;
   duration: number;
-  bookingDeadline: string;  
-  cancellationDeadline: string; 
+  bookingDeadline: string;
+  cancellationDeadline: string;
   confirmationMethod: string;
-  newCategory?: string;  
+  newCategory?: string;
 }

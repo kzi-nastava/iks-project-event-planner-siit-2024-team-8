@@ -20,7 +20,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
-import {MatOption} from '@angular/material/core';
+import {MatNativeDateModule, MatOption, NativeDateAdapter, NativeDateModule} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {CreateAssetComponent} from './asset/create-asset/create-asset.component';
 import {EditAssetComponent} from './asset/edit-asset/edit-asset.component';
@@ -36,7 +36,11 @@ import {AllEventsComponent} from './all-events/all-events.component';
 import {MatPaginator} from '@angular/material/paginator';
 import { FilterPopUpComponent } from './filter-pop-up/filter-pop-up.component';
 import {MatCheckbox} from '@angular/material/checkbox';
-import { EventComponent } from './event/event.component';
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
+import {MatSlider, MatSliderRangeThumb} from '@angular/material/slider';
+import {EventComponent} from './event/event.component';
+import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
+import { SearchBarHomeComponent } from './search-bar-home/search-bar-home.component';
 
 
 @NgModule({
@@ -57,33 +61,41 @@ import { EventComponent } from './event/event.component';
     DeleteConfirmationDialogComponent,
     AllEventsComponent,
     FilterPopUpComponent,
-    EventComponent
+    EventComponent,
+    SearchBarHomeComponent,
   ],
-    imports: [
-        FormsModule,
-        BrowserModule,
-        AppRoutingModule,
-        LayoutModule,
-        WineModule,
-        MatCardModule,
-        MatInput,
-        MatButton,
-        MatFormField,
-        CommonModule,
-        MatStepperModule,
-        MatInputModule,
-        MatButtonModule,
-        MatRadioGroup,
-        MatRadioButton,
-        MatOption,
-        MatSelect,
-        MatIcon,
-        MatDialogModule,
-        MatSlideToggleModule,
-        MatPaginator,
-        MatCheckbox,
-        NgOptimizedImage,
-    ],
+  imports: [
+    FormsModule,
+    BrowserModule,
+    AppRoutingModule,
+    LayoutModule,
+    WineModule,
+    MatCardModule,
+    MatInput,
+    MatButton,
+    MatFormField,
+    CommonModule,
+    MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
+    MatRadioGroup,
+    MatRadioButton,
+    MatOption,
+    MatSelect,
+    MatIcon,
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatPaginator,
+    MatCheckbox,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatSlider,
+    MatMenu,
+    MatMenuTrigger,
+    MatNativeDateModule,
+    MatSliderRangeThumb,
+  ],
   providers: [
     provideAnimationsAsync()
   ],

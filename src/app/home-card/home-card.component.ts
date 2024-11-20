@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {EventDTO} from '../event/domain/EventDTO.model';
+import {Event} from '../model/event';
 
 @Component({
   selector: 'app-home-card',
@@ -8,10 +8,10 @@ import {EventDTO} from '../event/domain/EventDTO.model';
 })
 export class HomeCardComponent {
   @Input()
-  event : EventDTO;
+  event : Event;
 
   @Output()
-  clicked : EventEmitter<EventDTO> = new EventEmitter<EventDTO>();
+  clicked : EventEmitter<Event> = new EventEmitter<Event>();
 
   favourite : boolean = false;
 

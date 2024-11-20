@@ -139,11 +139,12 @@ export class AllEventsComponent {
     this.isMyAssets = url.includes('all-my-assets');
 
     if (url.includes('all-events')) {
-      this.filterType = 'events'; 
+      this.filterType = 'events';
     } else if (url.includes('all-assets')) {
-      this.filterType = 'assets'; 
+      this.filterType = 'assets';
     } else if (url.includes('all-my-assets')) {
-      this.filterType = 'my-assets'; 
+      this.filterType = 'my-assets';
     }
   }
+
 }

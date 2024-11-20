@@ -2,6 +2,9 @@
   <div *ngIf="filterType === 'events'">
     <div class="filter-title">
       <h3>Event Types</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
       <mat-checkbox>Wedding</mat-checkbox><br>
@@ -10,14 +13,20 @@
     </div>
 
     <div class="filter-title">
-      <h3>Private</h3>
+      <h3>Privacy</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
-      <mat-checkbox></mat-checkbox>
+      <mat-slide-toggle>Private</mat-slide-toggle>
     </div>
 
     <div class="filter-title">
       <h3>Capacity</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
       <mat-slider min="200" max="500" step="10" showTickMarks discrete>
@@ -28,6 +37,9 @@
 
     <div class="filter-title">
       <h3>Start Date</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
       <mat-form-field>
@@ -40,6 +52,9 @@
 
     <div class="filter-title">
       <h3>End Date</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
       <mat-form-field>
@@ -55,6 +70,9 @@
 
     <div class="filter-title">
       <h3>Asset Category</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
       <mat-radio-group [(ngModel)]="selectedAssetCategory" (change)="onAssetCategoryChange($event)">
@@ -66,6 +84,9 @@
 
     <div class="filter-title">
       <h3>Event Type</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
       <mat-checkbox>Wedding</mat-checkbox><br>
@@ -75,6 +96,9 @@
 
     <div class="filter-title">
       <h3>Asset Type</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
       <mat-checkbox>Type A</mat-checkbox><br>
@@ -84,6 +108,9 @@
 
     <div class="filter-title">
       <h3>Price</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
       <mat-slider min="100" max="1000" step="50" showTickMarks discrete>
@@ -94,6 +121,9 @@
 
     <div class="filter-title">
       <h3>Available</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div class="filter-options">
       <mat-checkbox></mat-checkbox>

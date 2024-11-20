@@ -14,7 +14,7 @@
   <div *ngIf="isMyAssets">
     <h1 class="my-assets-heading">My Assets</h1>  <!-- Add the class for styling -->
   </div>
-  
+
   <app-search-bar id="search-bar"></app-search-bar>
   <!--Filter div! -->
   <div id="filter-div">
@@ -25,8 +25,21 @@
       <mat-icon>sort</mat-icon>
     </button>
     <mat-menu  #menu="matMenu">
-      <div  id="menu-events">
-        <div id="order-div">
+      <div *ngIf="isEvents" class="menu-events">
+        <div class="order-div">
+          <span>Sort by</span>
+          <button (click)="orderButtonClicked()" mat-icon-button>
+            <mat-icon *ngIf="ascending">keyboard_arrow_up</mat-icon>
+            <mat-icon *ngIf="!ascending">keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+        <mat-checkbox (click)="onItemClick($event)">Name</mat-checkbox>
+        <mat-checkbox (click)="onItemClick($event)">Capacity</mat-checkbox>
+        <mat-checkbox (click)="onItemClick($event)">Start Date</mat-checkbox>
+        <mat-checkbox (click)="onItemClick($event)">End Date</mat-checkbox>
+      </div>
+      <div *ngIf="!isEvents" class="menu-events">
+        <div class="order-div">
           <span>Sort by</span>
           <button (click)="orderButtonClicked()" mat-icon-button>
             <mat-icon *ngIf="ascending">keyboard_arrow_up</mat-icon>

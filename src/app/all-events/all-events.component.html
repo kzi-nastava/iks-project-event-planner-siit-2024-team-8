@@ -10,7 +10,6 @@
 <!--Search bar and filter and sort div -->
 <div id="see-all-outer-div">
   <app-search-bar id="search-bar"></app-search-bar>
-
   <!--Filter div! -->
   <div id="filter-div">
     <button mat-icon-button (click)="onClickFilterButton()">
@@ -43,8 +42,8 @@
     </div>
   </div>
   <div *ngIf="!isEvents" class="cards-view">
-    <div *ngFor="let event of currentPageEvents" class="card">
-      <app-home-card [event]="event"></app-home-card>
+    <div *ngFor="let asset of currentPageEvents" class="card">
+      <app-asset-card [asset]="asset"></app-asset-card>
     </div>
   </div>
   <div id="paging-div">

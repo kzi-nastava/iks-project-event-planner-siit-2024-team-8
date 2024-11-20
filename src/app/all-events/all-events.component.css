@@ -8,21 +8,23 @@
 .cards-view{
   display: grid;
   grid-template-columns:repeat(3,1fr);
-  max-height: 50em;
   height: fit-content;
   overflow-y: auto;
   margin-bottom: 1em;
   justify-self: center;
-  padding-left: 5%
+  padding-left: 5%;
+  max-height: 70%;
 }
 .card{
-  margin: 2rem;
-  max-width: 58%;
-  max-height: 80%;
+  margin: 1rem;
+  max-width: 60%;
+  max-height: 20%;
 }
 #search-bar{
   width: 100%;
-  height: 14%;
+  height: 5%;
+  margin-top: -2%;
+  margin-bottom: 5%;
 }
 
 .page-btn{
@@ -62,6 +64,7 @@
   width: 7%;
   background-color: #A1C084;
   border-radius: 1rem;
+  margin-bottom: 1em;
 }
 
 #filter-popup {

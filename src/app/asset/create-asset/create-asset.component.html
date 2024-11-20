@@ -52,7 +52,6 @@
           <input type="number" id="discount" name="discount" [(ngModel)]="service.discount" max="100" class="form-control" />
         </div>
 
-        <!-- Replacing select options with mat-slide-toggle for Visibility -->
         <div class="form-group">
           <label for="visibility">Visibility</label>
           <mat-slide-toggle id="visibility" name="visibility" [(ngModel)]="service.visibility" [checked]="service.visibility" class="toggle-switch">
@@ -60,7 +59,6 @@
           </mat-slide-toggle>
         </div>
 
-        <!-- Replacing select options with mat-slide-toggle for Availability -->
         <div class="form-group">
           <label for="availability">Availability</label>
           <mat-slide-toggle id="availability" name="availability" [(ngModel)]="service.availability" [checked]="service.availability" class="toggle-switch">

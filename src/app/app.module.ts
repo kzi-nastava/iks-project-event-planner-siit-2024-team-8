@@ -32,6 +32,11 @@ import {AssetCardComponent} from './asset/asset-card/asset-card.component';
 import { DeleteConfirmationDialogComponent } from './dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {AllEventsComponent} from './all-events/all-events.component';
+import {MatPaginator} from '@angular/material/paginator';
+import { FilterPopUpComponent } from './filter-pop-up/filter-pop-up.component';
+import {MatCheckbox} from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +53,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     RegisterComponent,
     NavBarSideComponent,
     AssetCardComponent,
-    DeleteConfirmationDialogComponent
+    DeleteConfirmationDialogComponent,
+    AllEventsComponent,
+    FilterPopUpComponent
   ],
   imports: [
     FormsModule,
@@ -71,6 +78,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatIcon,
     MatDialogModule,
     MatSlideToggleModule,
+    MatPaginator,
+    MatCheckbox,
   ],
   providers: [
     provideAnimationsAsync()

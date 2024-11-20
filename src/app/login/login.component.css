@@ -1,5 +1,6 @@
-.flex-container {display: flex; justify-content: center; align-items: center; flex-direction: column;}
-.login-div {width: 25%}
+.flex-container {display: flex; justify-content: center; align-items: center; flex-direction: column; align-self: center; height: 100%; }
+.login-div {width: 25%;}
+.login-div:last-child{margin-bottom:10em;}
 p {color: black; font-size: 12pt; text-align: center}
 a p {font-size: 10pt; text-align: center; text-decoration: none;}
 a p:hover {color: lightgrey;}

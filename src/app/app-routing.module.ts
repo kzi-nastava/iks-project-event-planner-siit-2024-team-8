@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {CreateAssetComponent} from './asset/create-asset/create-asset.component';
 import {EditAssetComponent} from './asset/edit-asset/edit-asset.component';
+import {AllEventsComponent} from './all-events/all-events.component';
 
 const routes: Routes = [
   { path: 'wine', component: WinesComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
+  {path : 'all-events', component: AllEventsComponent },
   { path: '**', redirectTo: '/home' }
 ];
 

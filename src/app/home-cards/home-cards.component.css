@@ -26,7 +26,7 @@
   align-items: center;
 }
 
-button {
+.carousel_button {
   position: absolute;
   bottom: -5%;
   transform: translateY(-50%);
@@ -66,4 +66,23 @@ p{
 
 .cards-div{
   margin-top: 5%;
+}
+
+.see_all{
+  align-self: center !important;
+  color: black !important;
+  background: transparent !important;
+  width: fit-content;
+  font-size: 0.72em;
+  transform: translateY(-25%);
+}
+.see_all:hover{
+  background : #A1C084 !important;
+  color: white !important;
+}
+
+.header_div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

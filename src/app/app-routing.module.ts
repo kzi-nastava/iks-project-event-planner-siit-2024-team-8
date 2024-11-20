@@ -11,6 +11,7 @@ import {RegisterComponent} from './register/register.component';
 import {CreateAssetComponent} from './asset/create-asset/create-asset.component';
 import {EditAssetComponent} from './asset/edit-asset/edit-asset.component';
 import {AllEventsComponent} from './all-events/all-events.component';
+import {EventComponent} from './event/event.component'
 
 const routes: Routes = [
   { path: 'wine', component: WinesComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'create-asset', component: CreateAssetComponent },
   { path: 'edit-asset', component: EditAssetComponent },
   { path: 'asset', component: AssetComponent },
+  { path: 'event', component: EventComponent },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },

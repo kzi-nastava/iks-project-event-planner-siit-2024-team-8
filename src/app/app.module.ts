@@ -36,6 +36,7 @@ import {AllEventsComponent} from './all-events/all-events.component';
 import {MatPaginator} from '@angular/material/paginator';
 import { FilterPopUpComponent } from './filter-pop-up/filter-pop-up.component';
 import {MatCheckbox} from '@angular/material/checkbox';
+import { EventComponent } from './event/event.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {MatCheckbox} from '@angular/material/checkbox';
     AssetCardComponent,
     DeleteConfirmationDialogComponent,
     AllEventsComponent,
-    FilterPopUpComponent
+    FilterPopUpComponent,
+    EventComponent
   ],
     imports: [
         FormsModule,

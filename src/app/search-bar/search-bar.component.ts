@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search-bar',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './search-bar.component.css'
 })
 export class SearchBarComponent {
-
+  imageUrl = "https://i.ibb.co/Nsv5dX9/BNCPlanner.png";
 }

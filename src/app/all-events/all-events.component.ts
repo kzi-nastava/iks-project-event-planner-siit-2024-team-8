@@ -15,6 +15,7 @@ import {Router} from '@angular/router';
 export class AllEventsComponent {
   events : Event[];
   assets : Asset[];
+  filterType: string = '';
 
   constructor(private router: Router,private eventService : EventService,private assetService: AssetService) {}
 
@@ -46,6 +47,7 @@ export class AllEventsComponent {
 
   //Events Page?
   isEvents: boolean;
+  isMyAssets: boolean = false;
 
   updatePageData(event?: PageEvent): void {
     if (event) {
@@ -72,25 +74,20 @@ export class AllEventsComponent {
     const firstPage = 0;
     const lastPage = this.totalPages - 1;
 
-    // Always show the first page
     pageNumbers.push(firstPage);
 
-    // Add ellipsis and surrounding pages based on the current page
     if (this.pageIndex > 1) {
       pageNumbers.push('...');
     }
 
-    // Add a range of pages around the current page
     for (let i = Math.max(1, this.pageIndex - 1); i <= Math.min(this.pageIndex + 1, lastPage - 1); i++) {
       pageNumbers.push(i);
     }
 
-    // Add ellipsis for skipped pages at the end
     if (this.pageIndex < lastPage - 1) {
       pageNumbers.push('...');
     }
 
-    // Always show the last page
     if (lastPage > 0) {
       pageNumbers.push(lastPage);
     }
@@ -124,7 +121,7 @@ export class AllEventsComponent {
   }
 
   onClosePopupClick() {
-    this.isFilterVisible = false;` `
+    this.isFilterVisible = false;
   }
 
   onItemClick($event: MouseEvent) {
@@ -137,6 +134,16 @@ export class AllEventsComponent {
   }
 
   private checkRoute() {
-    this.isEvents = this.router.url.includes('all-events');
+    const url = this.router.url;
+    this.isEvents = url.includes('all-events');
+    this.isMyAssets = url.includes('all-my-assets');
+
+    if (url.includes('all-events')) {
+      this.filterType = 'events'; 
+    } else if (url.includes('all-assets')) {
+      this.filterType = 'assets'; 
+    } else if (url.includes('all-my-assets')) {
+      this.filterType = 'my-assets'; 
+    }
   }
 }

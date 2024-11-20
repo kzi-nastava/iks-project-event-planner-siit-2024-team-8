@@ -1,14 +1,20 @@
 <div id="filter-popup" *ngIf="isFilterVisible">
   <div class="filter-container">
-    <app-filter-pop-up></app-filter-pop-up>
+    <app-filter-pop-up [filterType]="filterType"></app-filter-pop-up>
     <button (click)="onClosePopupClick()" style="color: #f5f5f5" id="close-button" mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
   </div>
 </div>
 
+
 <!--Search bar and filter and sort div -->
 <div id="see-all-outer-div">
+
+  <div *ngIf="isMyAssets">
+    <h1 class="my-assets-heading">My Assets</h1>  <!-- Add the class for styling -->
+  </div>
+  
   <app-search-bar id="search-bar"></app-search-bar>
   <!--Filter div! -->
   <div id="filter-div">

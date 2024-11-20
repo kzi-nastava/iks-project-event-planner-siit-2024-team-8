@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {path : 'all-events', component: AllEventsComponent },
   {path : 'all-assets', component: AllEventsComponent },
+  { path: 'all-my-assets', component: AllEventsComponent },
   {path : 'asset/:id', component: AssetComponent },
   {path : 'event/:id', component: EventComponent },
   { path: '**', redirectTo: '/home' }

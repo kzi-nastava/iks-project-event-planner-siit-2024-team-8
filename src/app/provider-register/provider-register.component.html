@@ -1,0 +1,43 @@
+<div class="flex-container">
+  <div class="provider-div">
+    <h1><strong>Provider Register</strong></h1>
+    <button (click)="navigateToRegister()" id="link_bttn" >Back</button>
+  </div>
+  <br>
+  <div class="provider-div">
+    <p>Please enter your company info:</p>
+    <form>
+      <mat-form-field>
+        <mat-label>*Company Name</mat-label>
+        <input matInput id="company-name">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Company Description</mat-label>
+        <textarea matInput rows="5" id="company-desc"></textarea>
+      </mat-form-field>
+      <br>
+      <p>*Choose company images:</p>
+      <p>(You can always add more images from your profile)</p>>
+      <div class="flex-images">
+        <div class="flex-images-inner">
+          <img [src]="imageUrl1" alt="Company Image #1">
+          <input type="file" id="company-img-1" accept="image/*" (change)="onFileSelected1($event)">
+          <label for="company-img-1" class="custom-file-label">Upload</label>
+        </div>
+        <div class="flex-images-inner">
+          <img [src]="imageUrl2" alt="Company Image #2">
+          <input type="file" id="company-img-2" accept="image/*" (change)="onFileSelected2($event)">
+          <label for="company-img-2" class="custom-file-label">Upload</label>
+        </div>
+        <div class="flex-images-inner">
+          <img [src]="imageUrl3" alt="Company Image #3">
+          <input type="file" id="company-img-3" accept="image/*" (change)="onFileSelected3($event)">
+          <label for="company-img-3" class="custom-file-label">Upload</label>
+        </div>
+      </div>
+      <br>
+      <button mat-raised-button>Finish</button>
+    </form>
+  </div>
+</div>

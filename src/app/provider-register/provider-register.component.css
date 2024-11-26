@@ -1,0 +1,61 @@
+.flex-container {display: flex; justify-content: center; align-items: center; flex-direction: column; align-self: center; height: 100%; }
+.provider-div {width: 33%}
+/*.provider-div:last-child{margin-bottom:10em;}*/
+p {color: black; font-size: 12pt; text-align: center}
+a p {font-size: 10pt; text-align: center; text-decoration: none;}
+a p:hover {color: lightgrey;}
+h1 {color: black; font-size: 30pt; margin: 0; text-align: center;}
+label {color: lightgrey;}
+.provider-div button {background-color: gray !important; color: white !important; font-size: 12pt !important; width: 100% !important;}
+#link_bttn {
+  border: none; /* Removes button border */
+  background: none; /* Removes background color */
+  background-color: #f5f5f5 !important;
+  color: black !important; /* Matches default link color */
+  font-size: 10pt; /* Matches surrounding text size */
+  text-align: center; /* Aligns text like a link */
+  text-decoration: underline; /* Adds underline to mimic links */
+  cursor: pointer; /* Changes cursor to pointer for clickable effect */
+  padding: 0; /* Removes padding for consistency with links */
+}
+#link_bttn:hover {
+  color: lightgrey !important;
+}
+mat-form-field {align-self: center; width: 100%;}
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+.flex-images {
+  display: flex;
+  flex-direction: row;
+}
+.flex-images-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+}
+.custom-file-label {
+  margin-top: 10px;
+  padding: 5px 7px;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.custom-file-label:hover {
+  background-color: lightgray;
+}
+input[type="file"] {
+  display: none;
+}

@@ -12,6 +12,7 @@ import {CreateAssetComponent} from './asset/create-asset/create-asset.component'
 import {EditAssetComponent} from './asset/edit-asset/edit-asset.component';
 import {AllEventsComponent} from './all-events/all-events.component';
 import {EventComponent} from './event/event.component'
+import {ProviderRegisterComponent} from './provider-register/provider-register.component';
 
 const routes: Routes = [
   { path: 'wine', component: WinesComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'all-my-assets', component: AllEventsComponent },
   {path : 'asset/:id', component: AssetComponent },
   {path : 'event/:id', component: EventComponent },
+  {path: 'provider-register', component: ProviderRegisterComponent },
   { path: '**', redirectTo: '/home' }
 ];
 

@@ -41,6 +41,7 @@ import {MatSlider, MatSliderRangeThumb} from '@angular/material/slider';
 import {EventComponent} from './event/event.component';
 import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 import { SearchBarHomeComponent } from './search-bar-home/search-bar-home.component';
+import { ProviderRegisterComponent } from './provider-register/provider-register.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { SearchBarHomeComponent } from './search-bar-home/search-bar-home.compon
     FilterPopUpComponent,
     EventComponent,
     SearchBarHomeComponent,
+    ProviderRegisterComponent,
   ],
   imports: [
     FormsModule,

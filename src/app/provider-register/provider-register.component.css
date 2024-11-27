@@ -2,6 +2,7 @@
 .provider-div {width: 33%}
 /*.provider-div:last-child{margin-bottom:10em;}*/
 p {color: black; font-size: 12pt; text-align: center}
+.subtext {color: gray; font-size: 10pt; text-align: center; margin-top: 0px}
 a p {font-size: 10pt; text-align: center; text-decoration: none;}
 a p:hover {color: lightgrey;}
 h1 {color: black; font-size: 30pt; margin: 0; text-align: center;}

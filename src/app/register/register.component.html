@@ -55,7 +55,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>*Choose profile type:</mat-label>
-      <mat-select [(ngModel)]="profileType">
+      <mat-select [(ngModel)]="profileType" (selectionChange)="navigateToProvider()">
         <mat-option value="USER">User</mat-option>
         <mat-option value="PROVIDER">Provider</mat-option>
         <mat-option value="ORGANIZER">Organizer</mat-option>

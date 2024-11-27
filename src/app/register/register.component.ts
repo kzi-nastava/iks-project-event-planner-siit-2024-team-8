@@ -33,4 +33,9 @@ export class RegisterComponent {
     }
   }
   profileType: string = '';
+  navigateToProvider() {
+    if (this.profileType == "PROVIDER") {
+      this.router.navigate(['/provider-register']);
+    }
+  }
 }

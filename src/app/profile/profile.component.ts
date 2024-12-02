@@ -12,4 +12,8 @@ export class ProfileComponent {
   navigateToCreateAsset(): void {
     this.router.navigate(['/create-asset']);
   }
+
+  navigateToEditProfile(): void {
+    this.router.navigate(['/profile-edit']);
+  }
 }

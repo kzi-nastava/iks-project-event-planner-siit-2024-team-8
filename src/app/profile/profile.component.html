@@ -32,10 +32,10 @@
       </div>
 
       <div class="profile-actions">
-        <button mat-raised-button class="btn action-button">
-          <mat-icon>delete</mat-icon> 
+        <button mat-raised-button class="btn action-button" >
+          <mat-icon>report</mat-icon>  
         </button>
-        <button mat-raised-button class="btn action-button">
+        <button mat-raised-button class="btn action-button" (click)="navigateToEditProfile()">
           <mat-icon>edit</mat-icon>  
         </button>
       </div>
@@ -49,8 +49,9 @@
           class="profile-picture"
         />
         <div class="specific-actions">
-          <button [routerLink]="['/all-my-assets']" mat-raised-button color="primary" class="btn my-assets-btn">My Assets</button>
-          <button mat-raised-button color="primary" class="btn create-asset-btn" (click)="navigateToCreateAsset()">Create Asset</button>
+          <button [routerLink]="['/all-my-assets']" mat-raised-button color="primary" class="btn under-profile-btn">My Assets</button>
+          <button mat-raised-button color="primary" class="btn under-profile-btn" (click)="navigateToCreateAsset()">Create Asset</button>
+          <button mat-raised-button color="primary" class="btn under-profile-btn" >Start chat</button>
         </div>
       </div>
     </div>

@@ -1,0 +1,55 @@
+<div class="outer-container">
+  <div class="profile-container">
+    <div class="user-info">
+      <div class="user-details">
+        <h2>EDIT PROFILE</h2>
+      </div>
+
+      <div class="additional-info">
+        <h3>EMAIL</h3>
+        <input type="email" class="input-field" placeholder="Enter email" />
+
+        <h3>NAME AND SURNAME</h3>
+        <input type="text" class="input-field" placeholder="Enter full name" />
+
+        <h3>ADDRESS</h3>
+        <input type="text" class="input-field" placeholder="Enter address" />
+
+        <h3>PHONE NUMBER</h3>
+        <input type="text" class="input-field" placeholder="Enter phone number" />
+      </div>
+
+      <div class="company-info">
+        <h3>COMPANY NAME</h3>
+        <input type="text" class="input-field" placeholder="Enter company name" />
+
+        <h3>ABOUT</h3>
+        <textarea class="input-field" placeholder="Enter company description"></textarea>
+      </div>
+
+      <div class="button-group">
+        <button mat-raised-button color="primary" class="btn action-btn" type="submit">Confirm</button>
+        <button mat-raised-button color="primary" class="btn action-btn" type="button" (click)="navigateToProfile()">Cancel</button>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <div class="profile-picture-container">
+        <input
+          type="file"
+          id="fileInput"
+          accept="image/*"
+          style="display: none;"
+          (change)="onFileSelected($event)"
+        />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+          alt="Profile Picture"
+          class="profile-picture"
+          (click)="triggerFileInput()"
+        />
+        <button mat-raised-button color="warn" class="btn deactivate-btn" type="button" (click)="openDeleteDialog()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

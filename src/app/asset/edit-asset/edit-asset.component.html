@@ -1,7 +1,7 @@
 <div class="outer-container">
   <div class="service-container">
     <div class="upload-section">
-      <h2>Upload Service Images</h2>
+      <h2>Upload Service/Product Images</h2>
 
       <div *ngIf="images.length > 0" class="carousel">
         <button (click)="prevImage()">&#10094;</button>
@@ -16,17 +16,30 @@
     </div>
 
     <div class="service-details">
-      <h2>Edit Service</h2>
+      <h2>Edit Service/Product</h2>
 
       <form (ngSubmit)="onSubmit()" #serviceForm="ngForm">
         <div class="form-group">
-          <label for="name">Service Name</label>
+          <label for="name">Name</label>
           <input type="text" id="name" name="name" [(ngModel)]="service.name" required class="form-control" />
         </div>
 
         <div class="form-group">
           <label for="description">Description</label>
           <textarea id="description" name="description" [(ngModel)]="service.description" required class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" name="category" [(ngModel)]="service.category" (change)="onCategoryChange()" class="form-control">
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+            <option value="none">Other</option>
+          </select>
+        </div>
+
+        <div *ngIf="showNewCategoryField" class="form-group">
+          <label for="newCategory">New Category</label>
+          <input type="text" id="newCategory" name="newCategory" [(ngModel)]="service.newCategory" class="form-control" />
         </div>
 
         <div class="form-group">
@@ -53,27 +66,29 @@
           </mat-slide-toggle>
         </div>
 
-        <div class="form-group">
-          <label for="duration">Duration</label>
-          <input type="number" id="duration" name="duration" [(ngModel)]="service.duration" required min="1" step="1" class="form-control" />
-        </div>
+        <div *ngIf="isService">
+          <div class="form-group">
+            <label for="duration">Duration</label>
+            <input type="number" id="duration" name="duration" [(ngModel)]="service.duration" required min="1" step="1" class="form-control" />
+          </div>
 
-        <div class="form-group">
-          <label for="bookingDeadline">Booking Deadline</label>
-          <input type="date" id="bookingDeadline" name="bookingDeadline" [(ngModel)]="service.bookingDeadline" required class="form-control" />
-        </div>
-        
-        <div class="form-group">
-          <label for="cancellationDeadline">Cancellation Deadline</label>
-          <input type="date" id="cancellationDeadline" name="cancellationDeadline" [(ngModel)]="service.cancellationDeadline" required class="form-control" />
-        </div>
+          <div class="form-group">
+            <label for="bookingDeadline">Booking Deadline</label>
+            <input type="date" id="bookingDeadline" name="bookingDeadline" [(ngModel)]="service.bookingDeadline" required class="form-control" />
+          </div>
+          
+          <div class="form-group">
+            <label for="cancellationDeadline">Cancellation Deadline</label>
+            <input type="date" id="cancellationDeadline" name="cancellationDeadline" [(ngModel)]="service.cancellationDeadline" required class="form-control" />
+          </div>
 
-        <div class="form-group">
-          <label for="confirmationMethod">Confirmation Method</label>
-          <select id="confirmationMethod" name="confirmationMethod" [(ngModel)]="service.confirmationMethod" required class="form-control">
-            <option value="automatic">Automatic</option>
-            <option value="manual">Manual</option>
-          </select>
+          <div class="form-group">
+            <label for="confirmationMethod">Confirmation Method</label>
+            <select id="confirmationMethod" name="confirmationMethod" [(ngModel)]="service.confirmationMethod" required class="form-control">
+              <option value="automatic">Automatic</option>
+              <option value="manual">Manual</option>
+            </select>
+          </div>
         </div>
 
         <div class="button-group">

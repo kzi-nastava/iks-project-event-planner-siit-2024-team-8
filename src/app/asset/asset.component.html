@@ -11,16 +11,11 @@
     </div>
 
     <div class="service-details">
-      <h2>{{ service.name || 'Service Name' }}</h2>
+      <h2>{{ service.name || 'Service/Product Name' }}</h2>
 
       <div class="form-group">
-        <label for="category">Service Category</label>
+        <label for="category">Category</label>
         <p id="category">{{ service.category || 'No Category' }}</p>
-      </div>
-
-      <div class="form-group">
-        <label for="name">Service Name</label>
-        <p id="name">{{ service.name || 'No Name' }}</p>
       </div>
 
       <div class="form-group">
@@ -48,24 +43,26 @@
         <p id="availability">{{ service.availability ? 'Available' : 'Unavailable' }}</p>
       </div>
 
-      <div class="form-group">
-        <label for="duration">Duration</label>
-        <p id="duration">{{ service.duration }} hours</p>
-      </div>
+      <div *ngIf="isService">
+        <div class="form-group">
+          <label for="duration">Duration</label>
+          <p id="duration">{{ service.duration }} hours</p>
+        </div>
 
-      <div class="form-group">
-        <label for="bookingDeadline">Booking Deadline</label>
-        <p id="bookingDeadline">{{ service.bookingDeadline || 'No Deadline' }}</p>
-      </div>
+        <div class="form-group">
+          <label for="bookingDeadline">Booking Deadline</label>
+          <p id="bookingDeadline">{{ service.bookingDeadline || 'No Deadline' }}</p>
+        </div>
 
-      <div class="form-group">
-        <label for="cancellationDeadline">Cancellation Deadline</label>
-        <p id="cancellationDeadline">{{ service.cancellationDeadline || 'No Deadline' }}</p>
-      </div>
+        <div class="form-group">
+          <label for="cancellationDeadline">Cancellation Deadline</label>
+          <p id="cancellationDeadline">{{ service.cancellationDeadline || 'No Deadline' }}</p>
+        </div>
 
-      <div class="form-group">
-        <label for="confirmationMethod">Confirmation Method</label>
-        <p id="confirmationMethod">{{ service.confirmationMethod || 'Automatic' }}</p>
+        <div class="form-group">
+          <label for="confirmationMethod">Confirmation Method</label>
+          <p id="confirmationMethod">{{ service.confirmationMethod || 'Automatic' }}</p>
+        </div>
       </div>
 
       <div class="button-group">

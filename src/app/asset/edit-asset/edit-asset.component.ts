@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AssetService } from '../asset.service';
+import { Asset, AssetType } from '../../model/asset';
 
 @Component({
   selector: 'app-edit-asset',
@@ -8,28 +9,28 @@ import { AssetService } from '../asset.service';
   styleUrls: ['./edit-asset.component.css']
 })
 export class EditAssetComponent implements OnInit {
-  service: any = {
-    category: '',
+  service: Asset = {
+    id: 0, 
     name: '',
+    type: AssetType.SERVICE,
     description: '',
-    price: '',
-    discount: '',
+    category: '',
+    price: 0, 
+    discount: 0, 
     images: [] as string[],
     eventTypes: [] as string[],
     visibility: true,
     availability: true,
-    duration: '',
+    duration: 0, 
     bookingDeadline: '',
     cancellationDeadline: '',
     confirmationMethod: 'automatic',
+    newCategory: undefined 
   };
+
+  isService: boolean = false;
 
   categories: string[] = ['Health', 'Education', 'Technology', 'Lifestyle'];
-  serviceType = {
-    category: '',
-    newCategory: ''
-  };
-
   showNewCategoryField = false;
 
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
@@ -40,10 +41,10 @@ export class EditAssetComponent implements OnInit {
   ngOnInit(): void {
     const selectedAsset = this.assetService.getSelectedAsset();
     if (!selectedAsset) {
-      // Redirect back if no asset is selected
       this.router.navigate(['/asset']);
     } else {
-      this.service = { ...selectedAsset }; // Populate form with selected asset
+      this.service = { ...selectedAsset }; 
+      this.isService = this.service.type === AssetType.SERVICE; 
       this.images = this.service.images.length > 0 ? this.service.images : this.images;
     }
   }
@@ -93,6 +94,10 @@ export class EditAssetComponent implements OnInit {
   }
 
   navigateToAsset(): void {
-    this.router.navigate(['/asset']);
+    if (this.service.id) {
+      this.router.navigate(['/asset', this.service.id]); 
+    } else {
+      this.router.navigate(['/asset']); 
+    }
   }
 }

@@ -11,9 +11,9 @@ import { Asset, AssetType } from '../model/asset';
   styleUrls: ['./asset.component.css']
 })
 export class AssetComponent {
-  service: Asset ;
+  service: Asset;
   assetID: string;
-  showNewCategoryField = false;
+  isService: boolean; 
 
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
   currentImageIndex: number = 0;
@@ -27,10 +27,12 @@ export class AssetComponent {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.assetID = (params.get('id'));
+      this.assetID = params.get('id');
     });
     this.service = this.assetService.get(parseInt(this.assetID));
+    this.isService = this.service.type === AssetType.SERVICE; 
   }
+
   prevImage(): void {
     if (this.currentImageIndex > 0) this.currentImageIndex--;
   }
@@ -61,9 +63,5 @@ export class AssetComponent {
   deleteItem() {
     console.log('Item deleted!');
   }
-
-  editAsset(asset: any): void {
-    this.assetService.setSelectedAsset(asset);
-    this.router.navigate(['/edit-asset']);
-  }
 }
+

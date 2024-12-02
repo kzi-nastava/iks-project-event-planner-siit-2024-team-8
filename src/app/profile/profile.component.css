@@ -111,14 +111,10 @@ p {
   gap: 10px; 
 }
 
-.my-assets-btn, .create-asset-btn {
+.under-profile-btn {
   width: 130px; 
   height: 30px;
   border-radius: 16px;
-}
-
-.my-assets-btn:hover, .create-asset-btn:hover {
-  background-color: #556B2F !important;
 }
 
 .action-button mat-icon {

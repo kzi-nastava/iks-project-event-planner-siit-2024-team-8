@@ -42,6 +42,7 @@ import {EventComponent} from './event/event.component';
 import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 import { SearchBarHomeComponent } from './search-bar-home/search-bar-home.component';
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { ProviderRegisterComponent } from './provider-register/provider-register
     EventComponent,
     SearchBarHomeComponent,
     ProviderRegisterComponent,
+    ProfileEditComponent,
   ],
   imports: [
     FormsModule,

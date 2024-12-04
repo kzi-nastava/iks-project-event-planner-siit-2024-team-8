@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserTransferService} from '../services/user-transfer-service';
 import {UserService} from '../services/user-service';
+import {VerificationEmailDialogComponent} from '../dialogs/verification-email-dialog/verification-email-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-provider-register',
@@ -10,7 +12,7 @@ import {UserService} from '../services/user-service';
 })
 export class ProviderRegisterComponent implements OnInit {
   user: any;
-  constructor(private router: Router, private userTransferService: UserTransferService, private userService: UserService) {}
+  constructor(private dialog: MatDialog, private router: Router, private userTransferService: UserTransferService, private userService: UserService) {}
   ngOnInit(): void {
     this.user = this.userTransferService.getUser();
     console.log(this.user);
@@ -73,13 +75,12 @@ export class ProviderRegisterComponent implements OnInit {
   companyDesc: string = '';
 
   validateData(): boolean {
-    if (this.companyName == '' || this.companyDesc == '') {
-      return false;
-    }
-    return true;
+    return this.companyName != '';
   }
   onSubmit() {
     if (!(this.validateData())) {
+      console.log(this.companyName)
+      console.log(this.companyDesc)
       alert("You must enter the name and description of your company!");
       return;
     }
@@ -87,5 +88,7 @@ export class ProviderRegisterComponent implements OnInit {
     this.user.companyDesc = this.companyDesc;
     this.user.companyImagesURL = [this.imageUrl1, this.imageUrl2, this.imageUrl3];
     this.userService.registerUser(this.user).subscribe((response: any) => {console.log(response);});
+
+    const dialogRef = this.dialog.open(VerificationEmailDialogComponent);
   }
 }

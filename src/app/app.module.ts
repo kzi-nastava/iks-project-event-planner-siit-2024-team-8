@@ -44,6 +44,7 @@ import { SearchBarHomeComponent } from './search-bar-home/search-bar-home.compon
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { HttpClientModule } from '@angular/common/http';
+import { VerificationEmailDialogComponent } from './dialogs/verification-email-dialog/verification-email-dialog.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { HttpClientModule } from '@angular/common/http';
     SearchBarHomeComponent,
     ProviderRegisterComponent,
     ProfileEditComponent,
+    VerificationEmailDialogComponent,
   ],
   imports: [
     FormsModule,

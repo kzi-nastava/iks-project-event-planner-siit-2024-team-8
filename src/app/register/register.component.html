@@ -9,19 +9,19 @@
     <p>*All fields required unless noted</p>
     <mat-form-field>
       <mat-label>*First Name</mat-label>
-      <input matInput>
+      <input matInput [(ngModel)]="firstName">
     </mat-form-field>
     <mat-form-field>
       <mat-label>*Last Name</mat-label>
-      <input matInput>
+      <input matInput [(ngModel)]="lastName">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Address</mat-label>
-      <input matInput>
+      <input matInput [(ngModel)]="address">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Phone number</mat-label>
-      <input matInput>
+      <input matInput [(ngModel)]="number">
     </mat-form-field>
     <div>
       <button mat-raised-button matStepperNext>Next</button>
@@ -43,19 +43,19 @@
     <p>*Enter your login info:</p>
     <mat-form-field>
       <mat-label>*Email</mat-label>
-      <input matInput type="email">
+      <input matInput type="email" [(ngModel)]="email">
     </mat-form-field>
     <mat-form-field>
       <mat-label>*Password</mat-label>
-      <input matInput type="password">
+      <input matInput type="password" [(ngModel)]="password">
     </mat-form-field>
     <mat-form-field>
       <mat-label>*Repeat Password</mat-label>
-      <input matInput type="password">
+      <input matInput type="password" [(ngModel)]="repeatPassword">
     </mat-form-field>
     <mat-form-field>
       <mat-label>*Choose profile type:</mat-label>
-      <mat-select [(ngModel)]="profileType" (selectionChange)="navigateToProvider()">
+      <mat-select [(ngModel)]="profileType">
         <mat-option value="USER">User</mat-option>
         <mat-option value="PROVIDER">Provider</mat-option>
         <mat-option value="ORGANIZER">Organizer</mat-option>

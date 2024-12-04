@@ -9,12 +9,12 @@
     <form>
       <mat-form-field>
         <mat-label>*Company Name</mat-label>
-        <input matInput id="company-name">
+        <input matInput id="company-name" [(ngModel)]="companyName">
       </mat-form-field>
       <br>
       <mat-form-field>
         <mat-label>Company Description</mat-label>
-        <textarea matInput rows="5" id="company-desc"></textarea>
+        <textarea matInput rows="5" id="company-desc" [(ngModel)]="companyDesc"></textarea>
       </mat-form-field>
       <br>
       <p>*Choose company images:</p>
@@ -37,7 +37,7 @@
         </div>
       </div>
       <br>
-      <button mat-raised-button>Finish</button>
+      <button mat-raised-button (click)="onSubmit()">Finish</button>
     </form>
   </div>
 </div>

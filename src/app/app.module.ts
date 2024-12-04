@@ -43,6 +43,7 @@ import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 import { SearchBarHomeComponent } from './search-bar-home/search-bar-home.component';
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -99,6 +100,7 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
     MatMenuTrigger,
     MatNativeDateModule,
     MatSliderRangeThumb,
+    HttpClientModule,
   ],
   providers: [
     provideAnimationsAsync()

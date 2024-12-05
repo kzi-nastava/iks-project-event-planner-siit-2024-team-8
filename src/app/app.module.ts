@@ -45,6 +45,7 @@ import { ProviderRegisterComponent } from './provider-register/provider-register
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { HttpClientModule } from '@angular/common/http';
 import { VerificationEmailDialogComponent } from './dialogs/verification-email-dialog/verification-email-dialog.component';
+import { VerifyComponent } from './verify/verify.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { VerificationEmailDialogComponent } from './dialogs/verification-email-d
     ProviderRegisterComponent,
     ProfileEditComponent,
     VerificationEmailDialogComponent,
+    VerifyComponent,
   ],
   imports: [
     FormsModule,

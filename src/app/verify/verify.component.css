@@ -1,0 +1,8 @@
+h1, p {
+  color: gray;
+}
+
+div {
+  display: grid;
+  place-items: center;
+}

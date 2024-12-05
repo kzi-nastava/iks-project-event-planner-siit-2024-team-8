@@ -6,11 +6,15 @@ import { User } from '../model/user';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/api/users';
+  private registerApiUrl = 'localhost:8080/api/users';
+  private activateApiUrl = 'localhost:8080/api/activation-requests';
 
   constructor(private http: HttpClient) {}
 
   registerUser(user: User) {
-    return this.http.post(this.apiUrl, user);
+    return this.http.post(this.registerApiUrl, user);
+  }
+  activateUser(token: string) {
+    return this.http.post(this.activateApiUrl, token);
   }
 }

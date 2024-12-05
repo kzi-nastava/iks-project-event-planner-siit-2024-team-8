@@ -3,6 +3,13 @@ import { Router } from '@angular/router';
 import {User, returnUser, UserType} from '../model/user';
 import {UserService} from '../services/user-service';
 import {UserTransferService} from '../services/user-transfer-service';
+import {MatDialog} from '@angular/material/dialog';
+import {
+  VerificationEmailDialogComponent
+} from '../dialogs/verification-email-dialog/verification-email-dialog.component';
+import {
+  DeleteConfirmationDialogComponent
+} from '../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +18,7 @@ import {UserTransferService} from '../services/user-transfer-service';
 })
 
 export class RegisterComponent {
-  constructor(private router: Router, private userService: UserService, private userTransferService: UserTransferService) {}
+  constructor(private dialog: MatDialog, private router: Router, private userService: UserService, private userTransferService: UserTransferService) {}
 
   navigateToLogin() {
     this.router.navigate(['/login']);
@@ -65,6 +72,8 @@ export class RegisterComponent {
       this.router.navigate(['/provider-register']);
     } else {
       this.userService.registerUser(user).subscribe((response: any) => {console.log(response);});
+
+      const dialogRef = this.dialog.open(VerificationEmailDialogComponent);
     }
   }
 }

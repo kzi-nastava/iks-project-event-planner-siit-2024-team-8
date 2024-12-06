@@ -6,7 +6,7 @@ import { User } from '../model/user';
   providedIn: 'root',
 })
 export class UserService {
-  private registerApiUrl = 'localhost:8080/api/users';
+  private registerApiUrl = 'localhost:8080/api/users/register';
   private activateApiUrl = 'localhost:8080/api/activation-requests';
 
   constructor(private http: HttpClient) {}

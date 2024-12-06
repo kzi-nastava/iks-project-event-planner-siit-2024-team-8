@@ -46,6 +46,8 @@ import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { HttpClientModule } from '@angular/common/http';
 import { VerificationEmailDialogComponent } from './dialogs/verification-email-dialog/verification-email-dialog.component';
 import { VerifyComponent } from './verify/verify.component';
+import { AssetCategoriesComponent } from './asset/asset-categories/asset-categories.component';
+import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-category-edit.component';
 
 
 @NgModule({
@@ -70,10 +72,11 @@ import { VerifyComponent } from './verify/verify.component';
     SearchBarHomeComponent,
     ProviderRegisterComponent,
     ProfileEditComponent,
-    VerificationEmailDialogComponent,
-    VerifyComponent,
+    AssetCategoriesComponent,
+    AssetCategoryEditComponent
   ],
   imports: [
+    MatCardModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -104,7 +107,6 @@ import { VerifyComponent } from './verify/verify.component';
     MatMenuTrigger,
     MatNativeDateModule,
     MatSliderRangeThumb,
-    HttpClientModule,
   ],
   providers: [
     provideAnimationsAsync()

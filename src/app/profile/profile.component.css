@@ -112,8 +112,9 @@ p {
 }
 
 .under-profile-btn {
-  width: 130px; 
-  height: 30px;
+  width: 130px;
+  min-height: 30px; 
+  height: auto; 
   border-radius: 16px;
 }
 

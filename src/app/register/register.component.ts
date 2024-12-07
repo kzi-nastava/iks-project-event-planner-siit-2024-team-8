@@ -7,9 +7,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {
   VerificationEmailDialogComponent
 } from '../dialogs/verification-email-dialog/verification-email-dialog.component';
-import {
-  DeleteConfirmationDialogComponent
-} from '../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-register',

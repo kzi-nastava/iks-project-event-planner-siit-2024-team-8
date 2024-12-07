@@ -73,7 +73,9 @@ import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-ca
     ProviderRegisterComponent,
     ProfileEditComponent,
     AssetCategoriesComponent,
-    AssetCategoryEditComponent
+    AssetCategoryEditComponent,
+    VerificationEmailDialogComponent,
+    VerifyComponent
   ],
   imports: [
     MatCardModule,
@@ -107,6 +109,7 @@ import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-ca
     MatMenuTrigger,
     MatNativeDateModule,
     MatSliderRangeThumb,
+    HttpClientModule
   ],
   providers: [
     provideAnimationsAsync()

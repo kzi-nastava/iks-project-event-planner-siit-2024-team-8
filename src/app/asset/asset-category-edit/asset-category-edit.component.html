@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit Asset Category' : 'Create Asset Category' }}</h2>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="categoryName" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="categoryDescription"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  
+  <button mat-icon-button *ngIf="isEditMode" (click)="onDelete()">
+    <mat-icon>delete</mat-icon>
+  </button>
+  
+  <button mat-button (click)="onSave()" cdkFocusInitial>{{ isEditMode ? 'Save' : 'Create' }}</button>
+</mat-dialog-actions>

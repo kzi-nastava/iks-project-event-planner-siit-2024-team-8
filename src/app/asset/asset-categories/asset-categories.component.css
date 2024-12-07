@@ -1,0 +1,103 @@
+#asset-category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 2em auto;
+    margin-left: 8em;
+    color: #44474E;
+    max-width: 70%;
+  }
+  
+  .cards-view {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(12rem, 1fr)); 
+    gap: 1em; 
+    justify-items: start;
+    justify-content: start;
+  }
+  
+  .card {
+    width: 14rem;
+    padding: 1rem;
+    border-radius: 0px;
+  }
+  
+  .placeholder-card {
+    width: 14rem;
+    height: 10rem;
+    background-color: transparent;
+  }
+  
+  mat-card {
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: #e6e6e6;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    cursor: pointer; 
+  }
+  
+  mat-card:hover {
+    background-color: #d5d5d5; 
+    transform: scale(1.02);
+  }
+  
+  mat-card-content {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+  }
+  
+  mat-card-title,
+  mat-card-subtitle {
+    max-width: 100%;
+    text-overflow: ellipsis;
+  }
+  
+  mat-card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  mat-card-subtitle {
+    font-size: 0.9rem;
+    color: #44474E;
+  }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+    background-color: transparent; 
+  }
+  
+  .plus-button {
+    background-color: #A1C084;
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-left: 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .plus-button:hover {
+    background-color: #7f9d42; 
+  }
+  
+  mat-icon {
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  

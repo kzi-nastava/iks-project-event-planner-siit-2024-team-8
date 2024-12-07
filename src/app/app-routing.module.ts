@@ -15,6 +15,8 @@ import {EventComponent} from './event/event.component'
 import {ProviderRegisterComponent} from './provider-register/provider-register.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import {VerifyComponent} from './verify/verify.component';
+import { AssetCategoriesComponent } from './asset/asset-categories/asset-categories.component';
+import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-category-edit.component';
 
 const routes: Routes = [
   { path: 'wine', component: WinesComponent },
@@ -37,6 +39,8 @@ const routes: Routes = [
   {path: 'provider-register', component: ProviderRegisterComponent },
   {path: 'profile-edit', component: ProfileEditComponent},
   {path: 'verify', component: VerifyComponent},
+  {path: 'asset-categories', component: AssetCategoriesComponent},
+  {path: 'asset-category-edit', component: AssetCategoryEditComponent},
   { path: '**', redirectTo: '/home' }
 ];
 

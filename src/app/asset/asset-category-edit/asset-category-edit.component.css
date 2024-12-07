@@ -1,0 +1,16 @@
+mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  button[mat-icon-button] {
+    background: transparent;
+    border: none;
+    padding: 4px;
+    color: #ff0000; /* Optional: Red color for delete button */
+  }
+  
+  button[mat-icon-button]:hover {
+    background-color: #ffcccc; /* Optional: Change background on hover */
+  }

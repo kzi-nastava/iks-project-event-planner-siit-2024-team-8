@@ -15,6 +15,7 @@ export class UserService {
     return this.http.post(this.registerApiUrl, user);
   }
   activateUser(token: string) {
-    return this.http.post(this.activateApiUrl, token);
+    const urlWithToken = `${this.activateApiUrl}/${token}`;
+    return this.http.post(urlWithToken, null);
   }
 }

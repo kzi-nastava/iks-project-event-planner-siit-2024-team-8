@@ -30,7 +30,7 @@
   <mat-step label="2 Profile image">
     <p>*Choose your profile image:</p>
     <div class="image-container">
-      <img [src]="imageUrl" alt="Profile Image" class="profile-image">
+      <img [src]=imageUrl alt="Profile Image" class="profile-image">
     </div>
     <div style="align-content: center">
       <input type="file" accept="image/*" (change)="onFileSelected($event)">

@@ -11,7 +11,6 @@ import { WineModule } from './wine/wine.module';
 import { HomeCardComponent } from './home-card/home-card.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AssetComponent } from './asset/asset.component';
-import { LoginComponent } from './login/login.component';
 import {MatFormField, MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import { RegisterComponent } from './register/register.component';
@@ -20,7 +19,13 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
-import {MatNativeDateModule, MatOption, NativeDateAdapter, NativeDateModule} from '@angular/material/core';
+import {
+  MatNativeDateModule,
+  MatOption,
+  MatOptionModule,
+  NativeDateAdapter,
+  NativeDateModule
+} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {CreateAssetComponent} from './asset/create-asset/create-asset.component';
 import {EditAssetComponent} from './asset/edit-asset/edit-asset.component';
@@ -48,6 +53,7 @@ import { VerificationEmailDialogComponent } from './dialogs/verification-email-d
 import { VerifyComponent } from './verify/verify.component';
 import { AssetCategoriesComponent } from './asset/asset-categories/asset-categories.component';
 import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-category-edit.component';
+import {AuthModule} from './infrastructure/auth/auth.module';
 
 
 @NgModule({
@@ -61,7 +67,6 @@ import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-ca
     CreateAssetComponent,
     EditAssetComponent,
     AssetComponent,
-    LoginComponent,
     RegisterComponent,
     NavBarSideComponent,
     AssetCardComponent,
@@ -75,7 +80,7 @@ import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-ca
     AssetCategoriesComponent,
     AssetCategoryEditComponent,
     VerificationEmailDialogComponent,
-    VerifyComponent
+    VerifyComponent,
   ],
   imports: [
     MatCardModule,
@@ -109,7 +114,10 @@ import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-ca
     MatMenuTrigger,
     MatNativeDateModule,
     MatSliderRangeThumb,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule,
+    MatOptionModule,
+    NgOptimizedImage,
   ],
   providers: [
     provideAnimationsAsync()

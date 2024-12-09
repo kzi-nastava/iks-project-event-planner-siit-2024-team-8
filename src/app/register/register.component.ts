@@ -20,10 +20,11 @@ export class RegisterComponent {
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
-  imageUrl: string = 'https://via.placeholder.com/150'; // Default placeholder image
+  imageUrl: "https://via.placeholder.com/150"; // Default placeholder image
+  selectedFile: File | null = null;
   imageSelected: boolean = false;
 
-  onFileSelected(event: Event): void {
+    onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files[0]) {
@@ -47,7 +48,7 @@ export class RegisterComponent {
   password: string = '';
   repeatPassword: string = '';
 
-  validateData(): boolean {
+    validateData(): boolean {
     if (this.firstName == '' || this.lastName == '' || this.imageUrl == 'https://via.placeholder.com/150' || this.email == '' || this.password == '' || this.profileType == '') {
       return false;
     }
@@ -58,7 +59,6 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    //make sure data ok
     if (!(this.validateData())) {
       alert('Please enter all the required fields.');
       return;

@@ -1,22 +1,42 @@
-<h2 mat-dialog-title>{{ isEditMode ? 'Edit Asset Category' : 'Create Asset Category' }}</h2>
+<h2 mat-dialog-title>
+  {{ isEditMode ? 'Edit Asset Category' : isApproveMode ? 'Approve Asset Category' : 'Create Asset Category' }}
+</h2>
 
 <mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="categoryName" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Description</mat-label>
-    <textarea matInput [(ngModel)]="categoryDescription"></textarea>
-  </mat-form-field>
+  <div *ngIf="isApproveMode; else editOrCreateMode">
+    <p><strong>Name:</strong> {{ categoryName }}</p>
+    <p><strong>Description:</strong> {{ categoryDescription }}</p>
+    <p><strong>Type:</strong> {{ type }}</p>
+  </div>
+
+  <ng-template #editOrCreateMode>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="categoryName" [readonly]="isApproveMode" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="categoryDescription" [readonly]="isApproveMode"></textarea>
+    </mat-form-field>
+
+    <mat-radio-group [(ngModel)]="type" [disabled]="isApproveMode">
+      <mat-radio-button value="Product">Product</mat-radio-button>
+      <mat-radio-button value="Utility">Utility</mat-radio-button>
+    </mat-radio-group>
+  </ng-template>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>
-  
+
   <button mat-icon-button *ngIf="isEditMode" (click)="onDelete()">
     <mat-icon>delete</mat-icon>
   </button>
-  
-  <button mat-button (click)="onSave()" cdkFocusInitial>{{ isEditMode ? 'Save' : 'Create' }}</button>
+
+  <button mat-button *ngIf="isApproveMode" (click)="onApprove()">Approve</button>
+
+  <button mat-button *ngIf="!isApproveMode" (click)="onSave()" cdkFocusInitial>
+    {{ isEditMode ? 'Save' : 'Create' }}
+  </button>
 </mat-dialog-actions>

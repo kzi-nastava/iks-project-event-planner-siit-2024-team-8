@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { AssetCategoryEditComponent } from '../asset-category-edit/asset-category-edit.component';
-
-interface AssetCategory {
-  name: string;
-  description: string;
-}
+import { AssetCategoryService } from '../../services/asset-category-service';
+import { AssetCategory } from '../../model/asset-category';
 
 @Component({
   selector: 'app-asset-categories',
@@ -14,24 +11,63 @@ interface AssetCategory {
   styleUrls: ['./asset-categories.component.css']
 })
 export class AssetCategoriesComponent implements OnInit {
-  assetCategories: AssetCategory[] = [
-    { name: 'Electronics', description: 'Devices and gadgets like computers, TVs, etc.' },
-    { name: 'Furniture', description: 'Various furniture items such as chairs, tables, etc.' },
-    { name: 'Tools', description: 'Equipment used for construction and repairs.' },
-    { name: 'Clothing', description: 'Apparel for different occasions.' },
-    { name: 'Books', description: 'Reading materials including fiction, non-fiction, etc.' },
-    { name: 'Toys', description: 'Play items for children of all ages.' },
-  ];
-
-  pageSize = 15; 
+  assetCategories: AssetCategory[] = [];
+  pendingCategories: AssetCategory[] = []; 
+  pageSize = 15;
   pageIndex = 0;
-  totalItems: number = this.assetCategories.length;
+  totalItems: number = 0;
   currentPageCategories: AssetCategory[] = [];
+  pendingPageCategories: AssetCategory[] = []; 
+  carouselIndex = 0; 
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private assetCategoryService: AssetCategoryService
+  ) {}
 
-  ngOnInit() {
-    this.updatePageData();
+  ngOnInit(): void {
+    this.loadCategories();
+    this.loadPendingCategories(); // Load pending categories
+  }
+
+  loadCategories(): void {
+    this.assetCategoryService.getActiveCategories().subscribe(
+      (data: AssetCategory[]) => {
+        this.assetCategories = data;
+        this.totalItems = this.assetCategories.length;
+        this.updatePageData();
+      },
+      error => {
+        console.error('Error loading categories', error);
+      }
+    );
+  }
+
+  loadPendingCategories(): void {
+    this.assetCategoryService.getPendingCategories().subscribe(
+      (data: AssetCategory[]) => {
+        this.pendingCategories = data;
+        this.updateCarouselData();
+      },
+      error => {
+        console.error('Error loading pending categories', error);
+      }
+    );
+  }
+
+  updateCarouselData(): void {
+    const startIndex = this.carouselIndex * 5; 
+    const endIndex = startIndex + 5;
+    this.pendingPageCategories = this.pendingCategories.slice(startIndex, endIndex);
+  }
+
+  navigateCarousel(direction: 'left' | 'right'): void {
+    if (direction === 'left' && this.carouselIndex > 0) {
+      this.carouselIndex--;
+    } else if (direction === 'right' && this.carouselIndex < Math.floor(this.pendingCategories.length / 5)) {
+      this.carouselIndex++;
+    }
+    this.updateCarouselData();
   }
 
   updatePageData(event?: PageEvent): void {
@@ -43,40 +79,96 @@ export class AssetCategoriesComponent implements OnInit {
     const endIndex = startIndex + this.pageSize;
 
     this.currentPageCategories = this.assetCategories.slice(startIndex, endIndex);
-
-    while (this.currentPageCategories.length < this.pageSize) {
-      this.currentPageCategories.push({ name: '', description: '' });
-    }
   }
 
-  openEditDialog(category: AssetCategory): void {
+  openEditDialog(category: AssetCategory, isApproveMode: boolean = false): void {
     const dialogRef = this.dialog.open(AssetCategoryEditComponent, {
       width: '400px',
-      data: { category: category, isEditMode: true }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const index = this.assetCategories.findIndex(c => c.name === category.name);
-        if (index > -1) {
-          this.assetCategories[index] = result;
-        }
+      data: { 
+        category: category, 
+        isEditMode: !isApproveMode, 
+      isApproveMode: isApproveMode
       }
     });
+  
+    dialogRef.componentInstance.saveCategory.subscribe((result: any) => {
+      this.saveCategory(result.categoryData, result.categoryId);
+    });
+  
+    dialogRef.componentInstance.deleteCategory.subscribe((categoryId: string) => {
+      this.deleteCategory(categoryId);
+    });
+  
+    dialogRef.componentInstance.approveCategory.subscribe((categoryId: string) => {
+      this.approveCategory(categoryId);  
+    });
   }
-
+  
   onAddCategoryClick(): void {
     const dialogRef = this.dialog.open(AssetCategoryEditComponent, {
       width: '400px',
-      data: { category: { name: '', description: '' }, isEditMode: false }
+      data: { category: { name: '', description: '', type: 'Product' }, isEditMode: false }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.assetCategories.push(result);
-        this.totalItems = this.assetCategories.length;
-        this.updatePageData(); 
+  
+    dialogRef.componentInstance.saveCategory.subscribe((result: any) => {
+      this.createCategory(result.categoryData);
+    });
+  }
+  
+  approveCategory(categoryId: string): void {
+    this.assetCategoryService.approveCategory(categoryId).subscribe(
+      () => {
+        this.loadPendingCategories();
+      },
+      error => {
+        console.error('Error approving category', error);
       }
-    });
+    );
+  }
+  
+
+  saveCategory(categoryData: any, categoryId: string | undefined): void {
+    if (categoryId) {
+      this.assetCategoryService.updateCategory(categoryId, categoryData).subscribe(
+        updatedCategory => {
+          const index = this.assetCategories.findIndex(c => c.id === updatedCategory.id);
+          if (index > -1) {
+            this.assetCategories[index] = updatedCategory;
+          }
+          this.totalItems = this.assetCategories.length;
+          this.updatePageData();
+        },
+        error => {
+          console.error('Error updating category', error);
+        }
+      );
+    }
+  }
+
+  createCategory(categoryData: any): void {
+    console.log('Category Data:', categoryData);
+    this.assetCategoryService.createCategory(categoryData).subscribe(
+      newCategory => {
+        this.assetCategories.push(newCategory);
+        this.totalItems = this.assetCategories.length;
+        this.updatePageData();
+      },
+      error => {
+        console.error('Error creating category', error);
+      }
+    );
+  }
+
+  deleteCategory(categoryId: string): void {
+    this.assetCategoryService.deleteCategory(categoryId).subscribe(
+      () => {
+        this.assetCategories = this.assetCategories.filter(c => c.id !== categoryId);
+        this.totalItems = this.assetCategories.length;
+        this.updatePageData();
+      },
+      error => {
+        console.error('Error deleting category', error);
+      }
+    );
   }
 }

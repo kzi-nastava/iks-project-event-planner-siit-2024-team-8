@@ -8,9 +8,19 @@ mat-dialog-actions {
     background: transparent;
     border: none;
     padding: 4px;
-    color: #ff0000; /* Optional: Red color for delete button */
+    color: #ff0000; 
   }
   
   button[mat-icon-button]:hover {
-    background-color: #ffcccc; /* Optional: Change background on hover */
+    background-color: #ffcccc; 
   }
+
+  mat-radio-group {
+    display: flex; 
+    flex-direction: column;
+  }
+  
+  mat-radio-button {
+    margin-bottom: 0.5rem; 
+  }
+  

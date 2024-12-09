@@ -1,16 +1,59 @@
 <div id="asset-category-list">
+
+  <div class="title-container">
+    <h1>Asset Categories</h1>
+  </div>
+
+  <div class="carousel-container">
+    <div class="cards-header">
+      <h2>Pending</h2>
+    </div>
+    <div class="carousel">
+      <div class="carousel-cards">
+        <div *ngFor="let category of pendingPageCategories" class="card pending-card" 
+        (click)="category.name ? openEditDialog(category, true) : null">
+          <mat-card class="example-card" *ngIf="category.name">
+            <mat-card-content>
+              <mat-card-title>{{ category.name }}</mat-card-title>
+              <mat-card-subtitle>{{ category.description }}</mat-card-subtitle>
+              <div *ngIf="category.type" class="category-type">
+                {{ category.type }}
+               </div>
+            </mat-card-content>
+         </mat-card>
+       <div *ngIf="!category.name" class="placeholder-card"></div>
+      </div>
+      </div>
+      <div class="carousel-arrows">
+        <button class="carousel-arrow left" (click)="navigateCarousel('left')">
+          <mat-icon>arrow_left</mat-icon>
+        </button>
+        <button class="carousel-arrow right" (click)="navigateCarousel('right')">
+          <mat-icon>arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class = "active-categories">
+    <div class="cards-header">
+      <h2>Active</h2>
+    </div>
     <div class="cards-view">
-      <div *ngFor="let category of currentPageCategories" class="card" (click)="openEditDialog(category)">
+      <div *ngFor="let category of currentPageCategories" class="card" (click)="category.name ? openEditDialog(category) : null">
         <mat-card class="example-card" *ngIf="category.name">
           <mat-card-content>
             <mat-card-title>{{ category.name }}</mat-card-title>
             <mat-card-subtitle>{{ category.description }}</mat-card-subtitle>
+            <div *ngIf="category.type" class="category-type">
+              {{ category.type }}
+            </div>
           </mat-card-content>
         </mat-card>
         <div *ngIf="!category.name" class="placeholder-card"></div>
       </div>
     </div>
-  
+
     <div class="pagination-container">
       <mat-paginator
         [length]="totalItems"
@@ -20,9 +63,10 @@
         (page)="updatePageData($event)"
         aria-label="Select page of asset categories">
       </mat-paginator>
-  
+
       <button class="plus-button" (click)="onAddCategoryClick()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
   </div>
+</div>

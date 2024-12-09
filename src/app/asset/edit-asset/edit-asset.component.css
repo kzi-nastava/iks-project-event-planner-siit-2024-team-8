@@ -53,10 +53,6 @@ button {
   border: none;
 }
 
-button:hover {
-  color: #000000;
-}
-
 .service-details {
   width: 60%;
   padding: 20px;
@@ -120,23 +116,15 @@ textarea {
   border: none;
   padding: 10px 20px;
   font-size: 16px;
-  border-radius: 4px;
   cursor: pointer;
   display: inline-block;
   border-radius: 16px;
   width: 120px;
 }
 
-.custom-file-input:hover {
-  background-color: #556B2F;
-  cursor: pointer;
-  color: black;
-}
-
-.btn:hover {
+.btn:hover, .custom-file-input:hover {
   background-color: #556B2F !important;
   cursor: pointer;
-  color: rgb(255, 255, 255) !important;
 }
 
 .file-input {
@@ -173,18 +161,7 @@ textarea {
   margin-bottom: 50px;
 }
 
-::ng-deep .mat-slide-toggle .mat-slide-toggle-bar {
-  background-color: #757575 !important; 
-}
-
-::ng-deep .mat-slide-toggle .mat-slide-toggle-thumb {
-  background-color: #bdbdbd !important; 
-}
-
 ::ng-deep .mat-slide-toggle-checked .mat-slide-toggle-bar {
   background-color: #A1C084 !important;  
 }
 
-::ng-deep .mat-slide-toggle-checked .mat-slide-toggle-thumb {
-  background-color: white !important;  
-}

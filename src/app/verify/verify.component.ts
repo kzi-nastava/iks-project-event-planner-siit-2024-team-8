@@ -12,7 +12,6 @@ export class VerifyComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService) { }
   ngOnInit() {
     this.token = this.route.snapshot.queryParamMap.get('token');
-    console.log('Token:', this.token);
     this.userService.activateUser(this.token).subscribe((response: any) => {console.log(response);});
     setTimeout(() => {
       this.router.navigate(['/login']);

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
 
@@ -15,7 +15,6 @@ export class UserService {
     return this.http.post(this.registerApiUrl, user);
   }
   activateUser(token: string) {
-    const urlWithToken = `${this.activateApiUrl}/${token}`;
-    return this.http.post(urlWithToken, null);
+    return this.http.put(this.activateApiUrl,token);
   }
 }

@@ -3,6 +3,7 @@ import {NavigationEnd, Route} from '@angular/router';
 import {filter} from 'rxjs';
 import {Router} from '@angular/router';
 
+declare var mega: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

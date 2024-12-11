@@ -24,11 +24,11 @@ export class RegisterComponent {
   selectedFile: File | null = null;
   imageSelected: boolean = false;
 
-    onFileSelected(event: Event): void {
+  onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files[0]) {
-      const file = input.files[0];
+      this.selectedFile = input.files[0];
       const reader = new FileReader();
 
       reader.onload = (e: any) => {
@@ -36,9 +36,10 @@ export class RegisterComponent {
         this.imageSelected = true; // Enable the "Next" button
       };
 
-      reader.readAsDataURL(file); // Convert the image file to a data URL
+      reader.readAsDataURL(this.selectedFile);
     }
   }
+
   profileType: string = '';
   firstName: string = '';
   lastName: string = '';
@@ -63,12 +64,19 @@ export class RegisterComponent {
       alert('Please enter all the required fields.');
       return;
     }
-    let user : User = returnUser(this.firstName, this.lastName, this.email, this.password, this.number, this.imageUrl, this.address, this.profileType as UserType)
+    let formData = new FormData();
+
+    if (this.selectedFile) {
+      console.log(this.selectedFile);
+      formData.append('image', this.selectedFile, this.selectedFile.name);
+    }
+    let user : User = returnUser(this.firstName, this.lastName, this.email, this.password, this.number,  this.address, this.profileType as UserType)
+    Object.entries(user).forEach(([key, value]) => formData.append(key, value))
     if (this.profileType == 'PROVIDER') {
       this.userTransferService.setUser(user);
       this.router.navigate(['/provider-register']);
     } else {
-      this.userService.registerUser(user).subscribe((response: any) => {console.log(response);});
+      this.userService.registerUser(formData).subscribe((response: any) => {console.log(response);});
 
       const dialogRef = this.dialog.open(VerificationEmailDialogComponent);
     }

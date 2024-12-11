@@ -1,0 +1,13 @@
+<div class="toast" [@toastAnimation]="isVisible ? 'visible' : 'hidden'">
+  <div class="toast-content">
+    <div class="message">
+      <span>
+        <div class="title" [ngStyle]="getTitleColor()">{{ title }}</div>
+        <div class="text">{{ message }}</div>
+      </span>
+    </div>
+  </div>
+  <div class="exit" (click)="closeToast()">&times;</div>
+</div>
+
+

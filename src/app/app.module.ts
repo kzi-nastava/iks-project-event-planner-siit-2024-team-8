@@ -48,12 +48,14 @@ import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
 import { SearchBarHomeComponent } from './search-bar-home/search-bar-home.component';
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { VerificationEmailDialogComponent } from './dialogs/verification-email-dialog/verification-email-dialog.component';
 import { VerifyComponent } from './verify/verify.component';
 import { AssetCategoriesComponent } from './asset/asset-categories/asset-categories.component';
 import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-category-edit.component';
 import {AuthModule} from './infrastructure/auth/auth.module';
+import { ToastComponent } from './toast/toast.component';
+import {Interceptor} from './infrastructure/auth/interceptor';
 
 
 @NgModule({
@@ -81,6 +83,7 @@ import {AuthModule} from './infrastructure/auth/auth.module';
     AssetCategoryEditComponent,
     VerificationEmailDialogComponent,
     VerifyComponent,
+    ToastComponent,
   ],
   imports: [
     MatCardModule,
@@ -120,7 +123,12 @@ import {AuthModule} from './infrastructure/auth/auth.module';
     NgOptimizedImage,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

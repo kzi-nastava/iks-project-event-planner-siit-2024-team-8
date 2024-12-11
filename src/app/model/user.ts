@@ -12,7 +12,6 @@ export interface User {
   email: string;
   password: string;
   number: string;
-  profileImageURL: string;
   address: string;
   userType: UserType;
   companyName: string;
@@ -22,7 +21,7 @@ export interface User {
   isActive: boolean;
 }
 
-export function returnUser(firstName: string, lastName: string, email: string, password: string, number: string, profileImageUrl: string, address: string, userType: UserType): User {
+export function returnUser(firstName: string, lastName: string, email: string, password: string, number: string, address: string, userType: UserType): User {
   return {
     id: -1, //generated in backend
 
@@ -31,7 +30,6 @@ export function returnUser(firstName: string, lastName: string, email: string, p
     email: email,
     password: password,
     number: number,
-    profileImageURL: profileImageUrl,
     address: address,
     userType: userType,
 

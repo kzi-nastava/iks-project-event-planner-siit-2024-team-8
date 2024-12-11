@@ -4,6 +4,7 @@ import {Login} from '../model/login.model';
 import {AuthService} from '../auth.service';
 import {AuthResponse} from '../model/auth-response.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ToastService} from '../../../services/toast-service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginComponent {
   constructor(private router: Router,
-              private authService: AuthService,) {}
+              private authService: AuthService,
+              private toastService: ToastService) {}
 
   navigateToRegister(): void {
     this.router.navigate(['/register']);
@@ -34,8 +36,14 @@ export class LoginComponent {
       this.authService.login(login).subscribe({
         next: (response: AuthResponse) => {
           localStorage.setItem('user', response.token);
-          this.authService.setUser()
-          this.router.navigate(['home'])
+          this.authService.setUser();
+          this.router.navigate(['home']);
+          this.toastService.showToast({
+            message: 'Successfully logged in!',
+            title: 'Success',
+            type: 'success',
+            duration: 3000,
+          });
         }
       })
     }

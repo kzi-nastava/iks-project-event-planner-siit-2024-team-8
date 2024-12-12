@@ -13,7 +13,7 @@
 
       <div class="additional-info">
         <h3>EMAIL</h3>
-        <input type="email" class="input-field" [(ngModel)]="email_input"/>
+        <input type="email" class="input-field" [(ngModel)]="email_input" disabled />
 
         <h3>NAME</h3>
         <input type="text" class="input-field" [(ngModel)]="firstName_input"/>
@@ -41,7 +41,7 @@
       -->
 
       <div class="button-group">
-        <button mat-raised-button color="primary" class="btn action-btn" type="submit">Confirm</button>
+        <button mat-raised-button color="primary" class="btn action-btn" type="submit" (click)="submit()">Confirm</button>
         <button mat-raised-button color="primary" class="btn action-btn" type="button" (click)="navigateToProfile()">Cancel</button>
       </div>
     </div>

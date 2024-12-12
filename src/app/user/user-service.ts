@@ -1,9 +1,10 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../model/user';
+import { User } from './domain/user';
 import {environment} from '../../env/environment';
 import {Observable} from 'rxjs';
 import {Form} from '@angular/forms';
+import {UserInfoResponse} from './domain/user.info.response';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class UserService {
   activateUser(token: string) {
     return this.http.put(this.activateApiUrl,token);
   }
-  getUserInfo() :Observable<User> {
-    return this.http.get<User>(environment.apiHost + '/users/user')
+  getUserInfo() :Observable<UserInfoResponse> {
+    return this.http.get<UserInfoResponse>(environment.apiHost + '/users/user')
   }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserTransferService} from '../services/user-transfer-service';
-import {UserService} from '../services/user-service';
+import {UserTransferService} from '../user/user-transfer-service';
+import {UserService} from '../user/user-service';
 import {VerificationEmailDialogComponent} from '../dialogs/verification-email-dialog/verification-email-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {User, returnUser, UserType} from '../model/user';
-import {UserService} from '../services/user-service';
-import {UserTransferService} from '../services/user-transfer-service';
+import {User, returnUser, UserType} from '../domain/user';
+import {UserService} from '../user-service';
+import {UserTransferService} from '../user-transfer-service';
 import {MatDialog} from '@angular/material/dialog';
 import {
   VerificationEmailDialogComponent
-} from '../dialogs/verification-email-dialog/verification-email-dialog.component';
+} from '../../dialogs/verification-email-dialog/verification-email-dialog.component';
 
 @Component({
   selector: 'app-register',

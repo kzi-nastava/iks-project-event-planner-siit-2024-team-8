@@ -1,0 +1,145 @@
+.outer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  margin: 40px;
+  flex-wrap: wrap;
+  color: #44474E;
+}
+
+.event-container {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+}
+
+.event-details {
+  width: 55%;
+  padding: 20px;
+}
+
+.event-details h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.upload-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.upload-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.carousel-images {
+  display: flex;
+  overflow: hidden;
+}
+
+.carousel-image {
+  display: none;
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.5s ease-in-out, border-radius 0.5s ease, box-shadow 0.5s ease;
+  border-radius: 15% ;
+}
+
+.carousel-image.active {
+  display: block;
+}
+
+button {
+  background: none;
+  color: #44474E;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+  margin: 0 20px;
+  border: none;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  color: #85888d;
+  font-size: 16px;
+  font-style: italic;
+}
+
+p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.btn {
+  background-color: #A1C084 !important;
+  color: #ffffff !important;
+  border: none;
+  box-shadow: none !important;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn:hover {
+  background-color: #556B2F !important;
+  cursor: pointer;
+}
+
+
+.button-group {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+.action-button {
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.button-group mat-icon {
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  margin: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .outer-container {
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px;
+  }
+
+  .upload-section, .service-details {
+    width: 100%;
+  }
+
+  .carousel-images {
+    width: 100%;
+    height: 250px;
+  }
+
+  .carousel-image {
+    width: 100%;
+    height: 250px;
+  }
+}

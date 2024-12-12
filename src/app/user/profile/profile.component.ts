@@ -4,6 +4,11 @@ import {AuthService} from '../../infrastructure/auth/auth.service';
 import {UserService} from '../user-service';
 import {User} from '../domain/user';
 import {UserInfoResponse} from '../domain/user.info.response';
+import {
+  DeleteConfirmationDialogComponent
+} from '../../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {LogoutDialogComponent} from '../../dialogs/logout-dialog/logout-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +18,8 @@ import {UserInfoResponse} from '../domain/user.info.response';
 export class ProfileComponent {
   role : string = '';
   currentUser : UserInfoResponse = null;
-  constructor(private router: Router,private authService: AuthService,private userService: UserService) { }
+  constructor(private router: Router,private authService: AuthService,private userService: UserService,
+              private dialog: MatDialog) { }
 
   public ngOnInit() {
     this.authService.userState.subscribe(user => {
@@ -31,5 +37,14 @@ export class ProfileComponent {
 
   navigateToEditProfile(): void {
     this.router.navigate(['/profile-edit']);
+  }
+
+  logoutClick() {
+    const dialogRef = this.dialog.open(LogoutDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirm') {
+        this.authService.logout();
+      }
+    });
   }
 }

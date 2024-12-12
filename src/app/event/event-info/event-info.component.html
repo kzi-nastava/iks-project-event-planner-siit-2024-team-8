@@ -1,0 +1,67 @@
+<div class="outer-container">
+  <div class="event-container">
+    <div class="upload-section">
+      <div *ngIf="event.images && event.images.length > 0" class="carousel">
+        <button (click)="prevImage()">&#10094;</button>
+        <div class="carousel-images">
+          <img
+            *ngFor="let image of event.images; let i = index"
+            [src]="image"
+            [alt]="'Image ' + (i + 1)"
+            class="carousel-image"
+            [class.active]="i === currentImageIndex"
+          />
+        </div>
+        <button (click)="nextImage()">&#10095;</button>
+      </div>
+    </div>
+
+    <div class="event-details">
+      <h2>{{ event.name || 'Unnamed Event' }}</h2>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <p id="description">{{ event.description || 'No description available.' }}</p>
+      </div>
+
+      <div class="form-group">
+        <button id="mapButton" mat-raised-button class="btn map-button" type="button" >View on Map</button>
+      </div>
+
+      <div class="form-group">
+        <label for="capacity">Capacity</label>
+        <p id="capacity">{{ event.capacity > 0 ? event.capacity : 'No capacity specified.' }}</p>
+      </div>
+
+      <div class="form-group">
+        <label for="isPrivate">Privacy</label>
+        <p id="isPrivate">{{ event.isPrivate ? 'Private' : 'Public' }}</p>
+      </div>
+
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <p id="startDate">{{ event.startDate ? (event.startDate | date: 'mediumDate') : 'Not specified.' }}</p>
+      </div>
+
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <p id="endDate">{{ event.endDate ? (event.endDate | date: 'mediumDate') : 'Not specified.' }}</p>
+      </div>
+
+      <div class="form-group">
+        <label for="budget">Budget</label>
+        <p id="budget">{{ event.budget > 0 ? (event.budget | currency) : 'No budget specified.' }}</p>
+      </div>
+
+      <div class="button-group">
+        <button mat-raised-button class="btn action-button" (click)="openDeleteDialog()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-raised-button class="btn action-button" (click)="navigateToEditEvent()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -28,6 +28,11 @@ export class AuthService {
     });
   }
 
+  logout() {
+    localStorage.removeItem('user');
+    this.setUser();
+  }
+
   getRole(): any {
     if (this.isLoggedIn()) {
       const accessToken: any = localStorage.getItem('user');
@@ -44,4 +49,5 @@ export class AuthService {
   setUser(): void {
     this.user$.next(this.getRole());
   }
+
 }

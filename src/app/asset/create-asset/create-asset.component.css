@@ -3,10 +3,10 @@
   justify-content: space-between;
   gap: 32px;
   margin: 40px;
-  color:#44474E
+  color: #44474E;
 }
 
-.service-container {
+.asset-container {
   display: flex;
   justify-content: space-between;
   gap: 32px;
@@ -37,7 +37,6 @@
   object-fit: cover;
   transition: transform 0.5s ease-in-out, border-radius 0.5s ease, box-shadow 0.5s ease;
   border-radius: 15% !important;
-
 }
 
 .carousel-image.active {
@@ -58,7 +57,7 @@ button:hover {
   color: #000000;
 }
 
-.service-details {
+.asset-details {
   width: 60%;
   padding: 20px;
 }
@@ -125,7 +124,6 @@ textarea {
   cursor: pointer;
   display: inline-block;
   width: 120px;
-
 }
 
 .custom-file-input:hover {

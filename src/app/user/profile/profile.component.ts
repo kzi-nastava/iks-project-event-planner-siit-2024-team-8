@@ -27,7 +27,9 @@ export class ProfileComponent {
     })
     this.userService.getUserInfo().subscribe({
       next: (data: UserInfoResponse) => { this.currentUser = data;
-      console.log(data.firstName);}
+      console.log(data.firstName);
+        console.log(this.currentUser.profileImage);}
+
     })
   }
 
@@ -37,6 +39,10 @@ export class ProfileComponent {
 
   navigateToEditProfile(): void {
     this.router.navigate(['/profile-edit']);
+  }
+
+  navigateToCategories(): void {
+    this.router.navigate(['/asset-categories']);
   }
 
   logoutClick() {

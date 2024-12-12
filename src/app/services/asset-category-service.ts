@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AssetCategory } from '../model/asset-category';  
+import { map } from 'rxjs/operators';  
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,26 @@ export class AssetCategoryService {
     return this.http.get<AssetCategory[]>(`${this.apiUrl}/active`);
   }
 
+  getActiveUtilityCategories(): Observable<AssetCategory[]> {
+    console.log('tried getting active product categories');
+    return this.getActiveCategories().pipe(
+      map(categories => categories.filter(category => category.type === 'UTILITY'))
+    );
+  }
+
+  getActiveProductCategories(): Observable<AssetCategory[]> {
+    console.log('tried getting active product categories');
+    return this.getActiveCategories().pipe(
+      map(categories => categories.filter(category => category.type === 'PRODUCT'))
+    );
+  }
+
   getPendingCategories(): Observable<AssetCategory[]> {
     return this.http.get<AssetCategory[]>(`${this.apiUrl}/pending`);
+  }
+
+  getCategoryById(id: string): Observable<AssetCategory> {
+    return this.http.get<AssetCategory>(`${this.apiUrl}/${id}`);
   }
 
   createCategory(category: AssetCategory): Observable<AssetCategory> {

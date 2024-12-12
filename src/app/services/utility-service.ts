@@ -20,12 +20,13 @@ export class UtilityService {
     return this.http.get<Utility>(`${this.apiUrl}/${id}`);
   }
 
-  createUtility(utility: Utility): Observable<Utility> {
-    return this.http.post<Utility>(this.apiUrl, utility);
+  createUtility(formData: FormData): Observable<Object> {
+    console.log(formData);
+    return this.http.post(this.apiUrl, formData);
   }
 
-  updateUtility(id: string, utility: Utility): Observable<Utility> {
-    return this.http.put<Utility>(`${this.apiUrl}/${id}`, utility);
+  updateUtility(id: string, formData: FormData): Observable<Object> {
+    return this.http.put<Utility>(`${this.apiUrl}/${id}`, formData);
   }
 
   deleteUtility(id: string): Observable<void> {

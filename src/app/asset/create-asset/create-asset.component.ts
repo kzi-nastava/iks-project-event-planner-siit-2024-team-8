@@ -1,60 +1,132 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UtilityService } from '../../services/utility-service';
+import { ProductService } from '../../services/product-service';
+import { AssetCategoryService } from '../../services/asset-category-service';
+import { AssetCategory } from '../../model/asset-category';
+import { Asset } from '../../model/asset';
+
 @Component({
   selector: 'app-create-asset',
   templateUrl: './create-asset.component.html',
   styleUrls: ['./create-asset.component.css']
 })
-export class CreateAssetComponent {
-  constructor(private router: Router) {}
-  service = {
+export class CreateAssetComponent implements OnInit {
+  asset: Asset = {
+    id: null,
     category: '',
     name: '',
     description: '',
-    price: '',
-    discount: '',
-    images: [] as string[],  
-    eventTypes: [] as string[],
-    visibility: true,
-    availability: true,
-    duration: '',
-    bookingDeadline: '',
-    cancellationDeadline: '',
-    confirmationMethod: 'automatic',
+    price: 0,
+    discount: 0,
+    grade: 0,
+    images: [],
+    possibleEventTypes: [],
+    visible: false,
+    available: false,
+    status: '',
+    deleted: false,
+    providerId: '',
   };
 
-  categories: string[] = ['Health', 'Education', 'Technology', 'Lifestyle']; 
-  serviceType = {
-    category: '',
-    newCategory: ''
-  };
+  isUtility: boolean = false;
+  isProduct: boolean = true;
+  assetType: string = 'product';
 
-  showNewCategoryField = false;
+  utilityDuration: number;
+  utilityReservationTerm: string;
+  utilityCancellationTerm: string;
+  utilityManualConfirmation: boolean = false;
 
-  images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
+  categories: AssetCategory[] = [];
+  showNewCategoryField: boolean = false;
+  newCategoryName: string = '';
+  newCategoryDescription: string = '';
+
+  images: File[] = []; // for FormData
+  imagePreviews: string[] = []; // for display
   currentImageIndex: number = 0;
 
-  onCategoryChange() {
-    this.showNewCategoryField = this.service.category === 'none';
+  constructor(
+    private router: Router,
+    private utilityService: UtilityService,
+    private productService: ProductService,
+    private assetCategoryService: AssetCategoryService
+  ) {}
+
+  ngOnInit(): void {
+    this.onAssetTypeChange(this.assetType);
+  }
+
+  onAssetTypeChange(type: string): void {
+    this.assetType = type;
+
+    this.asset.category = null; // Reset the category initially
+
+    if (type === 'utility') {
+      this.isUtility = true;
+      this.isProduct = false;
+
+      this.assetCategoryService.getActiveUtilityCategories().subscribe(
+        (categories: AssetCategory[]) => {
+          this.categories = categories;
+          console.log('Fetched utility categories:', categories);
+
+          if (this.categories.length > 0) {
+            this.asset.category = this.categories[0].id;
+          }
+        },
+        (error) => {
+          console.error('Error fetching utility categories:', error);
+        }
+      );
+    } else if (type === 'product') {
+      this.isUtility = false;
+      this.isProduct = true;
+
+      this.assetCategoryService.getActiveProductCategories().subscribe(
+        (categories: AssetCategory[]) => {
+          this.categories = categories;
+          console.log('Fetched product categories:', categories);
+
+          if (this.categories.length > 0) {
+            this.asset.category = this.categories[0].id;
+          }
+        },
+        (error) => {
+          console.error('Error fetching product categories:', error);
+        }
+      );
+    }
+  }
+
+
+
+  onCategoryChange(): void {
+    if (this.asset.category === 'none' || this.asset.category === null) {
+      this.showNewCategoryField = true;
+    } else {
+      this.showNewCategoryField = false;
+    }
   }
 
   onFileSelected(event: any): void {
-    const files = event.target.files as FileList; 
+    const files = event.target.files as FileList;
     if (files && files.length > 0) {
-      Array.from(files).forEach((file) => {
-        if (file instanceof Blob) {
-          const reader = new FileReader();
-          reader.onload = () => {
-            if (reader.result) {
-              if (this.images[0].includes('placeholder')) {
-                this.images = []; 
-              }
-              this.images.push(reader.result as string);
-            }
-          };
-          reader.readAsDataURL(file);
-        }
-      });
+      this.images = [];
+      this.imagePreviews = [];
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          this.imagePreviews.push(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+
+        this.images.push(file);
+      }
     }
   }
 
@@ -70,11 +142,116 @@ export class CreateAssetComponent {
     }
   }
 
+  validateForm(): boolean {
+    if (this.asset.category === '' || this.asset.category === null) {
+      alert('Please select a valid category.');
+      return false;
+    }
+
+    if (!this.asset.name || this.asset.name.length > 20 || !/^[a-zA-Z\s]+$/.test(this.asset.name)) {
+      alert('Asset name should contain only letters and spaces, and be less than 20 characters.');
+      return false;
+    }
+
+    if (this.asset.price < 1 || this.asset.price > 999999) {
+      alert('Price must be between 1 and 999999.');
+      return false;
+    }
+
+    if (this.asset.discount < 0 || this.asset.discount > 100) {
+      alert('Discount must be between 0 and 100.');
+      return false;
+    }
+
+    if (this.asset.visible === null || this.asset.available === null) {
+      alert('Visibility and Availability cannot be null.');
+      return false;
+    }
+
+    if (this.asset.category === 'none' && (!this.newCategoryName || this.newCategoryName.trim() === '')) {
+      alert('Please provide a name for the new category.');
+      return false;
+    }
+
+    if (this.isUtility) {
+      if (!this.utilityReservationTerm || !this.utilityCancellationTerm) {
+        alert('Please select both reservation and cancellation terms.');
+        return false;
+      }
+
+      if (this.utilityDuration < 1 || this.utilityDuration > 999) {
+        alert('Duration must be between 1 and 999.');
+        return false;
+      }
+
+      if (this.utilityManualConfirmation === undefined) {
+        alert('Please select the confirmation method.');
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   onSubmit(): void {
-    console.log('Form submitted with data:', this.service);
+    if (!this.validateForm()) {
+      return;
+    }
+
+    let formData = new FormData();
+
+    if (this.images && this.images.length > 0) {
+      for (let i = 0; i < this.images.length; i++) {
+        const imageFile = this.images[i];
+        formData.append('images', imageFile, imageFile.name);
+      }
+    }
+
+    if (this.asset.category === 'none') {
+      formData.append('category', "00000000-0000-0000-0000-000000000000");
+    } else {
+      formData.append('category', this.asset.category);
+    }
+    formData.append('name', this.asset.name);
+    formData.append('description', this.asset.description);
+    formData.append('price', this.asset.price.toString());
+    formData.append('discount', this.asset.discount.toString());
+    formData.append('visible', this.asset.visible.toString());
+    formData.append('available', this.asset.available.toString());
+    formData.append('provider', this.asset.providerId);
+    formData.append('suggestedCategoryName', this.newCategoryName);
+    formData.append('suggestedCategoryDesc', this.newCategoryDescription);
+
+    if (this.isUtility) {
+      formData.append('duration', this.utilityDuration.toString());
+      formData.append('reservationTerm', this.utilityReservationTerm);
+      formData.append('cancellationTerm', this.utilityCancellationTerm);
+      formData.append('manuelConfirmation', this.utilityManualConfirmation.toString());
+      console.log(this.asset);
+      this.utilityService.createUtility(formData).subscribe(
+        (createdUtility) => {
+          console.log('Utility created:', createdUtility);
+          this.navigateToProfile();
+        },
+        (error) => {
+          console.error('Error creating utility:', error);
+        }
+      );
+    } else if (this.isProduct) {
+      console.log(formData);
+      this.productService.createProduct(formData).subscribe(
+        (createdProduct) => {
+          console.log('Product created:', createdProduct);
+          this.navigateToProfile();
+        },
+        (error) => {
+          console.error('Error creating product:', error);
+        }
+      );
+    }
   }
 
   navigateToProfile(): void {
-    this.router.navigate(['/profile']);
+    this.router.navigate([`/profile`]);
   }
 }

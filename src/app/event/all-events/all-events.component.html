@@ -60,8 +60,8 @@
       <app-event-card [event]="event"></app-event-card>
     </div>
   </div>
-  <div *ngIf="!isEvents" class="cards-view">
-    <div *ngFor="let asset of currentPageEvents" class="card">
+  <div class="cards-view" *ngIf="!isEvents">
+    <div *ngFor="let asset of currentPageEvents" class="card" (click)="onCardClick(asset)">
       <app-asset-card [asset]="asset"></app-asset-card>
     </div>
   </div>

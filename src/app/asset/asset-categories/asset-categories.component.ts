@@ -12,13 +12,13 @@ import { AssetCategory } from '../../model/asset-category';
 })
 export class AssetCategoriesComponent implements OnInit {
   assetCategories: AssetCategory[] = [];
-  pendingCategories: AssetCategory[] = []; 
+  pendingCategories: AssetCategory[] = [];
   pageSize = 15;
   pageIndex = 0;
   totalItems: number = 0;
   currentPageCategories: AssetCategory[] = [];
-  pendingPageCategories: AssetCategory[] = []; 
-  carouselIndex = 0; 
+  pendingPageCategories: AssetCategory[] = [];
+  carouselIndex = 0;
 
   constructor(
     private dialog: MatDialog,
@@ -56,7 +56,7 @@ export class AssetCategoriesComponent implements OnInit {
   }
 
   updateCarouselData(): void {
-    const startIndex = this.carouselIndex * 5; 
+    const startIndex = this.carouselIndex * 5;
     const endIndex = startIndex + 5;
     this.pendingPageCategories = this.pendingCategories.slice(startIndex, endIndex);
   }
@@ -84,37 +84,37 @@ export class AssetCategoriesComponent implements OnInit {
   openEditDialog(category: AssetCategory, isApproveMode: boolean = false): void {
     const dialogRef = this.dialog.open(AssetCategoryEditComponent, {
       width: '400px',
-      data: { 
-        category: category, 
-        isEditMode: !isApproveMode, 
-      isApproveMode: isApproveMode
+      data: {
+        category: category,
+        isEditMode: !isApproveMode,
+        isApproveMode: isApproveMode
       }
     });
-  
+
     dialogRef.componentInstance.saveCategory.subscribe((result: any) => {
       this.saveCategory(result.categoryData, result.categoryId);
     });
-  
+
     dialogRef.componentInstance.deleteCategory.subscribe((categoryId: string) => {
       this.deleteCategory(categoryId);
     });
-  
+
     dialogRef.componentInstance.approveCategory.subscribe((categoryId: string) => {
-      this.approveCategory(categoryId);  
+      this.approveCategory(categoryId);
     });
   }
-  
+
   onAddCategoryClick(): void {
     const dialogRef = this.dialog.open(AssetCategoryEditComponent, {
       width: '400px',
       data: { category: { name: '', description: '', type: 'Product' }, isEditMode: false }
     });
-  
+
     dialogRef.componentInstance.saveCategory.subscribe((result: any) => {
       this.createCategory(result.categoryData);
     });
   }
-  
+
   approveCategory(categoryId: string): void {
     this.assetCategoryService.approveCategory(categoryId).subscribe(
       () => {
@@ -125,7 +125,7 @@ export class AssetCategoriesComponent implements OnInit {
       }
     );
   }
-  
+
 
   saveCategory(categoryData: any, categoryId: string | undefined): void {
     if (categoryId) {

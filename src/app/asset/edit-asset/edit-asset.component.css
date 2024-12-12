@@ -6,7 +6,7 @@
   color: #44474E;
 }
 
-.service-container {
+.asset-container {
   display: flex;
   justify-content: space-between;
   gap: 32px;
@@ -53,7 +53,7 @@ button {
   border: none;
 }
 
-.service-details {
+.asset-details {
   width: 60%;
   padding: 20px;
 }

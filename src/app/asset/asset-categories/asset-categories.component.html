@@ -10,19 +10,19 @@
     </div>
     <div class="carousel">
       <div class="carousel-cards">
-        <div *ngFor="let category of pendingPageCategories" class="card pending-card" 
-        (click)="category.name ? openEditDialog(category, true) : null">
+        <div *ngFor="let category of pendingPageCategories" class="card pending-card"
+             (click)="category.name ? openEditDialog(category, true) : null">
           <mat-card class="example-card" *ngIf="category.name">
             <mat-card-content>
               <mat-card-title>{{ category.name }}</mat-card-title>
               <mat-card-subtitle>{{ category.description }}</mat-card-subtitle>
               <div *ngIf="category.type" class="category-type">
                 {{ category.type }}
-               </div>
+              </div>
             </mat-card-content>
-         </mat-card>
-       <div *ngIf="!category.name" class="placeholder-card"></div>
-      </div>
+          </mat-card>
+          <div *ngIf="!category.name" class="placeholder-card"></div>
+        </div>
       </div>
       <div class="carousel-arrows">
         <button class="carousel-arrow left" (click)="navigateCarousel('left')">

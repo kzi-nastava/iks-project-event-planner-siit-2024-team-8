@@ -55,7 +55,7 @@
           <button *ngIf="role =='PROVIDER'" [routerLink]="['/all-my-assets']" mat-raised-button color="primary" class="btn under-profile-btn">My Assets</button>
           <button *ngIf="role =='PROVIDER'" mat-raised-button color="primary" class="btn under-profile-btn" (click)="navigateToCreateAsset()">Create Asset</button>
           <button mat-raised-button color="primary" class="btn under-profile-btn" >Start chat</button>
-          <button *ngIf="role =='PROVIDER'" [routerLink]="['/asset-categories']" mat-raised-button color="primary" class="btn under-profile-btn">Asset categories</button>
+          <button *ngIf="role =='PROVIDER'" (click)="navigateToCategories()" mat-raised-button color="primary" class="btn under-profile-btn">Asset categories</button>
         </div>
       </div>
     </div>

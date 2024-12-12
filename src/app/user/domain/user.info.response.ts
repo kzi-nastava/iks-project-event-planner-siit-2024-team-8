@@ -3,7 +3,7 @@ export interface UserInfoResponse{
   lastName: string;
   email: string;
   number: string;
-  profileImage: Blob;
+  profileImage: string;
   address: string;
   isActive: boolean;
 }

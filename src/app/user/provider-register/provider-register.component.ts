@@ -85,7 +85,7 @@ export class ProviderRegisterComponent implements OnInit {
       return;
     }
     this.user.companyName = this.companyName;
-    this.user.companyDesc = this.companyDesc;
+    this.user.companyDescription = this.companyDesc;
     this.user.companyImagesURL = [this.imageUrl1, this.imageUrl2, this.imageUrl3];
     this.userService.registerUser(this.user).subscribe((response: any) => {console.log(response);});
 

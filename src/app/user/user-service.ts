@@ -12,6 +12,7 @@ import {UserInfoResponse} from './domain/user.info.response';
 export class UserService {
   private registerApiUrl = 'http://localhost:8080/api/users/register';
   private activateApiUrl = 'http://localhost:8080/api/activation-requests/authenticate';
+  private updateApiUrl = 'http://localhost:8080/api/users/update';
 
   constructor(private http: HttpClient) {}
 
@@ -23,5 +24,8 @@ export class UserService {
   }
   getUserInfo() :Observable<UserInfoResponse> {
     return this.http.get<UserInfoResponse>(environment.apiHost + '/users/user')
+  }
+  updateUser(formData : FormData): Observable<Object> {
+    return this.http.put(this.updateApiUrl, formData);
   }
 }

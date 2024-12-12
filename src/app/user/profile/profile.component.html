@@ -2,28 +2,28 @@
   <div class="profile-container">
     <div class="user-info">
       <div class="user-details">
-        <h2>User Name</h2>
-        <p>Type of User</p>
+        <h2>{{currentUser.firstName+" "+currentUser.lastName}}</h2>
+        <p>{{ role }}</p>
       </div>
 
       <div class="additional-info">
         <h3>EMAIL</h3>
-        <p>user.com</p>
+        <p>{{ currentUser.email }}</p>
 
         <h3>NAME AND SURNAME</h3>
-        <p>Full Name</p>
+        <p>{{currentUser.firstName+" "+currentUser.lastName}}</p>
 
         <h3>ADDRESS</h3>
-        <p>123 Bla Bla</p>
+        <p>{{ currentUser.address }}</p>
 
         <h3>PHONE NUMBER</h3>
-        <p>613089</p>
+        <p>{{ currentUser.number }}</p>
 
         <h3>ACCOUNT STATUS</h3>
-        <p style="font-weight: 500;">Verified</p>
+        <p style="font-weight: 500;">{{ currentUser.isActive ? 'Verified' : 'Not Verified' }}</p>
       </div>
 
-      <div class="company-info">
+      <div *ngIf="role==='PROVIDER'" class="company-info">
         <h3>COMPANY NAME</h3>
         <p>Company ABC</p>
 
@@ -44,7 +44,7 @@
     <div class="profile-section">
       <div class="profile-picture-container">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+          [src]="currentUser.profileImage"
           alt="Profile Picture"
           class="profile-picture"
         />

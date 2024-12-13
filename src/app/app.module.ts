@@ -56,6 +56,7 @@ import { ToastComponent } from './layout/toast/toast.component';
 import {Interceptor} from './infrastructure/auth/interceptor';
 import { LogoutDialogComponent } from './dialogs/logout-dialog/logout-dialog.component';
 import {EventModule} from './event/event.module';
+import { ErrorCodeDialogComponent } from './dialogs/error-code-dialog/error-code-dialog.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import {EventModule} from './event/event.module';
     VerifyComponent,
     ToastComponent,
     LogoutDialogComponent,
+    ErrorCodeDialogComponent,
   ],
   imports: [
     MatCardModule,

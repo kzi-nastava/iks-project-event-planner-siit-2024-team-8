@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Event} from '../../model/event';
 import {EventService} from '../../event/event.service';
 import {Asset} from '../../model/asset';
-import {AssetService} from '../../asset/asset.service';
+import {AssetService} from '../../services/asset-service';
 
 @Component({
   selector: 'app-home-cards',
@@ -12,7 +12,7 @@ import {AssetService} from '../../asset/asset.service';
 export class HomeCardsComponent {
 
   events : Event[];
-  assets : Asset[];
+  assets: Asset[] = [];
 
   currentEvent : number = 0;
   currentAsset : number = 0;
@@ -22,7 +22,9 @@ export class HomeCardsComponent {
 
   ngOnInit() {
     this.events = this.eventService.getAll();
-    this.assets = this.assetService.getAll();
+    this.assetService.getAllAssets().subscribe((assetsData: any) => {
+      this.assets = [...assetsData.products, ...assetsData.utilities];
+    });
   }
 
 

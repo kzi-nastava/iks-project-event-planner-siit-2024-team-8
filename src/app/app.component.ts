@@ -34,11 +34,14 @@ export class AppComponent {
 
   getValidRoutes(): string[] {
     const routes: string[] = [];
+
     this.router.config.forEach((route: Route) => {
       if (route.path) {
-        routes.push(`/${route.path}`);
+        const basePath = route.path.split('/')[0];
+        routes.push(`/${basePath}`);
       }
     });
+
     return routes;
   }
 }

@@ -1,23 +1,17 @@
-export enum AssetType {
-  SERVICE = 'SERVICE',
-  PRODUCT = 'PRODUCT',
-}
 
 export interface Asset {
-  id: number;
-  name: string;
-  type: AssetType;
-  description: string;
+  id?: string;
   category: string;
+  name: string;
+  description: string;
   price: number;
   discount: number;
+  grade: number;
   images: string[];
-  eventTypes: string[];
-  visibility: boolean;
-  availability: boolean;
-  duration: number;
-  bookingDeadline: string;
-  cancellationDeadline: string;
-  confirmationMethod: string;
-  newCategory?: string;
+  possibleEventTypes: string[]; // List of EventType IDs
+  visible: boolean;
+  available: boolean;
+  status: string;
+  deleted: boolean;
+  providerId: string;
 }

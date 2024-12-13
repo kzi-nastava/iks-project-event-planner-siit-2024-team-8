@@ -1,8 +1,13 @@
-<mat-card [routerLink]="['/asset',asset.id]" class="example-card">
-
+<mat-card class="example-card">
   <img mat-card-image class="img" src="https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-network-placeholder-png-image_3416659.jpg" alt="Image">
   <mat-card-content>
-    <mat-card-title>{{asset.name}}</mat-card-title>
-    <mat-card-subtitle>{{asset.type}}</mat-card-subtitle>
+    <mat-card-title>{{ asset.name }}</mat-card-title>
+
+    <mat-card-subtitle *ngIf="category">
+      {{ category.type }}
+      {{ category.name }}
+    </mat-card-subtitle>
+
+    <mat-card-subtitle *ngIf="!category">Loading category...</mat-card-subtitle>
   </mat-card-content>
 </mat-card>

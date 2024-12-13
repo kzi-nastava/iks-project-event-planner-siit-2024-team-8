@@ -8,7 +8,7 @@
   color: #44474E;
 }
   
-.service-container {
+.asset-container {
   display: flex;
   gap: 32px;
   width: 100%;
@@ -60,13 +60,13 @@
     border: none;
   }
   
-  .service-details {
+  .asset-details {
     width: 55%;
     padding: 20px;
 
 }
   
-  .service-details h2 {
+  .asset-details h2 {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -131,7 +131,7 @@
       margin: 20px;
     }
   
-    .upload-section, .service-details {
+    .upload-section, .asset-details {
       width: 100%;
     }
   

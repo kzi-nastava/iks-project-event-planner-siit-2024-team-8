@@ -41,13 +41,13 @@
 }
 
 .card {
-  width: 14rem; 
+  width: 14rem;
   padding: 1rem;
   border-radius: 0px;
 }
 
 .placeholder-card {
-  width: 14rem; 
+  width: 14rem;
   height: 8rem;
   background-color: transparent;
 }
@@ -165,7 +165,7 @@ mat-icon {
 }
 
 .cards-header h2 {
-  font-size: 1.4rem; 
+  font-size: 1.4rem;
   color: #44474E;
 }
 

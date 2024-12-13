@@ -1,53 +1,69 @@
 import { Component } from '@angular/core';
-import {EventDTO} from '../domain/EventDTO.model';
-import {Asset} from '../../model/asset';
-import {Event} from '../../model/event';
-import {EventService} from '../event.service';
-import {AssetService} from '../../asset/asset.service';
-import {PageEvent} from '@angular/material/paginator';
-import {Router} from '@angular/router';
+import { EventService } from '../../services/event-service';
+import { AssetService } from '../../services/asset-service';
+import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
+import { Event } from '../../model/event';
+import { Asset } from '../../model/asset';
 
 @Component({
   selector: 'app-all-events',
   templateUrl: './all-events.component.html',
-  styleUrl: './all-events.component.css'
+  styleUrls: ['./all-events.component.css']
 })
 export class AllEventsComponent {
-  events : Event[];
-  assets : Asset[];
+  events: Event[] = [];
+  assets: Asset[] = [];
   filterType: string = '';
 
-  constructor(private router: Router,private eventService : EventService,private assetService: AssetService) {}
-
+  constructor(
+    private router: Router,
+    private eventService: EventService,
+    private assetService: AssetService
+  ) {}
 
   ngOnInit() {
     this.checkRoute();
-    this.events = this.eventService.getAll();
-    this.assets = this.assetService.getAll();
-    this.updatePageData();
-    this.updatePageNumbers();
+    this.fetchData();
     this.router.events.subscribe(() => {
       this.checkRoute();
+      this.fetchData();
     });
   }
 
-  //paging mechanism
+  // Paging mechanism
   pageSize = 6;
   pageIndex = 0;
-  totalItems : number = 90;
-  totalPages: number = Math.ceil(this.totalItems / this.pageSize)
+  totalItems: number = 90;
+  totalPages: number = Math.ceil(this.totalItems / this.pageSize);
   currentPageEvents: any[] = [];
   pageNumbers: any[] = [];
 
-  //filter visibility
+  // Filter visibility
   isFilterVisible: boolean = false;
 
-  //current order
+  // Current order
   ascending: boolean = true;
 
-  //Events Page?
+  // Events Page?
   isEvents: boolean;
   isMyAssets: boolean = false;
+
+  fetchData() {
+    if (this.isEvents) {
+      // Fetch events
+      this.eventService.getAllEvents().subscribe((events: Event[]) => {
+        this.events = events;
+        this.updatePageData(); // Update page data after fetching events
+      });
+    } else {
+      // Fetch assets
+      this.assetService.getAllAssets().subscribe((assetsData: any) => {
+        this.assets = [...assetsData.products, ...assetsData.utilities];
+        this.updatePageData(); // Update page data after fetching assets
+      });
+    }
+  }
 
   updatePageData(event?: PageEvent): void {
     if (event) {
@@ -55,18 +71,26 @@ export class AllEventsComponent {
       this.pageSize = event.pageSize;
     }
 
-    if(this.isEvents){
+    if (this.isEvents) {
       this.currentPageEvents = this.events.slice(
         this.pageIndex * this.pageSize,
         (this.pageIndex + 1) * this.pageSize
       );
-    }else{
+    } else {
       this.currentPageEvents = this.assets.slice(
         this.pageIndex * this.pageSize,
         (this.pageIndex + 1) * this.pageSize
       );
     }
+  }
 
+  onCardClick(asset: Asset): void {
+    console.log('Navigating to asset with ID:', asset.id);
+    if (this.assetService.isUtility(asset)) {
+      this.router.navigate([`/assets/utilities/${asset.id}`]);
+    } else {
+      this.router.navigate([`/assets/products/${asset.id}`]);
+    }
   }
 
   updatePageNumbers(): void {
@@ -94,6 +118,7 @@ export class AllEventsComponent {
 
     this.pageNumbers = pageNumbers;
   }
+
   setPage(pageNumber: number): void {
     this.pageIndex = pageNumber;
     this.updatePageData();
@@ -146,5 +171,4 @@ export class AllEventsComponent {
       this.filterType = 'my-assets';
     }
   }
-
 }

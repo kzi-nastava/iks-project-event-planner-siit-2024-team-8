@@ -83,7 +83,10 @@ export class ProfileEditComponent {
   }
 
   deleteItem(): void {
-    console.log('Item deleted!');
+    this.userService.deleteUser(this.email_input).subscribe((result) => {console.log(result);})
+    this.router.navigate(['/home']).then(() => {
+      window.location.reload();
+    })
   }
 
   navigateToProfile(): void {
@@ -137,6 +140,10 @@ export class ProfileEditComponent {
 
     this.userService.updateUser(formData).subscribe((response: any) => {
       console.log(response);
+    });
+
+    this.router.navigate(['/profile']).then(() => {
+      window.location.reload();
     });
   }
 }

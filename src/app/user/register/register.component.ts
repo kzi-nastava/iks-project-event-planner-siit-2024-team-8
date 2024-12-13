@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {
   VerificationEmailDialogComponent
 } from '../../dialogs/verification-email-dialog/verification-email-dialog.component';
+import {ErrorCodeDialogComponent} from '../../dialogs/error-code-dialog/error-code-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -76,9 +77,18 @@ export class RegisterComponent {
       this.userTransferService.setUser(user);
       this.router.navigate(['/provider-register']);
     } else {
-      this.userService.registerUser(formData).subscribe((response: any) => {console.log(response);});
-
-      const dialogRef = this.dialog.open(VerificationEmailDialogComponent);
+      this.userService.registerUser(formData).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          // Open the dialog only if registration is successful
+          const dialogRef = this.dialog.open(VerificationEmailDialogComponent);
+        },
+        error: (error) => {
+          this.dialog.open(ErrorCodeDialogComponent, {
+            data: { errorCode: error.status },
+          });
+        },
+      });
     }
   }
 }

@@ -32,9 +32,9 @@
       </div>
 
       <div class="profile-actions">
-        <button mat-raised-button class="btn action-button" >
+        <!-- <button mat-raised-button class="btn action-button" >
           <mat-icon>report</mat-icon>
-        </button>
+        </button> -->
         <button mat-raised-button class="btn action-button" (click)="navigateToEditProfile()">
           <mat-icon>edit</mat-icon>
         </button>
@@ -54,7 +54,7 @@
         <div class="specific-actions">
           <button *ngIf="role =='Provider'" [routerLink]="['/all-my-assets']" mat-raised-button color="primary" class="btn under-profile-btn">My Assets</button>
           <button *ngIf="role =='Provider'" mat-raised-button color="primary" class="btn under-profile-btn" (click)="navigateToCreateAsset()">Create Asset</button>
-          <button mat-raised-button color="primary" class="btn under-profile-btn" >Start chat</button>
+          <!-- <button mat-raised-button color="primary" class="btn under-profile-btn" >Start chat</button> -->
           <button *ngIf="role =='Provider'" (click)="navigateToCategories()" mat-raised-button color="primary" class="btn under-profile-btn">Asset categories</button>
         </div>
       </div>

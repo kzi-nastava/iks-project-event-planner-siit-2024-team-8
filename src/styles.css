@@ -1,6 +1,14 @@
-html, body { height: 100%; background-color: #f5f5f5; overflow-x: hidden;display: flex;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+*{
+  font-family: 'Poppins',sans-serif;
+}
+h1{
+  font-family: 'Poppins',sans-serif;
+}
+html, body { height: 100%; width: 100%; background-color: #f5f5f5;display: flex;
+  margin: 0; padding: 0;
   flex-direction: column;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color: #ffffff;}
+body {height: 100%; margin: 0;color: #ffffff;}
 .mat-accent.mat-mdc-checkbox {
   --mdc-checkbox-selected-pressed-icon-color: #A1C084;
   --mdc-checkbox-selected-checkmark-color: #ffffff;
@@ -31,4 +39,80 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color: #fff
   --mat-switch-label-text-color: #1a1b1f;
 }
 
+.mat-step-icon mat-step-icon-state-number mat-step-icon-selected{
+  --mdc-switch-selected-focus-state-layer-color: #A1C084;
+  --mdc-switch-selected-handle-color: #ffffff;
+  --mdc-switch-selected-hover-state-layer-color: #A1C084;
+  --mdc-switch-selected-pressed-state-layer-color: #A1C084;
+  --mdc-switch-selected-focus-handle-color: #e0e0ff;
+  --mdc-switch-selected-hover-handle-color: #e0e0ff;
+  --mdc-switch-selected-pressed-handle-color: #e0e0ff;
+  --mdc-switch-selected-focus-track-color: #A1C084;
+  --mdc-switch-selected-hover-track-color: #A1C084;
+  --mdc-switch-selected-pressed-track-color: #A1C084;
+  --mdc-switch-selected-track-color: #A1C084;
+  --mdc-switch-selected-icon-color: #44474E;
+  --mat-switch-track-outline-color: #74777f;
+  --mat-switch-disabled-unselected-track-outline-color: #1a1b1f;
+  --mat-switch-label-text-color: #1a1b1f;
+}
 
+.mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #A1C084 !important;
+  color: white !important;
+}
+
+.mat-step-header .mat-step-label{
+  color: rgba(0, 0, 0, .54)
+}
+.mat-step-header .mat-step-icon {
+  background-color: gray;
+}
+mat-form-field.mat-form-field.mat-white {
+  &.mat-focused {
+    .mat-form-field-label {
+      color: #A1C084;
+    }
+    .mat-form-field-ripple {
+      background-color: #A1C084 !important;
+    }
+  }
+  .mat-form-field-label,.mat-form-field-label.mat-focused,
+  .mat-form-field.mat-focused.matform-field-should-float {
+    color: #A1C084;
+  }
+  .mat-form-field-underline, .mat-form-field-underline.mat-focused {
+    background-color: #A1C084;
+  }
+}
+/* Change the clock face background */
+ngx-material-timepicker .timepicker-overlay {
+  background-color: #f0f4f8; /* Light gray or your desired color */
+}
+
+/* Change the active digit color */
+ngx-material-timepicker .timepicker-dial__item--active {
+  color: #4caf50 !important; /* Green or your preferred color */
+  font-weight: bold;
+}
+
+/* Change clock numbers (digits) */
+ngx-material-timepicker .timepicker-dial__item {
+  color: #333333; /* Dark gray */
+}
+
+/* Change the confirm button color */
+ngx-material-timepicker .timepicker-button {
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  border-radius: 4px;
+}
+
+/* Change cancel button color */
+ngx-material-timepicker .timepicker-button--cancel {
+  background-color: #f44336; /* Red background */
+  color: white;
+}
+
+/* Change the clock face numbers when hovered */
+ngx-material-timepicker .timepicker-dial

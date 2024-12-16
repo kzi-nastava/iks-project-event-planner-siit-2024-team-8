@@ -6,12 +6,14 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {MatIcon} from "@angular/material/icon";
 import {AppModule} from '../app.module';
+import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
 
 
 
 @NgModule({
   declarations: [
     NavBarComponent,
+    LeafletMapComponent,
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,6 @@ import {AppModule} from '../app.module';
     RouterModule,
     MatIcon,
   ],
-  exports: [NavBarComponent]
+  exports: [NavBarComponent, LeafletMapComponent]
 })
 export class LayoutModule { }

@@ -1,0 +1,15 @@
+<mat-card class="example-card" (click)="onActivityClicked()">
+  <mat-card-content>
+    <mat-card-title>{{ activity.name }}</mat-card-title>
+
+    <mat-card-subtitle >
+      <mat-icon>location_on</mat-icon>
+      {{ activity.place }}
+    </mat-card-subtitle>
+
+    <mat-card-subtitle>
+      <mat-icon>schedule</mat-icon>
+      {{ activity.startTime }}
+    </mat-card-subtitle>
+  </mat-card-content>
+</mat-card>

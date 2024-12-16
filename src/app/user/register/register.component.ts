@@ -66,17 +66,17 @@ export class RegisterComponent {
       return;
     }
     let formData = new FormData();
-
     if (this.selectedFile) {
-      console.log(this.selectedFile);
       formData.append('image', this.selectedFile, this.selectedFile.name);
     }
     let user : User = returnUser(this.firstName, this.lastName, this.email, this.password, this.number,  this.address, this.profileType as UserType)
-    Object.entries(user).forEach(([key, value]) => formData.append(key, value))
+
     if (this.profileType == 'PROVIDER') {
-      this.userTransferService.setUser(user);
+      this.userTransferService.user = user;
+      this.userTransferService.formData = formData;
       this.router.navigate(['/provider-register']);
     } else {
+      Object.entries(user).forEach(([key, value]) => formData.append(key, value))
       this.userService.registerUser(formData).subscribe({
         next: (response: any) => {
           console.log(response);

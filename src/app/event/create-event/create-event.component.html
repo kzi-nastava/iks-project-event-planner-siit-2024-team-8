@@ -1,0 +1,70 @@
+<div class="flex-container">
+  <h1>Create event</h1>
+  <br>
+  <mat-horizontal-stepper #stepper>
+    <mat-step label="1 Basic info" class="custom-stepper">
+      <p>*All fields required unless noted</p>
+      <mat-form-field>
+        <mat-label>*First Name</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>*Last Name</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Phone number</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <div class="button_div">
+        <button mat-raised-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="2 Profile image">
+      <p>*Choose your profile image:</p>
+      <div class="image-container">
+        <img [src]=imageUrl alt="Profile Image" class="profile-image">
+      </div>
+      <div style="align-content: center">
+        <input type="file" accept="image/*" (change)="onFileSelected($event)">
+      </div>
+      <div class="button_div">
+        <button mat-raised-button matStepperNext [disabled]="!imageSelected">Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="3 Location">
+      <app-leaflet-map></app-leaflet-map>
+      <p>*Enter your login info:</p>
+      <mat-form-field>
+        <mat-label>*City</mat-label>
+        <input matInput type="email">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>*Address (street and number)</mat-label>
+        <input matInput type="password">
+      </mat-form-field>
+      <div class="button_div">
+        <button mat-raised-button id="#submit_location" (click)="onSubmitLocationClick()">Submit Location</button>
+        <button style="width: 100%" mat-raised-button>Finish</button>
+      </div>
+    </mat-step>
+    <mat-step label="4 Location">
+      <div class="activity_div" *ngFor="let activity of activities">
+        <app-activity-card *ngIf="!activity.isInput"
+                            [activity]="activity"></app-activity-card>
+        <app-activity-card-edit *ngIf="activity.isInput"
+                                [activity]="activity"
+                                (clicked)="onActivitySaved($event)"></app-activity-card-edit>
+      </div>
+      <div class="button_div">
+        <app-new-activity-card (click)="onClickNewActivity()"></app-new-activity-card>
+        <button style="width: 100%" mat-raised-button>Next</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+

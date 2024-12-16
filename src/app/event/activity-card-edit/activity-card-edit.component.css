@@ -1,0 +1,69 @@
+/* Main Card Wrapper */
+.activity-card {
+  width: 100%;
+  padding: 80px;
+  margin-left: 3%;
+  margin-top : 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+
+  /* Center the card within the parent container */
+  position: relative;
+}
+.activity-card div{
+  margin-right: 8%;
+}
+/* Input Fields */
+.input-field {
+  width: 100%;
+  max-width: 500px; /* Optional: Set a max width for better responsiveness */
+  padding: 14px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  color: #333;
+}
+
+.input-field:focus {
+  border-color: #b1c8a8; /* Olive green focus border */
+  outline: none;
+}
+
+/* Save Button */
+.activity-save-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.save-btn {
+  background-color: #b1c8a8; /* Olive Green */
+  color: #ffffff;
+  width: 120px;
+  height: 48px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  text-transform: none;
+}
+
+.save-btn:hover {
+  background-color: #98b18d; /* Slightly darker olive green */
+}
+
+/* Ensure that textareas behave similarly to input fields */
+textarea.input-field {
+  height: 120px;
+  resize: vertical;
+  width: 100%; /* Match the width of other input fields */
+}

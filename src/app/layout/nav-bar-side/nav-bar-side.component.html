@@ -11,7 +11,10 @@
   <button mat-icon-button (click)="onClickPlaceholder()">
     <mat-icon>notification_important</mat-icon>
   </button>
-  <button mat-icon-button *ngIf="role =='ORGANIZER'">
+  <button mat-icon-button *ngIf="role =='ORGANIZER'" [routerLink]="['create-event']">
+    <mat-icon>add_circle</mat-icon>
+  </button>
+  <button mat-icon-button *ngIf="role =='PROVIDER'" [routerLink]="['asset-categories']">
     <mat-icon>add_circle</mat-icon>
   </button>
   <div class="bottom-buttons">

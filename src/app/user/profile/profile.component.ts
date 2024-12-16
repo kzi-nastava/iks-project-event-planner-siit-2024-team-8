@@ -9,6 +9,8 @@ import {
 } from '../../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {LogoutDialogComponent} from '../../dialogs/logout-dialog/logout-dialog.component';
+import {catchError, of, retryWhen, switchMap, timer} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +20,8 @@ import {LogoutDialogComponent} from '../../dialogs/logout-dialog/logout-dialog.c
 export class ProfileComponent {
   role : string = '';
   currentUser : UserInfoResponse = null;
+  imageUrl : string = '';
+
   constructor(private router: Router,private authService: AuthService,private userService: UserService,
               private dialog: MatDialog) { }
 
@@ -26,10 +30,10 @@ export class ProfileComponent {
       this.role = user;
     })
     this.userService.getUserInfo().subscribe({
-      next: (data: UserInfoResponse) => { this.currentUser = data;
-      console.log(data.firstName);
-        console.log(this.currentUser.profileImage);}
-
+      next: (data: UserInfoResponse) => {
+        this.currentUser = data;
+        this.imageUrl = data.profileImage;
+      }
     })
   }
 

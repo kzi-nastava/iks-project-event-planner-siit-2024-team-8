@@ -1,0 +1,37 @@
+<mat-card class="activity-card">
+  <!-- Activity Title -->
+  <div class="activity-title">
+    <input matInput placeholder="Activity Name" class="input-field" [(ngModel)]="activity.name"/>
+  </div>
+
+  <!-- Activity Location -->
+  <div class="activity-location">
+    <input matInput placeholder="Activity Location" class="input-field" [(ngModel)]="activity.place"/>
+  </div>
+
+  <div class="activity-start-time">
+    <mat-form-field appearance="fill" class="input-field">
+      <mat-label>Start Time</mat-label>
+      <input matInput [ngxTimepicker]="startTimePicker" placeholder="Choose Start Time" [(ngModel)]="activity.startTime"/>
+      <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="activity-end-time">
+    <mat-form-field appearance="fill" class="input-field">
+      <mat-label>End Time</mat-label>
+      <input matInput [ngxTimepicker]="endTimePicker" placeholder="Choose End Time" [(ngModel)]="activity.endTime"/>
+      <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
+    </mat-form-field>
+  </div>
+
+  <!-- Activity Description -->
+  <div class="activity-description">
+    <textarea matInput placeholder="Activity Description" class="input-field" [(ngModel)]="activity.description"></textarea>
+  </div>
+
+  <!-- Save Button -->
+  <div class="activity-save-btn">
+    <button mat-raised-button class="save-btn" (click)="onSaveActivity()">Save</button>
+  </div>
+</mat-card>

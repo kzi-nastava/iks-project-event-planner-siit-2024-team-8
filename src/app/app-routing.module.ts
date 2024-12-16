@@ -9,12 +9,14 @@ import {CreateAssetComponent} from './asset/create-asset/create-asset.component'
 import {EditAssetComponent} from './asset/edit-asset/edit-asset.component';
 import {AllEventsComponent} from './event/all-events/all-events.component';
 import {EventInfoComponent} from './event/event-info/event-info.component';
-import {ProviderRegisterComponent} from './user/provider-register/provider-register.component';
+import {ProviderRegisterComponent} from './provider/provider-register/provider-register.component';
 import { ProfileEditComponent } from './user/profile-edit/profile-edit.component';
 import {VerifyComponent} from './user/verify/verify.component';
 import { AssetCategoriesComponent } from './asset/asset-categories/asset-categories.component';
 import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-category-edit.component';
 import {LoginComponent} from './infrastructure/auth/login/login.component';
+import {CreateEventComponent} from './event/create-event/create-event.component';
+import {ActivityCardComponent} from './event/activity-card/activity-card.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -38,6 +40,8 @@ const routes: Routes = [
   {path: 'verify', component: VerifyComponent},
   {path: 'asset-categories', component: AssetCategoriesComponent},
   {path: 'asset-category-edit', component: AssetCategoryEditComponent},
+  {path: 'create-event', component: CreateEventComponent},
+  {path: 'activity-card', component: ActivityCardComponent},
   { path: '**', redirectTo: '/home' }
 ];
 

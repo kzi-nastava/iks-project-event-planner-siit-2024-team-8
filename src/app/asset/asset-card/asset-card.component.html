@@ -1,5 +1,12 @@
 <mat-card class="example-card">
-  <img mat-card-image class="img" src="https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-network-placeholder-png-image_3416659.jpg" alt="Image">
+  <!-- Display the first image dynamically -->
+  <img
+    mat-card-image
+    class="img"
+    [src]="asset.images?.length > 0 ? asset.images[0] : 'https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-network-placeholder-png-image_3416659.jpg'"
+    alt="Image"
+  >
+
   <mat-card-content>
     <mat-card-title>{{ asset.name }}</mat-card-title>
 

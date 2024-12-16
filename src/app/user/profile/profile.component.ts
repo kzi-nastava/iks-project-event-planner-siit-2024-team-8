@@ -22,7 +22,7 @@ export class ProfileComponent {
   currentUser : UserInfoResponse = null;
   imageUrl : string = '';
 
-  constructor(private router: Router,private authService: AuthService,private userService: UserService,
+  constructor(private router: Router,private authService: AuthService, private userService: UserService,
               private dialog: MatDialog) { }
 
   public ngOnInit() {

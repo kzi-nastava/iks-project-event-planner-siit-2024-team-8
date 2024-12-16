@@ -155,13 +155,23 @@ textarea {
 
 .button-group {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   margin-top: 0;
   margin-bottom: 50px;
 }
 
 ::ng-deep .mat-slide-toggle-checked .mat-slide-toggle-bar {
-  background-color: #A1C084 !important;  
+  background-color: #A1C084 !important;
+}
+
+.error-message {
+  color: darkred;
+  font-size: 14px;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: #ffdddd;
+  border: 1px solid darkred;
+  border-radius: 4px;
 }
 

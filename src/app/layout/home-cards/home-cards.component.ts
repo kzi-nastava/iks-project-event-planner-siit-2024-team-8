@@ -3,6 +3,7 @@ import {Event} from '../../model/event';
 import {EventService} from '../../event/event.service';
 import {Asset} from '../../model/asset';
 import {AssetService} from '../../services/asset-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-cards',
@@ -17,7 +18,7 @@ export class HomeCardsComponent {
   currentEvent : number = 0;
   currentAsset : number = 0;
 
-  constructor(private eventService : EventService,private assetService: AssetService) {}
+  constructor(private eventService : EventService,private assetService: AssetService, private router: Router) {}
 
 
   ngOnInit() {
@@ -69,5 +70,13 @@ export class HomeCardsComponent {
 
   getTransformAsset() {
     return `translateX(-${this.currentAsset * 33.33}%)`;
+  }
+
+  onAssetCardClick(asset: Asset) {
+    if (this.assetService.isUtility(asset)) {
+      this.router.navigate([`/assets/utilities/${asset.id}`]);
+    } else {
+      this.router.navigate([`/assets/products/${asset.id}`]);
+    }
   }
 }

@@ -37,8 +37,10 @@ export class EditAssetComponent implements OnInit {
   utilityCancellationTerm: string;
   utilityManualConfirmation: boolean;
 
-  images: string[] = [];
+  images: File[] = [];
+  imagePreviews: string[] = [];
   currentImageIndex: number = 0;
+  validationMessages: any = {};
 
   constructor(
     private router: Router,
@@ -62,7 +64,7 @@ export class EditAssetComponent implements OnInit {
       this.utilityService.getUtilityById(assetId).subscribe(
         (utility: Utility) => {
           this.asset = utility;
-          this.images = utility.images || ['https://via.placeholder.com/800x500.png?text=Default+Image'];
+          this.imagePreviews = utility.images || ['https://via.placeholder.com/800x500.png?text=Default+Image'];
           this.onAssetTypeChange('utility');
 
           this.utilityDuration = utility.duration;
@@ -79,7 +81,7 @@ export class EditAssetComponent implements OnInit {
       this.productService.getProductById(assetId).subscribe(
         (asset: Asset) => {
           this.asset = asset;
-          this.images = asset.images || ['https://via.placeholder.com/800x500.png?text=Default+Image'];
+          this.imagePreviews = asset.images || ['https://via.placeholder.com/800x500.png?text=Default+Image'];
           this.onAssetTypeChange('product');
         },
         (error) => {
@@ -100,16 +102,19 @@ export class EditAssetComponent implements OnInit {
   onFileSelected(event: any): void {
     const files = event.target.files as FileList;
     if (files && files.length > 0) {
-      this.images = [];
+      this.images = []; // Clear previous images
+      this.imagePreviews = []; // Clear previews
+
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const reader = new FileReader();
 
-        reader.onload = (e: any) => {
-          this.images.push(e.target.result);
+        reader.onload = () => {
+          this.imagePreviews.push(reader.result as string);
         };
-
         reader.readAsDataURL(file);
+
+        this.images.push(file); // Push the file to images for FormData
       }
     }
   }
@@ -121,50 +126,40 @@ export class EditAssetComponent implements OnInit {
   }
 
   nextImage(): void {
-    if (this.currentImageIndex < this.images.length - 1) {
+    if (this.currentImageIndex < this.imagePreviews.length - 1) {
       this.currentImageIndex++;
     }
   }
 
   validateForm(): boolean {
+    this.validationMessages = {};
     if (!this.asset.name || this.asset.name.length > 20 || !/^[a-zA-Z\s]+$/.test(this.asset.name)) {
-      alert('Asset name should contain only letters and spaces, and be less than 20 characters.');
-      return false;
+      this.validationMessages.name = 'Asset name should contain only letters and spaces, and be less than 20 characters.';
     }
 
-    if (this.asset.price <= 0 || this.asset.price > 999999) {
-      alert('Price must be between 1 and 999999.');
-      return false;
+    if (!this.asset.description ) {
+      this.validationMessages.name = 'Asset description is required.';
     }
 
-    if (this.asset.discount < 0 || this.asset.discount > 100) {
-      alert('Discount must be between 0 and 100.');
-      return false;
+    if (this.asset.price < 1 || this.asset.price > 999999 || !this.asset.price) {
+      this.validationMessages.price = 'Price must be between 1 and 999999.';
     }
 
-    if (this.asset.category === '' || this.asset.category === null) {
-      alert('Please select a valid category.');
-      return false;
+    if (this.asset.discount < 0 || this.asset.discount > 100 || !this.asset.discount) {
+      this.validationMessages.discount = 'Discount must be between 0 and 100.';
     }
 
     if (this.isUtility) {
-      if (!this.utilityDuration || this.utilityDuration < 1 || this.utilityDuration > 999) {
-        alert('Duration must be between 1 and 999.');
-        return false;
+      if (this.utilityDuration < 1 || this.utilityDuration > 999 || !this.utilityDuration) {
+        this.validationMessages.utilityDuration = 'Duration must be between 1 and 999.';
       }
 
       if (!this.utilityReservationTerm || !this.utilityCancellationTerm) {
-        alert('Please select both reservation and cancellation terms.');
-        return false;
-      }
-
-      if (this.utilityManualConfirmation === undefined) {
-        alert('Please select the confirmation method.');
-        return false;
+        this.validationMessages.utilityTerms = 'Please select both reservation and cancellation terms.';
       }
     }
 
-    return true;
+    return Object.keys(this.validationMessages).length === 0;
   }
 
   onSubmit(): void {
@@ -176,8 +171,8 @@ export class EditAssetComponent implements OnInit {
 
     if (this.images && this.images.length > 0) {
       for (let i = 0; i < this.images.length; i++) {
-        const base64Image = this.images[i];
-        formData.append('images', base64Image);
+        const imageFile = this.images[i];
+        formData.append('images', imageFile, imageFile.name); // Append the file for uploading
       }
     }
 
@@ -206,7 +201,7 @@ export class EditAssetComponent implements OnInit {
         }
       );
     } else if (this.isProduct) {
-      console.log('FormData after appending: ', formData);
+      console.log('images after appending', this.images);
       this.productService.updateProduct(this.asset.id, formData).subscribe(
         (updatedProduct) => {
           console.log('Product updated:', updatedProduct);

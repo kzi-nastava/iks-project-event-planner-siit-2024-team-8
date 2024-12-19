@@ -24,9 +24,11 @@ mat-card-content{
   align-items: center;
   flex-direction: column;
 }
-img{
-  max-height: 20%;
-  max-width: 100%;
+img {
+  width: 300px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .star_btn{

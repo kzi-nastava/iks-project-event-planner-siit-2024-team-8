@@ -46,6 +46,7 @@ export class CreateAssetComponent implements OnInit {
   images: File[] = []; // for FormData
   imagePreviews: string[] = []; // for display
   currentImageIndex: number = 0;
+  validationMessages: any = {};
 
   constructor(
     private router: Router,
@@ -60,8 +61,7 @@ export class CreateAssetComponent implements OnInit {
 
   onAssetTypeChange(type: string): void {
     this.assetType = type;
-
-    this.asset.category = null; // Reset the category initially
+    this.asset.category = null;
 
     if (type === 'utility') {
       this.isUtility = true;
@@ -143,54 +143,43 @@ export class CreateAssetComponent implements OnInit {
   }
 
   validateForm(): boolean {
+    this.validationMessages = {};
+
     if (this.asset.category === '' || this.asset.category === null) {
-      alert('Please select a valid category.');
-      return false;
+      this.validationMessages.category = 'Please select a valid category.';
     }
 
     if (!this.asset.name || this.asset.name.length > 20 || !/^[a-zA-Z\s]+$/.test(this.asset.name)) {
-      alert('Asset name should contain only letters and spaces, and be less than 20 characters.');
-      return false;
+      this.validationMessages.name = 'Asset name should contain only letters and spaces, and be less than 20 characters.';
     }
 
-    if (this.asset.price < 1 || this.asset.price > 999999) {
-      alert('Price must be between 1 and 999999.');
-      return false;
+    if (!this.asset.description ) {
+      this.validationMessages.name = 'Asset description is required.';
     }
 
-    if (this.asset.discount < 0 || this.asset.discount > 100) {
-      alert('Discount must be between 0 and 100.');
-      return false;
+    if (this.asset.price < 1 || this.asset.price > 999999 || !this.asset.price) {
+      this.validationMessages.price = 'Price must be between 1 and 999999.';
     }
 
-    if (this.asset.visible === null || this.asset.available === null) {
-      alert('Visibility and Availability cannot be null.');
-      return false;
+    if (this.asset.discount < 0 || this.asset.discount > 100 || !this.asset.discount) {
+      this.validationMessages.discount = 'Discount must be between 0 and 100.';
     }
 
     if (this.asset.category === 'none' && (!this.newCategoryName || this.newCategoryName.trim() === '')) {
-      alert('Please provide a name for the new category.');
-      return false;
+      this.validationMessages.newCategoryName = 'Please provide a name for the new category.';
     }
 
     if (this.isUtility) {
       if (!this.utilityReservationTerm || !this.utilityCancellationTerm) {
-        alert('Please select both reservation and cancellation terms.');
-        return false;
+        this.validationMessages.utilityTerms = 'Please select both reservation and cancellation terms.';
       }
 
-      if (this.utilityDuration < 1 || this.utilityDuration > 999) {
-        alert('Duration must be between 1 and 999.');
-        return false;
-      }
-
-      if (this.utilityManualConfirmation === undefined) {
-        alert('Please select the confirmation method.');
-        return false;
+      if (this.utilityDuration < 1 || this.utilityDuration > 999 || !this.utilityDuration) {
+        this.validationMessages.utilityDuration = 'Duration must be between 1 and 999.';
       }
     }
 
-    return true;
+    return Object.keys(this.validationMessages).length === 0;
   }
 
   onSubmit(): void {

@@ -6,7 +6,9 @@ import { UtilityService } from '../services/utility-service';
 import { ProductService } from '../services/product-service';
 import { AssetCategoryService } from '../services/asset-category-service';
 import { AssetCategory } from '../model/asset-category';
-import { Asset } from '../model/asset';  // Adjusted import for Asset model
+import { Asset } from '../model/asset';
+import {AuthService} from '../infrastructure/auth/auth.service';
+import {UserService} from '../user/user-service';
 
 @Component({
   selector: 'app-asset',
@@ -35,10 +37,13 @@ export class AssetComponent implements OnInit {
       private dialog: MatDialog,
       private utilityService: UtilityService,
       private productService: ProductService,
-      private assetCategoryService: AssetCategoryService
+      private assetCategoryService: AssetCategoryService,
+      private authService: AuthService,
+      private userService: UserService,
   ) {}
 
   ngOnInit(): void {
+
     this.route.paramMap.subscribe(params => {
       this.assetID = params.get('id');
       if (this.assetID) {

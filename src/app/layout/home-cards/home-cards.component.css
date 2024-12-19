@@ -24,6 +24,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-card:hover {
+  transform: scale(1.05); /* Slightly increase the card size */
 }
 
 .carousel_button {

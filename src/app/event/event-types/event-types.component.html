@@ -1,0 +1,33 @@
+<div class="main_div">
+  <h2 class="title">Event Types</h2>
+
+  <div id="cards-view">
+    <div *ngFor="let type of currentPageTypes" (click)="openEditEventType(type)">
+      <mat-card [routerLink]="[]">
+        <mat-card-content>
+          <mat-card-title>{{ type.name }}</mat-card-title>
+          <mat-card-subtitle>{{ type.description }}</mat-card-subtitle>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="pagination-container">
+    <mat-paginator
+      [length]="pageProperties.totalCount"
+      [pageSize]="pageProperties.pageSize"
+      [pageIndex]="pageProperties.page"
+      [pageSizeOptions]="pageProperties.pageSizeOptions"
+      (page)="pageChanged($event)"
+      aria-label="Select page of asset categories">
+    </mat-paginator>
+
+    <button class="plus-button" (click)="onCreateEventType()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-slide-toggle style="margin-left: 1rem;" [(ngModel)]="showActivated" (change)="onActiveChanged()">
+      {{ showActivated ? 'Active' : 'Deactivated' }}
+    </mat-slide-toggle>
+  </div>
+</div>

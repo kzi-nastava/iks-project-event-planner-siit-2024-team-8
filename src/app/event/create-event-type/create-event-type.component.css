@@ -1,0 +1,62 @@
+mat-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-dialog-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+button[mat-icon-button] {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  color: #ff0000;
+}
+
+button[mat-icon-button]:hover {
+  background-color: #ffcccc;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-radio-button {
+  margin-bottom: 0.5rem;
+}
+
+#title_div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#title_div  button{
+  margin-right: 0.9rem;
+  margin-top: 0.7rem;
+  color: #A1C084;
+}
+
+#title_div  button[mat-icon-button]:hover {
+  color: #44474E;
+  background: #A1C084;
+}
+
+mat-dialog-actions button {
+  color: #44474E;
+}
+
+mat-dialog-actions button:hover {
+  background-color: #A1C084;
+}
+#deactivate:hover{
+  background-color: #FF000080 !important;
+  color: black !important;
+}

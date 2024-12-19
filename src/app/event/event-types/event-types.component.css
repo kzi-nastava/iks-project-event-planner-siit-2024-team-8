@@ -1,0 +1,99 @@
+.main_div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left : 6%;
+}
+#cards-view{
+  width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(12rem, 1fr));
+  gap: 1em;
+  justify-items: start;
+  justify-content: start;
+  margin-bottom: 5em;
+  margin-bottom: 5em;
+}
+
+button {
+  background-color: #A1C084 !important;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: transparent;
+}
+
+.plus-button {
+  background-color: #A1C084;
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: 1em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.plus-button:hover {
+  background-color: #7f9d42;
+}
+
+.title{
+  font-size: 3.0rem;
+  color: #44474E;
+  margin-bottom: 5rem;
+}
+
+mat-card {
+  width: 10rem;
+  height: fit-content;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #e6e6e6;
+  overflow: hidden;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+mat-card:hover {
+  background-color: #d5d5d5;
+  transform: scale(1.02);
+}
+
+mat-card-content {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  word-wrap: break-word;
+}
+
+mat-card-title,
+mat-card-subtitle {
+  max-width: 100%;
+  text-overflow: ellipsis;
+  color: #44474E;
+}
+
+mat-card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+mat-card-subtitle {
+  font-size: 0.9rem;
+  color: #44474E;
+}
+

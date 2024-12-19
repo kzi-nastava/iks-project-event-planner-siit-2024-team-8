@@ -17,6 +17,9 @@ import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-ca
 import {LoginComponent} from './infrastructure/auth/login/login.component';
 import {CreateEventComponent} from './event/create-event/create-event.component';
 import {ActivityCardComponent} from './event/activity-card/activity-card.component';
+import {CreateEventTypeComponent} from './event/create-event-type/create-event-type.component';
+import {EventTypesComponent} from './event/event-types/event-types.component';
+import {AuthGuard} from './infrastructure/auth/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -42,6 +45,11 @@ const routes: Routes = [
   {path: 'asset-category-edit', component: AssetCategoryEditComponent},
   {path: 'create-event', component: CreateEventComponent},
   {path: 'activity-card', component: ActivityCardComponent},
+  {path: 'event-types',component:EventTypesComponent,canActivate:[AuthGuard],
+    data: {role : 'ADMIN'}},
+  {path: 'create-event-type', component: CreateEventTypeComponent},
+  {path: 'create-event-type/:id', component: CreateEventTypeComponent,canActivate:[AuthGuard],
+  data: {role : 'ADMIN'}},
   { path: '**', redirectTo: '/home' }
 ];
 

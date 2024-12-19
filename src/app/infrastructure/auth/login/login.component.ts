@@ -5,6 +5,7 @@ import {AuthService} from '../auth.service';
 import {AuthResponse} from '../model/auth-response.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastService} from '../../../services/toast-service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -44,8 +45,15 @@ export class LoginComponent {
             type: 'success',
             duration: 3000,
           });
-        }
-      })
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            this.toastService.showErrorToast("User not found.");
+          } else {
+            this.toastService.showErrorToast("An unexpected error occurred.");
+          }
+        },
+      });
     }
   }
 

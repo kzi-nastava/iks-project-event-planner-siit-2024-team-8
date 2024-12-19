@@ -1,0 +1,22 @@
+mat-card{
+  width: 90%;
+  height: fit-content;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.19);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  color : black !important;
+  margin : 4%;
+  align-self: center;
+  justify-items: center;
+}
+mat-card:hover{
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Elevated shadow */
+  cursor: pointer; /* Optional: add pointer cursor */
+}
+mat-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color : #44474E !important;
+}

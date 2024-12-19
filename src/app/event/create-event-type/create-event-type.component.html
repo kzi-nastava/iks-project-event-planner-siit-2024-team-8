@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>
+  {{ isEditMode ? 'Edit event type' : 'Create event type' }}
+</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="eventType.name"/>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="eventType.description"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+
+  <button mat-button *ngIf="isEditMode && eventType.active" (click)="onDeactivate()" id="deactivate">
+    Deactivate
+  </button>
+
+  <button mat-button *ngIf="isEditMode && !eventType.active" (click)="onActivate()">
+    Activate
+  </button>
+
+  <button mat-button (click)="onSave()">
+    {{ isEditMode ? 'Save' : 'Create' }}
+  </button>
+</mat-dialog-actions>
+
+

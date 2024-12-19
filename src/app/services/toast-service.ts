@@ -19,4 +19,23 @@
       console.log('Toast triggered:', options);
       this.toastSubject.next(options);
     }
+
+    showSuccessToast(message: string): void {
+      let options: ToastOptions = {
+        message: message,
+        title: 'Success',
+        type: 'success',
+        duration: 3000,
+      };
+       this.toastSubject.next(options);
+      }
+    showErrorToast(message: string): void {
+      let options: ToastOptions = {
+        message: message,
+        title: 'Error',
+        type: 'error',
+        duration: 3000,
+      }
+      this.toastSubject.next(options);
+    }
   }

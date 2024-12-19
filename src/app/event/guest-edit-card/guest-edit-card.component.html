@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Guest</mat-label>
+      <input matInput [(ngModel)]="guest.email">
+    </mat-form-field>
+    <div class="activity-save-btn">
+      <button mat-raised-button class="save-btn" (click)="onSaveGuestClick()">Save</button>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -16,14 +16,19 @@ import {MatCard, MatCardContent, MatCardImage, MatCardSubtitle, MatCardTitle} fr
 import { ActivityCardEditComponent } from './activity-card-edit/activity-card-edit.component';
 import {MatDialogActions, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
 import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
-import {MatDatepicker} from '@angular/material/datepicker';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerModule,
+  MatDatepickerToggle
+} from '@angular/material/datepicker';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {
   IgxBadgeComponent,
   IgxCardComponent,
   IgxCardContentDirective,
   IgxCardMediaDirective, IgxCarouselComponent,
-  IgxCheckboxComponent, IgxIconComponent,
+  IgxCheckboxComponent, IgxDatePickerComponent, IgxIconComponent,
   IgxInputGroupComponent,
   IgxRadioComponent,
   IgxRadioGroupDirective,
@@ -31,6 +36,14 @@ import {
   IgxStepperComponent
 } from 'igniteui-angular';
 import { NewActivityCardComponent } from './new-activity-card/new-activity-card.component';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {MatSlideToggle} from '@angular/material/slide-toggle';
+import { GuestEditCardComponent } from './guest-edit-card/guest-edit-card.component';
+import { GuestCardComponent } from './guest-card/guest-card.component';
+import { CreateEventTypeComponent } from './create-event-type/create-event-type.component';
+import {MatPaginator} from "@angular/material/paginator";
+import { EventTypesComponent } from './event-types/event-types.component';
+import {RouterLink} from "@angular/router";
 
 
 
@@ -40,49 +53,61 @@ import { NewActivityCardComponent } from './new-activity-card/new-activity-card.
     CreateEventComponent,
     ActivityCardComponent,
     ActivityCardEditComponent,
-    NewActivityCardComponent
+    NewActivityCardComponent,
+    GuestEditCardComponent,
+    GuestCardComponent,
+    CreateEventTypeComponent,
+    EventTypesComponent,
   ],
-  imports: [
-    CommonModule,
-    MatButton,
-    MatIcon,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatOption,
-    MatSelect,
-    MatStep,
-    MatStepper,
-    MatStepperNext,
-    ReactiveFormsModule,
-    LayoutModule,
-    MatCard,
-    MatCardContent,
-    MatCardImage,
-    MatCardSubtitle,
-    MatCardTitle,
-    MatDialogActions,
-    MatDialogContent,
-    MatDialogTitle,
-    MatIconButton,
-    MatRadioButton,
-    MatRadioGroup,
-    FormsModule,
-    MatDatepicker,
-    NgxMaterialTimepickerModule,
-    MatIconModule,
-    IgxStepperComponent,
-    IgxCardComponent,
-    IgxBadgeComponent,
-    IgxCardMediaDirective,
-    IgxCardContentDirective,
-    IgxInputGroupComponent,
-    IgxSelectComponent,
-    IgxRadioGroupDirective,
-    IgxRadioComponent,
-    IgxCheckboxComponent,
-    IgxIconComponent,
-    IgxCarouselComponent,
-  ]
+    imports: [
+        CommonModule,
+        MatButton,
+        MatIcon,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        MatOption,
+        MatSelect,
+        MatStep,
+        MatStepper,
+        MatStepperNext,
+        ReactiveFormsModule,
+        LayoutModule,
+        MatCard,
+        MatCardContent,
+        MatCardImage,
+        MatCardSubtitle,
+        MatCardTitle,
+        MatDialogActions,
+        MatDialogContent,
+        MatDialogTitle,
+        MatIconButton,
+        MatRadioButton,
+        MatRadioGroup,
+        FormsModule,
+        MatDatepicker,
+        NgxMaterialTimepickerModule,
+        MatIconModule,
+        IgxStepperComponent,
+        IgxCardComponent,
+        IgxBadgeComponent,
+        IgxCardMediaDirective,
+        IgxCardContentDirective,
+        IgxInputGroupComponent,
+        IgxSelectComponent,
+        IgxRadioGroupDirective,
+        IgxRadioComponent,
+        IgxCheckboxComponent,
+        IgxIconComponent,
+        IgxCarouselComponent,
+        MatProgressSpinner,
+        MatSlideToggle,
+        IgxDatePickerComponent,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        MatDatepickerModule,
+        MatPaginator,
+        RouterLink
+    ]
 })
 export class EventModule { }

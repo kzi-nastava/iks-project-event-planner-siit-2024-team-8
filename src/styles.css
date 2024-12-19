@@ -85,34 +85,22 @@ mat-form-field.mat-form-field.mat-white {
     background-color: #A1C084;
   }
 }
-/* Change the clock face background */
-ngx-material-timepicker .timepicker-overlay {
-  background-color: #f0f4f8; /* Light gray or your desired color */
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #b1c8a8 !important; /* Olive green for the focused state */
 }
 
-/* Change the active digit color */
-ngx-material-timepicker .timepicker-dial__item--active {
-  color: #4caf50 !important; /* Green or your preferred color */
-  font-weight: bold;
+/* Change underline color when the form field is focused */
+.mat-form-field.mat-focused .mat-form-field-underline {
+  background-color: #b1c8a8 !important; /* Olive green for the underline */
 }
 
-/* Change clock numbers (digits) */
-ngx-material-timepicker .timepicker-dial__item {
-  color: #333333; /* Dark gray */
+.mdc-line-ripple:active, .mdc-line-ripple:focus, .mdc-line-ripple:hover {
+  background-color: #A1C084 !important;
 }
-
-/* Change the confirm button color */
-ngx-material-timepicker .timepicker-button {
-  background-color: #4caf50; /* Green background */
-  color: white; /* White text */
-  border-radius: 4px;
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple:after {
+  border-bottom-color: #A1C084 !important;
 }
-
-/* Change cancel button color */
-ngx-material-timepicker .timepicker-button--cancel {
-  background-color: #f44336; /* Red background */
-  color: white;
+.mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label{
+  color: #A1C084 !important;
 }
-
-/* Change the clock face numbers when hovered */
-ngx-material-timepicker .timepicker-dial

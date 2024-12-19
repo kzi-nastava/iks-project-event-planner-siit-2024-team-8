@@ -28,7 +28,7 @@
         <mat-icon>arrow_back</mat-icon>
       </button>
       <div class="carousel-container" [style.transform]="getTransformAsset()">
-        <div *ngFor="let asset of assets" class="carousel-card">
+        <div *ngFor="let asset of assets" class="carousel-card" (click)="onAssetCardClick(asset)">
           <app-asset-card [asset]="asset"></app-asset-card>
         </div>
       </div>

@@ -19,7 +19,14 @@
   margin: 1rem;
   max-width: 60%;
   max-height: 20%;
+  cursor: pointer;
 }
+
+.card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 #search-bar{
   width: 100%;
   height: 5%;

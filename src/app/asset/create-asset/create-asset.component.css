@@ -165,4 +165,14 @@ textarea {
   margin-bottom: 50px;
 }
 
+.error-message {
+  color: darkred;
+  font-size: 14px;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: #ffdddd;
+  border: 1px solid darkred;
+  border-radius: 4px;
+}
+
 

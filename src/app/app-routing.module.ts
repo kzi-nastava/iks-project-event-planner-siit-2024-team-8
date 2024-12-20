@@ -20,6 +20,7 @@ import {ActivityCardComponent} from './event/activity-card/activity-card.compone
 import {CreateEventTypeComponent} from './event/create-event-type/create-event-type.component';
 import {EventTypesComponent} from './event/event-types/event-types.component';
 import {AuthGuard} from './infrastructure/auth/auth.guard';
+import {EditEventComponent} from './event/edit-event/edit-event.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'register', component: RegisterComponent },
   {path : 'all-events', component: AllEventsComponent },
+  {path: 'edit-event', component: EditEventComponent },
   {path : 'all-assets', component: AllEventsComponent },
   { path: 'all-my-assets', component: AllEventsComponent },
   {path : 'assets/products/:id', component: AssetComponent },

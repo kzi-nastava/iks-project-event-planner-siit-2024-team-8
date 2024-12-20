@@ -44,6 +44,7 @@ import { CreateEventTypeComponent } from './create-event-type/create-event-type.
 import {MatPaginator} from "@angular/material/paginator";
 import { EventTypesComponent } from './event-types/event-types.component';
 import {RouterLink} from "@angular/router";
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 
 
@@ -58,6 +59,7 @@ import {RouterLink} from "@angular/router";
     GuestCardComponent,
     CreateEventTypeComponent,
     EventTypesComponent,
+    EditEventComponent,
   ],
     imports: [
         CommonModule,

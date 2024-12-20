@@ -9,11 +9,13 @@ import {AuthService} from '../../infrastructure/auth/auth.service';
 })
 export class NavBarComponent {
   private isLoggedIn: boolean = false;
+  role : string = '';
   constructor(private router: Router,private authService: AuthService) {}
 
   ngOnInit() {
     this.authService.userState.subscribe(user => {
       this.isLoggedIn = !(user === '' || user == null);
+      this.role = user.toUpperCase();
     })
   }
 
@@ -24,6 +26,10 @@ export class NavBarComponent {
   onClickPlaceholder() {
     // REMOVE FUNCTION ONCE ALL PAGES ADDED TO THE APP
     alert("TODO")
+  }
+
+  onClickCreateEvent() {
+    this.router.navigate(['/create-event']);
   }
 
 }

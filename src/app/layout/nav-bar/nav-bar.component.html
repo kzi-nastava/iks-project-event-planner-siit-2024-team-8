@@ -53,6 +53,12 @@
       </button>
       <span>Notifications</span>
     </div>
+    <div *ngIf="role == 'ORGANIZER'" class="toolbar-button">
+      <button mat-icon-button (click)="onClickCreateEvent()">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+      <span>Create Event</span>
+    </div>
   </div>
   <div class="toolbar-section">
     <div class="toolbar-button">

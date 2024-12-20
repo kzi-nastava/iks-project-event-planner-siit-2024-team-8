@@ -52,6 +52,7 @@ import { LogoutDialogComponent } from './dialogs/logout-dialog/logout-dialog.com
 import { EventModule } from './event/event.module';
 import { ErrorCodeDialogComponent } from './dialogs/error-code-dialog/error-code-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditEventComponent } from './event/edit-event/edit-event.component';
 
 @NgModule({
   declarations: [

@@ -9,27 +9,27 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class AssetCategoryEditComponent {
   categoryName: string = '';
   categoryDescription: string = '';
-  type: string = 'Product';  
+  type: string = 'Product';
   isEditMode: boolean;
-  isApproveMode: boolean; // New flag to check for approve mode
+  isApproveMode: boolean;
   category: any;
 
-  @Output() saveCategory = new EventEmitter<any>();  
-  @Output() deleteCategory = new EventEmitter<string>();  
-  @Output() approveCategory = new EventEmitter<string>();  // New event emitter for approval
+  @Output() saveCategory = new EventEmitter<any>();
+  @Output() deleteCategory = new EventEmitter<string>();
+  @Output() approveCategory = new EventEmitter<string>();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<AssetCategoryEditComponent>
   ) {
     this.isEditMode = data.isEditMode;
-    this.isApproveMode = data.isApproveMode || false; // Set approval mode
+    this.isApproveMode = data.isApproveMode || false;
     this.category = data.category;
 
-    if (this.isEditMode && this.category) {
+    if (this.category) {
       this.categoryName = this.category.name;
       this.categoryDescription = this.category.description;
-      this.type = this.category.type;  
+      this.type = this.category.type;
     }
   }
 
@@ -41,9 +41,8 @@ export class AssetCategoryEditComponent {
     const categoryData = {
       name: this.categoryName,
       description: this.categoryDescription,
-      type: this.type
+      type: this.isEditMode ? this.category.type : this.type // Preserve type in edit mode
     };
-    console.log('Category Data:', categoryData);
     this.saveCategory.emit({ categoryData, categoryId: this.category?.id });
     this.dialogRef.close();
   }
@@ -57,7 +56,7 @@ export class AssetCategoryEditComponent {
 
   onApprove(): void {
     if (this.category) {
-      this.approveCategory.emit(this.category.id); // Emit approval event
+      this.approveCategory.emit(this.category.id);
       this.dialogRef.close();
     }
   }

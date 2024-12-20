@@ -27,7 +27,7 @@ export class AssetCategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
-    this.loadPendingCategories(); // Load pending categories
+    this.loadPendingCategories();
   }
 
   loadCategories(): void {

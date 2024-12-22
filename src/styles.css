@@ -7,7 +7,7 @@ h1{
 }
 html, body { height: 100%; width: 100%; background-color: #f5f5f5;display: flex;
   margin: 0; padding: 0;
-  flex-direction: column;}
+  flex-direction: column; overflow-x: hidden; }
 body {height: 100%; margin: 0;color: #ffffff;}
 .mat-accent.mat-mdc-checkbox {
   --mdc-checkbox-selected-pressed-icon-color: #A1C084;

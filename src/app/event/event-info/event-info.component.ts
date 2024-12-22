@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {Event} from '../../model/event';
 import {ActivatedRoute} from '@angular/router';
-import {EventService} from '../event.service';
+import {EventService} from '../../services/event-service';
+import {EventInfoResponse} from '../domain/EventInfoResponse';
 
 @Component({
   selector: 'app-event-info',
@@ -9,18 +10,24 @@ import {EventService} from '../event.service';
   styleUrl: './event-info.component.css'
 })
 export class EventInfoComponent {
-  event: Event;
+  event: EventInfoResponse;
   eventID: string;
 
+  constructor(private route: ActivatedRoute, private eventService: EventService) {}
 
-  constructor(private route: ActivatedRoute,private eventService: EventService) {}
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.eventID = (params.get('id'));
     });
 
-    this.event = this.eventService.get(parseInt(this.eventID));
+    this.eventService.getEventById(this.eventID).subscribe({
+      next: (event: EventInfoResponse) => {
+        this.event = event;
+      }
+    });
   }
+
+  /*
   currentImageIndex = 0;
 
   prevImage() {
@@ -29,13 +36,17 @@ export class EventInfoComponent {
 
   nextImage() {
     this.currentImageIndex = (this.currentImageIndex + 1) % this.event.images.length;
-  }
+  }*/
 
   openDeleteDialog() {
 
   }
 
   navigateToEditEvent() {
+
+  }
+
+  openMap() {
 
   }
 }

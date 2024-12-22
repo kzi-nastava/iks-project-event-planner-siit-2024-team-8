@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {Event} from '../../model/event';
-import {EventService} from '../../event/event.service';
 import {Asset} from '../../model/asset';
 import {AssetService} from '../../services/asset-service';
 import {Router} from '@angular/router';
+import {EventService} from '../../services/event-service';
 
 @Component({
   selector: 'app-home-cards',
@@ -22,7 +22,9 @@ export class HomeCardsComponent {
 
 
   ngOnInit() {
-    this.events = this.eventService.getAll();
+    this.eventService.getAllEvents().subscribe({next: (events: Event[]) => {
+      this.events = events;
+      }});
     this.assetService.getAllAssets().subscribe((assetsData: any) => {
       this.assets = [...assetsData.products, ...assetsData.utilities];
     });

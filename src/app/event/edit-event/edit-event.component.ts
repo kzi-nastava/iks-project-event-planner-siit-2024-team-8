@@ -1,7 +1,16 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
-import {EventService} from '../event.service';
-import {EventDTO} from '../domain/EventDTO.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {EventService} from '../../services/event-service';
+import {EventUpdateRequest} from '../domain/EventUpdateRequest';
+import {
+  VerificationEmailDialogComponent
+} from '../../dialogs/verification-email-dialog/verification-email-dialog.component';
+import {ErrorCodeDialogComponent} from '../../dialogs/error-code-dialog/error-code-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {
+  DeleteConfirmationDialogComponent
+} from '../../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import {EventInfoResponse} from '../domain/EventInfoResponse';
 
 @Component({
   selector: 'app-edit-event',
@@ -9,26 +18,49 @@ import {EventDTO} from '../domain/EventDTO.model';
   styleUrl: './edit-event.component.css'
 })
 export class EditEventComponent {
-  constructor(private router: Router, private eventService: EventService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private eventService: EventService, private dialog: MatDialog) {}
+
+  eventUpdateRequest: EventUpdateRequest;
+  eventInfoResponse: EventInfoResponse;
 
 
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.eventService.getEventById(params.get('id')).subscribe({
+        next: (event: EventInfoResponse) => {
+          this.eventInfoResponse = event;
+        }
+      });
+    });
+
+    //TODO - load data into fields
+  }
 
 
-  // TODO
-  name: string = '';
-  duration: string = '';
-  startDate: string = '';
-  endDate: string = '';
-  ngOnInit() {}
+  onClickSubmit() {
 
+    //TODO - put data from fields into eventUpdateRequest
 
-
-
-
-
-
-  onClickSubmit() {}
-  onClickDelete() {}
+    this.eventService.updateEvent(this.eventUpdateRequest).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.router.navigate(['/home']);
+      }
+    });
+  }
+  onClickDelete() {
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'confirm') {
+        this.eventService.deleteEvent(this.eventUpdateRequest.id).subscribe({
+          next: (response) => {
+            console.log(response);
+            this.router.navigate(['/home']);
+          }
+        })
+      }
+    });
+  }
   onClickBack() {
     this.router.navigate(['/home']);
   }

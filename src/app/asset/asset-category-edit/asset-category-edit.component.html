@@ -20,10 +20,12 @@
       <textarea matInput [(ngModel)]="categoryDescription" [readonly]="isApproveMode"></textarea>
     </mat-form-field>
 
-    <mat-radio-group [(ngModel)]="type" [disabled]="isApproveMode">
-      <mat-radio-button value="Product">Product</mat-radio-button>
-      <mat-radio-button value="Utility">Utility</mat-radio-button>
-    </mat-radio-group>
+    <div *ngIf="!isEditMode">
+      <mat-radio-group [(ngModel)]="type" [disabled]="isApproveMode">
+        <mat-radio-button value="Product">Product</mat-radio-button>
+        <mat-radio-button value="Utility">Utility</mat-radio-button>
+      </mat-radio-group>
+    </div>
   </ng-template>
 </mat-dialog-content>
 

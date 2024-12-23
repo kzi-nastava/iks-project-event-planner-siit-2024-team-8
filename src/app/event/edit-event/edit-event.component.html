@@ -5,26 +5,44 @@
   <form>
     <div class="form-group">
       <label for="event-name">Event Name</label>
-      <input id="event-name" type="text" class="form-control" [(ngModel)]="eventUpdateRequest.name" />
+      <input id="event-name" name="event-name" type="text" class="form-control" [(ngModel)]="name"/>
     </div>
 
     <div class="form-group">
-      <label for="event-duration">Duration</label>
+      <label for="event-org">Organizer</label>
+      <input id="event-org" name="event-org" [(ngModel)]="organizer" type="text" class="form-control" disabled/>
+    </div>
+
+    <div class="form-group">
+      <label for="event-description">Description</label>
       <textarea
-        id="event-duration"
-        class="form-control"
-        [(ngModel)]="eventUpdateRequest.capacity"
-      ></textarea>
+        id="event-description"
+        name="event-description"
+        [(ngModel)]="desc"
+        class="form-control">
+      </textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="event-cap">Event Capacity</label>
+      <input id="event-cap" name="event-cap" type="number" class="form-control" [(ngModel)]="cap"/>
     </div>
 
     <div class="form-group">
       <label for="event-start-date">Start Date</label>
-      <input id="event-start-date" type="date" class="form-control" />
+      <input id="event-start-date" name="event-start-date" [(ngModel)]="startDate" type="date" class="form-control" />
     </div>
 
     <div class="form-group">
       <label for="event-end-date">End Date</label>
-      <input id="event-end-date" type="date" class="form-control" />
+      <input id="event-end-date" name="event-end-date" [(ngModel)]="endDate" type="date" class="form-control" />
+    </div>
+
+    <div class="mini-group">
+      <label for="location-city">City&nbsp;&nbsp;&nbsp;</label>
+      <input id="location-city" name="location-city" [(ngModel)]="city" type="text" class="form-control"/>
+      <label for="location-st">&nbsp;&nbsp;&nbsp;Street&nbsp;&nbsp;&nbsp;</label>
+      <input id="location-st" name="location-st" [(ngModel)]="street" type="text" class="form-control"/>
     </div>
 
     <div class="button-group">

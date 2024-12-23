@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {Event} from '../../model/event';
 import {ActivatedRoute} from '@angular/router';
 import {EventService} from '../../services/event-service';
 import {EventInfoResponse} from '../domain/EventInfoResponse';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-event-info',
@@ -11,39 +11,30 @@ import {EventInfoResponse} from '../domain/EventInfoResponse';
 })
 export class EventInfoComponent {
   event: EventInfoResponse;
+
   eventID: string;
 
-  constructor(private route: ActivatedRoute, private eventService: EventService) {}
+  constructor(private route: ActivatedRoute, private eventService: EventService, private router: Router) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.eventID = (params.get('id'));
-    });
-
-    this.eventService.getEventById(this.eventID).subscribe({
-      next: (event: EventInfoResponse) => {
-        this.event = event;
+      this.eventID = params.get('id');
+      if (this.eventID) {
+        this.eventService.getEventById(this.eventID).subscribe({
+          next: (event: EventInfoResponse) => {
+            this.event = event;
+            console.log(this.event);
+          },
+          error: (err) => {
+            console.error('Error loading event:', err);
+          }
+        });
       }
     });
   }
 
-  /*
-  currentImageIndex = 0;
-
-  prevImage() {
-    this.currentImageIndex = (this.currentImageIndex - 1 + this.event.images.length) % this.event.images.length;
-  }
-
-  nextImage() {
-    this.currentImageIndex = (this.currentImageIndex + 1) % this.event.images.length;
-  }*/
-
-  openDeleteDialog() {
-
-  }
-
   navigateToEditEvent() {
-
+    this.router.navigate([`/edit-event/${this.eventID}`]);
   }
 
   openMap() {

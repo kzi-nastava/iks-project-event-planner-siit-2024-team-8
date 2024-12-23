@@ -1,8 +1,4 @@
-export interface Location {
-  name: string;
-  latitude: number;
-  longitude: number;
-}
+import {LocationDTO} from "../domain/EventUpdateRequest"
 
 export interface EventInfoResponse {
   id: string,
@@ -10,7 +6,7 @@ export interface EventInfoResponse {
   description: string,
   capacity: number,
   isPrivate: boolean,
-  location: Location,
+  location: LocationDTO,
   organizerName: string,
   startDate: string,
   endDate: string

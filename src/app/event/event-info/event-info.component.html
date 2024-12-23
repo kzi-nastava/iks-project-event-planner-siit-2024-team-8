@@ -1,72 +1,66 @@
 <div class="outer-container">
   <div class="event-container">
-    <!--<div class="upload-section">
-      <div *ngIf="event.images && event.images.length > 0" class="carousel">
-        <button (click)="prevImage()">&#10094;</button>
-        <div class="carousel-images">
-          <img
-            *ngFor="let image of event.images; let i = index"
-            [src]="image"
-            [alt]="'Image ' + (i + 1)"
-            class="carousel-image"
-            [class.active]="i === currentImageIndex"
-          />
+    <!-- Left Section: Event Details -->
+    <div class="event-info">
+      <!-- Event Details Section -->
+      <div class="event-details">
+        <div class="event-summary">
+          <h2>{{ event.name || 'Unnamed Event' }}</h2>
+          <p>{{ event.isPrivate ? 'Private Event' : 'Public Event' }}</p>
         </div>
-        <button (click)="nextImage()">&#10095;</button>
-      </div>
-    </div>-->
 
-    <div class="event-details">
-      <h2>{{ event.name || 'Unnamed Event' }}</h2>
+        <div class="additional-info">
+          <h3>DESCRIPTION</h3>
+          <p>{{ event.description || 'No description available.' }}</p>
 
-      <div class="form-group">
-        <label for="description">Description</label>
-        <p id="description">{{ event.description || 'No description available.' }}</p>
-      </div>
+          <h3>CAPACITY</h3>
+          <p>{{ event.capacity > 0 ? event.capacity : 'No capacity specified.' }}</p>
 
-      <div class="form-group">
-        <button id="mapButton" (click)="openMap()" ) mat-raised-button class="btn map-button" type="button" >View on Map</button>
-      </div>
+          <h3>START DATE</h3>
+          <p>{{ event.startDate ? (event.startDate | date: 'mediumDate') : 'Not specified.' }}</p>
 
-      <div class="form-group">
-        <label for="capacity">Capacity</label>
-        <p id="capacity">{{ event.capacity > 0 ? event.capacity : 'No capacity specified.' }}</p>
+          <h3>END DATE</h3>
+          <p>{{ event.endDate ? (event.endDate | date: 'mediumDate') : 'Not specified.' }}</p>
+
+          <h3>ORGANIZER</h3>
+          <p>{{ event.organizerName || 'Unknown' }}</p>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="isPrivate">Privacy</label>
-        <p id="isPrivate">{{ event.isPrivate ? 'Private' : 'Public' }}</p>
-      </div>
-
-      <div class="form-group">
-        <label for="startDate">Start Date</label>
-        <p id="startDate">{{ event.startDate ? (event.startDate | date: 'mediumDate') : 'Not specified.' }}</p>
-      </div>
-
-      <div class="form-group">
-        <label for="endDate">End Date</label>
-        <p id="endDate">{{ event.endDate ? (event.endDate | date: 'mediumDate') : 'Not specified.' }}</p>
-      </div>
-
-      <!--<div class="form-group">
-        <label for="budget">Budget</label>
-        <p id="budget">{{ event.budget > 0 ? (event.budget | currency) : 'No budget specified.' }}</p>
-      </div>-->
-
-      <div class="form-group">
-        <label for="organizer">Organized by:</label>
-        <p id="organizer">{{event.organizerName}}</p>
-      </div>
-
-      <div class="button-group">
-        <button mat-raised-button class="btn action-button" (click)="openDeleteDialog()">
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button mat-raised-button class="btn action-button" (click)="navigateToEditEvent()">
+      <!-- Action Buttons Section -->
+      <div class="event-actions">
+        <button class="btn" mat-raised-button (click)="navigateToEditEvent()">
           <mat-icon>edit</mat-icon>
+        </button>
+        <button class="btn" id="mapButton" (click)="openMap()" mat-raised-button>
+          <mat-icon>map</mat-icon>
         </button>
       </div>
     </div>
+
+    <!-- TODO
+    <div class="right-section">
+      <div class="guest-list">
+        <h3>Guests ({{ event.guests.length }})</h3>
+        <div class="guest-scrollbox">
+          <ul>
+            <li *ngFor="let guest of event.guests">{{ guest.name }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="event-agenda">
+        <h3>Agenda</h3>
+        <div class="agenda-list">
+          <div *ngFor="let activity of event.agenda">
+            <h4>{{ activity.name }}</h4>
+            <p><strong>Start Time:</strong> {{ activity.startTime }}</p>
+            <p><strong>End Time:</strong> {{ activity.endTime }}</p>
+            <p><strong>Location:</strong> {{ activity.place }}</p>
+            <p><strong>Description:</strong> {{ activity.description }}</p>
+            <p><strong>Input Needed:</strong> {{ activity.isInput ? 'Yes' : 'No' }}</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
 </div>
-

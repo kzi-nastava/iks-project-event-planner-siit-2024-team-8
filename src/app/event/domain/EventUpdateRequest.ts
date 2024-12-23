@@ -1,9 +1,17 @@
+export interface LocationDTO {
+  id: string;
+  latitude: number;
+  longitude: number;
+  city: string;
+  street: string;
+}
+
 export interface EventUpdateRequest {
   id: string,
   name: string,
   description: string,
-  location: Location,
+  location: LocationDTO,
   capacity: number,
-  startDate: Date,
-  endDate: Date,
+  startDate: string,
+  endDate: string,
 }

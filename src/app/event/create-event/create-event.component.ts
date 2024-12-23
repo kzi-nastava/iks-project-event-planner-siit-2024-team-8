@@ -1,16 +1,25 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Activity, returnActivity} from '../domain/activity';
 import {EventType} from '../domain/event.type';
 import {Invitation, returnInvitation} from '../domain/invitation';
 import {GeocodingService} from '../../services/geocoding-service';
 import {Location, returnLocation} from '../domain/location'
 import {ToastService} from '../../services/toast-service';
+import {EventTypeService} from '../../services/event-type-service';
+import {EventDTO, returnEvent} from '../domain/EventDTO.model';
+import {EventService} from '../../services/event-service';
+import {ApiResponse} from '../../model/api.response';
+import {MatStepper} from '@angular/material/stepper';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {minDateValidator} from '../../shared/custom.validators';
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
   styleUrl: './create-event.component.css'
 })
 export class CreateEventComponent {
+  @ViewChild('stepper') stepper!: MatStepper;
+
   imageUrl: "https://via.placeholder.com/150"; // Default placeholder image
   selectedFile: File | null = null;
   imageSelected: boolean = false;
@@ -18,19 +27,47 @@ export class CreateEventComponent {
   activities : Activity[] = [];
   eventTypes: EventType[] = [];
   guests: Array<Invitation>= [];
-  guestId: number = 1;
 
   error : string = "";
   location : Location;
   locationSelected: boolean = false;
 
+  event: EventDTO;
+
   isPrivate: boolean = false;
 
+  currentActivityIndex: number = 0;
+  currentGuestIndex: number = 0;
+
+  public stepFormOne : FormGroup ;
+  public stepFormTwo : FormGroup;
+
+  constructor(private geocodingService: GeocodingService,private toastService: ToastService,
+              private eventTypeService: EventTypeService,
+              private eventService: EventService,
+              private fb: FormBuilder,) {
+    this.stepFormOne = this.fb.group({
+      eventType: [null, Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(30), Validators.pattern(/^[a-zA-Z\s]+$/)]],
+      description: ['', Validators.required],
+      capacity: [0, [Validators.required, Validators.min(1)]],
+      startDate: ['', [Validators.required,minDateValidator()]],
+      endDate: ['', [Validators.required,minDateValidator()]],
+      isPrivate: [false]
+    });
+  }
   ngOnInit(): void {
     this.location = returnLocation();
+    this.getEventTypes();
+    this.event = returnEvent();
   }
-  constructor(private geocodingService: GeocodingService,private toastService: ToastService) {
+
+  getEventTypes():void {
+    this.eventTypeService.getActiveEventTypes().subscribe((eventTypes: EventType[]) => {
+      this.eventTypes = eventTypes;
+    })
   }
+
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
 
@@ -67,6 +104,7 @@ export class CreateEventComponent {
             type: 'error',
             duration: 3000,
           });
+          this.locationSelected = false;
           this.location = returnLocation();
         }
       },
@@ -83,23 +121,56 @@ export class CreateEventComponent {
   }
 
   onClickNewActivity() {
-    this.activities.push(returnActivity());
+    this.activities.push(returnActivity(this.currentActivityIndex));
+    this.currentActivityIndex++;
   }
   onActivitySaved(savedActivity: Activity): void {
     this.activities.pop();
     this.activities.push(savedActivity);
     console.log('Activity added to list:', savedActivity);
   }
+  onDeleteActivityClicked($event: number) {
+    this.activities = this.activities.filter(activity => activity.index !== $event);
+  }
 
   onAddGuestClick() {
-    this.guests.push(returnInvitation(this.guestId))
-    console.log("guests:" , this.guests);
-    this.guestId++;
+    this.guests.push(returnInvitation(this.currentGuestIndex))
+    this.currentGuestIndex++;
   }
 
   onSaveInvitationClick($event: Invitation) {
-    this.guests = this.guests.filter(guest => guest.id !== $event.id);
+    this.guests = this.guests.filter(guest => guest.index !== $event.index);
     this.guests.push($event);
+  }
+
+  onDeleteGuestClick($event:number): void {
+    this.guests = this.guests.filter(guest => guest.index !== $event);
+  }
+
+
+  onFinishClick() {
+    this.event.name = this.stepFormOne.value['name'];
+    this.event.description = this.stepFormOne.value['description'];
+    this.event.capacity = this.stepFormOne.value['capacity'];
+    this.event.startDate = this.stepFormOne.value['startDate'];
+    this.event.endDate = this.stepFormOne.value['endDate'];
+    this.event.eventType = this.stepFormOne.value['eventType'];
+    this.event.location = this.location;
+    this.event.agenda = this.activities;
+    this.event.guests = this.guests.map(guest => guest.email);
+    this.event.isPrivate = this.isPrivate;
+    this.event.organizerID = localStorage.getItem('userID');
+
+    console.log(this.event);
+
+    this.eventService.createEvent(this.event).subscribe({
+      next: (response: ApiResponse) => {
+        console.log(response);
+      },
+      error: (error) => {
+        this.toastService.showErrorToast(error.message);
+      },
+    });
   }
 
 }

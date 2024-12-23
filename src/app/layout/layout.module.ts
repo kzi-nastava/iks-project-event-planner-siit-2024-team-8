@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {MatIcon} from "@angular/material/icon";
 import {AppModule} from '../app.module';
-import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
+import { LeafletMapComponent } from '../shared/leaflet-map/leaflet-map.component';
 
 
 

@@ -1,4 +1,9 @@
 <mat-card class="activity-card">
+  <button mat-icon-button
+          style="align-self: flex-end; margin-right: 2rem;margin-bottom: 2rem" (click)="onDeleteClick()" >
+    <mat-icon style="color: #ff4d00 ">delete</mat-icon>
+  </button>
+
   <!-- Activity Title -->
   <div class="activity-title">
     <input matInput placeholder="Activity Name" class="input-field" [(ngModel)]="activity.name"/>
@@ -9,10 +14,10 @@
     <input matInput placeholder="Activity Location" class="input-field" [(ngModel)]="activity.place"/>
   </div>
 
-  <div class="activity-start-time">
+  <div class="activity-end-time">
     <mat-form-field appearance="fill" class="input-field">
       <mat-label>Start Time</mat-label>
-      <input matInput [ngxTimepicker]="startTimePicker" placeholder="Choose Start Time" [(ngModel)]="activity.startTime"/>
+      <input matInput [ngxTimepicker]="startTimePicker" placeholder="Choose End Time" [(ngModel)]="activity.startTime"/>
       <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
     </mat-form-field>
   </div>

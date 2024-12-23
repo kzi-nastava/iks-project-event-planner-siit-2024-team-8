@@ -1,6 +1,6 @@
 .toast {
   z-index: 9999;
-  position: absolute;
+  position: fixed;
   top: 10vh;  /* Adjust based on your preference */
   left: 4vh;  /* Adjust based on your preference */
   background: #ffffff;

@@ -4,25 +4,34 @@ import { Observable } from 'rxjs';
 import { Event } from '../model/event';
 import {EventInfoResponse} from '../event/domain/EventInfoResponse';
 import {EventUpdateRequest} from '../event/domain/EventUpdateRequest';
+import {ApiResponse} from '../model/api.response';
+import {A} from '@angular/cdk/keycodes';
+import {environment} from '../../env/environment';
+import {EventDTO} from '../event/domain/EventDTO.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  private apiUrl = 'http://localhost:8080/api/events';
+  private apiUrl = '/events';
 
   constructor(private http: HttpClient) {}
   getAllEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.apiUrl}/all`);
   }
+
+  createEvent(event : EventDTO):Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${environment.apiHost+this.apiUrl}`, event)
+  }
+
   getEventById(id: string): Observable<EventInfoResponse> {
-    return this.http.get<EventInfoResponse>(`${this.apiUrl}/${id}`);
+    return this.http.get<EventInfoResponse>(`${environment.apiHost+this.apiUrl}/${id}`);
   }
   updateEvent(eventUpdateRequest: EventUpdateRequest) :Observable<Object> {
-    return this.http.put(this.apiUrl + "/update", eventUpdateRequest);
+    return this.http.put(`${environment.apiHost+this.apiUrl}` + "/update", eventUpdateRequest);
   }
   deleteEvent(id: string): Observable<Object> {
-    return this.http.delete(`${this.apiUrl}/delete/${id}`);
+    return this.http.delete(`${environment.apiHost+this.apiUrl}/delete/${id}`);
   }
 }

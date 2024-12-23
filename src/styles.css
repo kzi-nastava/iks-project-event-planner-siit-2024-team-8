@@ -9,7 +9,9 @@ html, body { height: 100%; width: 100%; background-color: #f5f5f5;display: flex;
   margin: 0; padding: 0;
   flex-direction: column; overflow-x: hidden; }
 body {height: 100%; margin: 0;color: #ffffff;}
-.mat-accent.mat-mdc-checkbox {
+
+.mat-accent.mat-mdc-checkbox,
+mat-option .mat-accent.mat-mdc-checkbox{
   --mdc-checkbox-selected-pressed-icon-color: #A1C084;
   --mdc-checkbox-selected-checkmark-color: #ffffff;
   --mdc-checkbox-selected-focus-icon-color: #A1C084;
@@ -103,4 +105,23 @@ mat-form-field.mat-form-field.mat-white {
 }
 .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label{
   color: #A1C084 !important;
+}
+clock-face__container ng-star-inserted{
+  color: #A1C084 !important;
+}
+[_nghost-ng-c2055447140] {
+  --body-background-color: #f0f0f0 !important;
+  --primary-font-family: 'Poppins', sans-serif;
+  --button-color: #A1C084 !important;
+  --dial-active-color: #A1C084!important;
+  --dial-inactive-color: rgba(255, 255, 255, .7) !important;
+  --dial-background-color: #333 !important;
+  --dial-editable-active-color: #A1C084!important;
+  --dial-editable-background-color: #444 !important;
+  --clock-face-time-active-color: #A1C084 !important;
+  --clock-face-time-inactive-color: #929292 !important;
+  --clock-face-inner-time-inactive-color: #aaa !important;
+  --clock-face-time-disabled-color: #ddd !important;
+  --clock-face-background-color: #333 !important;
+  --clock-hand-color: #A1C084!important;
 }

@@ -1,16 +1,40 @@
 <h2 mat-dialog-title>
-  {{ isEditMode ? 'Edit event type' : 'Create event type' }}
+  {{ isEditMode ? eventType.name : 'Create event type' }}
 </h2>
 <mat-dialog-content>
-  <mat-form-field>
+  <mat-form-field *ngIf="!isEditMode">
     <mat-label>Name</mat-label>
     <input matInput [(ngModel)]="eventType.name"/>
   </mat-form-field>
+
 
   <mat-form-field>
     <mat-label>Description</mat-label>
     <textarea matInput [(ngModel)]="eventType.description"></textarea>
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label> Select Asset categories</mat-label>
+    <mat-select [matMenuTriggerFor]="menu"></mat-select>
+  </mat-form-field>
+
+  <mat-menu class="full-width-menu"  #menu="matMenu">
+    <div *ngFor="let category of assetCategories">
+      <mat-checkbox
+        (click) = "$event.stopPropagation()"
+        [checked]="isCategorySelected(category)"
+        (change)="onChecked(category,$event)">
+        {{ category.name }}
+      </mat-checkbox>
+    </div>
+  </mat-menu>
+
+  <h4 style="font-size: 1.25rem; margin-top: -1em;" >Currently selected categories</h4>
+  <div class="categories_div">
+    <div *ngFor="let category of this.eventType.assetCategories">
+      {{category.name}}
+    </div>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>

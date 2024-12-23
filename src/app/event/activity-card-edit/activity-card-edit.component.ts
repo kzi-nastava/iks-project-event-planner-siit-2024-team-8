@@ -14,6 +14,9 @@ export class ActivityCardEditComponent {
   @Output()
   clicked : EventEmitter<Activity> = new EventEmitter<Activity>();
 
+  @Output()
+  delete: EventEmitter<number> = new EventEmitter<number>();
+
   // Open the start time picker
   openStartTimePicker(): void {
     // Logic to open a time picker
@@ -80,5 +83,9 @@ export class ActivityCardEditComponent {
       this.activity.isInput = false;
       this.clicked.emit(this.activity);
     }
+  }
+
+  onDeleteClick() {
+    this.delete.emit(this.activity.index);
   }
 }

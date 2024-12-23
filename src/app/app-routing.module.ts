@@ -48,10 +48,8 @@ const routes: Routes = [
   {path: 'create-event', component: CreateEventComponent},
   {path: 'activity-card', component: ActivityCardComponent},
   {path: 'event-types',component:EventTypesComponent,canActivate:[AuthGuard],
-    data: {role : 'ADMIN'}},
+    data: {role  : 'ADMIN'}},
   {path: 'create-event-type', component: CreateEventTypeComponent},
-  {path: 'create-event-type/:id', component: CreateEventTypeComponent,canActivate:[AuthGuard],
-  data: {role : 'ADMIN'}},
   { path: '**', redirectTo: '/home' }
 ];
 

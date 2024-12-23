@@ -37,7 +37,9 @@ export class LoginComponent {
       this.authService.login(login).subscribe({
         next: (response: AuthResponse) => {
           localStorage.setItem('user', response.token);
+          localStorage.setItem('userID', response.id);
           this.authService.setUser();
+          this.authService.setUserId(response.id);
           this.router.navigate(['home']);
           this.toastService.showToast({
             message: 'Successfully logged in!',

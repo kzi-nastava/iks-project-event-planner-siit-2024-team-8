@@ -18,6 +18,9 @@ export class AuthService {
   user$ = new BehaviorSubject("");
   userState = this.user$.asObservable();
 
+  userID$ = new BehaviorSubject("");
+  userIdState = this.userID$.asObservable();
+
   constructor(private http: HttpClient) {
     this.user$.next(this.getRole());
   }
@@ -30,6 +33,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('userID');
     this.setUser();
   }
 
@@ -42,12 +46,23 @@ export class AuthService {
     return null;
   }
 
+  getUserId() {
+    if (this.isLoggedIn()){
+      return localStorage.getItem('userID');
+    }
+    return null
+  }
+
   isLoggedIn(): boolean {
     return localStorage.getItem('user') != null;
   }
 
   setUser(): void {
     this.user$.next(this.getRole());
+  }
+
+  setUserId(id: string): void {
+    this.userID$.next(this.getUserId());
   }
 
 }

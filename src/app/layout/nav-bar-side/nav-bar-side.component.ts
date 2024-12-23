@@ -9,16 +9,24 @@ import {AuthService} from '../../infrastructure/auth/auth.service';
 })
 export class NavBarSideComponent {
   role : string = '';
+  isLoggedIn: boolean = false;
 
   constructor(public router: Router,public authService: AuthService,) {}
   ngOnInit() : void {
     this.authService.userState.subscribe(user => {
-      this.role = user.toUpperCase();
+      this.isLoggedIn = !(user === '' || user == null);
+      if (!(user === '' || user == null)){
+        this.role = user.toUpperCase();
+      }
     })
   }
 
   onClickPlaceholder() {
     // REMOVE FUNCTION ONCE ALL THE PAGES ARE ADDED TO THE APP
     alert('TODO');
+  }
+
+  navigateToLogin() {
+    this.isLoggedIn?this.router.navigate(['/profile']): this.router.navigate(['/login']);
   }
 }

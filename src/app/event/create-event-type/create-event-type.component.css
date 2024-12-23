@@ -60,3 +60,30 @@ mat-dialog-actions button:hover {
   background-color: #FF000080 !important;
   color: black !important;
 }
+.custom-dropdown-content {
+  display: block;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0 16px;
+}
+
+.custom-dropdown-content mat-checkbox {
+  padding: 8px 0;
+  display: block;
+}
+
+
+
+.full-width-menu {
+  min-width: unset !important;
+  width: 100%;
+}
+.categories_div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: #A1C084 1px solid;
+  border-radius: 1rem;
+  width: 100%;
+}

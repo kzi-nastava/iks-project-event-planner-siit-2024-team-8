@@ -1,71 +1,74 @@
 <div class="flex-container">
   <h1>Create event</h1>
   <br>
-  <mat-horizontal-stepper #stepper>
-    <mat-step label="Basic info" class="custom-stepper">
+  <mat-horizontal-stepper #stepper linear>
+    <mat-step label="Basic info" class="custom-stepper" [stepControl]="stepFormOne">
       <p>*All fields required unless noted</p>
-      <mat-form-field>
-        <mat-label>*Choose event type:</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let type of eventTypes" [value]="type">
-            {{ type }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>*Event Name</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Event Description</mat-label>
-        <textarea matInput placeholder="Activity Description" class="input-field" ></textarea>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Maximum attendants</mat-label>
-        <input matInput type="number">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>*Start Date</mat-label>
-        <input matInput [matDatepicker]="startDatePicker">
-        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #startDatePicker></mat-datepicker>
-      </mat-form-field>
+      <form style="margin-bottom: 2rem;" [formGroup]="stepFormOne">
+        <mat-form-field>
+          <mat-label>Choose event type:</mat-label>
+          <mat-select formControlName="eventType">
+            <mat-option *ngFor="let type of eventTypes" [value]="type">
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="stepFormOne.controls['eventType'].invalid && !stepFormOne.controls['eventType'].untouched">
+            Please select a valid event type.
+          </mat-error>
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>*End Date</mat-label>
-        <input matInput [matDatepicker]="endDatePicker" required="required">
-        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #endDatePicker></mat-datepicker>
-      </mat-form-field>
+        <mat-form-field>
+          <mat-label>Event Name</mat-label>
+          <input matInput formControlName="name">
+          <mat-error *ngIf="stepFormOne.controls['name'].invalid && !stepFormOne.controls['name'].untouched">
+            Event name should contain only letters and spaces, and be less than 30 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Event Description</mat-label>
+          <textarea matInput placeholder="Activity Description" formControlName="description"></textarea>
+          <mat-error *ngIf="stepFormOne.controls['description'].invalid && !stepFormOne.controls['description'].untouched" >
+            Event description is required.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Maximum attendants</mat-label>
+          <input matInput type="number" formControlName="capacity">
+          <mat-error *ngIf="stepFormOne.controls['capacity'].invalid && !stepFormOne.controls['capacity'].untouched">Maximum attendants must be higher than 0.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate placeholder="Start date" formControlName="startDate">
+            <input matEndDate placeholder="End date" formControlName="endDate">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-error *ngIf="stepFormOne.controls['startDate'].hasError('required') && !stepFormOne.controls['startDate'].untouched" >Start Date is required</mat-error>
+          <mat-error *ngIf="stepFormOne.controls['startDate'].hasError('minDate') && !stepFormOne.controls['startDate'].untouched" >Previous date picked for start date</mat-error>
+          <mat-error *ngIf="stepFormOne.controls['endDate'].hasError('required') && !stepFormOne.controls['startDate'].untouched" >End date is required</mat-error>
+          <mat-error *ngIf="stepFormOne.controls['endDate'].hasError('minDate') && !stepFormOne.controls['startDate'].untouched" >Previous date picked for end date</mat-error>
+        </mat-form-field>
+    </form>
       <mat-label style="color: black !important; margin-right: 5%;">Private</mat-label>
       <mat-slide-toggle style="margin-bottom: 10%;" [(ngModel)]="isPrivate"></mat-slide-toggle>
       <div class="button_div">
         <button mat-raised-button matStepperNext>Next</button>
       </div>
     </mat-step>
-    <mat-step label = "Guest Invitations" *ngIf="isPrivate">
+    <mat-step label = "Guest Invitations" *ngIf="isPrivate" >
       <div id="invitations_div" *ngFor="let guest of guests">
         <app-guest-card *ngIf="!guest.isInput"
                         [invitation]="guest"></app-guest-card>
         <app-guest-edit-card *ngIf="guest.isInput"
                               [guest]="guest"
-                              (clicked)="onSaveInvitationClick($event)"></app-guest-edit-card>
+                              (clicked)="onSaveInvitationClick($event)"
+                              (delete)="onDeleteGuestClick($event)"></app-guest-edit-card>
       </div>
       <div class="button_div">
         <button mat-raised-button (click)="onAddGuestClick()" style="margin-top: 5%">Add Guest</button>
         <button mat-raised-button matStepperNext>Next</button>
-      </div>
-    </mat-step>
-    <mat-step label="Event image">
-      <p>*Choose your event image:</p>
-      <div class="image-container">
-        <img [src]=imageUrl alt="Profile Image" class="profile-image">
-      </div>
-      <div style="align-content: center">
-        <input type="file" accept="image/*" (change)="onFileSelected($event)">
-      </div>
-      <div class="button_div">
-        <button mat-raised-button matStepperNext [disabled]="!imageSelected">Next</button>
       </div>
     </mat-step>
     <mat-step label="Location">
@@ -90,11 +93,12 @@
                             [activity]="activity"></app-activity-card>
         <app-activity-card-edit *ngIf="activity.isInput"
                                 [activity]="activity"
-                                (clicked)="onActivitySaved($event)"></app-activity-card-edit>
+                                (clicked)="onActivitySaved($event)"
+                                (delete)="onDeleteActivityClicked($event)"></app-activity-card-edit>
       </div>
       <div class="button_div">
         <app-new-activity-card (click)="onClickNewActivity()"></app-new-activity-card>
-        <button style="width: 100%" mat-raised-button>Next</button>
+        <button style="width: 100%" mat-raised-button (click)="onFinishClick()">Next</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

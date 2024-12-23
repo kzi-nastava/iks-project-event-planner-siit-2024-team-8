@@ -14,7 +14,7 @@ a p {font-size: 10pt; text-align: center; text-decoration: none;}
 a p:hover {color: lightgrey;}
 h1 {color: black; font-size: 30pt; margin: 0; text-align: center; font-family: 'Poppins', sans-serif;}
 label {color: lightgrey;}
-form input {background:#A1C084;border: 1px solid lightgrey; border-radius: 1% !important; font-size: 12pt; width: 100%; height: 20pt; padding: 1pt;}
+form input {border-radius: 1% !important; font-size: 12pt; width: 100%; height: 20pt; padding: 1pt;}
 form label {text-align: left;}
 button {
   width: calc(100% - 40px); /* Full width minus the margins */
@@ -89,5 +89,16 @@ button.mat-raised-button:active {
   width: 20%;
   margin-bottom: 10%;
 }
+
+.error-message {
+  color: darkred;
+  font-size: 14px;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: #ffdddd;
+  border: 1px solid darkred;
+  border-radius: 4px;
+}
+
 
 

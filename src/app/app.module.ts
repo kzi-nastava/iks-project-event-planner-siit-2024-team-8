@@ -18,7 +18,14 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatNativeDateModule, MatOption, MatOptionModule, NativeDateAdapter, NativeDateModule } from '@angular/material/core';
+import {
+  MAT_DATE_LOCALE,
+  MatNativeDateModule,
+  MatOption,
+  MatOptionModule,
+  NativeDateAdapter,
+  NativeDateModule
+} from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { CreateAssetComponent } from './asset/create-asset/create-asset.component';
 import { EditAssetComponent } from './asset/edit-asset/edit-asset.component';
@@ -32,7 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AllEventsComponent } from './event/all-events/all-events.component';
 import { MatPaginator } from '@angular/material/paginator';
-import { FilterPopUpComponent } from './layout/filter-pop-up/filter-pop-up.component';
+import { FilterPopUpComponent } from './shared/filter-pop-up/filter-pop-up.component';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from '@angular/material/datepicker';
 import { MatSlider, MatSliderRangeThumb } from '@angular/material/slider';
@@ -46,13 +53,12 @@ import { VerifyComponent } from './user/verify/verify.component';
 import { AssetCategoriesComponent } from './asset/asset-categories/asset-categories.component';
 import { AssetCategoryEditComponent } from './asset/asset-category-edit/asset-category-edit.component';
 import { AuthModule } from './infrastructure/auth/auth.module';
-import { ToastComponent } from './layout/toast/toast.component';
+import { ToastComponent } from './shared/toast/toast.component';
 import { Interceptor } from './infrastructure/auth/interceptor';
 import { LogoutDialogComponent } from './dialogs/logout-dialog/logout-dialog.component';
 import { EventModule } from './event/event.module';
 import { ErrorCodeDialogComponent } from './dialogs/error-code-dialog/error-code-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditEventComponent } from './event/edit-event/edit-event.component';
 
 @NgModule({
   declarations: [
@@ -118,7 +124,7 @@ import { EditEventComponent } from './event/edit-event/edit-event.component';
     AuthModule,
     MatOptionModule,
     NgOptimizedImage,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     provideAnimationsAsync(),
@@ -127,6 +133,7 @@ import { EditEventComponent } from './event/edit-event/edit-event.component';
       useClass: Interceptor,
       multi: true,
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-US' }
   ],
   bootstrap: [AppComponent]
 })

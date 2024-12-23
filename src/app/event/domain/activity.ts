@@ -14,8 +14,10 @@ export interface Activity {
 
   isInput: boolean;
 
+  index: number;
+
 }
-export function returnActivity(): Activity{
+export function returnActivity(index: number): Activity{
   return{
     name : "",
     description : "",
@@ -23,6 +25,7 @@ export function returnActivity(): Activity{
     endTime : "",
     startTime: "",
     place: "",
+    index : index
   };
 }
 

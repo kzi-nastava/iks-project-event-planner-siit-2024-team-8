@@ -14,6 +14,8 @@ export class GuestEditCardComponent {
 
   @Output()
   clicked: EventEmitter<Invitation> = new EventEmitter();
+  @Output()
+  delete: EventEmitter<number> = new EventEmitter();
 
   constructor(private toastService : ToastService) { }
 
@@ -29,5 +31,9 @@ export class GuestEditCardComponent {
         duration: 3000,
       });
     }
+  }
+
+  onDeleteGuestClick() {
+    this.delete.emit(this.guest.index);
   }
 }

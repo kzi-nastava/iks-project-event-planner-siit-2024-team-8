@@ -28,10 +28,10 @@ export class EventService {
   getEventById(id: string): Observable<EventInfoResponse> {
     return this.http.get<EventInfoResponse>(`${environment.apiHost+this.apiUrl}/${id}`);
   }
-  updateEvent(eventUpdateRequest: EventUpdateRequest) :Observable<Object> {
-    return this.http.put(`${environment.apiHost+this.apiUrl}` + "/update", eventUpdateRequest);
+  updateEvent(eventUpdateRequest: EventUpdateRequest) :Observable<string> {
+    return this.http.put(`${environment.apiHost+this.apiUrl}` + "/update", eventUpdateRequest, {responseType: 'text'});
   }
-  deleteEvent(id: string): Observable<Object> {
+  /*deleteEvent(id: string): Observable<Object> {
     return this.http.delete(`${environment.apiHost+this.apiUrl}/delete/${id}`);
-  }
+  }*/
 }

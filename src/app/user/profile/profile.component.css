@@ -12,7 +12,9 @@ p {
   font-size: 18px;
 }
 .outer-container {
-  color: #44474E
+  color: #44474E;
+  display: flex;
+  flex-direction: row;
 }
 .user-details h2 {
   font-size: 30px;
@@ -47,6 +49,15 @@ p {
   margin-left: 150px;
   margin-top: 40px;
   align-items: flex-start;
+}
+
+.event-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-left: 150px;
+  margin-top: 40px;
+  align-items: center;
 }
 
 .profile-section {

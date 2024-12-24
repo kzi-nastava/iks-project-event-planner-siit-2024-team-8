@@ -60,4 +60,12 @@
       </div>
     </div>
   </div>
+  <div class="event-container" *ngIf="role == 'Organizer'">
+    <h2 style="font-size: 40px">My (Organized) Events</h2>
+    <ng-container *ngIf="items.length > 0">
+      <div *ngFor="let item of items">
+        <button class="btn" [routerLink]="['/event', item.id]" mat-raised-button>{{item.name}}</button>
+      </div>
+    </ng-container>
+  </div>
 </div>

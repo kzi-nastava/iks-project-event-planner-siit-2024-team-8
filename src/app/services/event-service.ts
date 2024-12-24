@@ -28,10 +28,16 @@ export class EventService {
   getEventById(id: string): Observable<EventInfoResponse> {
     return this.http.get<EventInfoResponse>(`${environment.apiHost+this.apiUrl}/${id}`);
   }
+
   updateEvent(eventUpdateRequest: EventUpdateRequest) :Observable<string> {
     return this.http.put(`${environment.apiHost+this.apiUrl}` + "/update", eventUpdateRequest, {responseType: 'text'});
   }
-  /*deleteEvent(id: string): Observable<Object> {
-    return this.http.delete(`${environment.apiHost+this.apiUrl}/delete/${id}`);
-  }*/
+
+  getOrganizedEvents(email : string) : Observable<EventInfoResponse[]> {
+    return this.http.get<EventInfoResponse[]>(`${environment.apiHost+this.apiUrl}/organized/${email}`);
+  }
+
+  deleteEvent(id: string): Observable<string> {
+    return this.http.delete(`${environment.apiHost+this.apiUrl}/delete/${id}`, {responseType: 'text'});
+  }
 }

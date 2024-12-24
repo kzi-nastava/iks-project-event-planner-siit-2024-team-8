@@ -112,13 +112,18 @@ export class EditEventComponent {
   }
 
   onClickDelete() {
-    /*const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'confirm') {
-        this.eventService.deleteEvent(this.eventUpdateRequest.id).subscribe({
+        this.eventService.deleteEvent(this.eventId).subscribe({
           next: (response) => {
             console.log(response);
-            this.router.navigate(['/home']).then(() => {alert("Update successful!");});
+            this.router.navigate(['/home']).then(() => {this.toastService.showToast({
+              message: 'Successfully deleted event!',
+              title: 'Success',
+              type: 'success',
+              duration: 3000,
+            })});
           },
           error: (error) => {
             this.dialog.open(ErrorCodeDialogComponent, {
@@ -127,8 +132,7 @@ export class EditEventComponent {
           },
         });
       }
-    });*/
-    alert("TODO")
+    });
   }
 
   onClickBack() {

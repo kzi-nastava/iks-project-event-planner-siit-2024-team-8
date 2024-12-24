@@ -12,6 +12,8 @@ import {ApiResponse} from '../../model/api.response';
 import {MatStepper} from '@angular/material/stepper';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {minDateValidator} from '../../shared/custom.validators';
+import { AssetCategory } from '../../model/asset-category';
+import {BudgetItem} from '../domain/budgetItem';
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
@@ -27,6 +29,7 @@ export class CreateEventComponent {
   activities : Activity[] = [];
   eventTypes: EventType[] = [];
   guests: Array<Invitation>= [];
+  budgetItems: BudgetItem[] = [];
 
   error : string = "";
   location : Location;
@@ -149,6 +152,10 @@ export class CreateEventComponent {
 
 
   onFinishClick() {
+    const isBudgetValid = this.SaveBudget();
+    if (!isBudgetValid) {
+      return;
+    }
     this.event.name = this.stepFormOne.value['name'];
     this.event.description = this.stepFormOne.value['description'];
     this.event.capacity = this.stepFormOne.value['capacity'];
@@ -160,6 +167,7 @@ export class CreateEventComponent {
     this.event.guests = this.guests.map(guest => guest.email);
     this.event.isPrivate = this.isPrivate;
     this.event.organizerID = localStorage.getItem('userID');
+    this.event.budgetItems = this.budgetItems;
 
     console.log(this.event);
 
@@ -173,4 +181,66 @@ export class CreateEventComponent {
     });
   }
 
+  isBudgetValid() {
+    return this.budgetItems.every(
+      (item) =>
+        item.assetCategoryId !== null &&
+        item.assetCategoryId !== '' &&
+        item.plannedAmount >= 0
+    );
+  }
+
+  addNewBudgetItem() {
+    const newBudgetItem: BudgetItem = {
+      id: '',
+      assetCategoryId: '',
+      plannedAmount: 0,
+      actualAmount: 0,
+    };
+    this.budgetItems.push(newBudgetItem);
+  }
+
+  onDeleteBudgetItem(itemId: String): void {
+    this.budgetItems = this.budgetItems.filter(item => item.id !== itemId);
+  }
+
+  onSuggestedBudgetClick(): void {
+    this.budgetItems = [];
+
+    const selectedEventType: EventType = this.stepFormOne.value['eventType'];
+    console.log("event types suggest cats: ", selectedEventType.assetCategories)
+
+    if (selectedEventType && selectedEventType.assetCategories) {
+      selectedEventType.assetCategories.forEach((category: AssetCategory) => {
+        const newBudgetItem: BudgetItem = {
+          id: '',
+          assetCategoryId: category.id,
+          plannedAmount: 0,
+          actualAmount: 0,
+        };
+        this.budgetItems.push(newBudgetItem);
+      });
+    }
+  }
+
+  SaveBudget(): boolean {
+    if (!this.isBudgetValid()) {
+      return false;
+    }
+
+    const categoryIds = this.budgetItems.map(item => item.assetCategoryId);
+    const duplicateCategories = categoryIds.filter((item, index) => categoryIds.indexOf(item) !== index);
+
+    if (duplicateCategories.length > 0) {
+      this.toastService.showToast({
+        message: 'There are duplicate budget items with the same category.',
+        title: 'Duplicate Category Error',
+        type: 'error',
+        duration: 3000,
+      });
+      return false;
+    }
+
+    return true;
+  }
 }

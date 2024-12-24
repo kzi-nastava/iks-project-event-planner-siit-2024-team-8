@@ -1,0 +1,15 @@
+<mat-card class="budget-item-card" (click)="onBudgetItemClicked()">
+  <mat-card-content>
+    <!-- Display the category type -->
+    <mat-card-title>{{ category?.type }}</mat-card-title>
+
+    <!-- Display the category name instead of assetCategoryId -->
+    <mat-card-subtitle>Category: {{ category?.name }}</mat-card-subtitle>
+
+    <!-- Only the plannedAmount (budget) is editable -->
+    <mat-card-subtitle>
+      Planned Budget:
+      <input matInput [(ngModel)]="budgetItem.plannedAmount" type="number" />
+    </mat-card-subtitle>
+  </mat-card-content>
+</mat-card>

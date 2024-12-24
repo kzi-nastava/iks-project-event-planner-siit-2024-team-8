@@ -1,6 +1,7 @@
 import {Activity} from './activity';
 import {Location, returnLocation} from './location'
 import {EventType} from './event.type';
+import {BudgetItem} from './budgetItem';
 
 export interface EventDTO {
   organizerID: string;
@@ -14,6 +15,7 @@ export interface EventDTO {
   agenda: Activity[];
   eventType: EventType;
   guests? : string[];
+  budgetItems: BudgetItem[];
 }
 
 export function returnEvent() : EventDTO {
@@ -29,5 +31,6 @@ export function returnEvent() : EventDTO {
     eventType: null,
     agenda: [],
     guests: [],
+    budgetItems: [],
   }
 }

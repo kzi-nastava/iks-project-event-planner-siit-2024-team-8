@@ -100,5 +100,34 @@ button.mat-raised-button:active {
   border-radius: 4px;
 }
 
+.add-budget-item-button {
+  margin-top: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border: 2px solid black;
+  border-radius: 25px;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.add-budget-item-button:hover {
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-budget-item-button mat-icon {
+  margin-right: 10px;
+  font-size: 20px;
+  color: black;
+}
+
+.add-budget-item-button p {
+  font-size: 14px; /* Text size */
+  color: black; /* Text color */
+  margin: 0;
+}
+
 
 

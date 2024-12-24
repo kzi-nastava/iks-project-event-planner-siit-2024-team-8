@@ -48,7 +48,8 @@ import { EditEventComponent } from './edit-event/edit-event.component';
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
+import { BudgetItemCardComponent } from './budget-item-card/budget-item-card.component';
+import { BudgetItemCardEditComponent } from './budget-item-card-edit/budget-item-card-edit.component';
 
 
 
@@ -64,6 +65,8 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
     CreateEventTypeComponent,
     EventTypesComponent,
     EditEventComponent,
+    BudgetItemCardComponent,
+    BudgetItemCardEditComponent,
   ],
   imports: [
     CommonModule,

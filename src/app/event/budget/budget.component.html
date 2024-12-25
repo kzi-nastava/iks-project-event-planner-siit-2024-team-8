@@ -1,0 +1,53 @@
+<div class="outer-container">
+  <div class="budget-view">
+    <div class="budget-section" style="border: 2px solid black; padding: 20px; border-radius: 10px;">
+      <div style="display: flex; align-items: center; gap:120px; margin-bottom: 20px;">
+        <p style="font-size: 20px; font-weight: bold;">
+          Total Planned Budget: {{ plannedBudget | currency }}
+        </p>
+        <p style="font-size: 20px; font-weight: bold;">
+          Total Spent: {{ actualBudget | currency }}
+        </p>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message" style="color: red; font-weight: bold;">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="success-message" style="color: green; font-weight: bold;">
+        {{ successMessage }}
+      </div>
+
+      <div class="budget-items" style="display: flex; flex-direction: column; gap: 10px;">
+        <div *ngFor="let item of budgetItems" class="budget-item-card">
+          <app-budget-item-card
+            [budgetItem]="item"
+            (clicked)="onBudgetItemClicked(item)"
+            (updated)="onBudgetItemUpdated($event)"
+            (deleted)="onBudgetItemDeleted($event)">
+          </app-budget-item-card>
+        </div>
+
+        <div *ngFor="let item of newBudgetItems" class="budget-item-edit-card">
+          <app-budget-item-card-edit
+            [budgetId]="budgetId"
+            [budgetItem]="item"
+            [showSaveButton]="true"
+            (delete)="onBudgetItemDeleted(item.id)"
+            (saved)="onBudgetItemSave($event)">
+          </app-budget-item-card-edit>
+        </div>
+
+        <div class="add-budget-item-card" (click)="addNewBudgetItem()" style="justify-content: center; align-items: center; cursor: pointer;">
+          <mat-card class="add-budget-item-button">
+            <mat-icon>add</mat-icon>
+            <p style="margin: 0;">Add Budget Item</p>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="button_div">
+      <button mat-raised-button (click)="goBack()">Back</button>
+    </div>
+  </div>
+</div>

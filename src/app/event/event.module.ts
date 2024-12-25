@@ -12,7 +12,14 @@ import {MatStep, MatStepper, MatStepperNext} from '@angular/material/stepper';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LayoutModule} from '../layout/layout.module';
 import { ActivityCardComponent } from './activity-card/activity-card.component';
-import {MatCard, MatCardContent, MatCardImage, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
+import {
+    MatCard,
+    MatCardActions,
+    MatCardContent,
+    MatCardImage,
+    MatCardSubtitle,
+    MatCardTitle
+} from '@angular/material/card';
 import { ActivityCardEditComponent } from './activity-card-edit/activity-card-edit.component';
 import {MatDialogActions, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
 import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
@@ -50,6 +57,9 @@ import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BudgetItemCardComponent } from './budget-item-card/budget-item-card.component';
 import { BudgetItemCardEditComponent } from './budget-item-card-edit/budget-item-card-edit.component';
+import { BudgetComponent } from './budget/budget.component';
+import {BoughtAssetsPopupComponent} from './bought-assets-popup/bought-assets-popup.component';
+import {MatListModule} from '@angular/material/list';
 
 
 
@@ -67,6 +77,8 @@ import { BudgetItemCardEditComponent } from './budget-item-card-edit/budget-item
     EditEventComponent,
     BudgetItemCardComponent,
     BudgetItemCardEditComponent,
+    BudgetComponent,
+    BoughtAssetsPopupComponent
   ],
   imports: [
     CommonModule,
@@ -111,6 +123,8 @@ import { BudgetItemCardEditComponent } from './budget-item-card-edit/budget-item
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardActions,
+    MatListModule,
   ]
 })
 export class EventModule { }

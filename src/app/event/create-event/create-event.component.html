@@ -112,6 +112,7 @@
           <div *ngFor="let item of budgetItems; let i = index">
             <app-budget-item-card-edit
               [budgetItem]="item"
+              [showSaveButton]="false"
               (delete)="onDeleteBudgetItem($event)">
             </app-budget-item-card-edit>
           </div>

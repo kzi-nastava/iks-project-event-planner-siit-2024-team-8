@@ -40,4 +40,8 @@ export class EventInfoComponent {
   openMap() {
 
   }
+
+  navigateToBudget() {
+    this.router.navigate([`/events/${this.eventID}/budget`]);
+  }
 }

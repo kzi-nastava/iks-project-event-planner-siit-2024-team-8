@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Bought Assets</h2>
+<mat-dialog-content>
+  <div *ngIf="hasAssets; else noAssets">
+    <mat-list>
+      <mat-list-item *ngFor="let asset of boughtAssets" (click)="onAssetClick(asset)">
+        <div>
+          <p>{{ asset.name }}</p>
+          <p>{{ asset.price }}</p>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <ng-template #noAssets>
+    <p>No bought assets for now.</p>
+  </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

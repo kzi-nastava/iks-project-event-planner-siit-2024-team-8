@@ -1,7 +1,5 @@
 <mat-card class="budget-item-edit-card">
-  <button mat-icon-button class="delete-button" (click)="onDeleteBudgetItem()">
-    <mat-icon color="warn">delete</mat-icon>
-  </button>
+
 
   <mat-radio-group [(ngModel)]="assetType" (ngModelChange)="onAssetTypeChange($event)">
     <mat-radio-button value="PRODUCT">Product</mat-radio-button>
@@ -23,4 +21,17 @@
     <input matInput [(ngModel)]="budgetItem.plannedAmount" type="number" min="0" required />
     <mat-error *ngIf="budgetItem.plannedAmount < 0">Planned amount cannot be negative.</mat-error>
   </mat-form-field>
+  <div *ngIf="errorMessage" style="color: red; font-weight: bold;">
+    {{ errorMessage }}
+  </div>
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div *ngIf="showSaveButton" style="display: flex; align-items: center;">
+      <button mat-icon-button (click)="onSaveBudgetItem()">
+        <mat-icon color="primary">save</mat-icon>
+      </button>
+      <button mat-icon-button class="delete-button" (click)="onDeleteBudgetItem()">
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+    </div>
+  </div>
 </mat-card>

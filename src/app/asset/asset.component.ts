@@ -9,6 +9,9 @@ import { AssetCategory } from '../model/asset-category';
 import { Asset } from '../model/asset';
 import {AuthService} from '../infrastructure/auth/auth.service';
 import {UserService} from '../user/user-service';
+import {UserInfoResponse} from '../user/domain/user.info.response';
+import {EventListPopupComponent} from './event-list-popup/event-list-popup.component';
+import {BudgetService} from '../services/budget-service';
 
 @Component({
   selector: 'app-asset',
@@ -20,16 +23,18 @@ export class AssetComponent implements OnInit {
   assetID: string;
   isUtility: boolean = false;
   isProduct: boolean = false;
-  categoryName: string = ''; // Store category name here
+  categoryName: string = '';
 
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
   currentImageIndex: number = 0;
 
-  // Utility specific properties
   utilityDuration: number;
   utilityReservationTerm: string;
   utilityCancellationTerm: string;
   utilityManualConfirmation: boolean;
+
+  role: string = '';
+  currentUser: UserInfoResponse;
 
   constructor(
       private router: Router,
@@ -40,15 +45,23 @@ export class AssetComponent implements OnInit {
       private assetCategoryService: AssetCategoryService,
       private authService: AuthService,
       private userService: UserService,
+      private budgetService: BudgetService,
   ) {}
 
   ngOnInit(): void {
+    this.authService.userState.subscribe(user => {
+      this.role = user;
 
-    this.route.paramMap.subscribe(params => {
-      this.assetID = params.get('id');
-      if (this.assetID) {
-        this.fetchAssetData();
-      }
+      this.userService.getUserInfo().subscribe(data => {
+        this.currentUser = data;
+
+        this.route.paramMap.subscribe(params => {
+          this.assetID = params.get('id');
+          if (this.assetID) {
+            this.fetchAssetData();
+          }
+        });
+      });
     });
   }
 
@@ -135,4 +148,44 @@ export class AssetComponent implements OnInit {
         this.router.navigate([`/assets/products/${this.assetID}/edit`]);
      }
     }
+
+  buyProduct(): void {
+    const dialogRef = this.dialog.open(EventListPopupComponent, {
+      data: { email: this.currentUser.email },
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe((selectedEvent) => {
+      if (selectedEvent) {
+        this.budgetService.buyProduct(selectedEvent.id, this.assetID).subscribe(
+          (response) => {
+            console.log('Product successfully bought:', response);
+          },
+          (error) => {
+            console.error('Error buying product:', error);
+          }
+        );
+      }
+    });
+  }
+
+  reserveUtility(): void {
+    const dialogRef = this.dialog.open(EventListPopupComponent, {
+      data: { email: this.currentUser.email },
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe((selectedEvent) => {
+      if (selectedEvent) {
+        this.budgetService.reserveUtility(selectedEvent.id, this.assetID).subscribe(
+          (response) => {
+            console.log('Utility successfully reserved:', response);
+          },
+          (error) => {
+            console.error('Error reserving utility:', error);
+          }
+        );
+      }
+    });
+  }
 }

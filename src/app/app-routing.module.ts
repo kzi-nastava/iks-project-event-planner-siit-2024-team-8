@@ -21,6 +21,7 @@ import {CreateEventTypeComponent} from './event/create-event-type/create-event-t
 import {EventTypesComponent} from './event/event-types/event-types.component';
 import {AuthGuard} from './infrastructure/auth/auth.guard';
 import {EditEventComponent} from './event/edit-event/edit-event.component';
+import {BudgetComponent} from './event/budget/budget.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -49,7 +50,9 @@ const routes: Routes = [
   {path: 'event-types',component:EventTypesComponent,canActivate:[AuthGuard],
     data: {role  : 'ADMIN'}},
   {path: 'create-event-type', component: CreateEventTypeComponent},
-  { path: '**', redirectTo: '/home' }
+  {path: 'events/:id/budget', component: BudgetComponent },
+  { path: '**', redirectTo: '/home' },
+
 ];
 
 @NgModule({

@@ -1,0 +1,13 @@
+<div class="popup-container">
+  <h2>Select an Event</h2>
+  <div *ngIf="hasEvents; else noEvents">
+    <ul class="event-list">
+      <li *ngFor="let event of events" (click)="onEventClick(event)" class="event-item">
+        {{ event.name }}
+      </li>
+    </ul>
+  </div>
+  <ng-template #noEvents>
+    <p class="no-events-message">No events are available for selection.</p>
+  </ng-template>
+</div>

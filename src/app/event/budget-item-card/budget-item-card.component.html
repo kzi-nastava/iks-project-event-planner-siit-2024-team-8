@@ -1,0 +1,24 @@
+<mat-card class="budget-item-card">
+  <mat-card-content>
+    <mat-card-title>{{ category?.type }}</mat-card-title>
+    <mat-card-subtitle>Category: {{ category?.name }}</mat-card-subtitle>
+    <mat-card-subtitle>
+      Planned Budget:
+      <input matInput [(ngModel)]="budgetItem.plannedAmount" type="number" />
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      Spent: {{ budgetItem.actualAmount }}
+    </mat-card-subtitle>
+  </mat-card-content>
+  <mat-card-actions style="display: flex; justify-content: flex-end; gap: 10px;">
+    <button mat-icon-button (click)="onSave()">
+      <mat-icon color="primary">save</mat-icon>
+    </button>
+    <button mat-icon-button class="delete-button" (click)="onDelete()">
+      <mat-icon color="warn">delete</mat-icon>
+    </button>
+    <button mat-raised-button color="accent" (click)="openBoughtAssetsModal()">
+      Show Bought Assets
+    </button>
+  </mat-card-actions>
+</mat-card>

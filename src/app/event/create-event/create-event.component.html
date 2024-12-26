@@ -98,7 +98,35 @@
       </div>
       <div class="button_div">
         <app-new-activity-card (click)="onClickNewActivity()"></app-new-activity-card>
-        <button style="width: 100%" mat-raised-button (click)="onFinishClick()">Next</button>
+        <button mat-raised-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Budget">
+      <div class="budget-section" style="border: 2px solid black; padding: 20px; border-radius: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <p style="font-size: 20px; font-weight: bold;">Make your budget</p>
+          <button mat-button (click)="onSuggestedBudgetClick()" style="color: green; font-weight: bold;">Suggested Budget</button>
+        </div>
+
+        <div class="budget-items">
+          <div *ngFor="let item of budgetItems; let i = index">
+            <app-budget-item-card-edit
+              [budgetItem]="item"
+              [showSaveButton]="false"
+              (delete)="onDeleteBudgetItem($event)">
+            </app-budget-item-card-edit>
+          </div>
+
+          <div class="add-budget-item-card" (click)="addNewBudgetItem()" style="justify-content: center; align-items: center; cursor: pointer;">
+            <mat-card class="add-budget-item-button">
+              <mat-icon>add</mat-icon>
+              <p style="margin: 0;">Add Budget Item</p>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 20px;">
+        <button style="width: 100%" mat-raised-button [disabled]="!SaveBudget()" (click)="onFinishClick()">Next</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

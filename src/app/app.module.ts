@@ -59,6 +59,8 @@ import { LogoutDialogComponent } from './dialogs/logout-dialog/logout-dialog.com
 import { EventModule } from './event/event.module';
 import { ErrorCodeDialogComponent } from './dialogs/error-code-dialog/error-code-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BudgetComponent} from './event/budget/budget.component';
+import { EventListPopupComponent } from './asset/event-list-popup/event-list-popup.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ToastComponent,
     LogoutDialogComponent,
     ErrorCodeDialogComponent,
+    EventListPopupComponent,
   ],
   imports: [
     MatCardModule,

@@ -62,6 +62,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {BudgetComponent} from './event/budget/budget.component';
 import { EventListPopupComponent } from './asset/event-list-popup/event-list-popup.component';
 import {FastRegisterComponent} from './user/fast-register/fast-register.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import {RouterOutlet} from '@angular/router';
+import {FullCalendarModule} from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -92,11 +95,13 @@ import {FastRegisterComponent} from './user/fast-register/fast-register.componen
     LogoutDialogComponent,
     ErrorCodeDialogComponent,
     EventListPopupComponent,
+    CalendarComponent,
   ],
   imports: [
     MatCardModule,
     FormsModule,
     BrowserModule,
+    CommonModule, RouterOutlet, FullCalendarModule,
     AppRoutingModule,
     LayoutModule,
     EventModule,

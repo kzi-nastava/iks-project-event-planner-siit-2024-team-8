@@ -32,4 +32,7 @@ export class NavBarComponent {
     this.router.navigate(['/create-event']);
   }
 
+  onClickCalendar() {
+    this.router.navigate(['/calendar']);
+  }
 }

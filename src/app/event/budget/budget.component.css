@@ -1,13 +1,10 @@
 .outer-container {
-  color: #44474E;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  margin-left: 100px;
-  margin-top: 20px;
-  margin-right: 50px;
-  max-width: 50%;
+  gap: 1em;
+  width: 50vw;
+  margin-left: 2em;
+  border-radius: 4px;
+  height: 80vh;
+  align-self: flex-end;
 }
 
 .budget-view {
@@ -15,7 +12,7 @@
 }
 
 .budget-section {
-  border: 2px solid black;
+  border: 2px solid #888;
   padding: 20px;
   border-radius: 10px;
   background-color: #fff;
@@ -93,3 +90,15 @@ button:active {
   margin: 0;
 }
 
+.close-button{
+  background-color: transparent !important;
+  color: #333333 !important;
+  align-self: flex-end;
+  padding: 10px;
+  scale: 1.25;
+  margin-right: 10px;
+}
+
+.close-button:hover {
+  background-color: transparent !important;
+}

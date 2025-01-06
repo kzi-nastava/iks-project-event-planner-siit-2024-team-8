@@ -4,6 +4,7 @@ import {GeocodingService} from '../../services/geocoding-service';
 import {icon, Marker} from 'leaflet';
 import {Location} from '../../event/domain/location';
 import {map} from 'rxjs/operators';
+import {LocationDTO} from '../../event/domain/EventUpdateRequest';
 
 @Component({
   selector: 'app-leaflet-map',
@@ -13,9 +14,10 @@ import {map} from 'rxjs/operators';
 export class LeafletMapComponent {
   marker : L.Marker;
   map: L.Map
+  mapInitialized: boolean = false;
 
   @Input()
-  location : Location;
+  location : LocationDTO | Location;
 
   @Output()
   newLocation: EventEmitter<Location> = new EventEmitter();
@@ -51,6 +53,7 @@ export class LeafletMapComponent {
   }
 
   private updateMap(): void {
+    if (!this.map) {this.initializeMap();}
     if (this.location.latitude === 0 && this.location.longitude === 0) {return;}
 
     if (this.marker) {
@@ -67,6 +70,16 @@ export class LeafletMapComponent {
     this.map.setView([latitude, longitude], 13);
   }
 
+  initializeMap() : void{
+    this.map = L.map('map').setView([45.2671, 19.8335], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
 
+    this.marker = new L.Marker([45.2517, 19.8380], {icon: this.greenIcon});
+    this.marker.addTo(this.map)
+      .bindPopup('Choose location.')
+      .openPopup();
+  }
 
 }

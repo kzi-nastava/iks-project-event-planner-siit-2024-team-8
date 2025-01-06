@@ -4,6 +4,8 @@ import {Asset} from '../../model/asset';
 import {AssetService} from '../../services/asset-service';
 import {Router} from '@angular/router';
 import {EventService} from '../../services/event-service';
+import {EventInfoResponse} from '../../event/domain/EventInfoResponse';
+import {PagedResponse} from '../../shared/model/paged.response';
 
 @Component({
   selector: 'app-home-cards',
@@ -12,7 +14,7 @@ import {EventService} from '../../services/event-service';
 })
 export class HomeCardsComponent {
 
-  events : Event[];
+  events : EventInfoResponse[];
   assets: Asset[] = [];
 
   currentEvent : number = 0;
@@ -22,9 +24,6 @@ export class HomeCardsComponent {
 
 
   ngOnInit() {
-    this.eventService.getAllEvents().subscribe({next: (events: Event[]) => {
-      this.events = events;
-      }});
     this.assetService.getAllAssets().subscribe((assetsData: any) => {
       this.assets = [...assetsData.products, ...assetsData.utilities];
     });

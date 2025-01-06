@@ -29,41 +29,25 @@
 
       <!-- Action Buttons Section -->
       <div class="event-actions">
-        <button class="btn" mat-raised-button (click)="navigateToEditEvent()">
+        <button class="btn" mat-raised-button *ngIf="isMyEvent()" (click)="navigateToEditEvent()">
           <mat-icon>edit</mat-icon>
         </button>
         <button class="btn" id="mapButton" (click)="openMap()" mat-raised-button>
           <mat-icon>map</mat-icon>
         </button>
-        <button class="btn" (click)="navigateToBudget()" mat-raised-button>
+        <button class="btn" (click)="navigateToBudget()" *ngIf="isMyEvent()" mat-raised-button>
           <mat-icon>Budget</mat-icon>
+        </button>
+        <button class="btn" mat-raised-button *ngIf="event.isPrivate" (click)="guestClicked = true;
+                                                                               locationClicked=false;
+                                                                               budgetClicked = false">
+          <mat-icon>group</mat-icon>
         </button>
       </div>
     </div>
 
-    <!-- TODO
-    <div class="right-section">
-      <div class="guest-list">
-        <h3>Guests ({{ event.guests.length }})</h3>
-        <div class="guest-scrollbox">
-          <ul>
-            <li *ngFor="let guest of event.guests">{{ guest.name }}</li>
-          </ul>
-        </div>
-      </div>
-      <div class="event-agenda">
-        <h3>Agenda</h3>
-        <div class="agenda-list">
-          <div *ngFor="let activity of event.agenda">
-            <h4>{{ activity.name }}</h4>
-            <p><strong>Start Time:</strong> {{ activity.startTime }}</p>
-            <p><strong>End Time:</strong> {{ activity.endTime }}</p>
-            <p><strong>Location:</strong> {{ activity.place }}</p>
-            <p><strong>Description:</strong> {{ activity.description }}</p>
-            <p><strong>Input Needed:</strong> {{ activity.isInput ? 'Yes' : 'No' }}</p>
-          </div>
-        </div>
-      </div>
-    </div> -->
-  </div>
+    <app-budget *ngIf="budgetClicked" style="width: 100em" (closed)="budgetClicked = false"></app-budget>
+    <app-guest-event-info [id]="event.id"  (closed)="guestClicked = false" *ngIf="guestClicked" style="width: 50em"></app-guest-event-info>
+    <app-location-event-info [location]="event.location" (closed)="locationClicked=false" *ngIf="locationClicked"></app-location-event-info>
+</div>
 </div>

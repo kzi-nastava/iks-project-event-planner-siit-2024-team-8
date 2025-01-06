@@ -61,6 +61,7 @@ import { ErrorCodeDialogComponent } from './dialogs/error-code-dialog/error-code
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {BudgetComponent} from './event/budget/budget.component';
 import { EventListPopupComponent } from './asset/event-list-popup/event-list-popup.component';
+import {FastRegisterComponent} from './user/fast-register/fast-register.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { EventListPopupComponent } from './asset/event-list-popup/event-list-pop
     EditAssetComponent,
     AssetComponent,
     RegisterComponent,
+    FastRegisterComponent,
     NavBarSideComponent,
     AssetCardComponent,
     DeleteConfirmationDialogComponent,

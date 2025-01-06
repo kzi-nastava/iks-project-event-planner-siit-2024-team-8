@@ -60,6 +60,9 @@ import { BudgetItemCardEditComponent } from './budget-item-card-edit/budget-item
 import { BudgetComponent } from './budget/budget.component';
 import {BoughtAssetsPopupComponent} from './bought-assets-popup/bought-assets-popup.component';
 import {MatListModule} from '@angular/material/list';
+import { GuestEventInfoComponent } from './guest-event-info/guest-event-info.component';
+import { AgendaEventInfoComponent } from './agenda-event-info/agenda-event-info.component';
+import { LocationEventInfoComponent } from './location-event-info/location-event-info.component';
 
 
 
@@ -78,7 +81,10 @@ import {MatListModule} from '@angular/material/list';
     BudgetItemCardComponent,
     BudgetItemCardEditComponent,
     BudgetComponent,
-    BoughtAssetsPopupComponent
+    BoughtAssetsPopupComponent,
+    GuestEventInfoComponent,
+    AgendaEventInfoComponent,
+    LocationEventInfoComponent
   ],
   imports: [
     CommonModule,

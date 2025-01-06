@@ -44,8 +44,8 @@ p {
 .event-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  gap: 32px;
+  justify-content: space-between;
+  gap: 13em;
   margin-left: 150px;
   margin-top: 40px;
   align-items: flex-start;

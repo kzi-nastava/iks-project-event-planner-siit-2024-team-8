@@ -1,5 +1,5 @@
 <div class="filter-container">
-  <div *ngIf="filterType === 'events'">
+  <div class="inner-div" *ngIf="filterType === 'events'">
     <div class="filter-title">
       <h3>Event Types</h3>
       <button class="down-button" mat-icon-button>
@@ -7,19 +7,13 @@
       </button>
     </div>
     <div class="filter-options">
-      <mat-checkbox>Wedding</mat-checkbox><br>
-      <mat-checkbox>Conference</mat-checkbox><br>
-      <mat-checkbox>Concert</mat-checkbox><br>
-    </div>
-
-    <div class="filter-title">
-      <h3>Privacy</h3>
-      <button class="down-button" mat-icon-button>
-        <mat-icon>keyboard_arrow_down</mat-icon>
-      </button>
-    </div>
-    <div class="filter-options">
-      <mat-slide-toggle>Private</mat-slide-toggle>
+      <div *ngFor="let type of eventTypes">
+        <mat-checkbox
+          (click) = "$event.stopPropagation()"
+          (change)="onChecked(type,$event)">
+          {{ type.name }}
+        </mat-checkbox>
+      </div>
     </div>
 
     <div class="filter-title">
@@ -29,9 +23,9 @@
       </button>
     </div>
     <div class="filter-options">
-      <mat-slider min="200" max="500" step="10" showTickMarks discrete>
-        <input value="300" matSliderStartThumb>
-        <input value="400" matSliderEndThumb>
+      <mat-slider min="0" max="100000" step="10" style="width: 80%" showTickMarks discrete>
+        <input value="0" matSliderStartThumb [(ngModel)]="filterEventsRequest.lowerCapacity">
+        <input value="100000" matSliderEndThumb [(ngModel)]="filterEventsRequest.upperCapacity">
       </mat-slider>
     </div>
 
@@ -44,7 +38,7 @@
     <div class="filter-options">
       <mat-form-field>
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="pickerStart">
+        <input matInput [matDatepicker]="pickerStart" [(ngModel)]="filterEventsRequest.startDate">
         <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
         <mat-datepicker #pickerStart></mat-datepicker>
       </mat-form-field>
@@ -59,14 +53,28 @@
     <div class="filter-options">
       <mat-form-field>
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="pickerEnd">
+        <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="filterEventsRequest.endDate">
         <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
         <mat-datepicker #pickerEnd></mat-datepicker>
       </mat-form-field>
     </div>
   </div>
 
-  <div *ngIf="filterType === 'assets' || filterType === 'my-assets'">
+  <div class="inner-div" *ngIf="filterType === 'assets' || filterType === 'my-assets'">
+    <div class="filter-title">
+      <h3>Asset Type</h3>
+      <button class="down-button" mat-icon-button>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+    </div>
+    <div class="filter-options">
+      <mat-radio-group [(ngModel)]="filterAssetsRequest.assetType" (change)="onAssetCategoryChange($event)">
+        <mat-radio-button *ngFor="let category of assetTypes" [value]="category">
+          {{ category }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
 
     <div class="filter-title">
       <h3>Asset Category</h3>
@@ -75,47 +83,38 @@
       </button>
     </div>
     <div class="filter-options">
-      <mat-radio-group [(ngModel)]="selectedAssetCategory" (change)="onAssetCategoryChange($event)">
-        <mat-radio-button *ngFor="let category of assetCategories" [value]="category">
-          {{ category }}
-        </mat-radio-button>
-      </mat-radio-group>
+      <div *ngFor="let category of assetCategories">
+        <mat-checkbox
+          (click) = "$event.stopPropagation()"
+          (change)="onCheckedCategory(category,$event)">
+          {{ category.name }}
+        </mat-checkbox>
+      </div>
     </div>
 
     <div class="filter-title">
-      <h3>Event Type</h3>
+      <h3>Price (EUR)</h3>
       <button class="down-button" mat-icon-button>
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
     </div>
     <div class="filter-options">
-      <mat-checkbox>Wedding</mat-checkbox><br>
-      <mat-checkbox>Conference</mat-checkbox><br>
-      <mat-checkbox>Concert</mat-checkbox><br>
+      <mat-slider min="100" max="1000" step="50" style="width: 60%;" showTickMarks discrete>
+        <input value="200" matSliderStartThumb [(ngModel)]="filterAssetsRequest.priceLow">
+        <input value="800" matSliderEndThumb [(ngModel)]="filterAssetsRequest.priceHigh">
+      </mat-slider>
     </div>
 
     <div class="filter-title">
-      <h3>Asset Type</h3>
+      <h3>Grade</h3>
       <button class="down-button" mat-icon-button>
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
     </div>
     <div class="filter-options">
-      <mat-checkbox>Type A</mat-checkbox><br>
-      <mat-checkbox>Type B</mat-checkbox><br>
-      <mat-checkbox>Type C</mat-checkbox><br>
-    </div>
-
-    <div class="filter-title">
-      <h3>Price</h3>
-      <button class="down-button" mat-icon-button>
-        <mat-icon>keyboard_arrow_down</mat-icon>
-      </button>
-    </div>
-    <div class="filter-options">
-      <mat-slider min="100" max="1000" step="50" showTickMarks discrete>
-        <input value="200" matSliderStartThumb>
-        <input value="800" matSliderEndThumb>
+      <mat-slider min="1" max="5" step="1" style="width: 60%;" showTickMarks discrete>
+        <input value="1" matSliderStartThumb [(ngModel)]="filterAssetsRequest.gradeLow">
+        <input value="5" matSliderEndThumb [(ngModel)]="filterAssetsRequest.gradeHigh">
       </mat-slider>
     </div>
 
@@ -126,19 +125,22 @@
       </button>
     </div>
     <div class="filter-options">
-      <mat-checkbox></mat-checkbox>
+      <mat-slide-toggle [(ngModel)]="filterAssetsRequest.available"></mat-slide-toggle>
     </div>
 
     <div *ngIf="selectedAssetCategory === 'Service'" class="filter-title">
       <h3>Duration (in hours)</h3>
+      <button class="down-button" mat-icon-button>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
     </div>
     <div *ngIf="selectedAssetCategory === 'Service'" class="filter-options">
-      <mat-form-field>
-        <mat-label>Enter Duration</mat-label>
-        <input matInput [(ngModel)]="duration" type="number" min="1" step="1">
-      </mat-form-field>
+      <mat-slider min="1" max="12" step="1" showTickMarks discrete>
+        <input value="1" matSliderStartThumb>
+        <input value= "12" matSliderEndThumb>
+      </mat-slider>
     </div>
   </div>
 
-  <button id="applyButton" mat-raised-button>Apply</button>
+  <button id="applyButton" (click)="onApplyFilterClick()" mat-raised-button>Apply</button>
 </div>

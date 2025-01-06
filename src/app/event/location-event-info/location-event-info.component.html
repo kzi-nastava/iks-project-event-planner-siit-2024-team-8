@@ -1,0 +1,12 @@
+<div class="location-container">
+  <app-leaflet-map [location]="location"></app-leaflet-map>
+  <div style="display : flex; flex-direction: column; margin-top:2rem;">
+    <p>Location : {{location.city}}</p>
+    <p>Street: {{location.street}}</p>
+    <button mat-raised-button style="align-self: center; margin-top: 1rem; background: #A1C084; color: #f5f5f5"
+    (click)="onCloseClick()">
+      Close
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>

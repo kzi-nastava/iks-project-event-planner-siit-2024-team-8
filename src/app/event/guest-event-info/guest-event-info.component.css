@@ -1,0 +1,50 @@
+.guest-list {
+  gap: 1em;
+  width: 90%;
+  margin-left: 2em;
+  border-radius: 10px;
+  overflow-y: auto;
+  height: 90vh;
+  align-self: flex-end;
+  border: 2px solid #888;
+}
+.guest-scrollbox{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+mat-card{
+  width: 90%;
+  height: fit-content;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.19);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  color : black !important;
+  margin : 4%;
+  align-self: center;
+  justify-items: center;
+}
+mat-card:hover{
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Elevated shadow */
+  cursor: pointer; /* Optional: add pointer cursor */
+}
+mat-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color : #44474E !important;
+}
+.close-button{
+  background-color: transparent !important;
+  color: #333333 !important;
+  align-self: flex-end;
+  padding: 10px;
+  scale: 1.25;
+  margin-right: 2rem;
+  margin-bottom: 1.025rem;
+}
+
+.close-button:hover {
+  background-color: transparent !important;
+}

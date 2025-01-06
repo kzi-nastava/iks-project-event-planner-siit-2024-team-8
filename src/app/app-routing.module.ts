@@ -22,6 +22,7 @@ import {EventTypesComponent} from './event/event-types/event-types.component';
 import {AuthGuard} from './infrastructure/auth/auth.guard';
 import {EditEventComponent} from './event/edit-event/edit-event.component';
 import {BudgetComponent} from './event/budget/budget.component';
+import {FastRegisterComponent} from './user/fast-register/fast-register.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -51,6 +52,7 @@ const routes: Routes = [
     data: {role  : 'ADMIN'}},
   {path: 'create-event-type', component: CreateEventTypeComponent},
   {path: 'events/:id/budget', component: BudgetComponent },
+  {path: 'fast-register', component: FastRegisterComponent},
   { path: '**', redirectTo: '/home' },
 
 ];

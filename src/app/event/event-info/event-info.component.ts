@@ -13,6 +13,9 @@ export class EventInfoComponent {
   event: EventInfoResponse;
 
   eventID: string;
+  budgetClicked:  boolean = false;
+  guestClicked: boolean = false;
+  locationClicked:  boolean = false;
 
   constructor(private route: ActivatedRoute, private eventService: EventService, private router: Router) {}
 
@@ -38,10 +41,18 @@ export class EventInfoComponent {
   }
 
   openMap() {
-
+    console.log('Opening Map');
+    this.locationClicked = true;
+    this.budgetClicked = false;
+    this.guestClicked = false;
   }
 
   navigateToBudget() {
-    this.router.navigate([`/events/${this.eventID}/budget`]);
+    this.budgetClicked = true;
+    this.guestClicked = false;
+  }
+
+  isMyEvent() {
+    return this.event.organizerID == localStorage.getItem("userID");
   }
 }

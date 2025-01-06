@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BudgetService } from '../../services/budget-service';
 import { BudgetItem } from '../domain/budgetItem';
@@ -10,6 +10,10 @@ import { Budget } from '../domain/budget';
   styleUrls: ['./budget.component.css']
 })
 export class BudgetComponent implements OnInit {
+
+  @Output()
+  closed: EventEmitter<boolean> = new EventEmitter();
+
   budgetItems: BudgetItem[] = [];
   newBudgetItems: BudgetItem[] = [];
   eventId: string;
@@ -97,5 +101,9 @@ export class BudgetComponent implements OnInit {
   onBudgetItemSave($event: any) {
     this.fetchBudget();
     this.successMessage = 'Budget item created successfully.';
+  }
+
+  closeClicked() {
+    this.closed.emit(true);
   }
 }

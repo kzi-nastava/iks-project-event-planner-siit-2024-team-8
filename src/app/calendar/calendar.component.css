@@ -1,0 +1,32 @@
+.calendar-container {
+  position: relative; /* Ensures the calendar respects this container */
+  width: 100%;        /* Set to full width of the parent */
+  height: 100%;
+  max-width: 1200px;  /* Optional: Restrict maximum width */
+  margin: 0 auto;     /* Center the container horizontally */
+  overflow: hidden;   /* Prevent content overflow */
+  color: black;
+}
+
+:host ::ng-deep .fc-day-today {
+  background-color: #A1C084 !important; /* Custom background */
+}
+
+:host ::ng-deep .fc .fc-button {
+  background-color: #A1C084 !important;
+}
+
+:host ::ng-deep .fc-event-title-container {
+  background-color: #A1C084 !important;
+}
+
+:host ::ng-deep .fc-event {
+  background-color: #A1C084 !important; /* Main background color */
+  border-color: black !important;      /* Border color */
+  color: black !important;            /* Optional: Text color */
+}
+
+/* Multi-day event bars (if using dayGrid view) */
+:host ::ng-deep .fc-event:before {
+  border-color: black !important; /* Ensure any pseudo-elements are styled */
+}

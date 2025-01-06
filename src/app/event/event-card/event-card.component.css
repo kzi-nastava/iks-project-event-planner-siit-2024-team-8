@@ -1,41 +1,37 @@
-mat-card{
-  width: fit-content;
-  height: fit-content;
-  max-width: 300px;
-  max-height: 450px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: none;
+.event-card {
+  border-radius: 8px;
+  margin: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  max-height: 10em;
+  width: 15em;
 }
 
-mat-card-header{
-  color: black;
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-card mat-card-title {
+  font-size: 1.5rem;
   font-weight: bold;
-  width: fit-content;
-}
-mat-card-content{
-  margin-top: 10px;
-  color: black;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-img {
-  width: 300px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 10px;
+  color: #A1C084; /* Updated color */
+  margin-bottom: 1em;
 }
 
-.star_btn{
-  align-self: flex-end;
-  margin-right: 0.5em;
+.event-card mat-card-subtitle {
+  font-size: 0.9rem;
+  color: #757575;
 }
-mat-icon{
-  transform: scale(1.15);
-  color: #A1C084;
+
+.event-card mat-card-content p {
+  font-size: 1rem;
+  color: #424242;
+  margin: 8px 0;
+}
+
+.event-card mat-card-actions {
+  margin-top: 16px;
 }

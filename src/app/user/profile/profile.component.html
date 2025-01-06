@@ -61,10 +61,10 @@
     </div>
   </div>
   <div class="event-container" *ngIf="role == 'Organizer'">
-    <h2 style="font-size: 40px">My (Organized) Events</h2>
+    <h2 style="font-size: 2rem">My (Organized) Events</h2>
     <ng-container *ngIf="items.length > 0">
       <div *ngFor="let item of items">
-        <button class="btn" [routerLink]="['/event', item.id]" mat-raised-button>{{item.name}}</button>
+        <app-event-card [event]="item">{{item.name}}</app-event-card>
       </div>
     </ng-container>
   </div>

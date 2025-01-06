@@ -1,0 +1,17 @@
+<div class="guest-list" >
+  <div style="display: flex; justify-content : space-between; gap:120px; margin-bottom: 20px;">
+    <h3 style="color: #333333; margin-left: 1em; font-size: 2.5rem;">Guests ({{ guests.length }})</h3>
+    <button mat-icon-button class="close-button" (click)="closeClicked()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="guest-scrollbox" *ngFor="let guest of guests">
+    <mat-card>
+      <mat-card-content>
+        <mat-icon>account_circle</mat-icon>
+        <mat-card-title>{{guest}}</mat-card-title>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -23,7 +23,7 @@ export class AppComponent {
     });
   }
   setSidebarState(url: string) {
-    this.showSidebar = !(url === '/home' || this.isInvalidRoute(url));
+    this.showSidebar = !(url === '/home' || url==='/fast-register' || this.isInvalidRoute(url));
   }
 
   isInvalidRoute(url: string):  boolean {

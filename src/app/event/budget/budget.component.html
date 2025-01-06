@@ -8,6 +8,9 @@
         <p style="font-size: 20px; font-weight: bold;">
           Total Spent: {{ actualBudget | currency }}
         </p>
+        <button mat-icon-button class="close-button" (click)="closeClicked()">
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
 
       <div *ngIf="errorMessage" class="error-message" style="color: red; font-weight: bold;">
@@ -46,8 +49,5 @@
       </div>
     </div>
 
-    <div class="button_div">
-      <button mat-raised-button (click)="goBack()">Back</button>
-    </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Event} from '../../model/event';
+import {EventInfoResponse} from '../domain/EventInfoResponse';
+import {EventCardResponse} from '../domain/event.card.response';
 
 @Component({
   selector: 'app-event-card',
@@ -8,10 +10,10 @@ import {Event} from '../../model/event';
 })
 export class EventCardComponent {
   @Input()
-  event : Event;
+  event : EventCardResponse;
 
   @Output()
-  clicked : EventEmitter<Event> = new EventEmitter<Event>();
+  clicked : EventEmitter<EventCardResponse> = new EventEmitter<EventCardResponse>();
 
   favourite : boolean = false;
 

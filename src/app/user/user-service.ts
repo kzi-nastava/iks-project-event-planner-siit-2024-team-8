@@ -5,6 +5,7 @@ import {environment} from '../../env/environment';
 import {Observable} from 'rxjs';
 import {Form} from '@angular/forms';
 import {UserInfoResponse} from './domain/user.info.response';
+import {ApiResponse} from '../model/api.response';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +18,8 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  registerUser(formData : FormData): Observable<Object> {
-    return this.http.post(this.registerApiUrl, formData);
+  registerUser(formData : FormData): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(this.registerApiUrl, formData);
   }
   activateUser(token: string) {
     return this.http.put(this.activateApiUrl,token);

@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { EventService } from '../../services/event-service';
 import { AssetService } from '../../services/asset-service';
 import { PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
-import { Event } from '../../model/event';
+import {Router} from '@angular/router';
+import { EventType } from '../../event/domain/event.type';
 import { Asset } from '../../model/asset';
+import {PagedResponse} from '../../shared/model/paged.response';
+import {EventInfoResponse} from '../domain/EventInfoResponse';
+import {FilterPopUpComponent} from '../../shared/filter-pop-up/filter-pop-up.component';
+import {SearchEventsRequest} from '../domain/search.events.request';
+import {ApiResponse} from '../../model/api.response';
+import {EventCardResponse} from '../domain/event.card.response';
+import {MatCheckboxChange} from '@angular/material/checkbox';
+import {SearchAssetsRequest} from '../../model/search.assets.request';
 
 @Component({
   selector: 'app-all-events',
@@ -12,10 +20,17 @@ import { Asset } from '../../model/asset';
   styleUrls: ['./all-events.component.css']
 })
 export class AllEventsComponent {
-  events: Event[] = [];
+  events: EventCardResponse[] = [];
   assets: Asset[] = [];
   filterType: string = '';
+  sortParameter: string = '';
 
+  pageProperties = {
+    page: 0,
+    pageSize: 4,
+    totalCount: 0,
+    pageSizeOptions: [4, 8, 12]
+  };
   constructor(
     private router: Router,
     private eventService: EventService,
@@ -31,13 +46,6 @@ export class AllEventsComponent {
     });
   }
 
-  // Paging mechanism
-  pageSize = 6;
-  pageIndex = 0;
-  totalItems: number = 90;
-  totalPages: number = Math.ceil(this.totalItems / this.pageSize);
-  currentPageEvents: any[] = [];
-  pageNumbers: any[] = [];
 
   // Filter visibility
   isFilterVisible: boolean = false;
@@ -52,37 +60,24 @@ export class AllEventsComponent {
   fetchData() {
     if (this.isEvents) {
       // Fetch events
-      this.eventService.getAllEvents().subscribe((events: Event[]) => {
-        this.events = events;
-        this.updatePageData(); // Update page data after fetching events
+      this.eventService.getAllEvents(this.pageProperties).subscribe((response: PagedResponse<EventCardResponse>) => {
+        this.events = response.content;
+        this.pageProperties.totalCount = response.totalElements;
       });
     } else {
       // Fetch assets
       this.assetService.getAllAssets().subscribe((assetsData: any) => {
         this.assets = [...assetsData.products, ...assetsData.utilities];
-        this.updatePageData(); // Update page data after fetching assets
       });
     }
   }
 
-  updatePageData(event?: PageEvent): void {
-    if (event) {
-      this.pageIndex = event.pageIndex;
-      this.pageSize = event.pageSize;
-    }
-
-    if (this.isEvents) {
-      this.currentPageEvents = this.events.slice(
-        this.pageIndex * this.pageSize,
-        (this.pageIndex + 1) * this.pageSize
-      );
-    } else {
-      this.currentPageEvents = this.assets.slice(
-        this.pageIndex * this.pageSize,
-        (this.pageIndex + 1) * this.pageSize
-      );
-    }
+  pageChanged(pageEvent: PageEvent) {
+    this.pageProperties.page = pageEvent.pageIndex;
+    this.pageProperties.pageSize = pageEvent.pageSize;
+    this.fetchData();
   }
+
 
   onCardClick(asset: Asset): void {
     console.log('Navigating to asset with ID:', asset.id);
@@ -93,53 +88,7 @@ export class AllEventsComponent {
     }
   }
 
-  updatePageNumbers(): void {
-    const pageNumbers: (number | string)[] = [];
-    const firstPage = 0;
-    const lastPage = this.totalPages - 1;
 
-    pageNumbers.push(firstPage);
-
-    if (this.pageIndex > 1) {
-      pageNumbers.push('...');
-    }
-
-    for (let i = Math.max(1, this.pageIndex - 1); i <= Math.min(this.pageIndex + 1, lastPage - 1); i++) {
-      pageNumbers.push(i);
-    }
-
-    if (this.pageIndex < lastPage - 1) {
-      pageNumbers.push('...');
-    }
-
-    if (lastPage > 0) {
-      pageNumbers.push(lastPage);
-    }
-
-    this.pageNumbers = pageNumbers;
-  }
-
-  setPage(pageNumber: number): void {
-    this.pageIndex = pageNumber;
-    this.updatePageData();
-    this.updatePageNumbers();
-  }
-
-  previousPage(): void {
-    if (this.pageIndex > 0) {
-      this.pageIndex--;
-      this.updatePageData();
-      this.updatePageNumbers();
-    }
-  }
-
-  nextPage(): void {
-    if (this.pageIndex < this.totalPages - 1) {
-      this.pageIndex++;
-      this.updatePageData();
-      this.updatePageNumbers();
-    }
-  }
 
   onClickFilterButton() {
     this.isFilterVisible = true;
@@ -171,4 +120,71 @@ export class AllEventsComponent {
       this.filterType = 'my-assets';
     }
   }
+
+  onApplyEventFiltersClicked(request : SearchEventsRequest) {
+    this.eventService.filterEvents(request).subscribe((response: PagedResponse<EventCardResponse>) => {
+      console.log()
+      this.events = response.content;
+      this.pageProperties.totalCount = response.totalElements;
+    })
+    this.isFilterVisible = false;
+  }
+  onApplyAssetsFiltersClicked($event: SearchAssetsRequest) {
+    
+  }
+
+  onCheckboxChanged($event: MatCheckboxChange, name: string) {
+    if ($event.checked){
+      this.sortParameter = name;
+
+    }
+  }
+
+
+  sortByName(ascending: boolean) {
+    this.events = [...this.events.sort((a, b) => {
+      if (ascending) {
+        return a.name.localeCompare(b.name); // Ascending (A → Z)
+      } else {
+        return b.name.localeCompare(a.name); // Descending (Z → A)
+      }
+    })];
+  }
+
+  sortByStartDate(ascending: boolean) {
+    this.events = [...this.events.sort((a, b) => {
+      const dateA = new Date(a.startDate).getTime();
+      const dateB = new Date(b.startDate).getTime();
+
+      if (ascending) {
+        return dateA - dateB; // Ascending (earliest first)
+      } else {
+        return dateB - dateA; // Descending (latest first)
+      }
+    })];
+  }
+
+  sortByEndDate(ascending: boolean) {
+    this.events = [...this.events.sort((a, b) => {
+      const dateA = new Date(a.endDate).getTime();
+      const dateB = new Date(b.endDate).getTime();
+
+      if (ascending) {
+        return dateA - dateB; // Ascending (earliest first)
+      } else {
+        return dateB - dateA; // Descending (latest first)
+      }
+    })];
+  }
+
+  sortByCapacity(ascending: boolean) {
+    this.events = [...this.events.sort((a, b) => {
+      if (ascending) {
+        return a.capacity - b.capacity; // Ascending (lowest capacity first)
+      } else {
+        return b.capacity - a.capacity; // Descending (highest capacity first)
+      }
+    })];
+  }
+
 }

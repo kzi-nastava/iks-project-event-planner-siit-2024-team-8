@@ -125,3 +125,27 @@ clock-face__container ng-star-inserted{
   --clock-face-background-color: #333 !important;
   --clock-hand-color: #A1C084!important;
 }
+
+
+.mat-mdc-paginator {
+  display: block;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  color: #333333;
+  background-color: #f5f5f5 !important;
+  font-family: 'Poppins', sans-serif;
+}
+
+.mdc-slider__thumb-knob {
+  background-color: #A1C084 !important;
+  border-color: #A1C084 !important;
+}
+
+.mdc-slider__value-indicator {
+  width: fit-content;
+  color: #333333 !important;
+  background-color: #A1C084 !important;
+}
+.mdc-slider__track--inactive {
+  background-color: #A1C084 !important;
+}

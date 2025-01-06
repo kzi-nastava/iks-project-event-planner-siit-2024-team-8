@@ -8,6 +8,7 @@ export interface EventInfoResponse {
   isPrivate: boolean,
   location: LocationDTO,
   organizerName: string,
+  organizerID: string,
   startDate: string,
   endDate: string
 }

@@ -12,6 +12,7 @@ import {PagedResponse} from '../shared/model/paged.response';
 import {SearchEventsRequest} from '../event/domain/search.events.request';
 import {EventCardResponse} from '../event/domain/event.card.response';
 import {EventCardComponent} from '../event/event-card/event-card.component';
+import {EventSignupRequest} from '../event/domain/EventSignupRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -98,5 +99,17 @@ export class EventService {
 
   getEventGuests(id:string) : Observable<string[]> {
     return this.http.get<string[]>(`${environment.apiHost+this.apiUrl}/guests/${id}`)
+  }
+
+  signupUserToEvent(eventSignupRequest: EventSignupRequest) : Observable<string> {
+    return this.http.put(`${environment.apiHost+this.apiUrl}/signup`, eventSignupRequest, {responseType: 'text'});
+  }
+
+  isUserSignedUp(eventSignupRequest: EventSignupRequest): Observable<boolean> {
+    return this.http.post<boolean>(`${environment.apiHost + this.apiUrl}/already`, eventSignupRequest);
+  }
+
+  leaveEvent(eventSignupRequest: EventSignupRequest) : Observable<string> {
+    return this.http.post(`${environment.apiHost+this.apiUrl}/leave`, eventSignupRequest, {responseType: 'text'});
   }
 }

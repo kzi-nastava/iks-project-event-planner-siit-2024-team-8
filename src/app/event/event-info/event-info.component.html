@@ -31,12 +31,23 @@
       <div class="event-actions">
         <button class="btn" mat-raised-button *ngIf="isMyEvent()" (click)="navigateToEditEvent()">
           <mat-icon>edit</mat-icon>
+          Edit Event
         </button>
         <button class="btn" id="mapButton" (click)="openMap()" mat-raised-button>
           <mat-icon>map</mat-icon>
+          View on Map
         </button>
         <button class="btn" (click)="navigateToBudget()" *ngIf="isMyEvent()" mat-raised-button>
           <mat-icon>Budget</mat-icon>
+          Budget
+        </button>
+        <button class="btn" (click)="eventSignup()" *ngIf="!isMyEvent() && !alreadySignedUp" mat-raised-button>
+          <mat-icon>how_to_reg</mat-icon>
+          Join Event
+        </button>
+        <button class="btn" (click)="leaveEvent()" *ngIf="!isMyEvent() && alreadySignedUp" mat-raised-button>
+          <mat-icon>cancel</mat-icon>
+          Leave Event
         </button>
         <button class="btn" mat-raised-button *ngIf="event.isPrivate" (click)="guestClicked = true;
                                                                                locationClicked=false;

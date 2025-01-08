@@ -112,4 +112,8 @@ export class EventService {
   leaveEvent(eventSignupRequest: EventSignupRequest) : Observable<string> {
     return this.http.post(`${environment.apiHost+this.apiUrl}/leave`, eventSignupRequest, {responseType: 'text'});
   }
+
+  fetchUserEvents(userId: string): Observable<EventInfoResponse[]> {
+    return this.http.get<EventInfoResponse[]>(`${environment.apiHost+this.apiUrl}/fetch_users/${userId}`)
+  }
 }

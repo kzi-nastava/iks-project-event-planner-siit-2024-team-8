@@ -13,58 +13,79 @@ import {ToastService} from '../services/toast-service';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent {
 
-  public constructor(private router: Router, private authService: AuthService, private eventService: EventService, private toastService: ToastService) {}
+export class CalendarComponent implements OnInit {
+  public constructor(
+    private router: Router,
+    private authService: AuthService,
+    private eventService: EventService,
+    private toastService: ToastService
+  ) {}
 
-  userId: string = "";
+  userId: string = '';
   fetchedEvents: EventInfoResponse[] = [];
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
+    timeZone: 'local', // Use the local timezone or 'UTC' if needed
     plugins: [dayGridPlugin, interactionPlugin],
     dateClick: (arg) => this.handleDateClick(arg),
-    events: [] // Initialize as an empty array
+    events: [] // Initialize as an empty array, to be populated after fetching
   };
 
   ngOnInit() {
     this.userId = this.authService.getUserId();
     this.eventService.fetchUserEvents(this.userId).subscribe({
-      next: events => {
+      next: (events) => {
         this.fetchedEvents = events;
 
         // Map fetched events to FullCalendar's format and update options
-        this.calendarOptions.events = this.fetchedEvents.map(event => ({
+        this.calendarOptions.events = this.fetchedEvents.map((event) => ({
           title: event.name,
-          start: event.startDate, // Adjust according to your API response structure
-          end: event.endDate,
+          start: this.getStartDate(event.startDate),
+          end: event.endDate ? this.getEndDate(event.endDate) : this.getStartDate(event.startDate),
           id: event.id,
-          description: event.description // Additional info, if available
+          description: event.description,
+          allDay: true, // Mark as an all-day event if you don't have time information
         }));
       },
-      error: err => {
+      error: (err) => {
         console.error('Error fetching events:', err);
       }
     });
   }
 
-  handleDateClick(arg: DateClickArg) {
-    // Find all events that start or overlap on the clicked date
-    const eventsForTheDay = this.fetchedEvents.filter(event => {
-      const eventStart = new Date(event.startDate).toISOString().split('T')[0];
-      const eventEnd = event.endDate ? new Date(event.endDate).toISOString().split('T')[0] : eventStart;
-      const clickedDate = arg.date.toISOString().split('T')[0];
+  // Helper function to standardize event start date
+  getStartDate(startDate: string): string {
+    // Assuming startDate is an ISO string, we handle it as an all-day event (no time)
+    return new Date(startDate).toISOString().split('T')[0]; // Only the date part
+  }
 
-      return clickedDate >= eventStart && clickedDate <= eventEnd;
+  // Helper function to standardize event end date (if provided)
+  getEndDate(endDate: string): string {
+    // If endDate is available, we handle it similarly to start date
+    return new Date(endDate).toISOString().split('T')[0]; // Only the date part
+  }
+
+  handleDateClick(arg: DateClickArg) {
+    const clickedDate = arg.date.toISOString().split('T')[0]; // Format the clicked date to 'YYYY-MM-DD'
+
+    // Find all events that start or overlap on the clicked date
+    const eventsForTheDay = this.fetchedEvents.filter((event) => {
+      const eventStart = this.getStartDate(event.startDate);
+      const eventEnd = this.getEndDate(event.endDate) || eventStart;
+
+      return clickedDate == eventStart || (clickedDate >= eventStart && clickedDate <= eventEnd);
     });
 
     // Open each event in a new tab
-    eventsForTheDay.forEach(event => {
+    eventsForTheDay.forEach((event) => {
       const eventUrl = `/event/${event.id}`;
       window.open(eventUrl, '_blank');
     });
 
-    if (eventsForTheDay.length === 0) {
+    // Show a message if no events are found on the selected date
+    if (eventsForTheDay.length == 0) {
       this.toastService.showToast({
         message: 'No events on the selected date!',
         title: 'Epic fail',

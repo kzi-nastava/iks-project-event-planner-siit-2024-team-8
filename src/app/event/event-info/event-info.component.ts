@@ -128,4 +128,46 @@ export class EventInfoComponent {
       }
     })
   }
+
+  getAgenda() {
+    this.eventService.fetchEventAgenda(this.eventID).subscribe({
+      next: (response: Blob) => {
+        // Create a URL for the Blob object (PDF)
+        const pdfUrl = URL.createObjectURL(response);
+
+        // Create a link element to trigger the download
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'event-agenda.pdf'; // Set the default file name
+        link.click(); // Trigger the download
+
+        // Clean up the URL object after the download starts
+        URL.revokeObjectURL(pdfUrl);
+      },
+      error: (err) => {
+        console.error('Error fetching event agenda:', err);
+      }
+    });
+  }
+
+  getGuestlist() {
+    this.eventService.fetchGuestlist(this.eventID).subscribe({
+      next: (response: Blob) => {
+        // Create a URL for the Blob object (PDF)
+        const pdfUrl = URL.createObjectURL(response);
+
+        // Create a link element to trigger the download
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'event-guestlist.pdf'; // Set the default file name
+        link.click(); // Trigger the download
+
+        // Clean up the URL object after the download starts
+        URL.revokeObjectURL(pdfUrl);
+      },
+      error: (err) => {
+        console.error('Error fetching event agenda:', err);
+      }
+    });
+  }
 }

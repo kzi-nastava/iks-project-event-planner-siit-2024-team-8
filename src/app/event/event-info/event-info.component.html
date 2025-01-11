@@ -49,6 +49,14 @@
           <mat-icon>cancel</mat-icon>
           Leave Event
         </button>
+        <button class="btn" (click)="getAgenda()" mat-raised-button>
+          <mat-icon>assignment</mat-icon>
+          Get Agenda
+        </button>
+        <button class="btn" (click)="getGuestlist()" *ngIf="isMyEvent()" mat-raised-button>
+          <mat-icon>supervised_user_circle</mat-icon>
+          Get Guestlist
+        </button>
         <button class="btn" mat-raised-button *ngIf="event.isPrivate" (click)="guestClicked = true;
                                                                                locationClicked=false;
                                                                                budgetClicked = false">

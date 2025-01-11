@@ -116,4 +116,16 @@ export class EventService {
   fetchUserEvents(userId: string): Observable<EventInfoResponse[]> {
     return this.http.get<EventInfoResponse[]>(`${environment.apiHost+this.apiUrl}/fetch_users/${userId}`)
   }
+
+  fetchEventAgenda(eventId: string): Observable<Blob> {
+    return this.http.get<Blob>(`${environment.apiHost + this.apiUrl}/fetch_agenda/${eventId}`, {
+      responseType: 'blob' as 'json' // Explicitly set the responseType to 'blob'
+    });
+  }
+
+  fetchGuestlist(eventId: string): Observable<Blob> {
+    return this.http.get<Blob>(`${environment.apiHost + this.apiUrl}/fetch_guestlist/${eventId}`, {
+      responseType: 'blob' as 'json' // Explicitly set the responseType to 'blob'
+    });
+  }
 }

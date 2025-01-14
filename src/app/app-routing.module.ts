@@ -24,6 +24,7 @@ import {EditEventComponent} from './event/edit-event/edit-event.component';
 import {BudgetComponent} from './event/budget/budget.component';
 import {FastRegisterComponent} from './user/fast-register/fast-register.component';
 import {CalendarComponent} from './calendar/calendar.component';
+import {ReviewsComponent} from './reviews/reviews.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -52,6 +53,7 @@ const routes: Routes = [
   {path: 'event-types',component:EventTypesComponent,canActivate:[AuthGuard],
     data: {role  : 'ADMIN'}},
   {path: 'create-event-type', component: CreateEventTypeComponent},
+  {path: 'reviews', component: ReviewsComponent},
   {path: 'events/:id/budget', component: BudgetComponent },
   {path: 'fast-register', component: FastRegisterComponent},
   {path: 'calendar', component: CalendarComponent},

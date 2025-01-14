@@ -12,6 +12,10 @@ import {UserService} from '../user/user-service';
 import {UserInfoResponse} from '../user/domain/user.info.response';
 import {EventListPopupComponent} from './event-list-popup/event-list-popup.component';
 import {BudgetService} from '../services/budget-service';
+import {ToastService} from '../services/toast-service';
+import {Review} from '../model/review';
+import {ReviewService} from '../services/review-service';
+import {EventService} from '../services/event-service';
 
 @Component({
   selector: 'app-asset',
@@ -33,6 +37,14 @@ export class AssetComponent implements OnInit {
   utilityCancellationTerm: string;
   utilityManualConfirmation: boolean;
 
+  boughtAsset: boolean = false;
+  //review
+  reviews: Review[] = [];
+  showComments: boolean = false;
+  userComment: string = '';
+  userRating: number = 0;
+  stars: number[] = [0, 1, 2, 3, 4];
+
   role: string = '';
   currentUser: UserInfoResponse;
 
@@ -46,6 +58,9 @@ export class AssetComponent implements OnInit {
       private authService: AuthService,
       private userService: UserService,
       private budgetService: BudgetService,
+      private toastService: ToastService,
+      private reviewService: ReviewService,
+      private eventService: EventService,
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +74,7 @@ export class AssetComponent implements OnInit {
           this.assetID = params.get('id');
           if (this.assetID) {
             this.fetchAssetData();
+            this.checkIfAssetBought();
           }
         });
       });
@@ -102,6 +118,21 @@ export class AssetComponent implements OnInit {
           (error) => console.error('Error fetching product:', error)
       );
     }
+  }
+
+  checkIfAssetBought(): void {
+    if (!this.currentUser || !this.assetID) {
+      return;
+    }
+
+    this.eventService.checkAssetInOrganizedEvents(this.authService.getUserId(), this.assetID).subscribe({
+      next: (isBought) => {
+        this.boughtAsset = isBought;
+      },
+      error: (err) => {
+        console.error('Error checking if asset is bought:', err);
+      }
+    });
   }
 
   fetchCategory(categoryId: string): void {
@@ -187,5 +218,115 @@ export class AssetComponent implements OnInit {
         );
       }
     });
+  }
+
+  loadComments() {
+    this.showComments = !this.showComments;
+
+    if (this.showComments && this.assetID) {
+      this.reviewService.getActiveReviewsForAsset(this.assetID).subscribe({
+        next: (reviews: Review[]) => {
+          this.reviews = reviews;
+        },
+        error: (err) => {
+          console.error('Error loading reviews:', err);
+        }
+      });
+    }
+  }
+
+  setRating(stars: number) {
+    this.userRating = stars;
+    console.log("set rating to: "+ stars)
+  }
+
+  submitRating() {
+    if (!this.userComment.trim()) {
+      this.toastService.showToast({
+        message: 'Please enter a comment before submitting.',
+        title: 'Error',
+        type: 'error',
+        duration: 3000,
+      });
+      return;
+    }
+
+    const reviewData = {
+      assetId: this.assetID,
+      userId: this.authService.getUserId(),
+      comment: this.userComment,
+      rating: this.userRating,
+    };
+
+    if (this.isProduct) {
+      this.productService.submitReview(this.assetID, reviewData).subscribe({
+        next: () => {
+          this.toastService.showToast({
+            message: 'Thank you for your feedback! \n Admin check in progress',
+            title: 'Success',
+            type: 'success',
+            duration: 3000,
+          });
+          this.resetForm();
+          this.showComments = false;
+          this.boughtAsset = false;
+        },
+        error: (err) => {
+          console.error('Error submitting rating:', err);
+          if (err.status === 400 && err.error.message === 'You have already submitted a review for this asset') {
+            this.toastService.showToast({
+              message: 'You have already submitted a review for this asset.',
+              title: 'Error',
+              type: 'error',
+              duration: 3000,
+            });
+          } else {
+            this.toastService.showToast({
+              message: 'Failed to submit your feedback. Please try again later.',
+              title: 'Error',
+              type: 'error',
+              duration: 3000,
+            });
+          }
+        },
+      });
+    } else if (this.isUtility) {
+      this.utilityService.submitReview(this.assetID, reviewData).subscribe({
+        next: () => {
+          this.toastService.showToast({
+            message: 'Thank you for your feedback! \n Admin check in progress',
+            title: 'Success',
+            type: 'success',
+            duration: 3000,
+          });
+          this.resetForm();
+          this.showComments = false;
+          this.boughtAsset = false;
+        },
+        error: (err) => {
+          console.error('Error submitting rating:', err);
+          if (err.status === 400 && err.error.message === 'You have already submitted a review for this asset') {
+            this.toastService.showToast({
+              message: 'You have already submitted a review for this asset.',
+              title: 'Error',
+              type: 'error',
+              duration: 3000,
+            });
+          } else {
+            this.toastService.showToast({
+              message: 'Failed to submit your feedback. Please try again later.',
+              title: 'Error',
+              type: 'error',
+              duration: 3000,
+            });
+          }
+        },
+      });
+    }
+  }
+
+  private resetForm(): void {
+    this.userComment = '';
+    this.userRating = 0;
   }
 }

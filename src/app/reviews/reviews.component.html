@@ -1,0 +1,48 @@
+<div id="review-list">
+  <div class="title-container">
+    <h1>Pending Reviews</h1>
+  </div>
+
+  <div class="carousel-container">
+    <div class="cards-header">
+      <h2>Pending</h2>
+    </div>
+    <div class="carousel">
+      <div class="carousel-cards">
+        <div *ngIf="pendingReviews.length > 0" class="card pending-card">
+          <mat-card class="example-card" (click)="openReviewDialog()">
+            <mat-card-content>
+              <mat-card-title><div *ngIf="pendingReviews[carouselIndex].comment">
+                {{ pendingReviews[carouselIndex].comment }}
+              </div></mat-card-title>
+              <mat-card-subtitle>Rating: {{ pendingReviews[carouselIndex].rating }}</mat-card-subtitle>
+              <div *ngIf="!pendingReviews[carouselIndex].comment" class="placeholder-card">
+                No comment available
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <div class="carousel-arrows">
+        <button class="carousel-arrow left" (click)="navigateCarousel('left')">
+          <mat-icon>arrow_left</mat-icon>
+        </button>
+        <button class="carousel-arrow right" (click)="navigateCarousel('right')">
+          <mat-icon>arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination-container">
+    <mat-paginator
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[15]"
+      (page)="updatePageData($event)"
+      aria-label="Select page of pending reviews">
+    </mat-paginator>
+  </div>
+</div>

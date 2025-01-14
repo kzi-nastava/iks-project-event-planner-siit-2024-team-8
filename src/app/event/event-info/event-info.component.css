@@ -79,3 +79,78 @@ p {
   cursor: pointer;
   color: black;
 }
+
+.comments-section {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid #e0e0e0;
+  margin-left: 150px;
+}
+
+.see-comments {
+  color: #8c8c8c;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.comment-input textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.rating p {
+  margin: 0;
+  font-size: 16px;
+}
+.review p {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.review {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.review:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.star {
+  font-size: 24px;
+  color: lightgray;
+  cursor: pointer;
+}
+
+.star.filled {
+  color: gold;
+}
+
+.rating button {
+  margin-top: 10px;
+}

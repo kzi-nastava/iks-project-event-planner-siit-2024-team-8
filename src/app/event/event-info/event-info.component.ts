@@ -6,6 +6,9 @@ import {Router} from '@angular/router';
 import {EventSignupRequest} from '../domain/EventSignupRequest';
 import {AuthService} from '../../infrastructure/auth/auth.service';
 import {ToastService} from '../../services/toast-service';
+import {Review} from '../../model/review';
+import {ReviewService} from '../../services/review-service';
+import {UserService} from '../../user/user-service';
 
 @Component({
   selector: 'app-event-info',
@@ -22,9 +25,16 @@ export class EventInfoComponent {
   locationClicked:  boolean = false;
 
   alreadySignedUp: boolean = false;
+  //review
+  reviews: Review[] = [];
+  showComments: boolean = false;
+  userComment: string = '';
+  userRating: number = 0;
+  stars: number[] = [0, 1, 2, 3, 4];
 
   constructor(private route: ActivatedRoute, private eventService: EventService, private router: Router,
-              private authService: AuthService, private toastService: ToastService) { }
+              private authService: AuthService, private toastService: ToastService,
+              private reviewService: ReviewService, private userService: UserService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -168,6 +178,77 @@ export class EventInfoComponent {
       error: (err) => {
         console.error('Error fetching event agenda:', err);
       }
+    });
+  }
+
+  loadComments() {
+    this.showComments = !this.showComments;
+
+    if (this.showComments && this.eventID) {
+      this.reviewService.getActiveReviewsForEvent(this.eventID).subscribe({
+        next: (reviews: Review[]) => {
+          this.reviews = reviews;
+        },
+        error: (err) => {
+          console.error('Error loading reviews:', err);
+        }
+      });
+    }
+  }
+
+  setRating(stars: number) {
+    this.userRating = stars;
+  }
+
+  submitRating() {
+    if (!this.userComment.trim()) {
+      this.toastService.showToast({
+        message: 'Please enter a comment before submitting.',
+        title: 'Error',
+        type: 'error',
+        duration: 3000,
+      });
+      return;
+    }
+
+    const reviewData = {
+      eventId: this.eventID,
+      userId: this.authService.getUserId(),
+      comment: this.userComment,
+      rating: this.userRating,
+    };
+
+    this.eventService.submitReview(this.eventID, reviewData).subscribe({
+      next: () => {
+        this.toastService.showToast({
+          message: 'Thank you for your feedback!',
+          title: 'Success',
+          type: 'success',
+          duration: 3000,
+        });
+
+        this.userComment = '';
+        this.userRating = 0;
+      },
+      error: (err) => {
+        console.error('Error submitting rating:', err);
+
+        if (err.status === 400 && err.error.message === 'You have already submitted a review for this event') {
+          this.toastService.showToast({
+            message: 'You have already submitted a review for this event.',
+            title: 'Error',
+            type: 'error',
+            duration: 3000,
+          });
+        } else {
+          this.toastService.showToast({
+            message: 'Failed to submit your feedback. Please try again later.',
+            title: 'Error',
+            type: 'error',
+            duration: 3000,
+          });
+        }
+      },
     });
   }
 }

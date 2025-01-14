@@ -13,6 +13,7 @@ import {SearchEventsRequest} from '../event/domain/search.events.request';
 import {EventCardResponse} from '../event/domain/event.card.response';
 import {EventCardComponent} from '../event/event-card/event-card.component';
 import {EventSignupRequest} from '../event/domain/EventSignupRequest';
+import {Review} from '../model/review';
 
 @Injectable({
   providedIn: 'root'
@@ -127,5 +128,21 @@ export class EventService {
     return this.http.get<Blob>(`${environment.apiHost + this.apiUrl}/fetch_guestlist/${eventId}`, {
       responseType: 'blob' as 'json' // Explicitly set the responseType to 'blob'
     });
+  }
+
+  submitReview(eventId: string, reviewData: any) {
+    return this.http.post(`${environment.apiHost+this.apiUrl}/${eventId}/review`, reviewData);
+  }
+
+  getReviews(eventId: string): Observable<Review[]> {
+    return this.http.get<Review[]>(`${environment.apiHost + this.apiUrl}/${eventId}/reviews`);
+  }
+
+  checkAssetInOrganizedEvents(userId: string, assetId: string): Observable<boolean> {
+    const params = new HttpParams()
+      .set('userId', userId)
+      .set('assetId', assetId);
+
+    return this.http.get<boolean>(`${environment.apiHost + this.apiUrl}/check-asset`, { params });
   }
 }

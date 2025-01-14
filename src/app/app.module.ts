@@ -65,6 +65,8 @@ import {FastRegisterComponent} from './user/fast-register/fast-register.componen
 import { CalendarComponent } from './calendar/calendar.component';
 import {RouterOutlet} from '@angular/router';
 import {FullCalendarModule} from '@fullcalendar/angular';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { ReviewPopupComponent } from './reviews/review-popup/review-popup.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import {FullCalendarModule} from '@fullcalendar/angular';
     ErrorCodeDialogComponent,
     EventListPopupComponent,
     CalendarComponent,
+    ReviewsComponent,
+    ReviewPopupComponent,
   ],
   imports: [
     MatCardModule,

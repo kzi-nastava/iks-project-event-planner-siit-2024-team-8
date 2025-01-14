@@ -86,4 +86,49 @@
       </div>
     </div>
   </div>
+  <div class="comments-section">
+    <p class="see-comments" (click)="loadComments()">{{ showComments ? 'Hide comments' : 'See comments' }}</p>
+
+    <div *ngIf="showComments">
+      <ng-container *ngIf="boughtAsset; else joinToComment">
+        <div class="comment-input">
+          <textarea [(ngModel)]="userComment" placeholder="Leave a comment..."></textarea>
+        </div>
+
+        <div class="rating">
+          <p>Rate this event:</p>
+          <ng-container *ngFor="let star of stars; let i = index">
+            <mat-icon
+              class="star"
+              [ngClass]="{'filled': i < userRating}"
+              (click)="setRating(i + 1)">
+              star
+            </mat-icon>
+          </ng-container>
+        </div>
+
+        <button class="btn" mat-raised-button (click)="submitRating()">
+          <mat-icon>send</mat-icon> Rate
+        </button>
+      </ng-container>
+
+      <ng-template #joinToComment>
+        <p>Join the event to comment and rate it.</p>
+      </ng-template>
+
+      <div *ngIf="reviews.length > 0">
+        <div class="review" *ngFor="let review of reviews">
+          <div class="reviewUserName"> {{ review.userName }} </div>
+          <p>{{ review.comment }}</p>
+          <div class="stars">
+            <ng-container *ngFor="let star of stars; let i = index">
+              <mat-icon class="star" [ngClass]="{'filled': i < review.rating}">
+                star
+              </mat-icon>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

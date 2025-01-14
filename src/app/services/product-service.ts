@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../model/product'
+import {Review} from '../model/review';
+import {environment} from '../../env/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +38,13 @@ export class ProductService {
 
   removeProductFromFavorites(id: string): Observable<string> {
     return this.http.delete<string>(`${this.apiUrl}/${id}/favorite`);
+  }
+
+  submitReview(id: string, reviewData: any) {
+    return this.http.post(`${this.apiUrl}/${id}/review`, reviewData);
+  }
+
+  getReviews(id: string): Observable<Review[]> {
+    return this.http.get<Review[]>(`${environment.apiHost + this.apiUrl}/${id}/reviews`);
   }
 }

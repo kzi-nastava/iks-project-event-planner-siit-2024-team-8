@@ -15,6 +15,7 @@ export class UserService {
   private activateApiUrl = 'http://localhost:8080/api/activation-requests/authenticate';
   private updateApiUrl = 'http://localhost:8080/api/users/update';
   private deactivateApiUrl = 'http://localhost:8080/api/users/delete';
+  private apiUrl = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient) {}
 
@@ -32,5 +33,8 @@ export class UserService {
   }
   deleteUser(email: string) {
     return this.http.delete(this.deactivateApiUrl + "/" + email, {responseType: 'text'});
+  }
+  getUserById(userId: string): Observable<UserInfoResponse> {
+    return this.http.get<UserInfoResponse>(`${this.apiUrl}${userId}`);
   }
 }

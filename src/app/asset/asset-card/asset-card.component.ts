@@ -17,11 +17,11 @@ export class AssetCardComponent implements OnInit {
   constructor(private assetCategoryService: AssetCategoryService) {}
 
   ngOnInit(): void {
-    if (this.asset.category) {
-      this.assetCategoryService.getCategoryById(this.asset.category.id).subscribe((category: AssetCategory) => {
-        this.asset.category = category;
-      });
-    }
+    // if (this.asset.category) {
+    //   this.assetCategoryService.getCategoryById(this.asset.category.id).subscribe((category: AssetCategory) => {
+    //     this.asset.category = category;
+    //   });
+    // }
   }
 
   onFavouriteClicked(): void {

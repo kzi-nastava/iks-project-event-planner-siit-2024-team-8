@@ -22,9 +22,8 @@ export class UtilityService {
     return this.http.get<Utility>(`${this.apiUrl}/${id}`);
   }
 
-  createUtility(formData: FormData): Observable<Object> {
-    console.log(formData);
-    return this.http.post(this.apiUrl, formData);
+  createUtility(formData: FormData): Observable<string> {
+    return this.http.post(this.apiUrl, formData, { responseType: 'text' });
   }
 
   updateUtility(id: string, formData: FormData): Observable<Object> {

@@ -23,6 +23,9 @@
   <button mat-icon-button *ngIf="role =='ADMIN'" [routerLink]="['reviews']">
     <mat-icon>assignment</mat-icon>
   </button>
+  <button mat-icon-button *ngIf="role =='PROVIDER'" [routerLink]="['price-list']">
+    <mat-icon>assignment</mat-icon>
+  </button>
   <div class="bottom-buttons">
     <button mat-icon-button (click)="onClickPlaceholder()">
       <mat-icon>settings</mat-icon>

@@ -28,6 +28,7 @@ export class AssetComponent implements OnInit {
   isUtility: boolean = false;
   isProduct: boolean = false;
   categoryName: string = '';
+  providerName: string = '';
 
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
   currentImageIndex: number = 0;
@@ -91,6 +92,11 @@ export class AssetComponent implements OnInit {
           (utility) => {
             this.asset = utility;
             this.images = utility.images || this.images;
+            this.userService.getUserById(this.asset.providerId).subscribe(data => {
+              if (data) {
+                this.providerName = data.firstName + ' ' + data.lastName;
+              }
+            });
 
             this.utilityDuration = utility.duration;
             this.utilityReservationTerm = utility.reservationTerm;
@@ -110,6 +116,11 @@ export class AssetComponent implements OnInit {
           (product) => {
             this.asset = product;
             this.images = product.images || this.images;
+            this.userService.getUserById(this.asset.providerId).subscribe(data => {
+              if (data) {
+                this.providerName = data.firstName + ' ' + data.lastName;
+              }
+            });
 
             if (product.category) {
               this.fetchCategory(product.category);

@@ -17,6 +17,6 @@ export function searchAssetsRequest(): SearchAssetsRequest{
     priceHigh: 1000,
     gradeLow: 0,
     gradeHigh: 5,
-    available: false,
+    available: true,
   }
 }

@@ -27,44 +27,45 @@
             <h3>ORGANIZER</h3>
             <p>{{ event.organizerName || 'Unknown' }}</p>
           </div>
-        </div>
 
-        <div class="event-actions">
-          <button class="btn" mat-raised-button *ngIf="isMyEvent()" (click)="navigateToEditEvent()">
-            <mat-icon>edit</mat-icon>
-            Edit Event
-          </button>
-          <button class="btn" id="mapButton" (click)="openMap()" mat-raised-button>
-            <mat-icon>map</mat-icon>
-            View on Map
-          </button>
-          <button class="btn" (click)="navigateToBudget()" *ngIf="isMyEvent()" mat-raised-button>
-            <mat-icon>Budget</mat-icon>
-            Budget
-          </button>
-          <button class="btn" (click)="eventSignup()" *ngIf="!isMyEvent() && !alreadySignedUp" mat-raised-button>
-            <mat-icon>how_to_reg</mat-icon>
-            Join Event
-          </button>
-          <button class="btn" (click)="leaveEvent()" *ngIf="!isMyEvent() && alreadySignedUp" mat-raised-button>
-            <mat-icon>cancel</mat-icon>
-            Leave Event
-          </button>
-          <button class="btn" (click)="getAgenda()" mat-raised-button>
-            <mat-icon>assignment</mat-icon>
-            Get Agenda
-          </button>
-          <button class="btn" (click)="getGuestlist()" *ngIf="isMyEvent()" mat-raised-button>
-            <mat-icon>supervised_user_circle</mat-icon>
-            Get Guestlist
-          </button>
-          <button class="btn" mat-raised-button *ngIf="event.isPrivate" (click)="guestClicked = true;
+          <div class="event-actions">
+            <button class="btn" mat-raised-button *ngIf="isMyEvent()" (click)="navigateToEditEvent()">
+              <mat-icon>edit</mat-icon>
+              Edit Event
+            </button>
+            <button class="btn" id="mapButton" (click)="openMap()" mat-raised-button>
+              <mat-icon>map</mat-icon>
+              View on Map
+            </button>
+            <button class="btn" (click)="navigateToBudget()" *ngIf="isMyEvent()" mat-raised-button>
+              <mat-icon>Budget</mat-icon>
+              Budget
+            </button>
+            <button class="btn" (click)="eventSignup()" *ngIf="!isMyEvent() && !alreadySignedUp && !event.isPrivate" mat-raised-button>
+              <mat-icon>how_to_reg</mat-icon>
+              Join Event
+            </button>
+            <button class="btn" (click)="leaveEvent()" *ngIf="!isMyEvent() && alreadySignedUp && !event.isPrivate" mat-raised-button>
+              <mat-icon>cancel</mat-icon>
+              Leave Event
+            </button>
+            <button class="btn" (click)="getAgenda()" mat-raised-button>
+              <mat-icon>assignment</mat-icon>
+              Get Agenda
+            </button>
+            <button class="btn" (click)="getGuestlist()" *ngIf="isMyEvent()" mat-raised-button>
+              <mat-icon>supervised_user_circle</mat-icon>
+              Get Guestlist
+            </button>
+            <button class="btn" mat-raised-button *ngIf="event.isPrivate" (click)="guestClicked = true;
                                                                                      locationClicked=false;
                                                                                      budgetClicked = false">
-            <mat-icon>group</mat-icon>
-          </button>
-        </div>
+              <mat-icon>group</mat-icon>
+            </button>
+          </div>
           `
+        </div>
+
         <app-budget *ngIf="budgetClicked" style="width: 100em" (closed)="budgetClicked = false"></app-budget>
         <app-guest-event-info [id]="event.id" (closed)="guestClicked = false" *ngIf="guestClicked" style="width: 50em"></app-guest-event-info>
         <app-location-event-info [location]="event.location" (closed)="locationClicked=false" *ngIf="locationClicked"></app-location-event-info>

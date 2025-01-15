@@ -13,6 +13,7 @@ import {ApiResponse} from '../../model/api.response';
 import {EventCardResponse} from '../domain/event.card.response';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {SearchAssetsRequest} from '../../model/search.assets.request';
+import {AssetResponse} from '../../model/asset.response';
 
 @Component({
   selector: 'app-all-events',
@@ -21,7 +22,7 @@ import {SearchAssetsRequest} from '../../model/search.assets.request';
 })
 export class AllEventsComponent {
   events: EventCardResponse[] = [];
-  assets: Asset[] = [];
+  assets: AssetResponse[] = [];
   filterType: string = '';
   sortParameter: string = '';
 
@@ -67,7 +68,7 @@ export class AllEventsComponent {
     } else {
       // Fetch assets
       this.assetService.getAllAssets().subscribe((assetsData: any) => {
-        this.assets = [...assetsData.products, ...assetsData.utilities];
+        this.assets = assetsData;
       });
     }
   }
@@ -79,9 +80,8 @@ export class AllEventsComponent {
   }
 
 
-  onCardClick(asset: Asset): void {
-    console.log('Navigating to asset with ID:', asset.id);
-    if (this.assetService.isUtility(asset)) {
+  onCardClick(asset: AssetResponse): void {
+    if (asset.type == 'UTILITY') {
       this.router.navigate([`/assets/utilities/${asset.id}`]);
     } else {
       this.router.navigate([`/assets/products/${asset.id}`]);
@@ -130,7 +130,11 @@ export class AllEventsComponent {
     this.isFilterVisible = false;
   }
   onApplyAssetsFiltersClicked($event: SearchAssetsRequest) {
-    
+    this.assetService.filterAssets($event,this.pageProperties).subscribe((response: PagedResponse<AssetResponse>) => {
+      this.assets = response.content;
+      this.pageProperties.totalCount = response.totalElements;
+    })
+    this.isFilterVisible = false;
   }
 
   onCheckboxChanged($event: MatCheckboxChange, name: string) {

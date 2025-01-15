@@ -31,7 +31,7 @@ export class FilterPopUpComponent implements OnChanges {
   assetFilters: string[] = ['Event Type', 'Asset Category', 'Asset Type', 'Price', 'Availability'];
   myAssetFilters: string[] = ['Event Type', 'Asset Category', 'Asset Type', 'Price', 'Availability'];
 
-  assetTypes = ['Service', 'Product'];
+  assetTypes = ['UTILITY', 'PRODUCT'];
   currentFilters: string[] = [];
 
   selectedAssetCategory: string = '';
@@ -90,6 +90,7 @@ export class FilterPopUpComponent implements OnChanges {
   }
 
   onApplyFilterClick() {
+  console.log(this.filterType);
   if (this.filterType === 'assets' || this.filterType === 'my-assets'){
     this.filterAssets.emit(this.filterAssetsRequest)
   }else{

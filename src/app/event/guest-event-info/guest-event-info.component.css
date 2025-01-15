@@ -1,6 +1,6 @@
 .guest-list {
   gap: 1em;
-  width: 90%;
+  width: 40vw;
   margin-left: 2em;
   border-radius: 10px;
   overflow-y: auto;

@@ -10,11 +10,11 @@
   <mat-card-content>
     <mat-card-title>{{ asset.name }}</mat-card-title>
 
-    <mat-card-subtitle *ngIf="category">
-      {{ category.type }}
-      {{ category.name }}
+    <mat-card-subtitle *ngIf="asset.category">
+      {{ asset.category.type }}
+      {{ asset.category.name }}
     </mat-card-subtitle>
 
-    <mat-card-subtitle *ngIf="!category">Loading category...</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!asset.category">Loading category...</mat-card-subtitle>
   </mat-card-content>
 </mat-card>

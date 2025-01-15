@@ -139,6 +139,28 @@ export class EventInfoComponent {
     })
   }
 
+  eventDateValid() : boolean {
+    // Check if event has a start and end date
+    if (this.event.startDate && this.event.endDate) {
+
+      const currentDate = new Date(); // Get the current date
+
+      const startDate = new Date(this.event.startDate); // Convert event startDate to Date object
+      const endDate = new Date(this.event.endDate); // Convert event endDate to Date object
+
+      // Check if the current date is between the start and end date
+      if (currentDate >= startDate && currentDate <= endDate) {
+        return false // The event is ongoing
+      }
+      // Check if the event is already past due (i.e., after the end date)
+      else if (currentDate > endDate) {
+        return false; // The event has already ended
+      }
+      return true;
+    }
+    return false;
+  }
+
   getAgenda() {
     this.eventService.fetchEventAgenda(this.eventID).subscribe({
       next: (response: Blob) => {

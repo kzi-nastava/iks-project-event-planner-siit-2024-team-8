@@ -33,6 +33,10 @@ export class EventService {
     return this.http.get<PagedResponse<EventCardResponse>>(`${environment.apiHost + this.apiUrl}/all`,{params: params});
   }
 
+  getTop5Events(pageProperties? : any): Observable<EventCardResponse[]> {
+    return this.http.get<EventCardResponse[]>(`${environment.apiHost + this.apiUrl}/top5`)
+  }
+
   //helper func to date
   formatDateToLocal(date: string | Date): string {
     const parsedDate = (typeof date === 'string') ? new Date(date) : date;

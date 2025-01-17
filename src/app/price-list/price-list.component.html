@@ -1,0 +1,35 @@
+<div class="price-list-container">
+  <h4>Price list</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Discount (%)</th>
+      <th>Discounted price</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of priceList; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.name }}</td>
+      <td *ngIf="!item.editMode">{{ item.price | currency:'EUR' }}</td>
+      <td *ngIf="item.editMode"><input type="number" [(ngModel)]="item.price" /></td>
+      <td *ngIf="!item.editMode">{{ item.discount }}%</td>
+      <td *ngIf="item.editMode"><input type="number" [(ngModel)]="item.discount" /></td>
+      <td>{{ calculateDiscountedPrice(item) | currency:'EUR' }}</td>
+      <td>
+        <button (click)="toggleEditMode(item)">
+          {{ item.editMode ? 'Cancel' : 'Edit' }}
+        </button>
+        <button *ngIf="item.editMode" (click)="saveItem(item)">
+          Save
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button class="export" (click)="exportToPDF()">Export PDF</button>
+</div>

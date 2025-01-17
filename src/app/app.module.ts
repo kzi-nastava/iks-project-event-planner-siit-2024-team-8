@@ -67,6 +67,7 @@ import {RouterOutlet} from '@angular/router';
 import {FullCalendarModule} from '@fullcalendar/angular';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewPopupComponent } from './reviews/review-popup/review-popup.component';
+import {PriceListComponent} from './price-list/price-list.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { ReviewPopupComponent } from './reviews/review-popup/review-popup.compon
     CalendarComponent,
     ReviewsComponent,
     ReviewPopupComponent,
+    PriceListComponent,
   ],
   imports: [
     MatCardModule,

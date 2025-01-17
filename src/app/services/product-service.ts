@@ -20,8 +20,8 @@ export class ProductService {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
-  createProduct(formData: FormData): Observable<Object> {
-    return this.http.post(this.apiUrl, formData);
+  createProduct(formData: FormData): Observable<string> {
+    return this.http.post(this.apiUrl, formData, { responseType: 'text' });
   }
 
   updateProduct(id: string, formData: FormData): Observable<Object> {

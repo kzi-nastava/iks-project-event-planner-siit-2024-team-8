@@ -45,6 +45,6 @@ export class UserService {
     return this.http.delete(this.deactivateApiUrl + "/" + email, {responseType: 'text'});
   }
   getUserById(userId: string): Observable<UserInfoResponse> {
-    return this.http.get<UserInfoResponse>(`${this.apiUrl}${userId}`);
+    return this.http.get<UserInfoResponse>(`${environment.apiHost+this.apiUrl}/${userId}`);
   }
 }

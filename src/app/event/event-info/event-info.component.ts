@@ -211,7 +211,7 @@ export class EventInfoComponent {
         next: (reviews: Review[]) => {
           this.reviews = reviews;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Error loading reviews:', err);
         }
       });

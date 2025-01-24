@@ -1,7 +1,7 @@
 <div class="parent_div">
   <div class="cards-div">
     <div class="header_div">
-      <p>Top 5 Events in #Your City#</p>
+      <p style="font-size: 1.7rem;">Top 5 Events</p>
       <button [routerLink]="['/all-events']" mat-raised-button class="see_all">See All</button>
     </div>
     <div class="carousel-container" [style.transform]="getTransformEvent()">
@@ -12,12 +12,12 @@
   </div>
   <div class="cards-div">
     <div class="header_div">
-      <p>Top 5 Assets in #Your City#</p>
+      <p style="font-size: 1.7rem;">Top 5 Assets</p>
       <button mat-raised-button class="see_all" [routerLink]="['/all-assets']">See All</button>
     </div>
     <div class="carousel-container" [style.transform]="getTransformAsset()">
       <div *ngFor="let asset of assets" class="carousel-card">
-        <app-asset-card [asset]="asset"></app-asset-card>
+        <app-asset-card (click)="onCardClick(asset)" [asset]="asset"></app-asset-card>
       </div>
     </div>
   </div>

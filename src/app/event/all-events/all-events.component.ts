@@ -8,7 +8,7 @@ import { Asset } from '../../model/asset';
 import {PagedResponse} from '../../shared/model/paged.response';
 import {EventInfoResponse} from '../domain/EventInfoResponse';
 import {FilterPopUpComponent} from '../../shared/filter-pop-up/filter-pop-up.component';
-import {SearchEventsRequest} from '../domain/search.events.request';
+import {returnSearchEventsRequest, SearchEventsRequest} from '../domain/search.events.request';
 import {ApiResponse} from '../../model/api.response';
 import {EventCardResponse} from '../domain/event.card.response';
 import {MatCheckboxChange} from '@angular/material/checkbox';
@@ -61,7 +61,7 @@ export class AllEventsComponent {
   fetchData() {
     if (this.isEvents) {
       // Fetch events
-      this.eventService.getAllEvents(this.pageProperties).subscribe((response: PagedResponse<EventCardResponse>) => {
+      this.eventService.filterEvents(returnSearchEventsRequest(),this.pageProperties).subscribe((response: PagedResponse<EventCardResponse>) => {
         this.events = response.content;
         this.pageProperties.totalCount = response.totalElements;
       });

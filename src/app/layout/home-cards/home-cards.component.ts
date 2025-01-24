@@ -49,4 +49,11 @@ export class HomeCardsComponent {
     }
   }
    */
+  onCardClick(asset: AssetResponse): void {
+    if (asset.type == 'UTILITY') {
+      this.router.navigate([`/assets/utilities/${asset.id}`]);
+    } else {
+      this.router.navigate([`/assets/products/${asset.id}`]);
+    }
+  }
 }

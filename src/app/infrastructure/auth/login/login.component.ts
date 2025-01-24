@@ -50,6 +50,7 @@ export class LoginComponent {
       }
       this.authService.login(login).subscribe({
         next: (response: AuthResponse) => {
+
           localStorage.setItem('user', response.token);
           localStorage.setItem('userID', response.id);
           this.authService.setUser();
@@ -68,6 +69,8 @@ export class LoginComponent {
             this.toastService.showErrorToast("User not found.");
           } else if(err.status === 403) {
             this.toastService.showErrorToast("User not activated.");
+          }else if (err.status === 423) {
+            this.toastService.showErrorToast(`Your account is suspended!\n${err.error.message}`);
           }
           else {
             this.toastService.showErrorToast("An unexpected error occurred.");

@@ -68,6 +68,11 @@ import {FullCalendarModule} from '@fullcalendar/angular';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewPopupComponent } from './reviews/review-popup/review-popup.component';
 import {PriceListComponent} from './price-list/price-list.component';
+import { BlockUserDialogComponent } from './dialogs/block-user-dialog/block-user-dialog.component';
+import { BlockedUsersDialogComponent } from './dialogs/blocked-users-dialog/blocked-users-dialog.component';
+import { ReportUserDialogComponent } from './dialogs/report-user-dialog/report-user-dialog.component';
+import {ReportsComponent} from './user/reports/reports.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -102,6 +107,10 @@ import {PriceListComponent} from './price-list/price-list.component';
     ReviewsComponent,
     ReviewPopupComponent,
     PriceListComponent,
+    BlockUserDialogComponent,
+    BlockedUsersDialogComponent,
+    ReportUserDialogComponent,
+    ReportsComponent,
   ],
   imports: [
     MatCardModule,
@@ -141,6 +150,7 @@ import {PriceListComponent} from './price-list/price-list.component';
     MatOptionModule,
     NgOptimizedImage,
     BrowserAnimationsModule,
+    MatTableModule,
   ],
   providers: [
     provideAnimationsAsync(),

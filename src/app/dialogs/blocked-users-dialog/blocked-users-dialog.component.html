@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Blocked users</h2>
+<div mat-dialog-content>
+  <div class="blocked-div" *ngFor="let blockedUser of blocked">
+    <div class="blocked-user-div">
+      <p style="font-size: 2em; align-self: flex-start; margin-bottom: 2rem;">{{blockedUser.fullName}}</p>
+      <button mat-raised-button class="unblock-button" (click)="unblockClicked(blockedUser)">Unblock</button>
+    </div>
+  </div>
+  <p style="text-align: center; font-size: 1rem;">You have {{blocked.length}} blocked {{blocked.length==1 ? "user" : "users"}}</p>
+</div>

@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {Form} from '@angular/forms';
 import {UserInfoResponse} from './domain/user.info.response';
 import {ApiResponse} from '../model/api.response';
+import {BlockedUserResponse} from './domain/blocked.user.response';
+import {CreateReportRequest} from './domain/createReportRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -18,33 +20,61 @@ export class UserService {
   private apiUrl = '/users';
 
 
+  constructor(private http: HttpClient) {
+  }
 
-  constructor(private http: HttpClient) {}
-
-  registerUser(formData : FormData): Observable<ApiResponse> {
+  registerUser(formData: FormData): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.registerApiUrl, formData);
   }
 
-  fastRegisterUser(email: string,password:string,eventID: string): Observable<ApiResponse> {
+  fastRegisterUser(email: string, password: string, eventID: string): Observable<ApiResponse> {
     let params = new HttpParams();
     params = params.set('email', email)
       .set('password', password)
       .set('eventID', eventID);
-    return this.http.post<ApiResponse>(`${environment.apiHost+this.apiUrl}/fast-register`, params);
+    return this.http.post<ApiResponse>(`${environment.apiHost + this.apiUrl}/fast-register`, params);
   }
+
   activateUser(token: string) {
-    return this.http.put(this.activateApiUrl,token);
+    return this.http.put(this.activateApiUrl, token);
   }
-  getUserInfo() :Observable<UserInfoResponse> {
+
+  getUserInfo(): Observable<UserInfoResponse> {
     return this.http.get<UserInfoResponse>(environment.apiHost + '/users/user')
   }
-  updateUser(formData : FormData) {
+
+  updateUser(formData: FormData) {
     return this.http.put(this.updateApiUrl, formData, {responseType: 'text'});
   }
+
   deleteUser(email: string) {
     return this.http.delete(this.deactivateApiUrl + "/" + email, {responseType: 'text'});
   }
+
   getUserById(userId: string): Observable<UserInfoResponse> {
     return this.http.get<UserInfoResponse>(`${environment.apiHost+this.apiUrl}/${userId}`);
+    return this.http.get<UserInfoResponse>(`${environment.apiHost + this.apiUrl}/${userId}`);
+  }
+
+  blockUser(blockedId: string): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${environment.apiHost + this.apiUrl}/block/${blockedId}`, blockedId);
+  }
+
+  getBlockedUsers(): Observable<BlockedUserResponse[]> {
+    console.log(localStorage.getItem('userID'));
+    return this.http.get<BlockedUserResponse[]>(`${environment.apiHost + this.apiUrl}/blocked/${localStorage.getItem('userID')}`);
+  }
+
+  updateBlockedUsers(blockedUsers: string[]): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(`${environment.apiHost + this.apiUrl}/blocked/${localStorage.getItem('userID')}`, blockedUsers);
+  }
+
+  reportUser(report: CreateReportRequest) {
+    return this.http.post<ApiResponse>(`${environment.apiHost}/reports`, report);
+  }
+
+  suspendUser(id : string) {
+    console.log(id);
+    return this.http.put<ApiResponse>(`${environment.apiHost}/reports/suspend`,id);
   }
 }

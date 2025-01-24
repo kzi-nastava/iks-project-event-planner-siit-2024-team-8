@@ -25,6 +25,7 @@ import {BudgetComponent} from './event/budget/budget.component';
 import {FastRegisterComponent} from './user/fast-register/fast-register.component';
 import {CalendarComponent} from './calendar/calendar.component';
 import {ReviewsComponent} from './reviews/reviews.component';
+import {ReportsComponent} from './user/reports/reports.component';
 import {PriceListComponent} from './price-list/price-list.component';
 
 const routes: Routes = [
@@ -58,6 +59,8 @@ const routes: Routes = [
   {path: 'events/:id/budget', component: BudgetComponent },
   {path: 'fast-register', component: FastRegisterComponent},
   {path: 'calendar', component: CalendarComponent},
+  {path: 'profile/:id', component: ProfileComponent},
+  {path: 'reports',component: ReportsComponent},
   {path: 'price-list', component: PriceListComponent},
   { path: '**', redirectTo: '/home' },
 

@@ -19,8 +19,8 @@
         <h3>PHONE NUMBER</h3>
         <p>{{ currentUser.number }}</p>
 
-        <h3>ACCOUNT STATUS</h3>
-        <p style="font-weight: 500;">{{ currentUser.isActive ? 'Verified' : 'Not Verified' }}</p>
+        <h3 *ngIf="isMyProfile">ACCOUNT STATUS</h3>
+        <p *ngIf="isMyProfile" style="font-weight: 500;">{{ currentUser.isActive ? 'Verified' : 'Not Verified' }}</p>
       </div>
 
       <div *ngIf="role==='Provider'" class="company-info">
@@ -35,11 +35,37 @@
         <!-- <button mat-raised-button class="btn action-button" >
           <mat-icon>report</mat-icon>
         </button> -->
-        <button mat-raised-button class="btn action-button" (click)="navigateToEditProfile()">
+        <button mat-raised-button class="btn"
+                (click)="navigateToEditProfile()"
+                *ngIf="isMyProfile">
           <mat-icon>edit</mat-icon>
+          Edit Profile
         </button>
-        <button mat-raised-button class="btn action-button" (click)="logoutClick()">
+        <button mat-raised-button class="btn"
+                (click)="logoutClick()"
+                *ngIf="isMyProfile">
           <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+        <button mat-raised-button class="btn"
+                (click)="blockedUsersClicked()"
+                *ngIf="isMyProfile">
+          <mat-icon>block</mat-icon>
+          Blocked Users
+        </button>
+      </div>
+      <div class="profile-actions" *ngIf="!isMyProfile" style="margin-top: 30%">
+        <button mat-raised-button class="btn"
+                *ngIf="!isMyProfile"
+                (click)="onReportUserClicked()">
+          <mat-icon>report</mat-icon>
+          Report User
+        </button>
+        <button mat-raised-button class="btn"
+                *ngIf="!isMyProfile"
+                (click)="onBlockUserClicked()">
+          <mat-icon>block</mat-icon>
+          Block User
         </button>
       </div>
     </div>

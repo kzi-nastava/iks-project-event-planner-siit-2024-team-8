@@ -29,6 +29,11 @@
           </div>
 
           <div class="event-actions">
+            <button class="btn" mat-raised-button *ngIf="!isMyEvent() && localStorage.getItem('userID') != null"
+                    [routerLink]="['/profile',event.organizerID]">
+              <mat-icon>account_circle</mat-icon>
+              Organizer
+            </button>
             <button class="btn" mat-raised-button *ngIf="isMyEvent()" (click)="navigateToEditEvent()">
               <mat-icon>edit</mat-icon>
               Edit Event

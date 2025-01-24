@@ -1,0 +1,45 @@
+<div class="mat-table-container">
+  <button mat-button (click)="onButtonClick()" class="suspend-button">Suspend</button>
+  <table mat-table [dataSource]="currentReports" matSort class="report-table">
+    <!-- User Email Column -->
+    <ng-container matColumnDef="userEmail">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> User Email </th>
+      <td mat-cell *matCellDef="let report"> {{ report.userEmail }} </td>
+    </ng-container>
+
+    <!-- Reported Email Column -->
+    <ng-container matColumnDef="reportedEmail">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Reported Email </th>
+      <td mat-cell *matCellDef="let report"> {{ report.reportedEmail }} </td>
+    </ng-container>
+
+    <!-- Reason Column -->
+    <ng-container matColumnDef="reason">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Reason </th>
+      <td mat-cell *matCellDef="let report"> {{ report.reason }} </td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+      <td mat-cell *matCellDef="let report"> {{ report.date | date:'short' }} </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+        [ngClass]="{'selected-row': selectedRowIndex === currentReports.indexOf(row)}"
+        (click)="onRowClick(currentReports.indexOf(row))"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="pageProperties.totalCount"
+    [pageSize]="pageProperties.pageSize"
+    [pageIndex]="pageProperties.page"
+    [pageSizeOptions]="pageProperties.pageSizeOptions"
+    (page)="pageChanged($event)"
+    aria-label="Select page of asset categories"
+    style="align-self: center; margin-top: 1%; justify-self: flex-end">
+
+  </mat-paginator>
+</div>

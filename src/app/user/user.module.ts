@@ -6,6 +6,10 @@ import {MatInput, MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../infrastructure/material/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ReportsComponent } from './reports/reports.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -16,8 +20,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FormsModule,
     MaterialModule,
     MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+  ],
+  declarations: [
   ]
 })
 export class UserModule { }

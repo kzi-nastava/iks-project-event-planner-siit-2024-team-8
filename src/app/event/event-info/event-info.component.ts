@@ -273,4 +273,6 @@ export class EventInfoComponent {
       },
     });
   }
+
+  protected readonly localStorage = localStorage;
 }

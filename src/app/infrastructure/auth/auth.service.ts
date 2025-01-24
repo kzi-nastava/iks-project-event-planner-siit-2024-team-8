@@ -65,4 +65,25 @@ export class AuthService {
     this.userID$.next(this.getUserId());
   }
 
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+
+    const decoded = this.decodeToken(token);
+    if (!decoded || !decoded.exp) return true;
+
+    const currentTime = Math.floor(Date.now() / 1000); // Current timestamp in seconds
+    return decoded.exp < currentTime;
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('user');
+  }
+
+  decodeToken(token: string): any {
+    if (!token) return null;
+    const payload = atob(token.split('.')[1]);
+    return JSON.parse(payload);
+  }
+
 }

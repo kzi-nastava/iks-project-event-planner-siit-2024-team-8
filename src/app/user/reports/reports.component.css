@@ -1,0 +1,22 @@
+.mat-table-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-self: center;
+}
+.report-table{
+  margin-top: 2%;
+  margin-left: 4%;
+  width: fit-content;
+}
+.suspend-button{
+  background: #A1C084 !important; color: white !important;
+  width: 10%;
+  align-self: flex-end;
+  margin-top: 2%;
+  margin-right: 2%;
+  border-radius: 3%;
+}
+.selected-row {
+  background-color: rgba(144, 238, 144, 0.2);
+}

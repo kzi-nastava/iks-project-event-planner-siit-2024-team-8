@@ -63,8 +63,7 @@ import {MatListModule} from '@angular/material/list';
 import { GuestEventInfoComponent } from './guest-event-info/guest-event-info.component';
 import { AgendaEventInfoComponent } from './agenda-event-info/agenda-event-info.component';
 import { LocationEventInfoComponent } from './location-event-info/location-event-info.component';
-
-
+import {ChatPopupComponent} from '../chat-popup/chat-popup.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +83,11 @@ import { LocationEventInfoComponent } from './location-event-info/location-event
     BoughtAssetsPopupComponent,
     GuestEventInfoComponent,
     AgendaEventInfoComponent,
-    LocationEventInfoComponent
+    LocationEventInfoComponent,
+    ChatPopupComponent,
+  ],
+  exports: [
+    ChatPopupComponent
   ],
   imports: [
     CommonModule,

@@ -45,6 +45,7 @@
               <mat-icon>how_to_reg</mat-icon>
               Join Event
             </button>
+            <button mat-raised-button class="btn buy-button" (click)="chatWithOrganizer()">Chat with organizer</button>
             <button class="btn" (click)="leaveEvent()" *ngIf="!isMyEvent() && alreadySignedUp && !event.isPrivate" mat-raised-button>
               <mat-icon>cancel</mat-icon>
               Leave Event
@@ -118,4 +119,8 @@
       </div>
     </div>
   </div>
+  <app-chat-popup
+    *ngIf="isChatVisible"
+    (close)="closeChat()">
+  </app-chat-popup>
 </div>

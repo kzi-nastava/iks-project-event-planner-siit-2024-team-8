@@ -23,6 +23,7 @@ export class EventInfoComponent {
   budgetClicked:  boolean = false;
   guestClicked: boolean = false;
   locationClicked:  boolean = false;
+  isChatVisible:  boolean = false;
 
   alreadySignedUp: boolean = false;
   //review
@@ -272,5 +273,13 @@ export class EventInfoComponent {
         }
       },
     });
+  }
+
+  chatWithOrganizer() {
+    this.isChatVisible = true;
+  }
+
+  closeChat() {
+    this.isChatVisible = false;
   }
 }

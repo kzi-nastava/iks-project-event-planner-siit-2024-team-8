@@ -6,9 +6,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrls: ['./chat-popup.component.scss']
 })
 export class ChatPopupComponent {
-  @Input() providerName!: string;
+  @Input() otherUserName!: string;
   messages = [
-    { sender: 'provider', text: 'Hello! How can I assist you?' }
+    { sender: 'otherUser', text: 'Hello! How can I assist you?' }
   ];
   newMessage = '';
 

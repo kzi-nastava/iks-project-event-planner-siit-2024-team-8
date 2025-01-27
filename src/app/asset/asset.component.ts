@@ -27,6 +27,7 @@ export class AssetComponent implements OnInit {
   assetID: string;
   isUtility: boolean = false;
   isProduct: boolean = false;
+  isChatVisible = false;
   categoryName: string = '';
   providerName: string = '';
 
@@ -339,5 +340,13 @@ export class AssetComponent implements OnInit {
   private resetForm(): void {
     this.userComment = '';
     this.userRating = 0;
+  }
+
+  chatWithProvider() {
+    this.isChatVisible = true;
+  }
+
+  closeChat() {
+    this.isChatVisible = false;
   }
 }

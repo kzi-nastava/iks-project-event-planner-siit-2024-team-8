@@ -43,8 +43,4 @@ export class ProductService {
   submitReview(id: string, reviewData: any) {
     return this.http.post(`${this.apiUrl}/${id}/review`, reviewData);
   }
-
-  getReviews(id: string): Observable<Review[]> {
-    return this.http.get<Review[]>(`${environment.apiHost + this.apiUrl}/${id}/reviews`);
-  }
 }

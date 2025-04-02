@@ -30,6 +30,8 @@ export class AssetComponent implements OnInit {
   isChatVisible = false;
   categoryName: string = '';
   providerName: string = '';
+  providerId: string = '';
+  userId: string = '';
 
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
   currentImageIndex: number = 0;
@@ -66,6 +68,7 @@ export class AssetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.userId = this.authService.getUserId()
     this.authService.userState.subscribe(user => {
       this.role = user;
 
@@ -93,7 +96,8 @@ export class AssetComponent implements OnInit {
           (utility) => {
             this.asset = utility;
             this.images = utility.images || this.images;
-            this.userService.getUserById(this.asset.providerId).subscribe(data => {
+            this.providerId = this.asset.providerId
+            this.userService.getUserById(this.providerId).subscribe(data => {
               if (data) {
                 this.providerName = data.firstName + ' ' + data.lastName;
               }
@@ -137,7 +141,7 @@ export class AssetComponent implements OnInit {
       return;
     }
 
-    this.eventService.checkAssetInOrganizedEvents(this.authService.getUserId(), this.assetID).subscribe({
+    this.eventService.checkAssetInOrganizedEvents(this.userId, this.assetID).subscribe({
       next: (isBought) => {
         this.boughtAsset = isBought;
       },
@@ -265,7 +269,7 @@ export class AssetComponent implements OnInit {
 
     const reviewData = {
       assetId: this.assetID,
-      userId: this.authService.getUserId(),
+      userId: this.userId,
       comment: this.userComment,
       rating: this.userRating,
     };

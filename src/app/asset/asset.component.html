@@ -133,7 +133,9 @@
   </div>
 
   <app-chat-popup
-    *ngIf="isChatVisible"
+    [otherUserName]="providerName"
+    [userId]="userId"
+    [otherUserId]="providerId"
     (close)="closeChat()">
   </app-chat-popup>
 </div>

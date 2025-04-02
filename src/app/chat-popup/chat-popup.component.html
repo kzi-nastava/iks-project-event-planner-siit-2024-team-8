@@ -4,8 +4,8 @@
     <button class="close-btn" (click)="closeChat()">&#10005;</button>
   </div>
   <div class="chat-messages">
-    <div *ngFor="let msg of messages" [ngClass]="msg.sender === 'user' ? 'message-right' : 'message-left'">
-      {{ msg.text }}
+    <div *ngFor="let msg of messages" [ngClass]="msg.senderId === userId ? 'message-right' : 'message-left'">
+      {{ msg.messageContent }}
     </div>
   </div>
   <div class="chat-input">

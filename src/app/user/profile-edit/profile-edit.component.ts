@@ -84,6 +84,7 @@ export class ProfileEditComponent {
 
   deleteItem(): void {
     this.userService.deleteUser(this.email_input).subscribe((result) => {console.log(result);})
+    localStorage.clear();
     this.router.navigate(['/home']).then(() => {
       window.location.reload();
     })

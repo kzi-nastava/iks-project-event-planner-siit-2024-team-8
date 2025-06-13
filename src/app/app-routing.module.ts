@@ -27,6 +27,8 @@ import {CalendarComponent} from './calendar/calendar.component';
 import {ReviewsComponent} from './reviews/reviews.component';
 import {ReportsComponent} from './user/reports/reports.component';
 import {PriceListComponent} from './price-list/price-list.component';
+import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.component';
+import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -62,6 +64,8 @@ const routes: Routes = [
   {path: 'profile/:id', component: ProfileComponent},
   {path: 'reports',component: ReportsComponent},
   {path: 'price-list', component: PriceListComponent},
+  {path: 'guestlist-edit/:id', component: GuestlistEditComponent},
+  {path: 'agenda-edit/:id', component: AgendaEditComponent},
   { path: '**', redirectTo: '/home' },
 
 ];

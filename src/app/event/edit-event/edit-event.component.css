@@ -64,12 +64,14 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
+  padding: 1px;
 }
 
 h1 {
   color: gray;
+  margin-bottom: 5px;
 }
 
 .btn-primary {
@@ -82,6 +84,24 @@ h1 {
   color: #fff !important;
 }
 
+
+.head-div button {
+  border: none;
+  background: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.head-div button:hover {
+  color: grey !important;
+}
+
 label {
   color: gray;
+}
+
+p {
+  color: gray;
+  margin-bottom: 5px;
+  margin-top: 2px;
 }

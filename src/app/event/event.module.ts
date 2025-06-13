@@ -63,6 +63,8 @@ import {MatListModule} from '@angular/material/list';
 import { GuestEventInfoComponent } from './guest-event-info/guest-event-info.component';
 import { AgendaEventInfoComponent } from './agenda-event-info/agenda-event-info.component';
 import { LocationEventInfoComponent } from './location-event-info/location-event-info.component';
+import { GuestlistEditComponent } from './guestlist-edit/guestlist-edit.component';
+import { AgendaEditComponent } from './agenda-edit/agenda-edit.component';
 
 
 
@@ -84,7 +86,9 @@ import { LocationEventInfoComponent } from './location-event-info/location-event
     BoughtAssetsPopupComponent,
     GuestEventInfoComponent,
     AgendaEventInfoComponent,
-    LocationEventInfoComponent
+    LocationEventInfoComponent,
+    GuestlistEditComponent,
+    AgendaEditComponent
   ],
   imports: [
     CommonModule,

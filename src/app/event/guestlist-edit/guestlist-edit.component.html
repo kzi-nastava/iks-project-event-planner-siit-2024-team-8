@@ -1,0 +1,25 @@
+<div class="guestlist-container">
+  <h2 style="color: grey">Choose guests for removal:</h2>
+
+  <mat-selection-list #guestSelection>
+    <mat-list-option *ngFor="let guest of responses" [value]="guest.userId">
+      <div>
+        <div class="name">
+          {{ guest.name }}
+        </div>
+        <div class="email">
+          {{ guest.email }}
+        </div>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+
+  <div class="buttons">
+    <button mat-raised-button style="background-color: red; color: white" (click)="onEject(guestSelection.selectedOptions.selected)">
+      Eject
+    </button>
+    <button mat-raised-button style="background-color: #A1C084; color: white" (click)="onBack()">
+      Back
+    </button>
+  </div>
+</div>

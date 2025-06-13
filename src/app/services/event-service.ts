@@ -14,6 +14,9 @@ import {EventCardResponse} from '../event/domain/event.card.response';
 import {EventCardComponent} from '../event/event-card/event-card.component';
 import {EventSignupRequest} from '../event/domain/EventSignupRequest';
 import {Review} from '../model/review';
+import {AgendaUpdateRequest} from '../event/domain/AgendaUpdateRequest';
+import {GuestlistUpdateRequest} from '../event/domain/GuestlistUpdateRequest';
+import {GuestResponse} from '../user/domain/guest-response';
 
 @Injectable({
   providedIn: 'root'
@@ -128,10 +131,22 @@ export class EventService {
     });
   }
 
+  updateEventAgenda(eventId: string, agendaUpdateRequest: AgendaUpdateRequest) : Observable<string> {
+    return this.http.put(`${environment.apiHost+this.apiUrl}/update_agenda/${eventId}`, agendaUpdateRequest, {responseType: 'text'});
+  }
+
   fetchGuestlist(eventId: string): Observable<Blob> {
     return this.http.get<Blob>(`${environment.apiHost + this.apiUrl}/fetch_guestlist/${eventId}`, {
       responseType: 'blob' as 'json' // Explicitly set the responseType to 'blob'
     });
+  }
+
+  fetchGuests(eventId: string): Observable<GuestResponse[]> {
+    return this.http.get<GuestResponse[]>(`${environment.apiHost + this.apiUrl}/fetch_guests/${eventId}`)
+  }
+
+  updateGuestlist(eventId: string, guestlistUpdateRequest: GuestlistUpdateRequest) : Observable<string>  {
+    return this.http.put(`${environment.apiHost+this.apiUrl}/update_guestlist/${eventId}`, guestlistUpdateRequest, {responseType: 'text'});
   }
 
   submitReview(eventId: string, reviewData: any) {

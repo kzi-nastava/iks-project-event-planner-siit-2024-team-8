@@ -17,6 +17,7 @@ import {Review} from '../model/review';
 import {AgendaUpdateRequest} from '../event/domain/AgendaUpdateRequest';
 import {GuestlistUpdateRequest} from '../event/domain/GuestlistUpdateRequest';
 import {GuestResponse} from '../user/domain/guest-response';
+import {ActivityUpdateRequest} from '../event/domain/ActivityUpdateRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -129,6 +130,10 @@ export class EventService {
     return this.http.get<Blob>(`${environment.apiHost + this.apiUrl}/fetch_agenda/${eventId}`, {
       responseType: 'blob' as 'json' // Explicitly set the responseType to 'blob'
     });
+  }
+
+  fetchActivities(eventId: string): Observable<AgendaUpdateRequest> {
+    return this.http.get<AgendaUpdateRequest>(`${environment.apiHost+this.apiUrl}/fetch_activities/${eventId}`);
   }
 
   updateEventAgenda(eventId: string, agendaUpdateRequest: AgendaUpdateRequest) : Observable<string> {

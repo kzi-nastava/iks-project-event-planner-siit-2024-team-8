@@ -1,0 +1,34 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ng-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+h1 {
+  font-weight: bold; color: grey; font-size: 50px;
+}
+
+.activity-form {
+  margin-bottom: 24px;
+}
+
+.form-field {
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px; /* space between buttons */
+  margin-top: 24px;
+}

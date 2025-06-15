@@ -73,6 +73,8 @@ import { BlockedUsersDialogComponent } from './dialogs/blocked-users-dialog/bloc
 import { ReportUserDialogComponent } from './dialogs/report-user-dialog/report-user-dialog.component';
 import {ReportsComponent} from './user/reports/reports.component';
 import {MatTableModule} from '@angular/material/table';
+import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
+import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.component';
 
 @NgModule({
   declarations: [

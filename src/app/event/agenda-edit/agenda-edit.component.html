@@ -1,0 +1,40 @@
+<h1>Update Event Agenda:</h1>
+<ng-container *ngIf="activityInfoResponses.length > 0">
+  <form>
+    <div *ngFor="let activity of activityInfoResponses; let i = index" class="activity-form">
+      <mat-card>
+        <mat-card-content>
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="activity.name" name="name{{i}}">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Description</mat-label>
+            <textarea matInput [(ngModel)]="activity.description" name="description{{i}}"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Place</mat-label>
+            <input matInput [(ngModel)]="activity.place" name="place{{i}}">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>Start Time</mat-label>
+            <input matInput [(ngModel)]="activity.startTime" name="startTime{{i}}">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-field">
+            <mat-label>End Time</mat-label>
+            <input matInput [(ngModel)]="activity.endTime" name="endTime{{i}}">
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="buttons">
+      <button style="background-color: #A1C084; color: white" type="button" mat-raised-button  (click)="onClickUpdate()">Update</button>
+      <button style="background-color: red; color: white" type="button" mat-raised-button  (click)="onClickBack()">Back</button>
+    </div>
+  </form>
+</ng-container>

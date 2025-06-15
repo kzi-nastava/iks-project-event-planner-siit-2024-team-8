@@ -138,4 +138,11 @@ export class EditEventComponent {
   onClickBack() {
     this.router.navigate(['/home']);
   }
+
+  onClickGl() {
+    this.router.navigate([`/guestlist-edit/${this.eventId}`]);
+  }
+  onClickAg() {
+    this.router.navigate([`/agenda-edit/${this.eventId}`]);
+  }
 }

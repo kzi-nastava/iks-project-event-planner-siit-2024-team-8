@@ -74,7 +74,7 @@ h3 {
 
 .profile-picture:hover {
   filter: brightness(70%);
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
 
@@ -118,3 +118,4 @@ h3 {
 .deactivate-btn:hover {
   background-color: #640000 !important;
 }
+

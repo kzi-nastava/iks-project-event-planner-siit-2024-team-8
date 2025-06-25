@@ -10,6 +10,7 @@ import {
   VerificationEmailDialogComponent,
 } from '../../dialogs/verification-email-dialog/verification-email-dialog.component';
 import { returnUpdatedUser, UserUpdateResponse } from '../domain/user-update-response';
+import {ProviderInfoResponse} from '../domain/ProviderInfoResponse';
 
 @Component({
   selector: 'app-profile-edit',
@@ -25,6 +26,8 @@ export class ProfileEditComponent {
   lastName_input: string = '';
   address_input: string = '';
   number_input: string = '';
+  company_name_input: string = '';
+  company_desc_input: string = '';
   currentUser: UserInfoResponse | null = null; // Added proper type annotation
 
   constructor(
@@ -35,23 +38,40 @@ export class ProfileEditComponent {
   ) {}
 
   public ngOnInit(): void {
-    this.authService.userState.subscribe((user) => {
-      this.role = user;
-    });
+    this.authService.userState.subscribe((userRole) => {
+      this.role = userRole;
 
-    this.userService.getUserInfo().subscribe({
-      next: (data: UserInfoResponse) => {
-        this.currentUser = data;
-        this.email_input = data.email;
-        this.firstName_input = data.firstName;
-        this.lastName_input = data.lastName;
-        this.address_input = data.address;
-        this.number_input = data.number;
-        this.profilePictureUrl = data.profileImage || this.profilePictureUrl; // Use default if no image is provided
-        console.log(data.firstName);
-      },
+      if (this.role == "Provider") {
+        this.userService.getProviderInfo(this.authService.getUserId()).subscribe({
+          next: (data: ProviderInfoResponse) => {
+            this.email_input = data.email;
+            this.firstName_input = data.firstName;
+            this.lastName_input = data.lastName;
+            this.address_input = data.address;
+            this.number_input = data.number;
+            this.profilePictureUrl = data.profileImage || this.profilePictureUrl;
+            this.company_name_input = data.companyName;
+            this.company_desc_input = data.companyDescription;
+            console.log(data.firstName);
+          }
+        });
+      } else {
+        this.userService.getUserInfo().subscribe({
+          next: (data: UserInfoResponse) => {
+            this.currentUser = data;
+            this.email_input = data.email;
+            this.firstName_input = data.firstName;
+            this.lastName_input = data.lastName;
+            this.address_input = data.address;
+            this.number_input = data.number;
+            this.profilePictureUrl = data.profileImage || this.profilePictureUrl;
+            console.log(data.firstName);
+          }
+        });
+      }
     });
   }
+
 
   triggerFileInput(): void {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
@@ -101,8 +121,10 @@ export class ProfileEditComponent {
   }
 
   submit(): void {
+
     const formData = new FormData();
 
+    // Add profile image (selected or placeholder)
     if (this.selectedFile) {
       console.log(this.selectedFile);
       formData.append('image', this.selectedFile, this.selectedFile.name);
@@ -112,39 +134,37 @@ export class ProfileEditComponent {
       formData.append('image', placeholderFile, placeholderFile.name);
     }
 
-    const goofy: string[] = [];
-    let newUser: UserUpdateResponse;
-    if (this.role != "Provider") {
-      newUser = returnUpdatedUser(
-        this.firstName_input,
-        this.lastName_input,
-        this.email_input,
-        this.number_input,
-        this.address_input,
-        '',
-        '',
-        goofy
-      );
-    } else {
-      newUser = returnUpdatedUser(
-        this.firstName_input,
-        this.lastName_input,
-        this.email_input,
-        this.number_input,
-        this.address_input,
-        '',
-        '',
-        goofy
-      );
-    }
-    Object.entries(newUser).forEach(([key, value]) => formData.append(key, value));
+    // Prepare user update object
+    const newUser: UserUpdateResponse = returnUpdatedUser(
+      this.firstName_input,
+      this.lastName_input,
+      this.email_input,
+      this.number_input,
+      this.address_input,
+      this.role === 'Provider' ? this.company_name_input: '',
+      this.role === 'Provider' ? this.company_desc_input: '',
+      []
+    );
 
-    this.userService.updateUser(formData).subscribe((response: any) => {
-      console.log(response);
+    // Append all fields to FormData
+    Object.entries(newUser).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach((item, i) => {
+          formData.append(`${key}[${i}]`, item);
+        });
+      } else {
+        formData.append(key, value);
+      }
     });
 
-    this.router.navigate(['/profile']).then(() => {
-      window.location.reload();
+    // Submit data
+    this.userService.updateUser(formData).subscribe((response: any) => {
+      console.log('Update successful:', response);
+      this.router.navigate(['/profile']).then(() => {
+        window.location.reload();
+      });
     });
   }
+
+
 }

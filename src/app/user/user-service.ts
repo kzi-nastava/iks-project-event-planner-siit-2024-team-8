@@ -8,6 +8,8 @@ import {UserInfoResponse} from './domain/user.info.response';
 import {ApiResponse} from '../model/api.response';
 import {BlockedUserResponse} from './domain/blocked.user.response';
 import {CreateReportRequest} from './domain/createReportRequest';
+import {ProviderInfoResponse} from './domain/ProviderInfoResponse';
+import {UserUpdateResponse} from './domain/user-update-response';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +45,10 @@ export class UserService {
     return this.http.get<UserInfoResponse>(environment.apiHost + '/users/user')
   }
 
+  getProviderInfo(id: string): Observable<ProviderInfoResponse> {
+    return this.http.get<ProviderInfoResponse>(environment.apiHost + `/users/provider/${id}`);
+  }
+
   updateUser(formData: FormData) {
     return this.http.put(this.updateApiUrl, formData, {responseType: 'text'});
   }
@@ -53,7 +59,6 @@ export class UserService {
 
   getUserById(userId: string): Observable<UserInfoResponse> {
     return this.http.get<UserInfoResponse>(`${environment.apiHost+this.apiUrl}/${userId}`);
-    return this.http.get<UserInfoResponse>(`${environment.apiHost + this.apiUrl}/${userId}`);
   }
 
   blockUser(blockedId: string): Observable<ApiResponse> {

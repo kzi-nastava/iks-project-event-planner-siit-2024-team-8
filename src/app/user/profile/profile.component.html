@@ -25,10 +25,10 @@
 
       <div *ngIf="role==='Provider'" class="company-info">
         <h3>COMPANY NAME</h3>
-        <p>Company ABC</p>
+        <p>{{ companyName }}</p>
 
         <h3>ABOUT</h3>
-        <p>Description of the company goes here.</p>
+        <p>{{ companyDesc }}</p>
       </div>
 
       <div class="profile-actions">
@@ -82,6 +82,12 @@
           <button *ngIf="role =='Provider'" mat-raised-button color="primary" class="btn under-profile-btn" (click)="navigateToCreateAsset()">Create Asset</button>
           <!-- <button mat-raised-button color="primary" class="btn under-profile-btn" >Start chat</button> -->
           <button *ngIf="role =='Admin'" (click)="navigateToCategories()" mat-raised-button color="primary" class="btn under-profile-btn">Asset categories</button>
+        </div>
+      </div>
+      <div *ngIf="role == 'Provider'">
+        <h3>COMPANY IMAGES</h3>
+        <div class="company-images" *ngFor="let image of companyImages">
+          <img class="company-image" [src]="image"  alt="Company Image" />
         </div>
       </div>
     </div>

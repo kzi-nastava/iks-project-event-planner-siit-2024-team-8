@@ -12,6 +12,7 @@ import {ToastService} from '../../services/toast-service';
 import {BlockedUsersDialogComponent} from '../../dialogs/blocked-users-dialog/blocked-users-dialog.component';
 import {BlockedUserResponse} from '../domain/blocked.user.response';
 import {ReportUserDialogComponent} from '../../dialogs/report-user-dialog/report-user-dialog.component';
+import {ProviderInfoResponse} from '../domain/ProviderInfoResponse';
 
 
 @Component({
@@ -26,6 +27,9 @@ export class ProfileComponent {
   items: EventInfoResponse[] = [];
   blockedUsers: BlockedUserResponse[] = [];
   initialListLength : number = 0;
+  companyName: string = '';
+  companyDesc: string = '';
+  companyImages: string[] = [];
 
   isMyProfile: boolean = true;
 
@@ -52,6 +56,15 @@ export class ProfileComponent {
                 this.items = data;
               }
             });
+          }
+          if (this.role == 'Provider') {
+            this.userService.getProviderInfo(this.authService.getUserId()).subscribe({
+              next: (data: ProviderInfoResponse) => {
+                this.companyDesc = data.companyDescription;
+                this.companyName = data.companyName;
+                this.companyImages = data.companyImagesURL;
+            }
+            })
           }
         }
       });

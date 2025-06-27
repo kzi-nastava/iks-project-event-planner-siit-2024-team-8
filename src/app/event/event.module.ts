@@ -89,6 +89,8 @@ import { AgendaEditComponent } from './agenda-edit/agenda-edit.component';
     AgendaEventInfoComponent,
     LocationEventInfoComponent,
     ChatPopupComponent,
+    AgendaEditComponent,
+    GuestlistEditComponent,
   ],
   exports: [
     ChatPopupComponent,

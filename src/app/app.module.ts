@@ -72,7 +72,7 @@ import { BlockUserDialogComponent } from './dialogs/block-user-dialog/block-user
 import { BlockedUsersDialogComponent } from './dialogs/blocked-users-dialog/blocked-users-dialog.component';
 import { ReportUserDialogComponent } from './dialogs/report-user-dialog/report-user-dialog.component';
 import {ReportsComponent} from './user/reports/reports.component';
-import {MatTableModule} from '@angular/material/table';
+import {MatTable, MatTableModule} from '@angular/material/table';
 import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
 import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.component';
 import { InboxComponent } from './inbox/inbox.component';
@@ -153,7 +153,7 @@ import { InboxComponent } from './inbox/inbox.component';
     AuthModule,
     MatOptionModule,
     NgOptimizedImage,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, MatTable,
   ],
   providers: [
     provideAnimationsAsync(),

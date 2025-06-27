@@ -68,6 +68,7 @@ import {FullCalendarModule} from '@fullcalendar/angular';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewPopupComponent } from './reviews/review-popup/review-popup.component';
 import {PriceListComponent} from './price-list/price-list.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import {PriceListComponent} from './price-list/price-list.component';
     ReviewsComponent,
     ReviewPopupComponent,
     PriceListComponent,
+    InboxComponent,
   ],
   imports: [
     MatCardModule,

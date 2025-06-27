@@ -26,6 +26,7 @@ import {FastRegisterComponent} from './user/fast-register/fast-register.componen
 import {CalendarComponent} from './calendar/calendar.component';
 import {ReviewsComponent} from './reviews/reviews.component';
 import {PriceListComponent} from './price-list/price-list.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -59,6 +60,7 @@ const routes: Routes = [
   {path: 'fast-register', component: FastRegisterComponent},
   {path: 'calendar', component: CalendarComponent},
   {path: 'price-list', component: PriceListComponent},
+  { path: 'inbox', component: InboxComponent },
   { path: '**', redirectTo: '/home' },
 
 ];

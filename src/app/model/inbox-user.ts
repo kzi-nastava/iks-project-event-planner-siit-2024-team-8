@@ -1,5 +1,7 @@
-export interface ApiResponse {
-  success: boolean;
-  message: string;
-  timestamp: Date;
+export interface InboxUser {
+  userId: string;
+  fullName: string;
+  role: string;
+  hasUnreadMessage: boolean;
+  lastMessageTime: string;
 }

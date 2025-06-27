@@ -35,4 +35,8 @@ export class NavBarComponent {
   onClickCalendar() {
     this.router.navigate(['/calendar']);
   }
+
+  onClickInbox() {
+    this.router.navigate(['/inbox']);
+  }
 }

@@ -11,6 +11,7 @@
 
       <div *ngIf="role === 'Organizer'" class="organizer-actions">
         <button *ngIf="isProduct" mat-raised-button class="btn buy-button" (click)="buyProduct()">Buy Product</button>
+        <button mat-raised-button class="btn buy-button" (click)="chatWithProvider()">Chat with provider</button>
         <button *ngIf="isUtility" mat-raised-button class="btn buy-button" (click)="reserveUtility()">Reserve Utility</button>
       </div>
     </div>
@@ -53,7 +54,6 @@
         <p id="availability">{{ asset.available ? 'Available' : 'Unavailable' }}</p>
       </div>
 
-      <!-- Utility-specific details -->
       <div *ngIf="isUtility">
         <div class="form-group">
           <label for="duration">Duration</label>
@@ -113,7 +113,7 @@
       </ng-container>
 
       <ng-template #joinToComment>
-        <p>Join the event to comment and rate it.</p>
+        <p>Buy the asset to comment and rate it.</p>
       </ng-template>
 
       <div *ngIf="reviews.length > 0">
@@ -131,4 +131,12 @@
       </div>
     </div>
   </div>
+
+  <app-chat-popup
+    *ngIf="isChatVisible"
+    [otherUserName]="providerName"
+    [userId]="userId"
+    [otherUserId]="providerId"
+    (close)="closeChat()">
+  </app-chat-popup>
 </div>

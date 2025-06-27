@@ -75,6 +75,7 @@ import {ReportsComponent} from './user/reports/reports.component';
 import {MatTableModule} from '@angular/material/table';
 import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
 import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.comp
     ReviewsComponent,
     ReviewPopupComponent,
     PriceListComponent,
+    InboxComponent,
     BlockUserDialogComponent,
     BlockedUsersDialogComponent,
     ReportUserDialogComponent,
@@ -152,7 +154,6 @@ import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.comp
     MatOptionModule,
     NgOptimizedImage,
     BrowserAnimationsModule,
-    MatTableModule,
   ],
   providers: [
     provideAnimationsAsync(),

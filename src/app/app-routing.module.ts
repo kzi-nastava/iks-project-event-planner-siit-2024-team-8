@@ -29,6 +29,7 @@ import {ReportsComponent} from './user/reports/reports.component';
 import {PriceListComponent} from './price-list/price-list.component';
 import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.component';
 import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -61,11 +62,7 @@ const routes: Routes = [
   {path: 'events/:id/budget', component: BudgetComponent },
   {path: 'fast-register', component: FastRegisterComponent},
   {path: 'calendar', component: CalendarComponent},
-  {path: 'profile/:id', component: ProfileComponent},
-  {path: 'reports',component: ReportsComponent},
   {path: 'price-list', component: PriceListComponent},
-  {path: 'guestlist-edit/:id', component: GuestlistEditComponent},
-  {path: 'agenda-edit/:id', component: AgendaEditComponent},
   { path: '**', redirectTo: '/home' },
 
 ];

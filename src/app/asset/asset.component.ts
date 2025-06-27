@@ -27,8 +27,11 @@ export class AssetComponent implements OnInit {
   assetID: string;
   isUtility: boolean = false;
   isProduct: boolean = false;
+  isChatVisible = false;
   categoryName: string = '';
   providerName: string = '';
+  providerId: string = '';
+  userId: string = '';
 
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
   currentImageIndex: number = 0;
@@ -65,6 +68,7 @@ export class AssetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.userId = this.authService.getUserId()
     this.authService.userState.subscribe(user => {
       this.role = user;
 
@@ -92,7 +96,9 @@ export class AssetComponent implements OnInit {
           (utility) => {
             this.asset = utility;
             this.images = utility.images || this.images;
-            this.userService.getUserById(this.asset.providerId).subscribe(data => {
+            this.providerId = this.asset.providerId
+            console.log(this.providerId + " ovo je provider id")
+            this.userService.getUserById(this.providerId).subscribe(data => {
               if (data) {
                 this.providerName = data.firstName + ' ' + data.lastName;
               }
@@ -116,6 +122,7 @@ export class AssetComponent implements OnInit {
           (product) => {
             this.asset = product;
             this.images = product.images || this.images;
+            this.providerId = this.asset.providerId
             this.userService.getUserById(this.asset.providerId).subscribe(data => {
               if (data) {
                 this.providerName = data.firstName + ' ' + data.lastName;
@@ -136,7 +143,7 @@ export class AssetComponent implements OnInit {
       return;
     }
 
-    this.eventService.checkAssetInOrganizedEvents(this.authService.getUserId(), this.assetID).subscribe({
+    this.eventService.checkAssetInOrganizedEvents(this.userId, this.assetID).subscribe({
       next: (isBought) => {
         this.boughtAsset = isBought;
       },
@@ -264,7 +271,7 @@ export class AssetComponent implements OnInit {
 
     const reviewData = {
       assetId: this.assetID,
-      userId: this.authService.getUserId(),
+      userId: this.userId,
       comment: this.userComment,
       rating: this.userRating,
     };
@@ -339,5 +346,13 @@ export class AssetComponent implements OnInit {
   private resetForm(): void {
     this.userComment = '';
     this.userRating = 0;
+  }
+
+  chatWithProvider() {
+    this.isChatVisible = true;
+  }
+
+  closeChat() {
+    this.isChatVisible = false;
   }
 }

@@ -1,0 +1,22 @@
+<div class="inbox-container">
+  <div class="inbox-title">Your chats</div>
+
+  <div
+    *ngFor="let user of inboxUsers"
+    class="inbox-item"
+    (click)="openChat(user)"
+  >
+    <h3>{{ user.fullName }}</h3>
+    <p>{{ user.role }}</p>
+    <p *ngIf="user.hasUnreadMessage" class="unread">You have an unread message</p>
+  </div>
+
+  <app-chat-popup
+    *ngIf="selectedUser"
+    [userId]="currentUserId"
+    [otherUserId]="selectedUser.userId"
+    [otherUserName]="selectedUser.fullName"
+    (close)="closeChat()"
+    [attr.key]="selectedUser.userId"
+  ></app-chat-popup>
+</div>

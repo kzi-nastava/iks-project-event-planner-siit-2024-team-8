@@ -120,6 +120,7 @@
     </div>
   </div>
   <app-chat-popup
+    *ngIf="isChatVisible"
     [otherUserName]="'Organizer'"
     [userId]="userId"
     [otherUserId]="organizerId"

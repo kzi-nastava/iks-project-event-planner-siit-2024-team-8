@@ -97,6 +97,7 @@ export class AssetComponent implements OnInit {
             this.asset = utility;
             this.images = utility.images || this.images;
             this.providerId = this.asset.providerId
+            console.log(this.providerId + " ovo je provider id")
             this.userService.getUserById(this.providerId).subscribe(data => {
               if (data) {
                 this.providerName = data.firstName + ' ' + data.lastName;
@@ -121,6 +122,7 @@ export class AssetComponent implements OnInit {
           (product) => {
             this.asset = product;
             this.images = product.images || this.images;
+            this.providerId = this.asset.providerId
             this.userService.getUserById(this.asset.providerId).subscribe(data => {
               if (data) {
                 this.providerName = data.firstName + ' ' + data.lastName;

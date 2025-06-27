@@ -113,7 +113,7 @@
       </ng-container>
 
       <ng-template #joinToComment>
-        <p>Join the event to comment and rate it.</p>
+        <p>Buy the asset to comment and rate it.</p>
       </ng-template>
 
       <div *ngIf="reviews.length > 0">
@@ -133,6 +133,7 @@
   </div>
 
   <app-chat-popup
+    *ngIf="isChatVisible"
     [otherUserName]="providerName"
     [userId]="userId"
     [otherUserId]="providerId"

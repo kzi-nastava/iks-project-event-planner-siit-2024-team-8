@@ -62,7 +62,12 @@ const routes: Routes = [
   {path: 'events/:id/budget', component: BudgetComponent },
   {path: 'fast-register', component: FastRegisterComponent},
   {path: 'calendar', component: CalendarComponent},
+  {path: 'profile/:id', component: ProfileComponent},
+  {path: 'reports',component: ReportsComponent},
   {path: 'price-list', component: PriceListComponent},
+  {path: 'guestlist-edit/:id', component: GuestlistEditComponent},
+  {path: 'agenda-edit/:id', component: AgendaEditComponent},
+  { path: 'inbox', component: InboxComponent },
   { path: '**', redirectTo: '/home' },
 
 ];

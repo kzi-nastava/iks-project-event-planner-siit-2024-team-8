@@ -3,7 +3,7 @@
     <p>{{ otherUserName || 'Person' }}</p>
     <button class="close-btn" (click)="closeChat()">&#10005;</button>
   </div>
-  <div class="chat-messages">
+  <div class="chat-messages" #chatMessagesContainer>
     <div *ngFor="let msg of messages" [ngClass]="msg.senderId === userId ? 'message-right' : 'message-left'">
       {{ msg.messageContent }}
     </div>

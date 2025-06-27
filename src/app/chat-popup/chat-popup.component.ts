@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  AfterViewChecked,
+  EventEmitter,
+  Output, Input
+} from '@angular/core';
 import { Message } from '../model/message';
 import {ChatService} from '../services/chat-service';
 
@@ -7,7 +16,7 @@ import {ChatService} from '../services/chat-service';
   templateUrl: './chat-popup.component.html',
   styleUrls: ['./chat-popup.component.scss']
 })
-export class ChatPopupComponent implements OnInit, OnDestroy {
+export class ChatPopupComponent implements OnInit, AfterViewChecked {
   @Input() otherUserName!: string;
   @Input() userId!: string;
   @Input() otherUserId!: string;
@@ -15,12 +24,30 @@ export class ChatPopupComponent implements OnInit, OnDestroy {
 
   messages: Message[] = [];
   newMessage = '';
+  private shouldScroll = false;
+  @ViewChild('chatMessagesContainer') private chatMessagesContainer!: ElementRef;
 
   constructor(private chatService: ChatService) {}
 
   ngOnInit(): void {
     this.chatService.connect(this.userId, (message: Message) => {
-      this.messages.push(message);
+      const isCurrentConversation =
+        (message.senderId === this.otherUserId && message.receiverId === this.userId) ||
+        (message.senderId === this.userId && message.receiverId === this.otherUserId);
+
+      if (isCurrentConversation) {
+        this.messages.push(message);
+        this.shouldScroll = true;
+
+        if (message.senderId === this.otherUserId && message.receiverId === this.userId) {
+          this.chatService.markMessagesAsSeen(this.userId, this.otherUserId).subscribe({
+            next: () => console.log('Marked messages as seen'),
+            error: (err) => console.error('Error marking messages as seen', err)
+          });
+        }
+      } else {
+        console.log(`Someone else sent a message.`);
+      }
     });
 
     this.loadChatHistory();
@@ -33,6 +60,7 @@ export class ChatPopupComponent implements OnInit, OnDestroy {
   loadChatHistory(): void {
     this.chatService.getChatHistory(this.userId, this.otherUserId).subscribe((history) => {
       this.messages = history;
+      this.shouldScroll = true;
     });
   }
 
@@ -47,12 +75,26 @@ export class ChatPopupComponent implements OnInit, OnDestroy {
       };
 
       this.chatService.sendMessage(message);
-      this.messages.push(message);
       this.newMessage = '';
+      this.shouldScroll = true;
     }
   }
 
   closeChat(): void {
     this.close.emit();
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.shouldScroll) {
+      this.scrollToBottom();
+      this.shouldScroll = false;
+    }
+  }
+
+  private scrollToBottom(): void {
+    try {
+      this.chatMessagesContainer.nativeElement.scrollTop = this.chatMessagesContainer.nativeElement.scrollHeight;
+    } catch (err) {
+    }
   }
 }

@@ -39,4 +39,24 @@ export class NavBarComponent {
   onClickInbox() {
     this.router.navigate(['/inbox']);
   }
+
+  onClickAssetCategories() {
+    this.router.navigate(['/asset-categories']);
+  }
+
+  onClickEventTypes() {
+    this.router.navigate(['/event-types']);
+  }
+
+  onClickReviews() {
+    this.router.navigate(['/reviews']);
+  }
+
+  onClickPriceList() {
+    this.router.navigate(['/price-list']);
+  }
+
+  onClickReports() {
+    this.router.navigate(['/reports']);
+  }
 }

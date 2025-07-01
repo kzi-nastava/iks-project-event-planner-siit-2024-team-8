@@ -92,15 +92,19 @@
             <ng-container *ngFor="let star of stars; let i = index">
               <mat-icon
                 class="star"
-                [ngClass]="{'filled': i < userRating}"
-                (click)="setRating(i + 1)">
+                [ngClass]="{
+                'filled': i < (hoveredRating >= 0 ? hoveredRating : userRating)}"
+                (click)="setRating(i + 1)"
+                (mouseenter)="hoveredRating = i + 1"
+                (mouseleave)="hoveredRating = -1">
+
                 star
               </mat-icon>
             </ng-container>
           </div>
 
           <button class="btn" mat-raised-button (click)="submitRating()">
-            <mat-icon>send</mat-icon> Rate
+            Rate
           </button>
         </ng-container>
 

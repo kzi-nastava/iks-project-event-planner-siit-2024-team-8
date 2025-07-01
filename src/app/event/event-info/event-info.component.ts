@@ -24,6 +24,7 @@ export class EventInfoComponent {
   guestClicked: boolean = false;
   locationClicked:  boolean = false;
   isChatVisible:  boolean = false;
+  hoveredRating: number = -1;
 
   alreadySignedUp: boolean = false;
   //review

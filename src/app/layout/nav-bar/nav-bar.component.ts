@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {NavigationStart, Router} from '@angular/router';
 import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
@@ -14,9 +14,25 @@ export class NavBarComponent {
 
   ngOnInit() {
     this.authService.userState.subscribe(user => {
-      this.isLoggedIn = !(user === '' || user == null);
-      this.role = user.toUpperCase();
-    })
+      const tokenValid = this.authService.isLoggedIn() && !this.authService.isTokenExpired();
+      this.isLoggedIn = user != null && user !== '' && tokenValid;
+      this.role = tokenValid ? user.toUpperCase() : '';
+    });
+
+    this.checkTokenAndRedirect();
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.checkTokenAndRedirect();
+      }
+    });
+  }
+
+  checkTokenAndRedirect() {
+    if (this.authService.isLoggedIn() && this.authService.isTokenExpired()) {
+      this.authService.logout();
+      this.router.navigate(['/login']);
+    }
   }
 
   navigateToLogin(): void {
@@ -34,5 +50,29 @@ export class NavBarComponent {
 
   onClickCalendar() {
     this.router.navigate(['/calendar']);
+  }
+
+  onClickInbox() {
+    this.router.navigate(['/inbox']);
+  }
+
+  onClickAssetCategories() {
+    this.router.navigate(['/asset-categories']);
+  }
+
+  onClickEventTypes() {
+    this.router.navigate(['/event-types']);
+  }
+
+  onClickReviews() {
+    this.router.navigate(['/reviews']);
+  }
+
+  onClickPriceList() {
+    this.router.navigate(['/price-list']);
+  }
+
+  onClickReports() {
+    this.router.navigate(['/reports']);
   }
 }

@@ -10,8 +10,22 @@
       </div>
 
       <div *ngIf="role === 'Organizer'" class="organizer-actions">
-        <button *ngIf="isProduct" mat-raised-button class="btn buy-button" (click)="buyProduct()">Buy Product</button>
-        <button *ngIf="isUtility" mat-raised-button class="btn buy-button" (click)="reserveUtility()">Reserve Utility</button>
+        <button
+          *ngIf="isProduct && !isVersionRoute && asset.available"
+          mat-raised-button
+          class="btn buy-button"
+          (click)="buyProduct()">
+          Buy Product
+        </button>
+        <button mat-raised-button class="btn buy-button" (click)="chatWithProvider()">Chat with provider</button>
+        <button *ngIf="isUtility && !isVersionRoute && !isReservationInFuture()" mat-raised-button class="btn buy-button" (click)="reserveUtility()">Reserve Utility</button>
+        <button
+          *ngIf="isUtility && isVersionRoute && isBeforeCancellationDate() && asset.available"
+          mat-raised-button
+          class="btn buy-button"
+          (click)="cancelReservation()">
+          Cancl Reservation
+        </button>
       </div>
     </div>
 
@@ -43,7 +57,7 @@
         <p id="discount">{{ asset.discount }}%</p>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" *ngIf="isProviderOwner">
         <label for="visibility">Visibility</label>
         <p id="visibility">{{ asset.visible ? 'Visible' : 'Hidden' }}</p>
       </div>
@@ -53,7 +67,6 @@
         <p id="availability">{{ asset.available ? 'Available' : 'Unavailable' }}</p>
       </div>
 
-      <!-- Utility-specific details -->
       <div *ngIf="isUtility">
         <div class="form-group">
           <label for="duration">Duration</label>
@@ -76,7 +89,7 @@
         </div>
       </div>
 
-      <div class="button-group">
+      <div class="button-group" *ngIf="isProviderOwner">
         <button mat-raised-button class="btn action-button" (click)="openDeleteDialog()">
           <mat-icon>delete</mat-icon>
         </button>
@@ -100,8 +113,11 @@
           <ng-container *ngFor="let star of stars; let i = index">
             <mat-icon
               class="star"
-              [ngClass]="{'filled': i < userRating}"
-              (click)="setRating(i + 1)">
+              [ngClass]="{
+                'filled': i < (hoveredRating >= 0 ? hoveredRating : userRating)}"
+              (click)="setRating(i + 1)"
+              (mouseenter)="hoveredRating = i + 1"
+              (mouseleave)="hoveredRating = -1">
               star
             </mat-icon>
           </ng-container>
@@ -113,7 +129,7 @@
       </ng-container>
 
       <ng-template #joinToComment>
-        <p>Join the event to comment and rate it.</p>
+        <p>Buy the asset to comment and rate it.</p>
       </ng-template>
 
       <div *ngIf="reviews.length > 0">
@@ -131,4 +147,12 @@
       </div>
     </div>
   </div>
+
+  <app-chat-popup
+    *ngIf="isChatVisible"
+    [otherUserName]="providerName"
+    [userId]="userId"
+    [otherUserId]="providerId"
+    (close)="closeChat()">
+  </app-chat-popup>
 </div>

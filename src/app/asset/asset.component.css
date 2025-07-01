@@ -70,6 +70,12 @@ font-weight: 600;
 margin-bottom: 20px;
 }
 
+.organizer-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .form-group {
 margin-bottom: 15px;
 }
@@ -81,50 +87,51 @@ label {
 }
 
 p {
-font-size: 18px;
-margin: 0;
+  font-size: 18px;
+  margin: 0;
 }
 
 .btn {
-background-color: #A1C084 !important;
-color: #ffffff !important;
-border: none;
-box-shadow: none !important;
-display: inline-block;
-font-size: 16px;
-cursor: pointer;
-box-sizing: border-box;
+  background-color: #A1C084 !important;
+  color: #ffffff !important;
+  border: none;
+  box-shadow: none !important;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 .btn:hover {
-background-color: #556B2F !important;
-cursor: pointer;
+  background-color: #556B2F !important;
+  cursor: pointer;
 }
 
 .button-group {
-margin-top: 30px;
-display: flex;
-gap: 10px;
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
 }
 
 .buy-button {
-margin-top: 60px;
-color: white !important;
-font-size: 18px;
+  margin-top: 30px;
+  color: white !important;
+  font-size: 18px;
+  max-width: 12em;
 }
 
 .action-button {
-padding: 0 !important;
-display: flex;
-justify-content: center;
-align-items: center;
-box-sizing: border-box;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .button-group mat-icon {
-font-size: 20px;
-color: rgb(255, 255, 255);
-margin: 0 !important;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  margin: 0 !important;
 }
 
 @media (max-width: 768px) {
@@ -215,6 +222,7 @@ margin: 0 !important;
   font-size: 24px;
   color: lightgray;
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
 }
 
 .star.filled {

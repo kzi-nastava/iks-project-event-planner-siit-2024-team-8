@@ -4,6 +4,7 @@ import { AssetCategoryService } from '../../services/asset-category-service';
 import { AssetCategory } from '../../model/asset-category';
 import { BudgetService } from '../../services/budget-service';
 import {MatDialog} from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   BoughtAssetsPopupComponent
 } from '../bought-assets-popup/bought-assets-popup.component';
@@ -24,7 +25,8 @@ export class BudgetItemCardComponent implements OnInit {
   constructor(
     private assetCategoryService: AssetCategoryService,
     private budgetService: BudgetService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -65,19 +67,31 @@ export class BudgetItemCardComponent implements OnInit {
       () => {
         this.deleted.emit(this.budgetItem.id);
         console.log('Budget item deleted successfully');
+        this.snackBar.open('Budget item deleted successfully.', 'Close', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+        });
       },
       (error) => {
         console.error('Failed to delete budget item:', error);
+        this.snackBar.open(
+          "Couldn't delete budget item. Already bought/reserved items.",
+          'Close',
+          {
+            duration: 5000,
+            verticalPosition: 'bottom',
+          }
+        );
       }
     );
   }
 
   openBoughtAssetsModal(): void {
-    const assetIds = this.budgetItem.assetIds;
+    const assetIds = this.budgetItem.assetVersionIds;
     const categoryType = this.category.type;
 
     const dialogRef = this.dialog.open(BoughtAssetsPopupComponent, {
-      data: { assetIds, categoryType },
+      data: { assetIds, categoryType, eventId: this.budgetItem.eventId },
     });
 
     dialogRef.afterClosed().subscribe(() => {

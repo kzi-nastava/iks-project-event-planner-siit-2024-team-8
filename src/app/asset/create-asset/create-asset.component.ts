@@ -76,7 +76,10 @@ export class CreateAssetComponent implements OnInit {
 
           if (this.categories.length > 0) {
             this.asset.category = this.categories[0].id;
-          }
+          } else {
+        this.asset.category = 'none';
+      }
+          this.onCategoryChange();
         },
         (error) => {
           console.error('Error fetching utility categories:', error);
@@ -93,7 +96,11 @@ export class CreateAssetComponent implements OnInit {
 
           if (this.categories.length > 0) {
             this.asset.category = this.categories[0].id;
+          }else {
+            this.asset.category = 'none';
           }
+
+          this.onCategoryChange();
         },
         (error) => {
           console.error('Error fetching product categories:', error);
@@ -151,7 +158,7 @@ export class CreateAssetComponent implements OnInit {
       this.validationMessages.category = 'Please select a valid category.';
     }
 
-    if (!this.asset.name || this.asset.name.length > 20 || !/^[a-zA-Z\s]+$/.test(this.asset.name)) {
+    if (!this.asset.name || this.asset.name.length > 50 || !/^[a-zA-Z\s]+$/.test(this.asset.name)) {
       this.validationMessages.name = 'Asset name should contain only letters and spaces, and be less than 20 characters.';
     }
 

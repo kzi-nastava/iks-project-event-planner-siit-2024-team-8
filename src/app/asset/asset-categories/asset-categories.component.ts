@@ -119,6 +119,7 @@ export class AssetCategoriesComponent implements OnInit {
     this.assetCategoryService.approveCategory(categoryId).subscribe(
       () => {
         this.loadPendingCategories();
+        this.loadCategories();
       },
       error => {
         console.error('Error approving category', error);

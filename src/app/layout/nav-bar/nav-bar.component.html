@@ -42,7 +42,7 @@
       <span>My Events</span>
     </div>
     <div class="toolbar-button">
-      <button mat-icon-button (click)="onClickInbox()">
+      <button mat-icon-button (click)="onClickPlaceholder()">
         <mat-icon>chat</mat-icon>
       </button>
       <span>Chats</span>
@@ -59,41 +59,42 @@
       </button>
       <span>Create Event</span>
     </div>
-
+    <!-- TO BE TESTED -->
     <div *ngIf="role == 'PROVIDER'" class="toolbar-button">
-      <button mat-icon-button (click)="onClickAssetCategories()">
+      <button mat-icon-button [routerLink]="['asset-categories']">
         <mat-icon>add_circle</mat-icon>
       </button>
       <span>Create Asset Category</span>
     </div>
 
     <div *ngIf="role == 'ADMIN'" class="toolbar-button">
-      <button mat-icon-button (click)="onClickEventTypes()">
+      <button mat-icon-button [routerLink]="['event-types']">
         <mat-icon>add_circle</mat-icon>
       </button>
       <span>Create Event Type</span>
     </div>
 
     <div *ngIf="role == 'ADMIN'" class="toolbar-button">
-      <button mat-icon-button (click)="onClickReviews()">
+      <button mat-icon-button [routerLink]="['reviews']">
         <mat-icon>assignment</mat-icon>
       </button>
       <span>Manage Reviews</span>
     </div>
 
     <div *ngIf="role == 'PROVIDER'" class="toolbar-button">
-      <button mat-icon-button (click)="onClickPriceList()">
+      <button mat-icon-button [routerLink]="['price-list']">
         <mat-icon>assignment</mat-icon>
       </button>
       <span>View Price List</span>
     </div>
 
     <div *ngIf="role == 'ADMIN'" class="toolbar-button">
-      <button mat-icon-button (click)="onClickReports()">
+      <button mat-icon-button [routerLink]="['reports']">
         <mat-icon>report</mat-icon>
       </button>
       <span>View Reports</span>
     </div>
+    <!-- TO BE TESTED -->
 
   </div>
   <div class="toolbar-section">

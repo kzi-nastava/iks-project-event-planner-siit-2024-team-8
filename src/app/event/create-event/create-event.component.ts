@@ -196,7 +196,7 @@ export class CreateEventComponent {
       assetCategoryId: '',
       plannedAmount: 0,
       actualAmount: 0,
-      assetVersionIds: [],
+      assetIds: [],
       deleted: false,
     };
     this.budgetItems.push(newBudgetItem);
@@ -219,7 +219,7 @@ export class CreateEventComponent {
           assetCategoryId: category.id,
           plannedAmount: 0,
           actualAmount: 0,
-          assetVersionIds: [],
+          assetIds: [],
           deleted: false,
         };
         this.budgetItems.push(newBudgetItem);

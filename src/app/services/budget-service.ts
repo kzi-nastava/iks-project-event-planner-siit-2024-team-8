@@ -50,15 +50,4 @@ export class BudgetService {
       null
     );
   }
-
-  cancelUtilityReservation(eventId: string, utilityVersionId: string): Observable<void> {
-    return this.http.put<void>(
-      `${environment.apiHost}${this.apiUrl}${eventId}/cancel-utility/${utilityVersionId}`,
-      null
-    );
-  }
-
-  acceptReservation(reservationId: string): Observable<void> {
-    return this.http.put<void>(`/api/event/budget/accept-reservation/${reservationId}`, {});
-  }
 }

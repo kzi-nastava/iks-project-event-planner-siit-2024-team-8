@@ -29,7 +29,6 @@ import {ReportsComponent} from './user/reports/reports.component';
 import {PriceListComponent} from './price-list/price-list.component';
 import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.component';
 import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
-import { InboxComponent } from './inbox/inbox.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -45,7 +44,6 @@ const routes: Routes = [
   {path: 'edit-event/:id', component: EditEventComponent },
   {path : 'all-assets', component: AllEventsComponent },
   { path: 'all-my-assets', component: AllEventsComponent },
-  { path: 'all-my-assets/:providerId', component: AllEventsComponent },
   {path : 'assets/products/:id', component: AssetComponent },
   {path : 'assets/utilities/:id', component: AssetComponent },
   {path : 'event/:id', component: EventInfoComponent },
@@ -68,9 +66,6 @@ const routes: Routes = [
   {path: 'price-list', component: PriceListComponent},
   {path: 'guestlist-edit/:id', component: GuestlistEditComponent},
   {path: 'agenda-edit/:id', component: AgendaEditComponent},
-  { path: 'inbox', component: InboxComponent },
-  {path: 'events/:eventId/assets/products/version/:id', component: AssetComponent},
-  {path: 'events/:eventId/assets/utilities/version/:id', component: AssetComponent},
   { path: '**', redirectTo: '/home' },
 
 ];

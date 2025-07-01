@@ -20,10 +20,6 @@ export class ProductService {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
-  getProductVersionById(id: string): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/product-versions/${id}`);
-  }
-
   createProduct(formData: FormData): Observable<string> {
     return this.http.post(this.apiUrl, formData, { responseType: 'text' });
   }
@@ -46,5 +42,9 @@ export class ProductService {
 
   submitReview(id: string, reviewData: any) {
     return this.http.post(`${this.apiUrl}/${id}/review`, reviewData);
+  }
+
+  getReviews(id: string): Observable<Review[]> {
+    return this.http.get<Review[]>(`${environment.apiHost + this.apiUrl}/${id}/reviews`);
   }
 }

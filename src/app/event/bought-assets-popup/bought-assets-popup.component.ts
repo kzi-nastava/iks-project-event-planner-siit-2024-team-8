@@ -12,12 +12,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./bought-assets-popup.component.css'],
 })
 export class BoughtAssetsPopupComponent {
-  boughtAssets: { versionId: string, asset: Product | Utility }[] = [];
+  boughtAssets: (Product | Utility)[] = [];
   protected hasAssets: boolean = true;
 
   constructor(
     private dialogRef: MatDialogRef<BoughtAssetsPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { assetIds: string[], categoryType: string, eventId: string },
+    @Inject(MAT_DIALOG_DATA) public data: { assetIds: string[], categoryType: string },
     private productService: ProductService,
     private utilityService: UtilityService,
     private router: Router
@@ -29,25 +29,16 @@ export class BoughtAssetsPopupComponent {
     if (this.data.assetIds && Array.isArray(this.data.assetIds) && this.data.assetIds.length > 0) {
       const assetRequests = this.data.assetIds.map((assetId) => {
         if (this.data.categoryType === 'PRODUCT') {
-          return this.productService.getProductVersionById(assetId).toPromise();
+          return this.productService.getProductById(assetId).toPromise();
         } else if (this.data.categoryType === 'UTILITY') {
-          return this.utilityService.getUtilityVersionById(assetId).toPromise();
+          return this.utilityService.getUtilityById(assetId).toPromise();
         } else {
           return Promise.resolve(null);
         }
       });
 
       Promise.all(assetRequests).then((assets) => {
-        this.boughtAssets = assets
-          .map((asset, index) => {
-            if (!asset) return null;
-            return {
-              versionId: this.data.assetIds[index], // original version ID
-              asset: asset
-            };
-          })
-          .filter((entry) => entry !== null);
-
+        this.boughtAssets = assets.filter((asset) => asset !== null);
         this.hasAssets = this.boughtAssets.length > 0;
       });
     } else {
@@ -56,19 +47,12 @@ export class BoughtAssetsPopupComponent {
     }
   }
 
-  onAssetClick(entry: { versionId: string, asset: Product | Utility }): void {
-    const {versionId, asset} = entry;
-    const eventId = this.data.eventId;
-
-    let route: string;
-
+  onAssetClick(asset: Product | Utility): void {
     if ((asset as Utility).duration) {
-      route = `/events/${eventId}/assets/utilities/version/${versionId}`;
+      this.router.navigate([`/assets/utilities/${asset.id}`]);
     } else {
-      route = `/events/${eventId}/assets/products/version/${versionId}`;
+      this.router.navigate([`/assets/products/${asset.id}`]);
     }
-
-    this.router.navigate([route]);
     this.close();
   }
 

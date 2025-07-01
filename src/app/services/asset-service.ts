@@ -69,15 +69,7 @@ import {SearchAssetsRequest} from '../model/search.assets.request';
       return this.http.get<PagedResponse<AssetResponse>>(`${environment.apiHost + this.apiUrl}/filter`, {params: params});
     }
 
-    getAssetsByProviderId(providerId: string): Observable<AssetResponse[]> {
-      return forkJoin({
-        products: this.http.get<any[]>(`${environment.apiHost}/products/provider/${providerId}`),
-        utilities: this.http.get<any[]>(`${environment.apiHost}/utilities/provider/${providerId}`)
-      }).pipe(
-        map(response => [
-          ...this.mapToAssetResponse(response.products, 'PRODUCT'),
-          ...this.mapToAssetResponse(response.utilities, 'UTILITY')
-        ])
-      );
-    }
+    isUtility(asset: Asset): asset is Utility {
+        return (asset as Utility).duration !== undefined;
+      }
   }

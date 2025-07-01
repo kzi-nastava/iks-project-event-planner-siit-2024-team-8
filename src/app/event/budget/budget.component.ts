@@ -44,14 +44,11 @@ export class BudgetComponent implements OnInit {
     this.budgetService.getBudgetByEventId(this.eventId).subscribe(
       (budget: Budget) => {
         this.budgetId = budget.id;
-        this.budgetItems = budget.items.map(item => ({
-          ...item,
-          eventId: this.eventId
-        }));
+        this.budgetItems = budget.items;
         this.plannedBudget = budget.plannedBudget;
         this.actualBudget = budget.actualBudget;
         this.budgetItems.forEach(item => {
-          console.log('Bought Assets for Item ID:', item.id, item.assetVersionIds);
+          console.log('Bought Assets for Item ID:', item.id, item.assetIds);
         });
         console.log(this.budgetItems);
       },
@@ -69,7 +66,7 @@ export class BudgetComponent implements OnInit {
       plannedAmount: 0,
       actualAmount: 0,
       deleted: false,
-      assetVersionIds: [],
+      assetIds: [],
     };
     this.newBudgetItems.push(newItem);
   }

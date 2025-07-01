@@ -23,8 +23,6 @@ export class EventInfoComponent {
   budgetClicked:  boolean = false;
   guestClicked: boolean = false;
   locationClicked:  boolean = false;
-  isChatVisible:  boolean = false;
-  hoveredRating: number = -1;
 
   alreadySignedUp: boolean = false;
   //review
@@ -33,8 +31,6 @@ export class EventInfoComponent {
   userComment: string = '';
   userRating: number = 0;
   stars: number[] = [0, 1, 2, 3, 4];
-  userId: string;
-  organizerId: string;
 
   constructor(private route: ActivatedRoute, private eventService: EventService, private router: Router,
               private authService: AuthService, private toastService: ToastService,
@@ -44,7 +40,6 @@ export class EventInfoComponent {
     this.route.paramMap.subscribe(params => {
       // Get event ID from route parameters
       this.eventID = params.get('id');
-      this.userId = this.authService.getUserId()
 
       // Construct event signup request
       this.eventSignupRequest = {
@@ -52,20 +47,21 @@ export class EventInfoComponent {
         userId: this.authService.getUserId()
       };
 
+      // Use `isUserSignedUp` Observable properly
       this.eventService.isUserSignedUp(this.eventSignupRequest).subscribe({
         next: (isSignedUp: boolean) => {
-          this.alreadySignedUp = isSignedUp;
+          this.alreadySignedUp = isSignedUp; // Assign the boolean value to `alreadySignedUp`
         },
         error: (err) => {
           console.error('Error checking signup status:', err);
         }
       });
 
+      // Load event details if event ID is present
       if (this.eventID) {
         this.eventService.getEventById(this.eventID).subscribe({
           next: (event: EventInfoResponse) => {
-            this.event = event;
-            this.organizerId = event.organizerID;
+            this.event = event; // Assign the event details
             console.log(this.event);
           },
           error: (err) => {
@@ -144,18 +140,21 @@ export class EventInfoComponent {
   }
 
   eventDateValid() : boolean {
+    // Check if event has a start and end date
     if (this.event.startDate && this.event.endDate) {
 
-      const currentDate = new Date();
+      const currentDate = new Date(); // Get the current date
 
-      const startDate = new Date(this.event.startDate);
-      const endDate = new Date(this.event.endDate);
+      const startDate = new Date(this.event.startDate); // Convert event startDate to Date object
+      const endDate = new Date(this.event.endDate); // Convert event endDate to Date object
 
+      // Check if the current date is between the start and end date
       if (currentDate >= startDate && currentDate <= endDate) {
-        return false
+        return false // The event is ongoing
       }
+      // Check if the event is already past due (i.e., after the end date)
       else if (currentDate > endDate) {
-        return false;
+        return false; // The event has already ended
       }
       return true;
     }
@@ -273,14 +272,6 @@ export class EventInfoComponent {
         }
       },
     });
-  }
-
-  chatWithOrganizer() {
-    this.isChatVisible = true;
-  }
-
-  closeChat() {
-    this.isChatVisible = false;
   }
 
   protected readonly localStorage = localStorage;

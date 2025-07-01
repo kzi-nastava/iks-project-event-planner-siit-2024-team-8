@@ -4,6 +4,5 @@ export interface BudgetItem {
   plannedAmount: number;
   actualAmount: number;
   deleted: boolean;
-  assetVersionIds: string[];
-  eventId?: string;
+  assetIds: string[];
 }

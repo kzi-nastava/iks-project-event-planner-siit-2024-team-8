@@ -50,7 +50,6 @@
               <mat-icon>how_to_reg</mat-icon>
               Join Event
             </button>
-            <button mat-raised-button class="btn buy-button" (click)="chatWithOrganizer()">Chat with organizer</button>
             <button class="btn" (click)="leaveEvent()" *ngIf="!isMyEvent() && alreadySignedUp && !event.isPrivate" mat-raised-button>
               <mat-icon>cancel</mat-icon>
               Leave Event
@@ -92,19 +91,15 @@
             <ng-container *ngFor="let star of stars; let i = index">
               <mat-icon
                 class="star"
-                [ngClass]="{
-                'filled': i < (hoveredRating >= 0 ? hoveredRating : userRating)}"
-                (click)="setRating(i + 1)"
-                (mouseenter)="hoveredRating = i + 1"
-                (mouseleave)="hoveredRating = -1">
-
+                [ngClass]="{'filled': i < userRating}"
+                (click)="setRating(i + 1)">
                 star
               </mat-icon>
             </ng-container>
           </div>
 
           <button class="btn" mat-raised-button (click)="submitRating()">
-            Rate
+            <mat-icon>send</mat-icon> Rate
           </button>
         </ng-container>
 
@@ -128,11 +123,4 @@
       </div>
     </div>
   </div>
-  <app-chat-popup
-    *ngIf="isChatVisible"
-    [otherUserName]="'Organizer'"
-    [userId]="userId"
-    [otherUserId]="organizerId"
-    (close)="closeChat()">
-  </app-chat-popup>
 </div>

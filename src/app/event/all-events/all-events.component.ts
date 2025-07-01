@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import { EventService } from '../../services/event-service';
 import { AssetService } from '../../services/asset-service';
 import { PageEvent } from '@angular/material/paginator';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import { EventType } from '../../event/domain/event.type';
 import { Asset } from '../../model/asset';
 import {PagedResponse} from '../../shared/model/paged.response';
@@ -25,7 +25,6 @@ export class AllEventsComponent {
   assets: AssetResponse[] = [];
   filterType: string = '';
   sortParameter: string = '';
-  providerId: string = '';
 
   pageProperties = {
     page: 0,
@@ -35,7 +34,6 @@ export class AllEventsComponent {
   };
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private eventService: EventService,
     private assetService: AssetService
   ) {}
@@ -62,17 +60,13 @@ export class AllEventsComponent {
 
   fetchData() {
     if (this.isEvents) {
-      this.eventService.filterEvents(returnSearchEventsRequest(), this.pageProperties)
-        .subscribe((response: PagedResponse<EventCardResponse>) => {
-          this.events = response.content;
-          this.pageProperties.totalCount = response.totalElements;
-        });
-    } else if (this.filterType === 'my-assets' && this.providerId) {
-      this.assetService.getAssetsByProviderId(this.providerId).subscribe((assetsData: any) => {
-        this.assets = assetsData;
-        console.log("uspesno od provider id");
+      // Fetch events
+      this.eventService.filterEvents(returnSearchEventsRequest(),this.pageProperties).subscribe((response: PagedResponse<EventCardResponse>) => {
+        this.events = response.content;
+        this.pageProperties.totalCount = response.totalElements;
       });
     } else {
+      // Fetch assets
       this.assetService.getAllAssets().subscribe((assetsData: any) => {
         this.assets = assetsData;
       });
@@ -117,7 +111,6 @@ export class AllEventsComponent {
     const url = this.router.url;
     this.isEvents = url.includes('all-events');
     this.isMyAssets = url.includes('all-my-assets');
-    const routeParams = this.route.snapshot.paramMap;
 
     if (url.includes('all-events')) {
       this.filterType = 'events';
@@ -125,7 +118,6 @@ export class AllEventsComponent {
       this.filterType = 'assets';
     } else if (url.includes('all-my-assets')) {
       this.filterType = 'my-assets';
-      this.providerId = routeParams.get('providerId') ?? '';
     }
   }
 

@@ -16,7 +16,6 @@ import {ToastService} from '../services/toast-service';
 import {Review} from '../model/review';
 import {ReviewService} from '../services/review-service';
 import {EventService} from '../services/event-service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-asset',
@@ -28,16 +27,8 @@ export class AssetComponent implements OnInit {
   assetID: string;
   isUtility: boolean = false;
   isProduct: boolean = false;
-  isChatVisible = false;
   categoryName: string = '';
   providerName: string = '';
-  providerId: string = '';
-  userId: string = '';
-  hoveredRating: number = -1;
-  isProviderOwner: boolean = false;
-  isVersionRoute: boolean = false;
-  reservationDate: Date;
-  eventID: string;
 
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
   currentImageIndex: number = 0;
@@ -48,7 +39,7 @@ export class AssetComponent implements OnInit {
   utilityManualConfirmation: boolean;
 
   boughtAsset: boolean = false;
-
+  //review
   reviews: Review[] = [];
   showComments: boolean = false;
   userComment: string = '';
@@ -71,11 +62,9 @@ export class AssetComponent implements OnInit {
       private toastService: ToastService,
       private reviewService: ReviewService,
       private eventService: EventService,
-      private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
-    this.userId = this.authService.getUserId()
     this.authService.userState.subscribe(user => {
       this.role = user;
 
@@ -83,9 +72,7 @@ export class AssetComponent implements OnInit {
         this.currentUser = data;
 
         this.route.paramMap.subscribe(params => {
-
           this.assetID = params.get('id');
-          this.eventID = params.get('eventId');
           if (this.assetID) {
             this.fetchAssetData();
             this.checkIfAssetBought();
@@ -97,77 +84,59 @@ export class AssetComponent implements OnInit {
 
   fetchAssetData(): void {
     const url = this.router.url;
-    this.isVersionRoute = url.includes('/version/');
 
     if (url.includes('utilities')) {
       this.isUtility = true;
       this.isProduct = false;
+      this.utilityService.getUtilityById(this.assetID).subscribe(
+          (utility) => {
+            this.asset = utility;
+            this.images = utility.images || this.images;
+            this.userService.getUserById(this.asset.providerId).subscribe(data => {
+              if (data) {
+                this.providerName = data.firstName + ' ' + data.lastName;
+              }
+            });
 
-      if (this.isVersionRoute) {
-        this.utilityService.getUtilityVersionById(this.assetID).subscribe(
-          (utility) => this.processFetchedAsset(utility),
-          (error) => console.error('Error fetching utility version:', error)
-        );
-      } else {
-        this.utilityService.getUtilityById(this.assetID).subscribe(
-          (utility) => this.processFetchedAsset(utility),
+            this.utilityDuration = utility.duration;
+            this.utilityReservationTerm = utility.reservationTerm;
+            this.utilityCancellationTerm = utility.cancellationTerm;
+            this.utilityManualConfirmation = utility.manuelConfirmation;
+
+            if (utility.category) {
+              this.fetchCategory(utility.category);
+            }
+          },
           (error) => console.error('Error fetching utility:', error)
-        );
-      }
-
+      );
     } else if (url.includes('products')) {
       this.isProduct = true;
       this.isUtility = false;
+      this.productService.getProductById(this.assetID).subscribe(
+          (product) => {
+            this.asset = product;
+            this.images = product.images || this.images;
+            this.userService.getUserById(this.asset.providerId).subscribe(data => {
+              if (data) {
+                this.providerName = data.firstName + ' ' + data.lastName;
+              }
+            });
 
-      if (this.isVersionRoute) {
-        this.productService.getProductVersionById(this.assetID).subscribe(
-          (product) => this.processFetchedAsset(product),
-          (error) => console.error('Error fetching product version:', error)
-        );
-      } else {
-        this.productService.getProductById(this.assetID).subscribe(
-          (product) => this.processFetchedAsset(product),
+            if (product.category) {
+              this.fetchCategory(product.category);
+            }
+          },
           (error) => console.error('Error fetching product:', error)
-        );
-      }
+      );
     }
   }
 
-  processFetchedAsset(asset: any): void {
-    this.asset = asset;
-    this.images = asset.images || this.images;
-    this.providerId = asset.providerId;
-    this.isProviderOwner = this.providerId === this.userId;
-
-    this.userService.getUserById(this.providerId).subscribe(data => {
-      if (data) {
-        this.providerName = data.firstName + ' ' + data.lastName;
-      }
-    });
-
-    if (asset.category) {
-      this.fetchCategory(asset.category);
-    }
-
-    if (this.isUtility) {
-      this.utilityDuration = asset.duration;
-      this.utilityReservationTerm = asset.reservationTerm;
-      this.utilityCancellationTerm = asset.cancellationTerm;
-      this.utilityManualConfirmation = asset.manuelConfirmation;
-
-      this.reservationDate = new Date(asset.reservationDate);
-    }
-  }
-
-  isReservationInFuture(): boolean {
-    return this.reservationDate && new Date(this.reservationDate) > new Date();
-  }
   checkIfAssetBought(): void {
     if (!this.currentUser || !this.assetID) {
       return;
     }
 
-    this.eventService.checkAssetInOrganizedEvents(this.userId, this.assetID).subscribe({
+    this.eventService.checkAssetInOrganizedEvents(this.authService.getUserId(), this.assetID).subscribe({
       next: (isBought) => {
         this.boughtAsset = isBought;
       },
@@ -207,30 +176,10 @@ export class AssetComponent implements OnInit {
   }
 
   deleteItem(): void {
-    const successMessage = 'Asset deleted successfully.';
-    const errorMessage = 'Failed to delete asset. Please try again.';
-
-    const handleResponse = {
-      next: () => {
-        this.snackBar.open(successMessage, 'Close', {
-          duration: 3000,
-          panelClass: ['snackbar-success']
-        });
-        this.router.navigate(['/home']);
-      },
-      error: (err: any) => {
-        const msg = err?.error || errorMessage;
-        this.snackBar.open(msg, 'Close', {
-          duration: 3000,
-          panelClass: ['snackbar-error']
-        });
-      }
-    };
-
     if (this.isUtility) {
-      this.utilityService.deleteUtility(this.assetID).subscribe(handleResponse);
+        this.utilityService.deleteUtility(this.assetID).subscribe()
     } else {
-      this.productService.deleteProduct(this.assetID).subscribe(handleResponse);
+        this.productService.deleteProduct(this.assetID).subscribe()
     }
   }
 
@@ -315,7 +264,7 @@ export class AssetComponent implements OnInit {
 
     const reviewData = {
       assetId: this.assetID,
-      userId: this.userId,
+      userId: this.authService.getUserId(),
       comment: this.userComment,
       rating: this.userRating,
     };
@@ -390,46 +339,5 @@ export class AssetComponent implements OnInit {
   private resetForm(): void {
     this.userComment = '';
     this.userRating = 0;
-  }
-
-  chatWithProvider() {
-    this.isChatVisible = true;
-  }
-
-  closeChat() {
-    this.isChatVisible = false;
-  }
-
-  isBeforeCancellationDate(): boolean {
-    const today = new Date();
-    if (!this.utilityCancellationTerm) return false;
-
-    const cancellationDate = new Date(this.utilityCancellationTerm);
-    return today <= cancellationDate;
-  }
-
-  cancelReservation(): void {
-    if (!this.assetID || !this.currentUser) return;
-
-    this.budgetService.cancelUtilityReservation(this.eventID, this.assetID).subscribe({
-      next: () => {
-        this.toastService.showToast({
-          title: 'Reservation Cancelled',
-          message: 'The utility reservation has been successfully cancelled.',
-          type: 'success',
-          duration: 3000
-        });
-        this.router.navigate(['/home']);
-      },
-      error: (err) => {
-        console.error('Error cancelling reservation:', err);
-        this.toastService.showToast({
-          title: 'Error',
-          message: 'Failed to cancel the reservation. Please try again later.',
-          type: 'error',
-          duration: 3000
-        });
-      }
-    });
   }
 }

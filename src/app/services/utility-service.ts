@@ -22,10 +22,6 @@ export class UtilityService {
     return this.http.get<Utility>(`${this.apiUrl}/${id}`);
   }
 
-  getUtilityVersionById(id: string): Observable<Utility> {
-    return this.http.get<Utility>(`${this.apiUrl}/utility-versions/${id}`);
-  }
-
   createUtility(formData: FormData): Observable<string> {
     return this.http.post(this.apiUrl, formData, { responseType: 'text' });
   }

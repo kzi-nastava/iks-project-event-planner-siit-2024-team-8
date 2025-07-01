@@ -2,10 +2,10 @@
 <mat-dialog-content>
   <div *ngIf="hasAssets; else noAssets">
     <mat-list>
-      <mat-list-item *ngFor="let entry of boughtAssets" (click)="onAssetClick(entry)">
+      <mat-list-item *ngFor="let asset of boughtAssets" (click)="onAssetClick(asset)">
         <div>
-          <p>{{ entry.asset.name }}</p>
-          <p>{{ entry.asset.price }}</p>
+          <p>{{ asset.name }}</p>
+          <p>{{ asset.price }}</p>
         </div>
       </mat-list-item>
     </mat-list>

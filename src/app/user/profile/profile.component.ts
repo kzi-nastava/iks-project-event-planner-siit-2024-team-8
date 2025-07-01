@@ -30,7 +30,6 @@ export class ProfileComponent {
   companyName: string = '';
   companyDesc: string = '';
   companyImages: string[] = [];
-  loggedInProviderId: string = null;
 
   isMyProfile: boolean = true;
 
@@ -64,7 +63,6 @@ export class ProfileComponent {
                 this.companyDesc = data.companyDescription;
                 this.companyName = data.companyName;
                 this.companyImages = data.companyImagesURL;
-                this.loggedInProviderId = this.authService.getUserId();
             }
             })
           }

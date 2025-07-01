@@ -222,6 +222,7 @@ p {
   font-size: 24px;
   color: lightgray;
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
 }
 
 .star.filled {

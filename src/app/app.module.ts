@@ -76,6 +76,7 @@ import {MatTable, MatTableModule} from '@angular/material/table';
 import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
 import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.component';
 import { InboxComponent } from './inbox/inbox.component';
+import { ReservationDialogComponent } from './dialogs/reservation-dialog/reservation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { InboxComponent } from './inbox/inbox.component';
     BlockedUsersDialogComponent,
     ReportUserDialogComponent,
     ReportsComponent,
+    ReservationDialogComponent,
   ],
   imports: [
     MatCardModule,

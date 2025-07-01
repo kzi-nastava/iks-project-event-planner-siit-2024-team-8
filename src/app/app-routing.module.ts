@@ -45,6 +45,7 @@ const routes: Routes = [
   {path: 'edit-event/:id', component: EditEventComponent },
   {path : 'all-assets', component: AllEventsComponent },
   { path: 'all-my-assets', component: AllEventsComponent },
+  { path: 'all-my-assets/:providerId', component: AllEventsComponent },
   {path : 'assets/products/:id', component: AssetComponent },
   {path : 'assets/utilities/:id', component: AssetComponent },
   {path : 'event/:id', component: EventInfoComponent },
@@ -68,6 +69,8 @@ const routes: Routes = [
   {path: 'guestlist-edit/:id', component: GuestlistEditComponent},
   {path: 'agenda-edit/:id', component: AgendaEditComponent},
   { path: 'inbox', component: InboxComponent },
+  {path: 'events/:eventId/assets/products/version/:id', component: AssetComponent},
+  {path: 'events/:eventId/assets/utilities/version/:id', component: AssetComponent},
   { path: '**', redirectTo: '/home' },
 
 ];

@@ -41,13 +41,13 @@
       </button>
       <span>My Events</span>
     </div>
-    <div class="toolbar-button">
+    <div *ngIf='role == "PROVIDER" || role == "ORGANIZER" || role == "USER" || role == "ADMIN"'  class="toolbar-button">
       <button mat-icon-button (click)="onClickInbox()">
         <mat-icon>chat</mat-icon>
       </button>
       <span>Chats</span>
     </div>
-    <div class="toolbar-button">
+    <div *ngIf='role == "PROVIDER" || role == "ORGANIZER" || role == "USER" || role == "ADMIN"' class="toolbar-button">
       <button mat-icon-button (click)="onClickPlaceholder()">
         <mat-icon>notification_important</mat-icon>
       </button>
@@ -97,12 +97,6 @@
 
   </div>
   <div class="toolbar-section">
-    <div class="toolbar-button">
-      <button mat-icon-button (click)="onClickPlaceholder()">
-        <mat-icon>settings</mat-icon>
-      </button>
-      <span>Settings</span>
-    </div>
     <div class="toolbar-button">
       <button mat-icon-button (click)="navigateToLogin()">
         <mat-icon class="account_button" fontIcon="account_circle"></mat-icon>

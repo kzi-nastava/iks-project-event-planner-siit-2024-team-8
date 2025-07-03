@@ -5,10 +5,10 @@
   <button mat-icon-button [routerLink]="['calendar']">
     <mat-icon>calendar_month</mat-icon>
   </button>
-  <button mat-icon-button [routerLink]="['inbox']">
+  <button *ngIf='role == "PROVIDER" || role == "ORGANIZER" || role == "USER" || role == "ADMIN"' mat-icon-button [routerLink]="['inbox']">
     <mat-icon>chat</mat-icon>
   </button>
-  <button mat-icon-button (click)="onClickPlaceholder()">
+  <button *ngIf='role == "PROVIDER" || role == "ORGANIZER" || role == "USER" || role == "ADMIN"' mat-icon-button (click)="onClickPlaceholder()">
     <mat-icon>notification_important</mat-icon>
   </button>
   <button mat-icon-button *ngIf="role =='ORGANIZER'" [routerLink]="['create-event']">
@@ -30,9 +30,6 @@
     <mat-icon>report</mat-icon>
   </button>
   <div class="bottom-buttons">
-    <button mat-icon-button (click)="onClickPlaceholder()">
-      <mat-icon>settings</mat-icon>
-    </button>
     <button mat-icon-button (click)="navigateToLogin()">
       <mat-icon>account_circle</mat-icon>
     </button>

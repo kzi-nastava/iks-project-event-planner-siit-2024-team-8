@@ -30,6 +30,7 @@ import {PriceListComponent} from './price-list/price-list.component';
 import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.component';
 import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
 import { InboxComponent } from './inbox/inbox.component';
+import {NotificationsComponent} from './notifications/notifications.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -71,6 +72,7 @@ const routes: Routes = [
   { path: 'inbox', component: InboxComponent },
   {path: 'events/:eventId/assets/products/version/:id', component: AssetComponent},
   {path: 'events/:eventId/assets/utilities/version/:id', component: AssetComponent},
+  {path: 'notifications', component: NotificationsComponent},
   { path: '**', redirectTo: '/home' },
 
 ];

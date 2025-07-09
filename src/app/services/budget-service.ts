@@ -59,6 +59,16 @@ export class BudgetService {
   }
 
   acceptReservation(reservationId: string): Observable<void> {
-    return this.http.put<void>(`/api/event/budget/accept-reservation/${reservationId}`, {});
+    return this.http.put<void>(
+      `${environment.apiHost}${this.apiUrl}accept-reservation/${reservationId}`,
+      {}
+    );
+  }
+
+  denyReservation(reservationId: string): Observable<void> {
+    return this.http.put<void>(
+      `${environment.apiHost}${this.apiUrl}deny-reservation/${reservationId}`,
+      {}
+    );
   }
 }

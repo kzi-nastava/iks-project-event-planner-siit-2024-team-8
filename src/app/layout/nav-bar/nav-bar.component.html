@@ -47,8 +47,8 @@
       </button>
       <span>Chats</span>
     </div>
-    <div *ngIf='role == "PROVIDER" || role == "ORGANIZER" || role == "USER" || role == "ADMIN"' class="toolbar-button">
-      <button mat-icon-button (click)="onClickPlaceholder()">
+    <div class="toolbar-button">
+      <button mat-icon-button (click)="onClickNotifications()">
         <mat-icon>notification_important</mat-icon>
       </button>
       <span>Notifications</span>

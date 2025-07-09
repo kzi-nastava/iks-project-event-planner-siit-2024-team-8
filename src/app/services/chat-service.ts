@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Message } from '../model/message';
 import { Client } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 import {InboxUser} from '../model/inbox-user';
 
 @Injectable({
@@ -17,11 +16,10 @@ export class ChatService {
   constructor(private http: HttpClient) {}
 
   connect(userId: string, onMessageReceived: (message: Message) => void): void {
-    const socket = new SockJS(this.chatUrl);
     console.log('Token in connectHeaders:', localStorage.getItem('user'));
 
     this.stompClient = new Client({
-      webSocketFactory: () => new SockJS(`${this.chatUrl}?token=${localStorage.getItem('user')}`),
+      brokerURL: `ws://localhost:8080/chat?token=${localStorage.getItem('user')}`, // pure websocket URL with token param
       debug: (msg) => console.log('[STOMP DEBUG]', msg),
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,

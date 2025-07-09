@@ -75,4 +75,8 @@ export class NavBarComponent {
   onClickReports() {
     this.router.navigate(['/reports']);
   }
+
+  onClickNotifications() {
+    this.router.navigate(['/notifications']);
+  }
 }

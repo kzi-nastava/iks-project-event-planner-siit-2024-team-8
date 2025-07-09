@@ -14,6 +14,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {minDateValidator} from '../../shared/custom.validators';
 import { AssetCategory } from '../../model/asset-category';
 import {BudgetItem} from '../domain/budgetItem';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
@@ -48,7 +49,8 @@ export class CreateEventComponent {
   constructor(private geocodingService: GeocodingService,private toastService: ToastService,
               private eventTypeService: EventTypeService,
               private eventService: EventService,
-              private fb: FormBuilder,) {
+              private fb: FormBuilder,
+              private router: Router,) {
     this.stepFormOne = this.fb.group({
       eventType: [null, Validators.required],
       name: ['', [Validators.required, Validators.maxLength(30), Validators.pattern(/^[a-zA-Z\s]+$/)]],
@@ -174,6 +176,14 @@ export class CreateEventComponent {
     this.eventService.createEvent(this.event).subscribe({
       next: (response: ApiResponse) => {
         console.log(response);
+        this.router.navigate(['/home']).then(() => {
+          this.router.navigate(['/home']).then(() => {this.toastService.showToast({
+            message: 'Successfully created event!',
+            title: 'Success',
+            type: 'success',
+            duration: 3000,
+          })});
+        });
       },
       error: (error) => {
         this.toastService.showErrorToast(error.message);

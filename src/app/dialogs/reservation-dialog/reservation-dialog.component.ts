@@ -7,13 +7,17 @@ import {MatDialogRef} from '@angular/material/dialog';
   styleUrl: './reservation-dialog.component.css'
 })
 export class ReservationDialogComponent {
-  constructor(public dialogRef: MatDialogRef<ReservationDialogComponent>) {}
+  constructor(private dialogRef: MatDialogRef<ReservationDialogComponent>) {}
 
   confirm(): void {
-    this.dialogRef.close(true);
+    this.dialogRef.close('accept');
   }
 
-  cancel(): void {
-    this.dialogRef.close(false);
+  deny(): void {
+    this.dialogRef.close('deny');
+  }
+
+  close(): void {
+    this.dialogRef.close(null); // Just close, no action
   }
 }

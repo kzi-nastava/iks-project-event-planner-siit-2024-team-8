@@ -157,6 +157,13 @@ export class AssetComponent implements OnInit {
 
       this.reservationDate = new Date(asset.reservationDate);
     }
+
+    console.log('--- CANCEL BUTTON DEBUG ---');
+    console.log('isUtility:', this.isUtility);
+    console.log('isVersionRoute:', this.isVersionRoute);
+    console.log('isBeforeCancellationDate():', this.isBeforeCancellationDate());
+    console.log('asset.available:', this.asset?.available);
+    console.log('utilityCancellationTerm:', this.utilityCancellationTerm);
   }
 
   isReservationInFuture(): boolean {
@@ -402,10 +409,32 @@ export class AssetComponent implements OnInit {
 
   isBeforeCancellationDate(): boolean {
     const today = new Date();
-    if (!this.utilityCancellationTerm) return false;
 
-    const cancellationDate = new Date(this.utilityCancellationTerm);
-    return today <= cancellationDate;
+    if (!this.utilityCancellationTerm) {
+      console.log('Cancellation term is missing.');
+      return false;
+    }
+
+    let cancellationDate: Date;
+
+    const parts = this.utilityCancellationTerm.split('/');
+    if (parts.length === 3) {
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1; // JavaScript months are 0-based
+      const year = parseInt(parts[2], 10);
+      cancellationDate = new Date(year, month, day);
+    } else {
+      console.error('Invalid cancellation term format:', this.utilityCancellationTerm);
+      return false;
+    }
+
+    if (isNaN(cancellationDate.getTime())) {
+      console.error('Failed to parse cancellation date:', cancellationDate);
+      return false;
+    }
+
+    const result = today <= cancellationDate;
+    return result;
   }
 
   cancelReservation(): void {

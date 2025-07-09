@@ -1,0 +1,19 @@
+<div class="notification-container">
+  <h2 class="notification-title">Your Notifications</h2>
+
+  <button (click)="markAllAsSeen()">Mark all as read</button>
+
+  <div
+    *ngFor="let notif of notifications"
+    class="notification-item"
+    [class.unseen]="!notif.seen"
+    [class.clickable]="notif.clickable"
+    (click)="onNotificationClick(notif)"
+  >
+    <h3>
+      {{ notif.title }}
+      <span *ngIf="!notif.seen" class="unseen-dot"></span>
+    </h3>
+    <p>{{ notif.body }}</p>
+  </div>
+</div>

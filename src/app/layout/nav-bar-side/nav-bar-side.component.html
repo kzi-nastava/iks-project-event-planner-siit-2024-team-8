@@ -8,7 +8,7 @@
   <button mat-icon-button [routerLink]="['inbox']">
     <mat-icon>chat</mat-icon>
   </button>
-  <button mat-icon-button (click)="onClickPlaceholder()">
+  <button mat-icon-button [routerLink]="['notifications']">
     <mat-icon>notification_important</mat-icon>
   </button>
   <button mat-icon-button *ngIf="role =='ORGANIZER'" [routerLink]="['create-event']">

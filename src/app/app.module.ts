@@ -77,6 +77,7 @@ import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
 import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { ReservationDialogComponent } from './dialogs/reservation-dialog/reservation-dialog.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { ReservationDialogComponent } from './dialogs/reservation-dialog/reserva
     ReportUserDialogComponent,
     ReportsComponent,
     ReservationDialogComponent,
+    NotificationsComponent,
   ],
   imports: [
     MatCardModule,

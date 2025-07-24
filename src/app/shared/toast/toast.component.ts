@@ -5,7 +5,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 @Component({
   selector: 'app-toast',
   templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.scss'],
+  styleUrls: ['./toast.component.css'],
   animations: [trigger('toastAnimation', [
     state('visible', style({
       opacity: 1,

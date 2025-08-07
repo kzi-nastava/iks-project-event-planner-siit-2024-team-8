@@ -18,6 +18,7 @@ import {AgendaUpdateRequest} from '../event/domain/AgendaUpdateRequest';
 import {GuestlistUpdateRequest} from '../event/domain/GuestlistUpdateRequest';
 import {GuestResponse} from '../user/domain/guest-response';
 import {ActivityUpdateRequest} from '../event/domain/ActivityUpdateRequest';
+import {PageProperties} from '../model/page.properties';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +56,7 @@ export class EventService {
 
     return `${year}-${month}-${day}`;
   }
-  filterEvents(request:SearchEventsRequest,pageProperties? : any): Observable<PagedResponse<EventCardResponse>> {
+  filterEvents(request:SearchEventsRequest,pageProperties? : PageProperties): Observable<PagedResponse<EventCardResponse>> {
     let params = new HttpParams();
 
     if (request.startDate) {
@@ -78,9 +79,16 @@ export class EventService {
     });
 
     if (pageProperties) {
+      if (pageProperties.sortBy !== null) {
+        params = params.set('sortBy', pageProperties.sortBy);
+      }
+
+      if (pageProperties.sortOrder !== null) {
+        params = params.set('sortOrder', pageProperties.sortOrder);
+      }
       params = params
         .set('page', pageProperties.page)
-        .set('size', pageProperties.pageSize);
+        .set('size', pageProperties.pageSize)
     }
 
     return this.http.get<PagedResponse<EventCardResponse>>(`${environment.apiHost + this.apiUrl}/filter`, {params: params});

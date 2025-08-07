@@ -167,4 +167,8 @@ export class ProfileComponent {
         });
     })
   }
+
+  navigateToEventTypes() {
+    this.router.navigate(['/event-types']);
+  }
 }

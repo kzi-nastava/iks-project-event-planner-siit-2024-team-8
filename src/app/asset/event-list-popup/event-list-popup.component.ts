@@ -1,7 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { EventInfoResponse } from '../../event/domain/EventInfoResponse';
 import { EventService } from '../../services/event-service';
+import {
+  ReservationDateTimeComponentComponent
+} from '../reservation-date-time-component/reservation-date-time-component.component';
+import {Utility} from '../../model/utility';
+import {ToastService} from '../../services/toast-service';
 
 @Component({
   selector: 'app-event-list-popup',
@@ -14,8 +19,10 @@ export class EventListPopupComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<EventListPopupComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { email: string },
-    private eventService: EventService
+    @Inject(MAT_DIALOG_DATA) public data: { email: string , utility: Utility },
+    private eventService: EventService,
+    private dialog: MatDialog,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -30,8 +37,29 @@ export class EventListPopupComponent implements OnInit {
       }
     });
   }
+  isAfterBookingDate(event : EventInfoResponse) {
+    const startDate = new Date(event.startDate);
+    const lastBookingDate = new Date(event.startDate);
+    lastBookingDate.setDate(lastBookingDate.getDate() - this.data.utility.reservationTerm);
+    const now = new Date();
+
+    return now > lastBookingDate;
+  }
 
   onEventClick(event: EventInfoResponse): void {
-    this.dialogRef.close(event);
+    if(!this.data.utility){
+      this.dialogRef.close(event);
+    }
+    if (this.isAfterBookingDate(event)){
+        this.toastService.showErrorToast("Reservation term has passed for this event!")
+        return;
+    }
+    const dialogRef = this.dialog.open(ReservationDateTimeComponentComponent, {
+      data: { event: event , utility : this.data.utility },
+      width: '400px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.dialogRef.close();
+    })
   }
 }

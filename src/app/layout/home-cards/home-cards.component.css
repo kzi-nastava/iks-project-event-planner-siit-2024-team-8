@@ -13,20 +13,31 @@
 
 .carousel-container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  transition: transform 0.5s ease-in-out; /* Smooth sliding effect */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 15%; /* 🔼 Increased from 16px */
+  padding: 10px 20px; /* optional: padding around content */
+}
+
+.carousel-container::-webkit-scrollbar {
+  height: 6px; /* height for horizontal scrollbar */
+}
+
+.carousel-container::-webkit-scrollbar-thumb {
+  background-color: #888;     /* color of the thumb */
+  border-radius: 10px;        /* rounded edges */
+}
+
+.carousel-container::-webkit-scrollbar-track {
+  background: #f0f0f0;        /* color of the track */
 }
 
 .carousel-card {
-  flex: 0 0 33.333333%; /* Show 3 cards at a time */
-  box-sizing: border-box;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 300px; /* or whatever fits your design */
 }
 
 .carousel-card:hover {
@@ -74,7 +85,7 @@ p{
 
 .cards-div{
   margin-top: 5%;
-  width: 50%;
+  width: 70%;
 }
 
 .see_all{

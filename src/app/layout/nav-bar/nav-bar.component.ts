@@ -57,7 +57,7 @@ export class NavBarComponent {
   }
 
   onClickAssetCategories() {
-    this.router.navigate(['/asset-categories']);
+    this.router.navigate(['/create-asset']);
   }
 
   onClickEventTypes() {

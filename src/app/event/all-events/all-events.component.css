@@ -7,12 +7,12 @@
 }
 .cards-view {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   overflow-y: auto;
   margin-bottom: 1em;
   justify-self: center;
-  height: 60vh;
-  width: 80%;
+  height: fit-content;
+  width: 90%;
   justify-items: center; /* This centers the cards horizontally */
 }
 .card{

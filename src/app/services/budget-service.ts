@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {environment} from '../../env/environment';
 import {Budget} from '../event/domain/budget';
 import {BudgetItem} from '../event/domain/budgetItem';
+import {CreateReservationRequest} from '../asset/dto/create.reservation.request';
+import {ReservationResponse} from '../asset/dto/reservation.response';
 
 @Injectable({
   providedIn: 'root',
@@ -44,10 +46,10 @@ export class BudgetService {
     );
   }
 
-  reserveUtility(eventId: string, utilityId: string): Observable<BudgetItem> {
+  reserveUtility(request : CreateReservationRequest): Observable<BudgetItem> {
     return this.http.post<BudgetItem>(
-      `${environment.apiHost}${this.apiUrl}${eventId}/reserve-utility/${utilityId}`,
-      null
+      `${environment.apiHost}${this.apiUrl}reserve-utility`,
+      request
     );
   }
 
@@ -70,5 +72,11 @@ export class BudgetService {
       `${environment.apiHost}${this.apiUrl}deny-reservation/${reservationId}`,
       {}
     );
+  }
+
+  getReservation(eventId: string, utilityId : string): Observable<ReservationResponse> {
+    return this.http.get<ReservationResponse>(
+      `${environment.apiHost}${this.apiUrl}reservation/${eventId}/${utilityId}`,
+    )
   }
 }

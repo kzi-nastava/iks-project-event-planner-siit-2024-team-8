@@ -58,11 +58,18 @@ p {
   flex-direction: row;
   align-items: flex-start;
 }
+.event-side-panel {
+  flex: 1;
+  min-width: 0;
+  border-left: 1px solid #ddd;
+  padding-left: 1rem;
+}
 
 .event-actions {
-  margin-top: 30px;
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap : 7%;
+  margin: 0 auto;
 }
 
 .btn {
@@ -73,7 +80,7 @@ p {
   font-size: 14px;
   border-radius: 4px;
   text-align: center;
-  width: fit-content;
+  min-width: 200px;
 }
 
 .btn:hover {

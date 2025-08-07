@@ -1,0 +1,16 @@
+.reserve-btn{
+  padding: 10px 15px;
+  background-color: #A1C084;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px 20px 12px;
+  color: white;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 5%;
+  color: #1a1b1f;
+}
+

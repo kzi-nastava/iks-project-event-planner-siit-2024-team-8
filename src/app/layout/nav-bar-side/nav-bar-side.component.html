@@ -2,22 +2,19 @@
   <button  mat-icon-button [routerLink]="['home']">
     <mat-icon>home</mat-icon>
   </button>
-  <button mat-icon-button [routerLink]="['calendar']">
+  <button *ngIf="role" mat-icon-button [routerLink]="['calendar']">
     <mat-icon>calendar_month</mat-icon>
   </button>
   <button *ngIf='role == "PROVIDER" || role == "ORGANIZER" || role == "USER" || role == "ADMIN"' mat-icon-button [routerLink]="['inbox']">
     <mat-icon>chat</mat-icon>
   </button>
-  <button mat-icon-button [routerLink]="['notifications']">
-    <mat-icon>notification_important</mat-icon>
+  <button *ngIf="role" mat-icon-button [routerLink]="['notifications']">
+    <mat-icon>notifications</mat-icon>
   </button>
   <button mat-icon-button *ngIf="role =='ORGANIZER'" [routerLink]="['create-event']">
     <mat-icon>add_circle</mat-icon>
   </button>
-  <button mat-icon-button *ngIf="role =='PROVIDER'" [routerLink]="['asset-categories']">
-    <mat-icon>add_circle</mat-icon>
-  </button>
-  <button mat-icon-button *ngIf="role =='ADMIN'" [routerLink]="['event-types']">
+  <button mat-icon-button *ngIf="role =='PROVIDER'" [routerLink]="['create-asset']">
     <mat-icon>add_circle</mat-icon>
   </button>
   <button mat-icon-button *ngIf="role =='ADMIN'" [routerLink]="['reviews']">

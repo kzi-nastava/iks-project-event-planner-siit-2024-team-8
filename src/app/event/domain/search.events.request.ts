@@ -1,5 +1,4 @@
 import {EventType} from './event.type';
-
 export interface SearchEventsRequest{
   name: string;
   eventTypes: string[];
@@ -7,6 +6,7 @@ export interface SearchEventsRequest{
   upperCapacity: number;
   startDate: string;
   endDate: string;
+
 }
 
 export function returnSearchEventsRequest(): SearchEventsRequest{
@@ -16,6 +16,6 @@ export function returnSearchEventsRequest(): SearchEventsRequest{
     lowerCapacity: 0,
     upperCapacity: 1000000,
     startDate: "",
-    endDate: ""
+    endDate: "",
   }
 }

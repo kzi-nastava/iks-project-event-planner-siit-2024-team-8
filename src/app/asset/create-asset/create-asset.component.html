@@ -67,7 +67,7 @@
         </div>
 
         <div class="form-group">
-          <label for="price">Price</label>
+          <label for="price">Price $</label>
           <input type="number" id="price" name="price" [(ngModel)]="asset.price" required class="form-control" />
           <div *ngIf="validationMessages.price" class="error-message">{{ validationMessages.price }}</div>
         </div>
@@ -94,20 +94,20 @@
 
         <div *ngIf="isUtility">
           <div class="form-group">
-            <label for="duration">Duration</label>
+            <label for="duration">Duration (in minutes)</label>
             <input type="number" id="duration" name="duration" [(ngModel)]="utilityDuration" required min="1" step="1" class="form-control" />
             <div *ngIf="validationMessages.utilityDuration" class="error-message">{{ validationMessages.utilityDuration }}</div>
           </div>
 
           <div class="form-group">
-            <label for="bookingDeadline">Booking Deadline</label>
-            <input type="date" id="bookingDeadline" name="bookingDeadline" [(ngModel)]="utilityReservationTerm" required class="form-control" />
+            <label for="bookingDeadline">Booking Deadline (in days)</label>
+            <input type="number" id="bookingDeadline" name="bookingDeadline" [(ngModel)]="utilityReservationTerm" required min="1" step="5" class="form-control" />
             <div *ngIf="validationMessages.utilityReservationTerm" class="error-message">{{ validationMessages.utilityReservationTerm }}</div>
           </div>
 
           <div class="form-group">
-            <label for="cancellationDeadline">Cancellation Deadline</label>
-            <input type="date" id="cancellationDeadline" name="cancellationDeadline" [(ngModel)]="utilityCancellationTerm" required class="form-control" />
+            <label for="cancellationDeadline">Cancellation Deadline (in days)</label>
+            <input type="number" id="cancellationDeadline" name="cancellationDeadline" [(ngModel)]="utilityCancellationTerm" min="1" step="5" required class="form-control" />
             <div *ngIf="validationMessages.utilityCancellationTerm" class="error-message">{{ validationMessages.utilityCancellationTerm }}</div>
           </div>
 

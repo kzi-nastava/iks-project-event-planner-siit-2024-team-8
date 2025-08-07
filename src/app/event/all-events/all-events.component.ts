@@ -12,8 +12,9 @@ import {returnSearchEventsRequest, SearchEventsRequest} from '../domain/search.e
 import {ApiResponse} from '../../model/api.response';
 import {EventCardResponse} from '../domain/event.card.response';
 import {MatCheckboxChange} from '@angular/material/checkbox';
-import {SearchAssetsRequest} from '../../model/search.assets.request';
+import {searchAssetsRequest, SearchAssetsRequest} from '../../model/search.assets.request';
 import {AssetResponse} from '../../model/asset.response';
+import {PageProperties} from '../../model/page.properties';
 
 @Component({
   selector: 'app-all-events',
@@ -24,14 +25,19 @@ export class AllEventsComponent {
   events: EventCardResponse[] = [];
   assets: AssetResponse[] = [];
   filterType: string = '';
-  sortParameter: string = '';
   providerId: string = '';
 
-  pageProperties = {
+  currentEventRequest : SearchEventsRequest = returnSearchEventsRequest();
+  currentAssetRequest : SearchAssetsRequest = searchAssetsRequest();
+
+
+  pageProperties: PageProperties = {
     page: 0,
-    pageSize: 4,
+    pageSize: 6,
     totalCount: 0,
-    pageSizeOptions: [4, 8, 12]
+    pageSizeOptions: [3, 6, 12,18],
+    sortBy: null,
+    sortOrder: null,
   };
   constructor(
     private router: Router,
@@ -73,8 +79,9 @@ export class AllEventsComponent {
         console.log("uspesno od provider id");
       });
     } else {
-      this.assetService.getAllAssets().subscribe((assetsData: any) => {
-        this.assets = assetsData;
+      this.assetService.filterAssets(searchAssetsRequest(),this.pageProperties).subscribe((assetsData: PagedResponse<AssetResponse>) => {
+        this.assets = assetsData.content;
+        this.pageProperties.totalCount = assetsData.totalElements;
       });
     }
   }
@@ -130,12 +137,13 @@ export class AllEventsComponent {
   }
 
   onApplyEventFiltersClicked(request : SearchEventsRequest) {
-    this.eventService.filterEvents(request).subscribe((response: PagedResponse<EventCardResponse>) => {
+    this.eventService.filterEvents(request,this.pageProperties).subscribe((response: PagedResponse<EventCardResponse>) => {
       console.log()
       this.events = response.content;
       this.pageProperties.totalCount = response.totalElements;
     })
     this.isFilterVisible = false;
+    this.currentEventRequest = request;
   }
   onApplyAssetsFiltersClicked($event: SearchAssetsRequest) {
     this.assetService.filterAssets($event,this.pageProperties).subscribe((response: PagedResponse<AssetResponse>) => {
@@ -143,60 +151,20 @@ export class AllEventsComponent {
       this.pageProperties.totalCount = response.totalElements;
     })
     this.isFilterVisible = false;
+    this.currentAssetRequest = $event;
   }
 
-  onCheckboxChanged($event: MatCheckboxChange, name: string) {
-    if ($event.checked){
-      this.sortParameter = name;
-
-    }
+  filterEvents() {
+    this.eventService.filterEvents(this.currentEventRequest, this.pageProperties).subscribe((response: PagedResponse<EventCardResponse>) => {
+      this.events = response.content;
+      this.pageProperties.totalCount = response.totalElements;
+    })
   }
 
-
-  sortByName(ascending: boolean) {
-    this.events = [...this.events.sort((a, b) => {
-      if (ascending) {
-        return a.name.localeCompare(b.name); // Ascending (A → Z)
-      } else {
-        return b.name.localeCompare(a.name); // Descending (Z → A)
-      }
-    })];
+  filterAssets() {
+    this.assetService.filterAssets(this.currentAssetRequest,this.pageProperties).subscribe((response: PagedResponse<AssetResponse>) => {
+      this.assets = response.content;
+      this.pageProperties.totalCount = response.totalElements;
+    })
   }
-
-  sortByStartDate(ascending: boolean) {
-    this.events = [...this.events.sort((a, b) => {
-      const dateA = new Date(a.startDate).getTime();
-      const dateB = new Date(b.startDate).getTime();
-
-      if (ascending) {
-        return dateA - dateB; // Ascending (earliest first)
-      } else {
-        return dateB - dateA; // Descending (latest first)
-      }
-    })];
-  }
-
-  sortByEndDate(ascending: boolean) {
-    this.events = [...this.events.sort((a, b) => {
-      const dateA = new Date(a.endDate).getTime();
-      const dateB = new Date(b.endDate).getTime();
-
-      if (ascending) {
-        return dateA - dateB; // Ascending (earliest first)
-      } else {
-        return dateB - dateA; // Descending (latest first)
-      }
-    })];
-  }
-
-  sortByCapacity(ascending: boolean) {
-    this.events = [...this.events.sort((a, b) => {
-      if (ascending) {
-        return a.capacity - b.capacity; // Ascending (lowest capacity first)
-      } else {
-        return b.capacity - a.capacity; // Descending (highest capacity first)
-      }
-    })];
-  }
-
 }

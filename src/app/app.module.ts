@@ -78,6 +78,12 @@ import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.comp
 import { InboxComponent } from './inbox/inbox.component';
 import { ReservationDialogComponent } from './dialogs/reservation-dialog/reservation-dialog.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import {IgxCarouselModule} from 'igniteui-angular';
+import {MatSort} from "@angular/material/sort";
+import {
+  ReservationDateTimeComponentComponent
+} from './asset/reservation-date-time-component/reservation-date-time-component.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -119,6 +125,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     ReportsComponent,
     ReservationDialogComponent,
     NotificationsComponent,
+    ReservationDateTimeComponentComponent
   ],
   imports: [
     MatCardModule,
@@ -158,6 +165,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
     MatOptionModule,
     NgOptimizedImage,
     BrowserAnimationsModule, MatTable,
+    MatTableModule,
+    IgxCarouselModule, MatSort, NgxMaterialTimepickerModule,
   ],
   providers: [
     provideAnimationsAsync(),

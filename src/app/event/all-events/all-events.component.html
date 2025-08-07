@@ -31,27 +31,29 @@
         <div class="order-div" style="align-self: center">
           <span style="font-size: 1rem">Sort by</span>
         </div>
-        <button class="menu-button" mat-flat-button (click)="sortByName(true)" >Name A-Z</button>
-        <button class="menu-button" mat-flat-button (click)="sortByName(false)" >Name Z-A</button>
-        <button class="menu-button" mat-flat-button (click)="sortByStartDate(true)">Start Date oldest</button>
-        <button class="menu-button" mat-flat-button (click)="sortByStartDate(false)">Start Date newest</button>
-        <button class="menu-button" mat-flat-button (click)="sortByEndDate(true)">End Date oldest</button>
-        <button class="menu-button" mat-flat-button (click)="sortByEndDate(false)">End Date newest</button>
-        <button class="menu-button" mat-flat-button (click)="sortByCapacity(true)">Capacity lowest</button>
-        <button class="menu-button" mat-flat-button (click)="sortByCapacity(false)">Capacity highest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'name'; pageProperties.sortOrder = 'asc'; filterEvents();" >Name A-Z</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'name'; pageProperties.sortOrder = 'desc';filterEvents();" >Name Z-A</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'startDate'; pageProperties.sortOrder = 'asc';filterEvents();">Start Date oldest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'startDate'; pageProperties.sortOrder = 'desc';filterEvents();">Start Date newest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'endDate'; pageProperties.sortOrder = 'asc';filterEvents();">End Date oldest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'endDate'; pageProperties.sortOrder = 'desc';filterEvents();">End Date newest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'capacity'; pageProperties.sortOrder = 'asc';filterEvents();">Capacity lowest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'capacity'; pageProperties.sortOrder = 'desc';filterEvents();">Capacity highest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'grade'; pageProperties.sortOrder = 'asc';filterEvents();">Grade lowest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'grade'; pageProperties.sortOrder = 'desc';filterEvents();">Grade highest</button>
       </div>
       <div *ngIf="!isEvents" class="menu-events">
-        <div class="order-div">
-          <span>Sort by</span>
-          <button (click)="orderButtonClicked()" mat-icon-button>
-            <mat-icon *ngIf="ascending">keyboard_arrow_up</mat-icon>
-            <mat-icon *ngIf="!ascending">keyboard_arrow_down</mat-icon>
-          </button>
+        <div class="order-div" style="align-self: center">
+          <span style="font-size: 1rem">Sort by</span>
         </div>
-        <mat-checkbox (click)="onItemClick($event)">Name</mat-checkbox>
-        <mat-checkbox (click)="onItemClick($event)">Price</mat-checkbox>
-        <mat-checkbox (click)="onItemClick($event)">Grade</mat-checkbox>
-        <mat-checkbox (click)="onItemClick($event)">Discount</mat-checkbox>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'name'; pageProperties.sortOrder = 'asc'; filterAssets();" >Name A-Z</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'name'; pageProperties.sortOrder = 'desc';filterAssets();" >Name Z-A</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'price'; pageProperties.sortOrder = 'asc';filterAssets();" >Price lowest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'price'; pageProperties.sortOrder = 'desc';filterAssets();" >Price highest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'grade'; pageProperties.sortOrder = 'asc';filterAssets();" >Grade lowest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'grade'; pageProperties.sortOrder = 'desc';filterAssets();" >Grade highest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'discount'; pageProperties.sortOrder = 'asc';filterAssets();" >Discount lowest</button>
+        <button class="menu-button" mat-flat-button (click)="pageProperties.sortBy = 'discount'; pageProperties.sortOrder = 'desc';filterAssets();" >Discount highest</button>
       </div>
     </mat-menu>
   </div>

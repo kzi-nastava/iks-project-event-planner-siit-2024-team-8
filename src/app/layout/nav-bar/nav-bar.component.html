@@ -35,7 +35,7 @@
       </button>
       <span>Home</span>
     </div>
-    <div class="toolbar-button">
+    <div *ngIf="role" class="toolbar-button">
       <button mat-icon-button (click)="onClickCalendar()">
         <mat-icon>calendar_month</mat-icon>
       </button>
@@ -47,9 +47,9 @@
       </button>
       <span>Chats</span>
     </div>
-    <div class="toolbar-button">
+    <div *ngIf="role" class="toolbar-button">
       <button mat-icon-button (click)="onClickNotifications()">
-        <mat-icon>notification_important</mat-icon>
+        <mat-icon>notifications</mat-icon>
       </button>
       <span>Notifications</span>
     </div>
@@ -64,14 +64,7 @@
       <button mat-icon-button (click)="onClickAssetCategories()">
         <mat-icon>add_circle</mat-icon>
       </button>
-      <span>Create Asset Category</span>
-    </div>
-
-    <div *ngIf="role == 'ADMIN'" class="toolbar-button">
-      <button mat-icon-button (click)="onClickEventTypes()">
-        <mat-icon>add_circle</mat-icon>
-      </button>
-      <span>Create Event Type</span>
+      <span>Create Asset</span>
     </div>
 
     <div *ngIf="role == 'ADMIN'" class="toolbar-button">

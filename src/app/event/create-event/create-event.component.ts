@@ -73,21 +73,6 @@ export class CreateEventComponent {
     })
   }
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files[0]) {
-      this.selectedFile = input.files[0];
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => {
-        this.imageUrl = e.target.result; // Set the image source to the selected file
-        this.imageSelected = true; // Enable the "Next" button
-      };
-
-      reader.readAsDataURL(this.selectedFile);
-    }
-  }
 
   onSubmitLocationClick() {
     const address = `${this.location.city}, ${this.location.street}`;
@@ -197,7 +182,7 @@ export class CreateEventComponent {
         item.assetCategoryId !== null &&
         item.assetCategoryId !== '' &&
         item.plannedAmount >= 0
-    );
+    ) || this.budgetItems.length === 0;
   }
 
   addNewBudgetItem() {

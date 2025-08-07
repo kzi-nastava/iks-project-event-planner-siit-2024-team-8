@@ -99,9 +99,9 @@
       </button>
     </div>
     <div class="filter-options">
-      <mat-slider min="100" max="1000" step="50" style="width: 60%;" showTickMarks discrete>
-        <input value="200" matSliderStartThumb [(ngModel)]="filterAssetsRequest.priceLow">
-        <input value="800" matSliderEndThumb [(ngModel)]="filterAssetsRequest.priceHigh">
+      <mat-slider min="0" max="5000" step="50" style="width: 60%;" showTickMarks discrete>
+        <input value="0" matSliderStartThumb [(ngModel)]="filterAssetsRequest.priceLow">
+        <input value="5000" matSliderEndThumb [(ngModel)]="filterAssetsRequest.priceHigh">
       </mat-slider>
     </div>
 

@@ -48,7 +48,7 @@ export class LoginComponent {
         email: this.loginForm.value.email || "",
         password: this.loginForm.value.password || ""
       }
-      this.authService.login(login).subscribe({
+      this.authService.login(login).subscribe(  {
         next: (response: AuthResponse) => {
 
           localStorage.setItem('user', response.token);
@@ -69,8 +69,9 @@ export class LoginComponent {
             this.toastService.showErrorToast("User not found.");
           } else if(err.status === 403) {
             this.toastService.showErrorToast("User not activated.");
-          }else if (err.status === 423) {
-            this.toastService.showErrorToast(`Your account is suspended!\n${err.error.message}`);
+          }else if (err.status === 400) {
+            const msg = err.error?.message || "User suspended.";
+            this.toastService.showErrorToast(msg);
           }
           else {
             this.toastService.showErrorToast("An unexpected error occurred.");

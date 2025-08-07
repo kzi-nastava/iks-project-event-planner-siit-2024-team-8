@@ -183,6 +183,10 @@ export class CreateAssetComponent implements OnInit {
         this.validationMessages.utilityTerms = 'Please select both reservation and cancellation terms.';
       }
 
+      if (this.utilityCancellationTerm > this.utilityReservationTerm) {
+        this.validationMessages.utilityCancellationTerm = 'Cancellation period can not be more than reservation period.';
+      }
+
       if (this.utilityDuration < 1 || this.utilityDuration > 999 || !this.utilityDuration) {
         this.validationMessages.utilityDuration = 'Duration must be between 1 and 999.';
       }

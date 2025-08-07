@@ -19,13 +19,23 @@
         </button>
         <button mat-raised-button class="btn buy-button" (click)="chatWithProvider()">Chat with provider</button>
         <button *ngIf="isUtility && !isVersionRoute && !isReservationInFuture()" mat-raised-button class="btn buy-button" (click)="reserveUtility()">Reserve Utility</button>
-        <button
-          *ngIf="isUtility && isVersionRoute && isBeforeCancellationDate() && asset.available"
-          mat-raised-button
-          class="btn buy-button"
-          (click)="cancelReservation()">
-          Cancl Reservation
-        </button>
+        <mat-card *ngIf="assetID && eventID && isUtility" class="item-card">
+          <mat-card-title>Reservation Info</mat-card-title>
+          <mat-card-content>
+            <div class="datetime">
+              <div><strong>Date:</strong> {{ date | date:'longDate' }}</div>
+              <div><strong>Time:</strong> {{ time }}</div>
+            </div>
+            <button
+              *ngIf="isUtility && isVersionRoute && isBeforeCancellationDate() && asset.available"
+              mat-raised-button
+              class="btn buy-button"
+              (click)="cancelReservation()">
+              Cancel Reservation
+            </button>
+          </mat-card-content>
+        </mat-card>
+
       </div>
     </div>
 
@@ -75,12 +85,12 @@
 
         <div class="form-group">
           <label for="reservationTerm">Reservation Term</label>
-          <p id="reservationTerm">{{ utilityReservationTerm || 'No Reservation Term' }}</p>
+          <p id="reservationTerm">{{ utilityReservationTerm || 'No Reservation Term' }} days before Event start</p>
         </div>
 
         <div class="form-group">
           <label for="cancellationTerm">Cancellation Term</label>
-          <p id="cancellationTerm">{{ utilityCancellationTerm || 'No Cancellation Term' }}</p>
+          <p id="cancellationTerm">{{ utilityCancellationTerm || 'No Cancellation Term' }} days before Event start</p>
         </div>
 
         <div class="form-group">

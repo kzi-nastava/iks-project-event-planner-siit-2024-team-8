@@ -10,6 +10,7 @@ import {PagedResponse} from '../shared/model/paged.response';
 import {AssetResponse} from '../model/asset.response';
 import {environment} from '../../env/environment';
 import {SearchAssetsRequest} from '../model/search.assets.request';
+import {PageProperties} from '../model/page.properties';
 
 @Injectable({
     providedIn: 'root'
@@ -46,7 +47,7 @@ import {SearchAssetsRequest} from '../model/search.assets.request';
     }));
   }
 
-    filterAssets(request : SearchAssetsRequest, pageProperties? :any): Observable<PagedResponse<AssetResponse>> {
+    filterAssets(request : SearchAssetsRequest, pageProperties? :PageProperties): Observable<PagedResponse<AssetResponse>> {
       let params : HttpParams = new HttpParams();
       Object.entries(request).forEach(([key, value]) => {
         if (key !== 'startDate' && key !== 'endDate' && value !== undefined && value !== null) {
@@ -61,9 +62,16 @@ import {SearchAssetsRequest} from '../model/search.assets.request';
       });
 
       if (pageProperties) {
+        if (pageProperties.sortBy !== null) {
+          params = params.set('sortBy', pageProperties.sortBy);
+        }
+
+        if (pageProperties.sortOrder !== null) {
+          params = params.set('sortOrder', pageProperties.sortOrder);
+        }
         params = params
           .set('page', pageProperties.page)
-          .set('size', pageProperties.pageSize);
+          .set('size', pageProperties.pageSize)
       }
 
       return this.http.get<PagedResponse<AssetResponse>>(`${environment.apiHost + this.apiUrl}/filter`, {params: params});
@@ -79,5 +87,8 @@ import {SearchAssetsRequest} from '../model/search.assets.request';
           ...this.mapToAssetResponse(response.utilities, 'UTILITY')
         ])
       );
+    }
+    getTop5Assets() : Observable<AssetResponse[]> {
+      return this.http.get<AssetResponse[]>(`${environment.apiHost + this.apiUrl}/top5`)
     }
   }

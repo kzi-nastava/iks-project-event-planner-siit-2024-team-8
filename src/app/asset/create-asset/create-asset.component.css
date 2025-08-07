@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   gap: 32px;
-  margin: 40px;
+  margin-top: 2%;
+  margin-left: 5%;
   color: #44474E;
 }
 

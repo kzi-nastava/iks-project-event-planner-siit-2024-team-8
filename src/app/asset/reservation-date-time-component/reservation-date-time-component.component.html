@@ -1,0 +1,23 @@
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px; max-width: 400px; padding: 20px;">
+
+  <h2>Choose date and time</h2>
+  <!-- Date Picker -->
+  <mat-form-field appearance="fill">
+    <mat-label>Select date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate"
+    [min] = "startDate"
+    [max] = "endDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Time Picker (using native input type="time") -->
+  <mat-form-field appearance="fill" class="input-field" style="z-index: 1500 !important;">
+    <mat-label>Select time</mat-label>
+    <input matInput [ngxTimepicker]="startTimePicker" placeholder="Choose End Time" [(ngModel)]="selectedTime"/>
+    <ngx-material-timepicker #startTimePicker></ngx-material-timepicker>
+  </mat-form-field>
+
+  <button class="reserve-btn" mat-raised-button (click)="reserveUtility()">Reserve Utility</button>
+
+</div>

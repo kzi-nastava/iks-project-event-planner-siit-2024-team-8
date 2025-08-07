@@ -94,9 +94,7 @@ button:active {
   background-color: transparent !important;
   color: #333333 !important;
   align-self: flex-end;
-  padding: 10px;
   scale: 1.25;
-  margin-right: 10px;
 }
 
 .close-button:hover {

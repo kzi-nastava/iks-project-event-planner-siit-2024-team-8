@@ -91,6 +91,7 @@ export class EventInfoComponent {
   navigateToBudget() {
     this.budgetClicked = true;
     this.guestClicked = false;
+    this.locationClicked = false;
   }
 
   isMyEvent() {

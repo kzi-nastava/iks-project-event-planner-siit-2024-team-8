@@ -33,8 +33,8 @@ export class EditAssetComponent implements OnInit {
   assetType: string = 'product';
 
   utilityDuration: number;
-  utilityReservationTerm: string;
-  utilityCancellationTerm: string;
+  utilityReservationTerm: number;
+  utilityCancellationTerm: number;
   utilityManualConfirmation: boolean;
 
   images: File[] = [];
@@ -186,8 +186,8 @@ export class EditAssetComponent implements OnInit {
 
     if (this.isUtility) {
       formData.append('duration', this.utilityDuration.toString());
-      formData.append('reservationTerm', this.utilityReservationTerm);
-      formData.append('cancellationTerm', this.utilityCancellationTerm);
+      formData.append('reservationTerm', this.utilityReservationTerm.toString());
+      formData.append('cancellationTerm', this.utilityCancellationTerm.toString());
       formData.append('manuelConfirmation', this.utilityManualConfirmation.toString());
       console.log('FormData after appending: ', formData);
 

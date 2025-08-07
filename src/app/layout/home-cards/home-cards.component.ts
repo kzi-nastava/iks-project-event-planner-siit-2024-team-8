@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Event} from '../../model/event';
 import {Asset} from '../../model/asset';
 import {AssetService} from '../../services/asset-service';
@@ -26,7 +26,7 @@ export class HomeCardsComponent {
 
 
   ngOnInit() {
-    this.assetService.getAllAssets().subscribe((assetsData: AssetResponse[]) => {
+    this.assetService.getTop5Assets().subscribe((assetsData: AssetResponse[]) => {
       this.assets = assetsData;
     });
     this.eventService.getTop5Events().subscribe((eventsData: EventCardResponse[]) => {

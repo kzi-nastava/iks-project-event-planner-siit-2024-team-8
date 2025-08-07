@@ -14,7 +14,7 @@ export function searchAssetsRequest(): SearchAssetsRequest{
     assetType: "",
     assetCategories: [],
     priceLow: 0,
-    priceHigh: 1000,
+    priceHigh: 5000,
     gradeLow: 0,
     gradeHigh: 5,
     available: true,

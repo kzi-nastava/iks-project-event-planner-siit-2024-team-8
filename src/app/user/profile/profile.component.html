@@ -42,16 +42,16 @@
           Edit Profile
         </button>
         <button mat-raised-button class="btn"
-                (click)="logoutClick()"
-                *ngIf="isMyProfile">
-          <mat-icon>logout</mat-icon>
-          Logout
-        </button>
-        <button mat-raised-button class="btn"
                 (click)="blockedUsersClicked()"
                 *ngIf="isMyProfile">
           <mat-icon>block</mat-icon>
           Blocked Users
+        </button>
+        <button mat-raised-button class="btn"
+                (click)="logoutClick()"
+                *ngIf="isMyProfile">
+          <mat-icon>logout</mat-icon>
+          Logout
         </button>
       </div>
       <div class="profile-actions" *ngIf="!isMyProfile" style="margin-top: 30%">
@@ -87,9 +87,9 @@
           >
             My Assets
           </button>
-          <button *ngIf="role =='Provider'" mat-raised-button color="primary" class="btn under-profile-btn" (click)="navigateToCreateAsset()">Create Asset</button>
           <!-- <button mat-raised-button color="primary" class="btn under-profile-btn" >Start chat</button> -->
-          <button *ngIf="role =='Admin'" (click)="navigateToCategories()" mat-raised-button color="primary" class="btn under-profile-btn">Asset categories</button>
+          <button *ngIf="role =='Admin' || role == 'Provider'" (click)="navigateToCategories()" mat-raised-button color="primary" class="btn under-profile-btn">Asset categories</button>
+          <button *ngIf="role =='Organizer' || role == 'Admin'" (click)="navigateToEventTypes()" mat-raised-button color="primary" class="btn under-profile-btn">Event Types</button>
         </div>
       </div>
       <div *ngIf="role == 'Provider'">

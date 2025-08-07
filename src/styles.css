@@ -110,6 +110,7 @@ clock-face__container ng-star-inserted{
   color: #A1C084 !important;
 }
 [_nghost-ng-c2055447140] {
+  z-index: 1500 !important;
   --body-background-color: #f0f0f0 !important;
   --primary-font-family: 'Poppins', sans-serif;
   --button-color: #A1C084 !important;

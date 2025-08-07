@@ -1,0 +1,13 @@
+.asset-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2%;
+  background-color: #A1C084 !important;
+  color: #333333 !important;
+  font-weight: bold;
+}
+.asset-btn:hover{
+  transform: translateY(-1vh);
+  transition: transform 0.2s ease;
+}

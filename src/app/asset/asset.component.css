@@ -118,6 +118,8 @@ p {
   color: white !important;
   font-size: 18px;
   max-width: 12em;
+  height: fit-content;
+  min-height : 3em;
 }
 
 .action-button {
@@ -231,4 +233,17 @@ p {
 
 .rating button {
   margin-top: 10px;
+}
+
+.item-card {
+  margin-top : 5%;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.datetime {
+  margin-top: 5%;
+  font-size: 1.25em;
+  color: #555;
 }

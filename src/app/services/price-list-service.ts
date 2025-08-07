@@ -19,9 +19,9 @@ export class PriceListService {
 
   updatePriceAndDiscount(assetId: string, newPrice: number, newDiscount: number): Observable<void> {
     const params = new HttpParams()
-      .set('newPrice', newPrice.toString())
-      .set('newDiscount', newDiscount.toString());
+      .set('newPrice', newPrice)
+      .set('newDiscount', newDiscount);
 
-    return this.http.put<void>(`${environment.apiHost + this.apiUrl}/${assetId}/price`, params);
+    return this.http.put<void>(`${environment.apiHost + this.apiUrl}/${assetId}/price`,null, {params});
   }
 }

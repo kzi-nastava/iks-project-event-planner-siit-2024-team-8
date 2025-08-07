@@ -50,7 +50,10 @@
               <mat-icon>how_to_reg</mat-icon>
               Join Event
             </button>
-            <button mat-raised-button class="btn buy-button" (click)="chatWithOrganizer()">Chat with organizer</button>
+            <button mat-raised-button class="btn buy-button" (click)="chatWithOrganizer()" *ngIf="!isMyEvent()">
+              <mat-icon>chat</mat-icon>
+              Chat with organizer
+            </button>
             <button class="btn" (click)="leaveEvent()" *ngIf="!isMyEvent() && alreadySignedUp && !event.isPrivate" mat-raised-button>
               <mat-icon>cancel</mat-icon>
               Leave Event
@@ -72,9 +75,11 @@
           `
         </div>
 
-        <app-budget *ngIf="budgetClicked" style="width: 100em" (closed)="budgetClicked = false"></app-budget>
-        <app-guest-event-info [id]="event.id" (closed)="guestClicked = false" *ngIf="guestClicked" style="width: 50em"></app-guest-event-info>
-        <app-location-event-info [location]="event.location" (closed)="locationClicked=false" *ngIf="locationClicked"></app-location-event-info>
+        <div class="event-side-panel">
+          <app-budget *ngIf="budgetClicked" (closed)="budgetClicked = false"></app-budget>
+          <app-guest-event-info *ngIf="guestClicked" [id]="event.id" (closed)="guestClicked = false"></app-guest-event-info>
+          <app-location-event-info *ngIf="locationClicked" [location]="event.location" (closed)="locationClicked = false"></app-location-event-info>
+        </div>
       </div>
     </div>
 

@@ -1,14 +1,14 @@
 <div class="outer-container">
   <div class="budget-view">
     <div class="budget-section" style="border: 2px solid black; padding: 20px; border-radius: 10px;">
-      <div style="display: flex; align-items: center; gap:120px; margin-bottom: 20px;">
+      <div style="display: flex; align-items: center; gap:5%; margin-bottom: 20px;">
         <p style="font-size: 20px; font-weight: bold;">
           Total Planned Budget: {{ plannedBudget | currency }}
         </p>
         <p style="font-size: 20px; font-weight: bold;">
           Total Spent: {{ actualBudget | currency }}
         </p>
-        <button mat-icon-button class="close-button" (click)="closeClicked()">
+        <button class="close-button" mat-icon-button  (click)="closeClicked()">
           <mat-icon>close</mat-icon>
         </button>
       </div>

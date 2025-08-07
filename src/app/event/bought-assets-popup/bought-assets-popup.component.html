@@ -1,12 +1,11 @@
 <h2 mat-dialog-title>Bought Assets</h2>
 <mat-dialog-content>
-  <div *ngIf="hasAssets; else noAssets">
+  <div *ngIf="hasAssets; else noAssets" style="width: 100%;">
     <mat-list>
       <mat-list-item *ngFor="let entry of boughtAssets" (click)="onAssetClick(entry)">
-        <div>
-          <p>{{ entry.asset.name }}</p>
-          <p>{{ entry.asset.price }}</p>
-        </div>
+        <button mat-raised-button class="asset-btn">
+          {{entry.asset.name}} - {{entry.asset.price}}$
+        </button>
       </mat-list-item>
     </mat-list>
   </div>

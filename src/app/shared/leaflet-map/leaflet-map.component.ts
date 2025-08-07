@@ -34,26 +34,21 @@ export class LeafletMapComponent {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.map = L.map('map').setView([45.2671, 19.8335], 13);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(this.map);
-
-      this.marker = new L.Marker([45.2517, 19.8380], {icon: this.greenIcon});
-      this.marker.addTo(this.map)
-      .bindPopup('Choose location.')
-      .openPopup();
-  }, 0);
+      this.initializeMapSafely();
+    }, 0);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['location'] && this.location) {
-      this.updateMap();
+    if (changes['location']) {
+      console.log('location changed:', this.location);
+      if (this.mapInitialized) {
+        this.updateMap();
+      }
     }
   }
 
   private updateMap(): void {
-    if (!this.map) {this.initializeMap();}
+    if (!this.map || !this.location) return;
     if (this.location.latitude === 0 && this.location.longitude === 0) {return;}
 
     if (this.marker) {
@@ -80,6 +75,35 @@ export class LeafletMapComponent {
     this.marker.addTo(this.map)
       .bindPopup('Choose location.')
       .openPopup();
+  }
+
+  initializeMapSafely(): void {
+    const mapElement = document.getElementById('map');
+
+    if (!mapElement) {
+      console.error('Map container not found — delaying retry.');
+      setTimeout(() => this.initializeMapSafely(), 50); // Retry after small delay
+      return;
+    }
+
+    if (this.mapInitialized) return;
+
+    this.map = L.map(mapElement).setView([45.2671, 19.8335], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(this.map);
+
+    this.marker = L.marker([45.2517, 19.8380], { icon: this.greenIcon });
+    this.marker.addTo(this.map)
+      .bindPopup('Choose location.')
+      .openPopup();
+
+    this.mapInitialized = true;
+
+    if (this.location && this.location.latitude !== 0 && this.location.longitude !== 0) {
+      this.updateMap();
+    }
   }
 
 }

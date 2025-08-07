@@ -17,6 +17,8 @@ import {Review} from '../model/review';
 import {ReviewService} from '../services/review-service';
 import {EventService} from '../services/event-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {Utility} from '../model/utility';
+import {EventInfoResponse} from '../event/domain/EventInfoResponse';
 
 @Component({
   selector: 'app-asset',
@@ -43,8 +45,8 @@ export class AssetComponent implements OnInit {
   currentImageIndex: number = 0;
 
   utilityDuration: number;
-  utilityReservationTerm: string;
-  utilityCancellationTerm: string;
+  utilityReservationTerm: number;
+  utilityCancellationTerm: number;
   utilityManualConfirmation: boolean;
 
   boughtAsset: boolean = false;
@@ -57,6 +59,10 @@ export class AssetComponent implements OnInit {
 
   role: string = '';
   currentUser: UserInfoResponse;
+  date: string;
+  time: string;
+  isBeforeCancellationDateResult: boolean;
+  event: EventInfoResponse;
 
   constructor(
       private router: Router,
@@ -89,6 +95,11 @@ export class AssetComponent implements OnInit {
           if (this.assetID) {
             this.fetchAssetData();
             this.checkIfAssetBought();
+          }
+          if (this.assetID && this.eventID) {
+            console.log("FETCHING RESERVATION");
+            this.fetchReservation();
+            this.fetchEvent()
           }
         });
       });
@@ -136,6 +147,9 @@ export class AssetComponent implements OnInit {
   processFetchedAsset(asset: any): void {
     this.asset = asset;
     this.images = asset.images || this.images;
+    if(asset.images.length ==  0) {
+       this.images.push('https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=');
+    }
     this.providerId = asset.providerId;
     this.isProviderOwner = this.providerId === this.userId;
 
@@ -144,17 +158,13 @@ export class AssetComponent implements OnInit {
         this.providerName = data.firstName + ' ' + data.lastName;
       }
     });
-
-    if (asset.category) {
-      this.fetchCategory(asset.category);
-    }
-
+    this.categoryName = asset.category.name;
     if (this.isUtility) {
       this.utilityDuration = asset.duration;
       this.utilityReservationTerm = asset.reservationTerm;
       this.utilityCancellationTerm = asset.cancellationTerm;
       this.utilityManualConfirmation = asset.manuelConfirmation;
-
+      console.log(asset);
       this.reservationDate = new Date(asset.reservationDate);
     }
 
@@ -259,7 +269,7 @@ export class AssetComponent implements OnInit {
       if (selectedEvent) {
         this.budgetService.buyProduct(selectedEvent.id, this.assetID).subscribe(
           (response) => {
-            console.log('Product successfully bought:', response);
+            this.toastService.showSuccessToast('Product successfully bought!');
           },
           (error) => {
             console.error('Error buying product:', error);
@@ -271,21 +281,8 @@ export class AssetComponent implements OnInit {
 
   reserveUtility(): void {
     const dialogRef = this.dialog.open(EventListPopupComponent, {
-      data: { email: this.currentUser.email },
+      data: { email: this.currentUser.email, utility : this.asset as Utility },
       width: '400px'
-    });
-
-    dialogRef.afterClosed().subscribe((selectedEvent) => {
-      if (selectedEvent) {
-        this.budgetService.reserveUtility(selectedEvent.id, this.assetID).subscribe(
-          (response) => {
-            console.log('Utility successfully reserved:', response);
-          },
-          (error) => {
-            console.error('Error reserving utility:', error);
-          }
-        );
-      }
     });
   }
 
@@ -408,33 +405,22 @@ export class AssetComponent implements OnInit {
   }
 
   isBeforeCancellationDate(): boolean {
-    const today = new Date();
-
-    if (!this.utilityCancellationTerm) {
-      console.log('Cancellation term is missing.');
+    if (!this.eventID){
+      this.isBeforeCancellationDateResult = false;
       return false;
     }
+    const startDate = new Date(this.event.startDate);
+    const cancellationTermDays = (this.asset as Utility).cancellationTerm; // should be number
+    const lastCancellationDate = new Date(startDate);
+    lastCancellationDate.setDate(startDate.getDate() - cancellationTermDays);
+    const now = new Date();
 
-    let cancellationDate: Date;
+    console.log(now);
+    console.log(lastCancellationDate);
 
-    const parts = this.utilityCancellationTerm.split('/');
-    if (parts.length === 3) {
-      const day = parseInt(parts[0], 10);
-      const month = parseInt(parts[1], 10) - 1; // JavaScript months are 0-based
-      const year = parseInt(parts[2], 10);
-      cancellationDate = new Date(year, month, day);
-    } else {
-      console.error('Invalid cancellation term format:', this.utilityCancellationTerm);
-      return false;
-    }
+    this.isBeforeCancellationDateResult =  now > lastCancellationDate;
 
-    if (isNaN(cancellationDate.getTime())) {
-      console.error('Failed to parse cancellation date:', cancellationDate);
-      return false;
-    }
-
-    const result = today <= cancellationDate;
-    return result;
+    return false;
   }
 
   cancelReservation(): void {
@@ -460,5 +446,19 @@ export class AssetComponent implements OnInit {
         });
       }
     });
+  }
+
+  private fetchReservation() {
+    this.budgetService.getReservation(this.eventID,this.assetID).subscribe(reservation => {
+      this.date = reservation.date;
+      this.time = reservation.time;
+
+    })
+  }
+
+  private fetchEvent() {
+    this.eventService.getEventById(this.eventID).subscribe(event => {
+      this.event = event;
+    })
   }
 }

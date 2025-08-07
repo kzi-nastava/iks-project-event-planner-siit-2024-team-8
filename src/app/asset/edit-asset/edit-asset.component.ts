@@ -145,7 +145,7 @@ export class EditAssetComponent implements OnInit {
       this.validationMessages.price = 'Price must be between 1 and 999999.';
     }
 
-    if (this.asset.discount < 0 || this.asset.discount > 100 || !this.asset.discount) {
+    if (this.asset.discount < 0 || this.asset.discount > 100) {
       this.validationMessages.discount = 'Discount must be between 0 and 100.';
     }
 

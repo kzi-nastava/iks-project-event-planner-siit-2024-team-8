@@ -163,14 +163,14 @@ export class CreateAssetComponent implements OnInit {
     }
 
     if (!this.asset.description ) {
-      this.validationMessages.name = 'Asset description is required.';
+      this.validationMessages.description = 'Asset description is required.';
     }
 
-    if (this.asset.price < 1 || this.asset.price > 999999 || !this.asset.price) {
+    if (this.asset.price < 1 || this.asset.price > 999999) {
       this.validationMessages.price = 'Price must be between 1 and 999999.';
     }
 
-    if (this.asset.discount < 0 || this.asset.discount > 100 || !this.asset.discount) {
+    if (this.asset.discount < 0 || this.asset.discount > 100) {
       this.validationMessages.discount = 'Discount must be between 0 and 100.';
     }
 

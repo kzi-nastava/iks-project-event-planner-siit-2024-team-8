@@ -10,6 +10,7 @@ import {BlockedUserResponse} from './domain/blocked.user.response';
 import {CreateReportRequest} from './domain/createReportRequest';
 import {ProviderInfoResponse} from './domain/ProviderInfoResponse';
 import {UserUpdateResponse} from './domain/user-update-response';
+import {EventInfoResponse} from '../event/domain/EventInfoResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -81,5 +82,21 @@ export class UserService {
   suspendUser(id : string) {
     console.log(id);
     return this.http.put<ApiResponse>(`${environment.apiHost}/reports/suspend`,id);
+  }
+
+  addToFavs(userId: string, eventId: string) {
+    return this.http.put(`${environment.apiHost+this.apiUrl}/favorite/${userId}`, eventId)
+  }
+
+  unaddToFavs(userId: string, eventId: string) {
+    return this.http.put(`${environment.apiHost+this.apiUrl}/unfavorite/${userId}`, eventId)
+  }
+
+  getFavs(userId: string): Observable<EventInfoResponse[]> {
+    return this.http.get<EventInfoResponse[]>(`${environment.apiHost+this.apiUrl}/fetch-favs/${userId}`)
+  }
+
+  checkFavorite(userId: string, eventId: string): Observable<boolean> {
+    return this.http.post<boolean>(`${environment.apiHost+this.apiUrl}/is-favorite/${userId}`, eventId);
   }
 }

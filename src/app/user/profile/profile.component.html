@@ -108,4 +108,12 @@
       </div>
     </ng-container>
   </div>
+  <div class="event-container">
+    <h2 style="font-size: 2rem">Favorite Events</h2>
+    <ng-container *ngIf="favoriteEvents.length > 0">
+      <div *ngFor="let ev of favoriteEvents">
+        <app-event-card [event]="ev">{{ev.name}}</app-event-card>
+      </div>
+    </ng-container>
+  </div>
 </div>

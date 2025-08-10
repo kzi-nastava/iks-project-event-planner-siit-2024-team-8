@@ -58,6 +58,14 @@
               <mat-icon>cancel</mat-icon>
               Leave Event
             </button>
+            <button class="btn" (click)="favEvent()" *ngIf="!isMyEvent() && alreadySignedUp && !isFavorite" mat-raised-button>
+              <mat-icon>favorite</mat-icon>
+              Favorite Event
+            </button>
+            <button class="btn" (click)="unfavEvent()" *ngIf="!isMyEvent() && alreadySignedUp && isFavorite" mat-raised-button>
+              <mat-icon>heart_broken</mat-icon>
+              Unfavorite Event
+            </button>
             <button class="btn" (click)="getAgenda()" mat-raised-button>
               <mat-icon>assignment</mat-icon>
               Get Agenda

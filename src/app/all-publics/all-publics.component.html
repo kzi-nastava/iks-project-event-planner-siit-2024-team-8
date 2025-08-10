@@ -1,0 +1,11 @@
+<div class="events-container">
+  <h1>Select the event you want to know the stats of...</h1>
+  <mat-card
+    *ngFor="let event of events"
+    class="event-card"
+    (click)="onEventClick(event)"
+  >
+    <mat-card-title>{{ event.name }}</mat-card-title>
+    <mat-card-subtitle>{{ event.organizerName }}</mat-card-subtitle>
+  </mat-card>
+</div>

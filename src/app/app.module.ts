@@ -84,6 +84,7 @@ import {
   ReservationDateTimeComponentComponent
 } from './asset/reservation-date-time-component/reservation-date-time-component.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { AllPublicsComponent } from './all-publics/all-publics.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     ReportsComponent,
     ReservationDialogComponent,
     NotificationsComponent,
-    ReservationDateTimeComponentComponent
+    ReservationDateTimeComponentComponent,
+    AllPublicsComponent
   ],
   imports: [
     MatCardModule,

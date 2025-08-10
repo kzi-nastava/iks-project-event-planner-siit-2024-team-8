@@ -27,6 +27,7 @@ export class EventInfoComponent {
   hoveredRating: number = -1;
 
   alreadySignedUp: boolean = false;
+  isFavorite: boolean = false;
   //review
   reviews: Review[] = [];
   showComments: boolean = false;
@@ -44,14 +45,22 @@ export class EventInfoComponent {
     this.route.paramMap.subscribe(params => {
       // Get event ID from route parameters
       this.eventID = params.get('id');
-      this.userId = this.authService.getUserId()
+
+      if (!this.eventID) {
+        console.error('No event ID found in route parameters');
+        return;
+      }
+
+      // Get user ID once
+      this.userId = this.authService.getUserId();
 
       // Construct event signup request
       this.eventSignupRequest = {
         eventId: this.eventID,
-        userId: this.authService.getUserId()
+        userId: this.userId
       };
 
+      // Check if user is signed up
       this.eventService.isUserSignedUp(this.eventSignupRequest).subscribe({
         next: (isSignedUp: boolean) => {
           this.alreadySignedUp = isSignedUp;
@@ -61,20 +70,30 @@ export class EventInfoComponent {
         }
       });
 
-      if (this.eventID) {
-        this.eventService.getEventById(this.eventID).subscribe({
-          next: (event: EventInfoResponse) => {
-            this.event = event;
-            this.organizerId = event.organizerID;
-            console.log(this.event);
-          },
-          error: (err) => {
-            console.error('Error loading event:', err);
-          }
-        });
-      }
+      // Check if event is favorited by user
+      this.userService.checkFavorite(this.userId, this.eventID).subscribe({
+        next: (isFavorite: boolean) => {
+          this.isFavorite = isFavorite;
+        },
+        error: (err) => {
+          console.error('Error checking favorite status:', err);
+        }
+      });
+
+      // Get event details
+      this.eventService.getEventById(this.eventID).subscribe({
+        next: (event: EventInfoResponse) => {
+          this.event = event;
+          this.organizerId = event.organizerID;
+          console.log(this.event);
+        },
+        error: (err) => {
+          console.error('Error loading event:', err);
+        }
+      });
     });
   }
+
 
 
   navigateToEditEvent() {
@@ -282,6 +301,15 @@ export class EventInfoComponent {
 
   closeChat() {
     this.isChatVisible = false;
+  }
+
+  favEvent() {
+    this.isFavorite = true;
+    this.userService.addToFavs(this.userId, this.eventID).subscribe();
+  }
+  unfavEvent() {
+    this.isFavorite = false;
+    this.userService.unaddToFavs(this.userId, this.eventID).subscribe();
   }
 
   protected readonly localStorage = localStorage;

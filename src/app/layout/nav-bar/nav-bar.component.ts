@@ -79,4 +79,8 @@ export class NavBarComponent {
   onClickNotifications() {
     this.router.navigate(['/notifications']);
   }
+
+  onClickStats() {
+    this.router.navigate(['/all-publics'])
+  }
 }

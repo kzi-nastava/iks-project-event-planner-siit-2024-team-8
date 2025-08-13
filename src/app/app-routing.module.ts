@@ -31,6 +31,7 @@ import {GuestlistEditComponent} from './event/guestlist-edit/guestlist-edit.comp
 import {AgendaEditComponent} from './event/agenda-edit/agenda-edit.component';
 import { InboxComponent } from './inbox/inbox.component';
 import {NotificationsComponent} from './notifications/notifications.component';
+import {AllPublicsComponent} from './all-publics/all-publics.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'all-my-assets/:providerId', component: AllEventsComponent },
   {path : 'assets/products/:id', component: AssetComponent },
   {path : 'assets/utilities/:id', component: AssetComponent },
+  {path: 'all-publics', component: AllPublicsComponent},
   {path : 'event/:id', component: EventInfoComponent },
   {path: 'provider-register', component: ProviderRegisterComponent },
   {path: 'profile-edit', component: ProfileEditComponent},

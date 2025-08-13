@@ -31,6 +31,7 @@ export class ProfileComponent {
   companyDesc: string = '';
   companyImages: string[] = [];
   loggedInProviderId: string = null;
+  favoriteEvents: EventInfoResponse[] = [];
 
   isMyProfile: boolean = true;
 
@@ -43,39 +44,75 @@ export class ProfileComponent {
               private toastService: ToastService,) { }
 
   ngOnInit() {
-    this.authService.userState.subscribe(user => {
+    this.authService.userState.subscribe(userRole => {
+      this.role = userRole;
       this.id = this.route.snapshot.paramMap.get('id');
-      this.role = user;
-      if (!(this.id==null)){this.loadAnotherUser(); return;}
-      this.userService.getUserInfo().subscribe({
-        next: (data: UserInfoResponse) => {
-          this.currentUser = data;
-          this.imageUrl = data.profileImage;
-          if (this.role == 'Organizer') {
-            this.eventService.getOrganizedEvents(this.currentUser.email).subscribe({
-              next: (data: EventInfoResponse[]) => {
-                this.items = data;
-              }
-            });
-          }
-          if (this.role == 'Provider') {
-            this.userService.getProviderInfo(this.authService.getUserId()).subscribe({
-              next: (data: ProviderInfoResponse) => {
-                this.companyDesc = data.companyDescription;
-                this.companyName = data.companyName;
-                this.companyImages = data.companyImagesURL;
-                this.loggedInProviderId = this.authService.getUserId();
+
+      if (this.id) {
+        // If there's an id in the route params, load that user info
+        this.loadAnotherUser();
+
+        // Also load favorites for this user id
+        this.loadFavorites(this.id);
+
+      } else {
+        // Load current logged-in user's info
+        this.userService.getUserInfo().subscribe({
+          next: (data: UserInfoResponse) => {
+            this.currentUser = data;
+            this.imageUrl = data.profileImage;
+
+            if (this.role === 'Organizer') {
+              this.eventService.getOrganizedEvents(this.currentUser.email).subscribe({
+                next: (events: EventInfoResponse[]) => {
+                  this.items = events;
+                }
+              });
             }
-            })
+
+            if (this.role === 'Provider') {
+              const userId = this.authService.getUserId();
+              this.userService.getProviderInfo(userId).subscribe({
+                next: (providerData: ProviderInfoResponse) => {
+                  this.companyDesc = providerData.companyDescription;
+                  this.companyName = providerData.companyName;
+                  this.companyImages = providerData.companyImagesURL;
+                  this.loggedInProviderId = userId;
+                }
+              });
+            }
+
+            // Load favorites for current user (when no route param)
+            this.loadFavorites(this.authService.getUserId());
           }
-        }
+        });
+      }
+
+      // Load blocked users regardless of above
+      this.userService.getBlockedUsers().subscribe(blockedUsers => {
+        this.blockedUsers = blockedUsers;
+        this.initialListLength = blockedUsers.length;
       });
     });
-    this.userService.getBlockedUsers().subscribe( blockedUsers => {
-      this.blockedUsers = blockedUsers;
-      this.initialListLength = blockedUsers.length;
+  }
+
+  private loadFavorites(userId: string | null) {
+    if (!userId) {
+      this.favoriteEvents = [];
+      return;
+    }
+
+    this.userService.getFavs(userId).subscribe({
+      next: favorites => {
+        this.favoriteEvents = favorites;
+      },
+      error: err => {
+        console.error('Failed to load favorites', err);
+        this.favoriteEvents = [];
+      }
     });
   }
+
 
   loadAnotherUser() {
     console.log(this.id);

@@ -170,6 +170,10 @@ export class EventService {
     return this.http.get<Review[]>(`${environment.apiHost + this.apiUrl}/${eventId}/reviews`);
   }
 
+  getPublics(): Observable<EventInfoResponse[]> {
+    return this.http.get<EventInfoResponse[]>(`${environment.apiHost + this.apiUrl}/publics`)
+  }
+
   checkAssetInOrganizedEvents(userId: string, assetId: string): Observable<boolean> {
     const params = new HttpParams()
       .set('userId', userId)
@@ -177,4 +181,11 @@ export class EventService {
 
     return this.http.get<boolean>(`${environment.apiHost + this.apiUrl}/check-asset`, { params });
   }
+
+  chartReviews(eventId: string): Observable<Blob> {
+    return this.http.get<Blob>(`${environment.apiHost + this.apiUrl}/chart-reviews/${eventId}`, {
+      responseType: 'blob' as 'json' // Explicitly set the responseType to 'blob'
+    });
+  }
+
 }

@@ -1,0 +1,47 @@
+.events-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content horizontally inside container */
+  gap: 12px;
+  overflow-y: auto;
+  height: calc(100vh - 64px); /* Full screen minus navbar */
+  padding: 10px;
+  box-sizing: border-box;
+  width: 75%;
+  margin: 0 auto; /* Centers the container itself on the page */
+}
+
+.event-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 50%; /* Card takes half of container's width */
+  background-color: #A1C084;
+  padding: 10px;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+}
+
+mat-card-subtitle {
+  font-size: 1rem;
+  color: lightgray;
+}
+
+/* Keep the scroll working inside a larger component */
+:host {
+  display: block;
+  height: 100%;
+}
+
+h1 {
+  color: gray;
+  font-size: 2.4rem;
+}

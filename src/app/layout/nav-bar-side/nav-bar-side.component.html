@@ -26,6 +26,9 @@
   <button mat-icon-button *ngIf="role == 'ADMIN'" [routerLink]="['reports']">
     <mat-icon>report</mat-icon>
   </button>
+  <button mat-icon-button *ngIf="role == 'ADMIN' || role == 'ORGANIZER'" [routerLink]="['all-publics']">
+    <mat-icon>show_chart</mat-icon>
+  </button>
   <div class="bottom-buttons">
     <button mat-icon-button (click)="navigateToLogin()">
       <mat-icon>account_circle</mat-icon>

@@ -88,6 +88,13 @@
       <span>View Reports</span>
     </div>
 
+    <div *ngIf="role == 'ADMIN' || role == 'ORGANIZER'" class="toolbar-button">
+      <button mat-icon-button (click)="onClickStats()">
+        <mat-icon>show_chart</mat-icon>
+      </button>
+      <span>View Stats</span>
+    </div>
+
   </div>
   <div class="toolbar-section">
     <div class="toolbar-button">

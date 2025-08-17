@@ -2,11 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { EventInfoResponse } from '../../event/domain/EventInfoResponse';
 import { EventService } from '../../services/event-service';
+import {Utility} from '../../model/utility';
+import {ToastService} from '../../services/toast-service';
 import {
   ReservationDateTimeComponentComponent
 } from '../reservation-date-time-component/reservation-date-time-component.component';
-import {Utility} from '../../model/utility';
-import {ToastService} from '../../services/toast-service';
 
 @Component({
   selector: 'app-event-list-popup',
@@ -23,7 +23,16 @@ export class EventListPopupComponent implements OnInit {
     private eventService: EventService,
     private dialog: MatDialog,
     private toastService: ToastService
-  ) {}
+  ) {
+    if (!this.data?.email){
+      this.toastService.showErrorToast('Email not provided!');
+      return;
+    }
+    if(!this.data?.utility){
+      this.toastService.showErrorToast('Event not provided!');
+      return;
+    }
+  }
 
   ngOnInit(): void {
     this.eventService.getOrganizedEvents(this.data.email).subscribe({
@@ -32,13 +41,15 @@ export class EventListPopupComponent implements OnInit {
         this.hasEvents = data.length > 0;
       },
       error: (error) => {
-        console.error('Error fetching events:', error);
+        this.toastService.showErrorToast("Error getting event list!");
         this.hasEvents = false;
       }
     });
+    if(!this.data?.email){this.toastService.showErrorToast('Email not provided!');return;}
+    if(!this.data?.utility){this.toastService.showErrorToast('Utility not provided!');return;}
   }
   isAfterBookingDate(event : EventInfoResponse) {
-    const startDate = new Date(event.startDate);
+    if(!event?.startDate){this.toastService.showErrorToast('Start date is invalid!');return true;}
     const lastBookingDate = new Date(event.startDate);
     lastBookingDate.setDate(lastBookingDate.getDate() - this.data.utility.reservationTerm);
     const now = new Date();

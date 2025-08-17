@@ -6,7 +6,6 @@ export interface SearchAssetsRequest{
   priceHigh: number;
   gradeLow: number;
   gradeHigh: number;
-  available: boolean;
 }
 export function searchAssetsRequest(): SearchAssetsRequest{
   return {
@@ -17,6 +16,5 @@ export function searchAssetsRequest(): SearchAssetsRequest{
     priceHigh: 5000,
     gradeLow: 0,
     gradeHigh: 5,
-    available: true,
   }
 }

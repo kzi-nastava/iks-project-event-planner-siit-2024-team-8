@@ -8,6 +8,7 @@ import {
   VerificationEmailDialogComponent
 } from '../../dialogs/verification-email-dialog/verification-email-dialog.component';
 import {ErrorCodeDialogComponent} from '../../dialogs/error-code-dialog/error-code-dialog.component';
+import {ToastService} from '../../services/toast-service';
 
 @Component({
   selector: 'app-register',
@@ -43,6 +44,8 @@ export class RegisterComponent {
       reader.readAsDataURL(this.selectedFile);
     }
   }
+
+
 
   profileType: string = '';
   firstName: string = '';

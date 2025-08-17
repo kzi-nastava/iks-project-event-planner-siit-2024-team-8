@@ -1,7 +1,7 @@
 <div class="search_bar_parent">
   <br>
   <div class="search_bar">
-    <input matInput placeholder="Search all offers...">
+    <input id="event_name" [formControl]="searchControl" matInput placeholder="Search all offers...">
     <button mat-raised-button>
       Search
     </button>

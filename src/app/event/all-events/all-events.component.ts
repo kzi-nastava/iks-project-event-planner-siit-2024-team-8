@@ -15,8 +15,6 @@ import {MatCheckboxChange} from '@angular/material/checkbox';
 import {searchAssetsRequest, SearchAssetsRequest} from '../../model/search.assets.request';
 import {AssetResponse} from '../../model/asset.response';
 import {PageProperties} from '../../model/page.properties';
-import {SearchBarComponent} from '../../layout/search-bar/search-bar.component';
-import {debounceTime} from 'rxjs';
 
 @Component({
   selector: 'app-all-events',
@@ -24,8 +22,6 @@ import {debounceTime} from 'rxjs';
   styleUrls: ['./all-events.component.css']
 })
 export class AllEventsComponent {
-  @ViewChild('searchBar') searchBar!: SearchBarComponent;
-
   events: EventCardResponse[] = [];
   assets: AssetResponse[] = [];
   filterType: string = '';
@@ -37,9 +33,9 @@ export class AllEventsComponent {
 
   pageProperties: PageProperties = {
     page: 0,
-    pageSize: 10,
+    pageSize: 6,
     totalCount: 0,
-    pageSizeOptions: [3, 5, 10],
+    pageSizeOptions: [3, 6, 12,18],
     sortBy: null,
     sortOrder: null,
   };
@@ -57,21 +53,6 @@ export class AllEventsComponent {
       this.checkRoute();
       this.fetchData();
     });
-  }
-  ngAfterViewInit() {
-    this.searchBar.searchControl.valueChanges
-      .pipe(
-        debounceTime(300)
-      )
-      .subscribe(value => {
-        if (this.isEvents) {
-          this.currentEventRequest.name = value;
-          this.filterEvents();
-        } else {
-          this.currentAssetRequest.name = value;
-          this.filterAssets();
-        }
-      });
   }
 
 

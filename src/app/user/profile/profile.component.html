@@ -94,13 +94,8 @@
       </div>
       <div *ngIf="role == 'Provider'">
         <h3>COMPANY IMAGES</h3>
-        <div class="company-images">
-          <img
-            *ngFor="let image of companyImages"
-            class="company-image"
-            [src]="image"
-            alt="Company Image"
-          />
+        <div class="company-images" *ngFor="let image of companyImages">
+          <img class="company-image" [src]="image"  alt="Company Image" />
         </div>
       </div>
     </div>

@@ -94,7 +94,6 @@ export class FilterPopUpComponent implements OnChanges {
   if (this.filterType === 'assets' || this.filterType === 'my-assets'){
     this.filterAssets.emit(this.filterAssetsRequest)
   }else{
-    console.log(this.filterEventsRequest.startDate);
     this.clicked.emit(this.filterEventsRequest);
   }
 

@@ -52,35 +52,12 @@
           style="display: none;"
           (change)="onFileSelected($event)"
         />
-
         <img
           [src]="profilePictureUrl"
           alt="Profile Picture"
           class="profile-picture"
           (click)="triggerFileInput()"
         />
-        <div class="preview-container" *ngIf="isProvider">
-          <div
-            class="preview-card"
-            *ngFor="let img of providerImages; let i = index"
-          >
-            <img [src]="img" alt="Selected Image" />
-            <button type="button" (click)="removeImage(i)">Remove</button>
-          </div>
-        </div>
-        <input
-          id="providerImagesInput"
-          type="file"
-          (change)="onFilesSelected($event)"
-          accept="image/*"
-          style="display: none;"
-          multiple
-        />
-        <!-- Styled trigger button -->
-        <label *ngIf="isProvider" for="providerImagesInput" class="custom-file-upload">
-          <span>📸 Select Images</span>
-        </label>
-
         <button mat-raised-button color="warn" class="btn deactivate-btn" type="button" (click)="openDeleteDialog()">Delete</button>
       </div>
     </div>

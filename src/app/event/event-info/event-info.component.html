@@ -16,7 +16,7 @@
             <p>{{ event.description || 'No description available.' }}</p>
 
             <h3>CAPACITY</h3>
-            <p id="cap">{{ event.capacity > 0 ? event.capacity : 'No capacity specified.' }}</p>
+            <p>{{ event.capacity > 0 ? event.capacity : 'No capacity specified.' }}</p>
 
             <h3>START DATE</h3>
             <p>{{ event.startDate ? (event.startDate | date: 'mediumDate') : 'Not specified.' }}</p>

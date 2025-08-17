@@ -154,15 +154,10 @@ p {
 
 
 .company-images {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
-  width: 100%;
-  min-width: 18vw;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 20%;
-  padding-right: 5px;
 }
 
 .company-image {

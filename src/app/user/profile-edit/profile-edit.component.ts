@@ -29,9 +29,6 @@ export class ProfileEditComponent {
   company_name_input: string = '';
   company_desc_input: string = '';
   currentUser: UserInfoResponse | null = null; // Added proper type annotation
-  isProvider : boolean = false;
-  providerImages : string[];
-  selectedFiles: File[] = [];
 
   constructor(
     private router: Router,
@@ -55,8 +52,6 @@ export class ProfileEditComponent {
             this.profilePictureUrl = data.profileImage || this.profilePictureUrl;
             this.company_name_input = data.companyName;
             this.company_desc_input = data.companyDescription;
-            this.providerImages = data.companyImagesURL;
-            this.isProvider = true;
             console.log(data.firstName);
           }
         });
@@ -139,8 +134,6 @@ export class ProfileEditComponent {
       formData.append('image', placeholderFile, placeholderFile.name);
     }
 
-
-
     // Prepare user update object
     const newUser: UserUpdateResponse = returnUpdatedUser(
       this.firstName_input,
@@ -150,8 +143,7 @@ export class ProfileEditComponent {
       this.address_input,
       this.role === 'Provider' ? this.company_name_input: '',
       this.role === 'Provider' ? this.company_desc_input: '',
-      this.role === 'Provider' ? this.providerImages.filter(img =>
-        typeof img === 'string' && img.startsWith('http://localhost:8080')) : []
+      []
     );
 
     // Append all fields to FormData
@@ -165,8 +157,6 @@ export class ProfileEditComponent {
       }
     });
 
-    this.selectedFiles.forEach((file) => {formData.append('newImages', file,file.name);})
-
     // Submit data
     this.userService.updateUser(formData).subscribe((response: any) => {
       console.log('Update successful:', response);
@@ -176,28 +166,5 @@ export class ProfileEditComponent {
     });
   }
 
-  onFilesSelected(event: Event) {
-    const target = event.target as HTMLInputElement;
-    if (!target.files) return;
 
-    const files = Array.from(target.files);
-
-    for (let file of files) {
-      this.selectedFiles.push(file);
-
-      // Preview
-      const reader = new FileReader();
-      reader.onload = (e: any) => this.providerImages.push(e.target.result);
-      reader.readAsDataURL(file);
-    }
-
-    // Reset the input so the same file can be picked again if removed
-    target.value = '';
-  }
-
-
-  removeImage(index: number) {
-    this.selectedFiles.splice(index, 1);
-    this.providerImages.splice(index, 1);
-  }
 }

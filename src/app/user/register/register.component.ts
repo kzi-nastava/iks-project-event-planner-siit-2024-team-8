@@ -16,12 +16,15 @@ import {ErrorCodeDialogComponent} from '../../dialogs/error-code-dialog/error-co
 })
 
 export class RegisterComponent {
-  constructor(private dialog: MatDialog, private router: Router, private userService: UserService, private userTransferService: UserTransferService) {}
+  constructor(private dialog: MatDialog,
+              private router: Router,
+              private userService: UserService,
+              private userTransferService: UserTransferService) {}
 
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
-  imageUrl: "https://via.placeholder.com/150"; // Default placeholder image
+  imageUrl: string = "https://via.placeholder.com/150"; // Default placeholder image
   selectedFile: File | null = null;
   imageSelected: boolean = false;
 
@@ -50,19 +53,38 @@ export class RegisterComponent {
   password: string = '';
   repeatPassword: string = '';
 
-    validateData(): boolean {
+  validateData(): string {
     if (this.firstName == '' || this.lastName == '' || this.imageUrl == 'https://via.placeholder.com/150' || this.email == '' || this.password == '' || this.profileType == '') {
-      return false;
+      return 'insufficient data';
     }
     else if (this.password != this.repeatPassword) {
-      return false;
+      return 'password mismatch';
     }
-    return true;
+    else if (this.number != '' && !/^\d+$/.test(this.number)) {
+      return 'nan';
+    }
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
+      return 'email'
+    }
+    return 'ok';
   }
 
   onSubmit() {
-    if (!(this.validateData())) {
+    const ret = this.validateData();
+    if (ret == 'insufficient data') {
       alert('Please enter all the required fields.');
+      return;
+    }
+    else if (ret == 'password mismatch') {
+      alert('Passwords do not match.');
+      return;
+    }
+    else if (ret == 'nan') {
+      alert('Invalid number!');
+      return;
+    }
+    else if (ret == 'email') {
+      alert('Please enter a valid email address!');
       return;
     }
     let formData = new FormData();

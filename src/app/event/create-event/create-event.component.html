@@ -50,7 +50,7 @@
           <mat-error *ngIf="stepFormOne.controls['endDate'].hasError('required') && !stepFormOne.controls['startDate'].untouched" >End date is required</mat-error>
           <mat-error *ngIf="stepFormOne.controls['endDate'].hasError('minDate') && !stepFormOne.controls['startDate'].untouched" >Previous date picked for end date</mat-error>
         </mat-form-field>
-    </form>
+      </form>
       <mat-label style="color: black !important; margin-right: 5%;">Private</mat-label>
       <mat-slide-toggle style="margin-bottom: 10%;" [(ngModel)]="isPrivate"></mat-slide-toggle>
       <div class="button_div">
@@ -62,9 +62,9 @@
         <app-guest-card *ngIf="!guest.isInput"
                         [invitation]="guest"></app-guest-card>
         <app-guest-edit-card *ngIf="guest.isInput"
-                              [guest]="guest"
-                              (clicked)="onSaveInvitationClick($event)"
-                              (delete)="onDeleteGuestClick($event)"></app-guest-edit-card>
+                             [guest]="guest"
+                             (clicked)="onSaveInvitationClick($event)"
+                             (delete)="onDeleteGuestClick($event)"></app-guest-edit-card>
       </div>
       <div class="button_div">
         <button mat-raised-button (click)="onAddGuestClick()" style="margin-top: 5%">Add Guest</button>
@@ -76,21 +76,21 @@
       <p>*Enter your login info:</p>
       <mat-form-field>
         <mat-label>*City</mat-label>
-        <input matInput [(ngModel)]="location.city">
+        <input id="grad" matInput [(ngModel)]="location.city">
       </mat-form-field>
       <mat-form-field>
         <mat-label>*Address (street and number)</mat-label>
-        <input matInput [(ngModel)]="location.street">
+        <input id="ulica" matInput [(ngModel)]="location.street">
       </mat-form-field>
       <div class="button_div">
         <button mat-raised-button id="#submit_location" (click)="onSubmitLocationClick()">Submit Location</button>
-        <button style="width: 100%" mat-raised-button matStepperNext [disabled]="!this.locationSelected"  >Next</button>
+        <button style="width: 100%" mat-raised-button matStepperNext >Next</button>
       </div>
     </mat-step>
     <mat-step label="Agenda">
       <div class="activity_div" *ngFor="let activity of activities">
         <app-activity-card *ngIf="!activity.isInput"
-                            [activity]="activity"></app-activity-card>
+                           [activity]="activity"></app-activity-card>
         <app-activity-card-edit *ngIf="activity.isInput"
                                 [activity]="activity"
                                 (clicked)="onActivitySaved($event)"
@@ -117,18 +117,14 @@
             </app-budget-item-card-edit>
           </div>
 
-          <div class="add-budget-item-card" (click)="addNewBudgetItem()" style="justify-content: center; align-items: center; cursor: pointer;">
-            <mat-card class="add-budget-item-button">
-              <mat-icon>add</mat-icon>
-              <p style="margin: 0;">Add Budget Item</p>
-            </mat-card>
+          <div class="add-budget-item-card" style="justify-content: center; align-items: center; cursor: pointer;">
+            <button id="budzetski" (click)="addNewBudgetItem()" mat-raised-button>+</button>
           </div>
         </div>
       </div>
       <div style="text-align: center; margin-top: 20px;">
-        <button style="width: 100%" mat-raised-button [disabled]="!SaveBudget()" (click)="onFinishClick()">Next</button>
+        <button id="finalize" style="width: 100%" mat-raised-button [disabled]="!SaveBudget()" (click)="onFinishClick()">Submit</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
-

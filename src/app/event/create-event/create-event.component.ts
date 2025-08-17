@@ -62,7 +62,12 @@ export class CreateEventComponent {
     });
   }
   ngOnInit(): void {
-    this.location = returnLocation();
+    this.location = {
+      city: 'Novi Sad',
+      street: 'Bulevar Oslobodjenja 1',
+      latitude: 45.256763,
+      longitude: 19.834423
+    };
     this.getEventTypes();
     this.event = returnEvent();
   }
@@ -150,7 +155,11 @@ export class CreateEventComponent {
     this.event.endDate = this.stepFormOne.value['endDate'];
     this.event.eventType = this.stepFormOne.value['eventType'];
     this.event.location = this.location;
-    this.event.agenda = this.activities;
+    if (this.activities.length == 0) {
+      this.event.agenda = [returnActivity(0)]
+    } else {
+      this.event.agenda = this.activities;
+    }
     this.event.guests = this.guests.map(guest => guest.email);
     this.event.isPrivate = this.isPrivate;
     this.event.organizerID = localStorage.getItem('userID');

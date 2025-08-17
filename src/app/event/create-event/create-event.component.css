@@ -7,7 +7,7 @@ mat-form-field {
   width: 100%;
 }
 .flex-container {display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%;height: 100%;
-margin-top: 2%}
+  margin-top: 2%}
 .register-div {width: 25%; margin-top: 3%;}
 p {color: black; font-size: 12pt; text-align: center}
 a p {font-size: 10pt; text-align: center; text-decoration: none;}
@@ -32,6 +32,15 @@ button {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
   transition: background-color 0.3s ease; /* Smooth hover effect */
   width: 50%;
+}
+
+#budzetski {
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  width: fit-content;
 }
 
 .button_div{
@@ -128,6 +137,3 @@ button.mat-raised-button:active {
   color: black; /* Text color */
   margin: 0;
 }
-
-
-

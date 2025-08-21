@@ -65,7 +65,11 @@
       <app-event-card [event]="event"></app-event-card>
     </div>
   </div>
-
+  <div class="cards-view" *ngIf="!isEvents">
+    <div *ngFor="let asset of assets" class="card">
+      <app-asset-card (click)="onCardClick(asset)" [asset]="asset"></app-asset-card>
+    </div>
+  </div>
   <mat-paginator
     [length]="pageProperties.totalCount"
     [pageSize]="pageProperties.pageSize"

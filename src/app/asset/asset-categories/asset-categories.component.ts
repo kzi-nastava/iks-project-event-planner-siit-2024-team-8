@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { AssetCategoryEditComponent } from '../asset-category-edit/asset-category-edit.component';
 import { AssetCategoryService } from '../../services/asset-category-service';
 import { AssetCategory } from '../../model/asset-category';
+import {AuthService} from '../../infrastructure/auth/auth.service';
 
 @Component({
   selector: 'app-asset-categories',
@@ -19,13 +20,16 @@ export class AssetCategoriesComponent implements OnInit {
   currentPageCategories: AssetCategory[] = [];
   pendingPageCategories: AssetCategory[] = [];
   carouselIndex = 0;
+  role: string | null = null;
 
   constructor(
     private dialog: MatDialog,
-    private assetCategoryService: AssetCategoryService
+    private assetCategoryService: AssetCategoryService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.role = this.authService.getRole();
     this.loadCategories();
     this.loadPendingCategories();
   }
@@ -150,9 +154,14 @@ export class AssetCategoriesComponent implements OnInit {
     console.log('Category Data:', categoryData);
     this.assetCategoryService.createCategory(categoryData).subscribe(
       newCategory => {
-        this.assetCategories.push(newCategory);
-        this.totalItems = this.assetCategories.length;
-        this.updatePageData();
+        if (this.role === 'Admin') {
+          this.assetCategories.push(newCategory);
+          this.totalItems = this.assetCategories.length;
+          this.updatePageData();
+        } else if (this.role === 'Provider') {
+          this.pendingCategories.push(newCategory);
+          this.updateCarouselData();
+        }
       },
       error => {
         console.error('Error creating category', error);

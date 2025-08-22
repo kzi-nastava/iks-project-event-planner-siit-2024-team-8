@@ -47,7 +47,7 @@ export class UtilityService {
   }
 
   submitReview(id: string, reviewData: any) {
-    return this.http.post(`/api/utilities/${id}/review`, reviewData);
+    return this.http.post(`${this.apiUrl}/${id}/review`, reviewData);
   }
 
   getReviews(id: string): Observable<Review[]> {

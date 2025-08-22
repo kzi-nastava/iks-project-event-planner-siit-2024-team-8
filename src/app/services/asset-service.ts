@@ -91,4 +91,10 @@ import {PageProperties} from '../model/page.properties';
     getTop5Assets() : Observable<AssetResponse[]> {
       return this.http.get<AssetResponse[]>(`${environment.apiHost + this.apiUrl}/top5`)
     }
+
+    getAssetIdByVersionId(versionId: string): Observable<string> {
+      return this.http.get<string>(
+        `${environment.apiHost + this.apiUrl}/version-to-asset-id/${versionId}`
+      );
+    }
   }

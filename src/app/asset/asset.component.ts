@@ -19,6 +19,8 @@ import {EventService} from '../services/event-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {Utility} from '../model/utility';
 import {EventInfoResponse} from '../event/domain/EventInfoResponse';
+import {AssetService} from '../services/asset-service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-asset',
@@ -40,6 +42,7 @@ export class AssetComponent implements OnInit {
   isVersionRoute: boolean = false;
   reservationDate: Date;
   eventID: string;
+  originalAssetId: string;
 
   images: string[] = ['https://via.placeholder.com/800x500.png?text=Default+Image'];
   currentImageIndex: number = 0;
@@ -78,6 +81,7 @@ export class AssetComponent implements OnInit {
       private reviewService: ReviewService,
       private eventService: EventService,
       private snackBar: MatSnackBar,
+      private assetService: AssetService,
   ) {}
 
   ngOnInit(): void {
@@ -317,76 +321,73 @@ export class AssetComponent implements OnInit {
       return;
     }
 
-    const reviewData = {
-      assetId: this.assetID,
-      userId: this.userId,
-      comment: this.userComment,
-      rating: this.userRating,
-    };
-
-    if (this.isProduct) {
-      this.productService.submitReview(this.assetID, reviewData).subscribe({
-        next: () => {
-          this.toastService.showToast({
-            message: 'Thank you for your feedback! \n Admin check in progress',
-            title: 'Success',
-            type: 'success',
-            duration: 3000,
-          });
-          this.resetForm();
-          this.showComments = false;
-          this.boughtAsset = false;
-        },
-        error: (err) => {
-          console.error('Error submitting rating:', err);
-          if (err.status === 400 && err.error.message === 'You have already submitted a review for this asset') {
-            this.toastService.showToast({
-              message: 'You have already submitted a review for this asset.',
-              title: 'Error',
-              type: 'error',
-              duration: 3000,
-            });
-          } else {
-            this.toastService.showToast({
-              message: 'Failed to submit your feedback. Please try again later.',
-              title: 'Error',
-              type: 'error',
-              duration: 3000,
-            });
-          }
-        },
+    const assetIdObservable = this.isVersionRoute
+      ? this.assetService.getAssetIdByVersionId(this.assetID)
+      : new Observable<string>((observer) => {
+        observer.next(this.assetID);
+        observer.complete();
       });
-    } else if (this.isUtility) {
-      this.utilityService.submitReview(this.assetID, reviewData).subscribe({
-        next: () => {
-          this.toastService.showToast({
-            message: 'Thank you for your feedback! \n Admin check in progress',
-            title: 'Success',
-            type: 'success',
-            duration: 3000,
+
+    assetIdObservable.subscribe({
+      next: (originalAssetId) => {
+        const reviewData = {
+          assetId: originalAssetId,
+          userId: this.userId,
+          comment: this.userComment,
+          rating: this.userRating,
+        };
+
+        if (this.isProduct) {
+          this.productService.submitReview(originalAssetId, reviewData).subscribe({
+            next: () => this.handleReviewSuccess(),
+            error: (err) => this.handleReviewError(err)
           });
-          this.resetForm();
-          this.showComments = false;
-          this.boughtAsset = false;
-        },
-        error: (err) => {
-          console.error('Error submitting rating:', err);
-          if (err.status === 400 && err.error.message === 'You have already submitted a review for this asset') {
-            this.toastService.showToast({
-              message: 'You have already submitted a review for this asset.',
-              title: 'Error',
-              type: 'error',
-              duration: 3000,
-            });
-          } else {
-            this.toastService.showToast({
-              message: 'Failed to submit your feedback. Please try again later.',
-              title: 'Error',
-              type: 'error',
-              duration: 3000,
-            });
-          }
-        },
+        } else if (this.isUtility) {
+          this.utilityService.submitReview(originalAssetId, reviewData).subscribe({
+            next: () => this.handleReviewSuccess(),
+            error: (err) => this.handleReviewError(err)
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching original asset ID:', err);
+        this.toastService.showToast({
+          message: 'Failed to submit your feedback. Could not resolve asset ID.',
+          title: 'Error',
+          type: 'error',
+          duration: 3000,
+        });
+      }
+    });
+  }
+
+  private handleReviewSuccess() {
+    this.toastService.showToast({
+      message: 'Thank you for your feedback! \n Admin check in progress',
+      title: 'Success',
+      type: 'success',
+      duration: 3000,
+    });
+    this.resetForm();
+    this.showComments = false;
+    this.boughtAsset = false;
+  }
+
+  private handleReviewError(err: any) {
+    console.error('Error submitting rating:', err);
+    if (err.status === 400 && err.error.message === 'You have already submitted a review for this asset') {
+      this.toastService.showToast({
+        message: 'You have already submitted a review for this asset.',
+        title: 'Error',
+        type: 'error',
+        duration: 3000,
+      });
+    } else {
+      this.toastService.showToast({
+        message: 'Failed to submit your feedback. Please try again later.',
+        title: 'Error',
+        type: 'error',
+        duration: 3000,
       });
     }
   }

@@ -57,20 +57,25 @@ describe('CreateAssetComponent', () => {
   });
 
   it('should not submit form if validation fails', fakeAsync(() => {
+    // Spy FIRST before any lifecycle triggers
+    const validateSpy = spyOn(component as any, 'validateForm').and.returnValue(false);
+
+    // Mock utility categories
     const utilityCategories = [{ id: '123', name: 'Test Utility Category' }];
     mockCategoryService.getActiveUtilityCategories.and.returnValue(of(utilityCategories));
-
-    fixture.detectChanges();
 
     component.assetType = 'utility';
     component.onAssetTypeChange('utility');
 
     tick();
 
-    spyOn(component as any, 'validateForm').and.returnValue(false);
+    // Detect changes AFTER spies and tick
+    fixture.detectChanges();
 
     component.onSubmit();
 
+    // Assert
+    expect(validateSpy).toHaveBeenCalled();
     expect(mockUtilityService.createUtility).not.toHaveBeenCalled();
     expect(mockProductService.createProduct).not.toHaveBeenCalled();
   }));

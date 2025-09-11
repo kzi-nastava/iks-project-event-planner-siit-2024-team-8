@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,4 +8,5 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './search-bar.component.css'
 })
 export class SearchBarComponent {
+  public searchControl = new FormControl('');
 }

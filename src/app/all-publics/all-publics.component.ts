@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
-import {EventInfoResponse} from '../event/domain/EventInfoResponse';
+import {EventInfoResponse} from '../event/domain/dto/EventInfoResponse';
 import {EventService} from '../services/event-service';
 
 @Component({

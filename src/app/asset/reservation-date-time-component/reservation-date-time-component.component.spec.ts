@@ -14,7 +14,7 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {EventInfoResponse} from '../../event/domain/EventInfoResponse';
+import {EventInfoResponse} from '../../event/domain/dto/EventInfoResponse';
 import {Utility} from '../../model/utility';
 
 describe('ReservationDateTimeComponentComponent', () => {

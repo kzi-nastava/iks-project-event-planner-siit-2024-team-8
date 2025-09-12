@@ -4,7 +4,7 @@ import {GeocodingService} from '../../services/geocoding-service';
 import {icon, Marker} from 'leaflet';
 import {Location} from '../../event/domain/location';
 import {map} from 'rxjs/operators';
-import {LocationDTO} from '../../event/domain/EventUpdateRequest';
+import {LocationDTO} from '../../event/domain/dto/EventUpdateRequest';
 
 @Component({
   selector: 'app-leaflet-map',

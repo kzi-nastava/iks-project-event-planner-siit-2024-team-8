@@ -7,7 +7,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastService} from '../../../services/toast-service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {EventService} from '../../../services/event-service';
-import {EventSignupRequest} from '../../../event/domain/EventSignupRequest';
+import {EventSignupRequest} from '../../../event/domain/dto/EventSignupRequest';
 
 @Component({
   selector: 'app-login',

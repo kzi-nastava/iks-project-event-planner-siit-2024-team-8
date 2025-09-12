@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin, {DateClickArg} from '@fullcalendar/interaction';
 import {Router} from '@angular/router';
 import {AuthService} from '../infrastructure/auth/auth.service';
-import {EventInfoResponse} from '../event/domain/EventInfoResponse';
+import {EventInfoResponse} from '../event/domain/dto/EventInfoResponse';
 import {EventService} from '../services/event-service';
 import {ToastService} from '../services/toast-service';
 

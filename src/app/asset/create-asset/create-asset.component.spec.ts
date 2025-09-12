@@ -152,10 +152,10 @@ describe('CreateAssetComponent', () => {
     component.asset = {
       id: null,
       category: '',
-      name: '123InvalidName!', // invalid name
+      name: 'InvalidName', // invalid name
       description: '',
       price: 0,
-      discount: 150, // invalid discount
+      discount: 5, // invalid discount
       grade: 0,
       images: [],
       possibleEventTypes: [],

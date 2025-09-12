@@ -4,10 +4,10 @@ import {Asset} from '../../model/asset';
 import {AssetService} from '../../services/asset-service';
 import {Router} from '@angular/router';
 import {EventService} from '../../services/event-service';
-import {EventInfoResponse} from '../../event/domain/EventInfoResponse';
+import {EventInfoResponse} from '../../event/domain/dto/EventInfoResponse';
 import {PagedResponse} from '../../shared/model/paged.response';
 import {AssetResponse} from '../../model/asset.response';
-import {EventCardResponse} from '../../event/domain/event.card.response';
+import {EventCardResponse} from '../../event/domain/dto/event.card.response';
 
 @Component({
   selector: 'app-home-cards',

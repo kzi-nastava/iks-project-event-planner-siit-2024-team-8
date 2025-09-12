@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import { EventInfoResponse } from '../../event/domain/EventInfoResponse';
+import { EventInfoResponse } from '../../event/domain/dto/EventInfoResponse';
 import { EventService } from '../../services/event-service';
 import {Utility} from '../../model/utility';
 import {ToastService} from '../../services/toast-service';

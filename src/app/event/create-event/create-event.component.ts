@@ -6,7 +6,7 @@ import {GeocodingService} from '../../services/geocoding-service';
 import {Location, returnLocation} from '../domain/location'
 import {ToastService} from '../../services/toast-service';
 import {EventTypeService} from '../../services/event-type-service';
-import {EventDTO, returnEvent} from '../domain/EventDTO.model';
+import {EventDTO, returnEvent} from '../domain/dto/EventDTO.model';
 import {EventService} from '../../services/event-service';
 import {ApiResponse} from '../../model/api.response';
 import {MatStepper} from '@angular/material/stepper';

@@ -1,4 +1,4 @@
-import {LocationDTO} from "../domain/EventUpdateRequest"
+import {LocationDTO} from "./EventUpdateRequest"
 
 export interface EventInfoResponse {
   id: string,

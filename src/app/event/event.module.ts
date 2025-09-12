@@ -51,7 +51,7 @@ import { CreateEventTypeComponent } from './create-event-type/create-event-type.
 import {MatPaginator} from "@angular/material/paginator";
 import { EventTypesComponent } from './event-types/event-types.component';
 import {RouterLink} from "@angular/router";
-import { EditEventComponent } from './edit-event/edit-event.component';
+import { EditEventComponent } from './domain/dto/edit-event/edit-event.component';
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';

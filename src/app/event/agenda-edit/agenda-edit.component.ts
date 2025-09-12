@@ -3,8 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {EventService} from '../../services/event-service';
 import {MatDialog} from '@angular/material/dialog';
 import {ToastService} from '../../services/toast-service';
-import {AgendaUpdateRequest} from '../domain/AgendaUpdateRequest';
-import {ActivityUpdateRequest} from '../domain/ActivityUpdateRequest';
+import {AgendaUpdateRequest} from '../domain/dto/AgendaUpdateRequest';
+import {ActivityUpdateRequest} from '../domain/dto/ActivityUpdateRequest';
 import {ErrorCodeDialogComponent} from '../../dialogs/error-code-dialog/error-code-dialog.component';
 
 @Component({

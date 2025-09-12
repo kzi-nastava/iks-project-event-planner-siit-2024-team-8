@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EventService} from '../../services/event-service';
-import {EventInfoResponse} from '../../event/domain/EventInfoResponse';
+import {EventInfoResponse} from '../../event/domain/dto/EventInfoResponse';
 import {ToastService} from '../../services/toast-service';
 import {BudgetService} from '../../services/budget-service';
 import {CreateReservationRequest, returnCreateReservationRequest} from '../dto/create.reservation.request';

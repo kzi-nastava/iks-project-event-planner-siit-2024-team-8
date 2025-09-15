@@ -10,7 +10,7 @@ import {BlockedUserResponse} from './domain/blocked.user.response';
 import {CreateReportRequest} from './domain/createReportRequest';
 import {ProviderInfoResponse} from './domain/ProviderInfoResponse';
 import {UserUpdateResponse} from './domain/user-update-response';
-import {EventInfoResponse} from '../event/domain/EventInfoResponse';
+import {EventInfoResponse} from '../event/domain/dto/EventInfoResponse';
 
 @Injectable({
   providedIn: 'root',

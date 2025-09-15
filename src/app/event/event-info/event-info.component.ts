@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {EventService} from '../../services/event-service';
-import {EventInfoResponse} from '../domain/EventInfoResponse';
+import {EventInfoResponse} from '../domain/dto/EventInfoResponse';
 import {Router} from '@angular/router';
-import {EventSignupRequest} from '../domain/EventSignupRequest';
+import {EventSignupRequest} from '../domain/dto/EventSignupRequest';
 import {AuthService} from '../../infrastructure/auth/auth.service';
 import {ToastService} from '../../services/toast-service';
 import {Review} from '../../model/review';

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Event} from '../../model/event';
-import {EventInfoResponse} from '../domain/EventInfoResponse';
-import {EventCardResponse} from '../domain/event.card.response';
+import {EventInfoResponse} from '../domain/dto/EventInfoResponse';
+import {EventCardResponse} from '../domain/dto/event.card.response';
 
 @Component({
   selector: 'app-event-card',

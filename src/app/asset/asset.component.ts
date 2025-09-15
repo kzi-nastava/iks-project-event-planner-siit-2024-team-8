@@ -18,7 +18,7 @@ import {ReviewService} from '../services/review-service';
 import {EventService} from '../services/event-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {Utility} from '../model/utility';
-import {EventInfoResponse} from '../event/domain/EventInfoResponse';
+import {EventInfoResponse} from '../event/domain/dto/EventInfoResponse';
 import {AssetService} from '../services/asset-service';
 import {Observable} from 'rxjs';
 

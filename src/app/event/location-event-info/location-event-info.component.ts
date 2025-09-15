@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {LocationDTO} from '../domain/EventUpdateRequest';
+import {LocationDTO} from '../domain/dto/EventUpdateRequest';
 import {Location} from '../../event/domain/location';
 
 @Component({

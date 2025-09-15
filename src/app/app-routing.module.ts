@@ -20,7 +20,7 @@ import {ActivityCardComponent} from './event/activity-card/activity-card.compone
 import {CreateEventTypeComponent} from './event/create-event-type/create-event-type.component';
 import {EventTypesComponent} from './event/event-types/event-types.component';
 import {AuthGuard} from './infrastructure/auth/auth.guard';
-import {EditEventComponent} from './event/edit-event/edit-event.component';
+import {EditEventComponent} from './event/domain/dto/edit-event/edit-event.component';
 import {BudgetComponent} from './event/budget/budget.component';
 import {FastRegisterComponent} from './user/fast-register/fast-register.component';
 import {CalendarComponent} from './calendar/calendar.component';

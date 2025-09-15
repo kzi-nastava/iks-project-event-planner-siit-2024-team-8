@@ -1,7 +1,7 @@
-import {Activity} from './activity';
-import {Location, returnLocation} from './location'
-import {EventType} from './event.type';
-import {BudgetItem} from './budgetItem';
+import {Activity} from '../activity';
+import {Location, returnLocation} from '../location'
+import {EventType} from '../event.type';
+import {BudgetItem} from '../budgetItem';
 
 export interface EventDTO {
   organizerID: string;

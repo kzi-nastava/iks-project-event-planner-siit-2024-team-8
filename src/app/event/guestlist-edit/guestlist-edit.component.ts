@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {EventService} from '../../services/event-service';
 import {MatDialog} from '@angular/material/dialog';
 import {ToastService} from '../../services/toast-service';
-import {GuestlistUpdateRequest} from '../domain/GuestlistUpdateRequest';
+import {GuestlistUpdateRequest} from '../domain/dto/GuestlistUpdateRequest';
 import {GuestResponse} from '../../user/domain/guest-response';
 import {ErrorCodeDialogComponent} from '../../dialogs/error-code-dialog/error-code-dialog.component';
 

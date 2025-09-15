@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EventService } from '../../services/event-service';
-import { EventUpdateRequest } from '../domain/EventUpdateRequest';
+import { EventService } from '../../../../services/event-service';
+import { EventUpdateRequest } from '../EventUpdateRequest';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteConfirmationDialogComponent } from '../../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
-import { EventInfoResponse } from '../domain/EventInfoResponse';
-import { GeocodingService } from '../../services/geocoding-service';
-import {ErrorCodeDialogComponent} from '../../dialogs/error-code-dialog/error-code-dialog.component';
-import {ToastService} from '../../services/toast-service'; // Import the Location interface
+import { DeleteConfirmationDialogComponent } from '../../../../dialogs/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { EventInfoResponse } from '../EventInfoResponse';
+import { GeocodingService } from '../../../../services/geocoding-service';
+import {ErrorCodeDialogComponent} from '../../../../dialogs/error-code-dialog/error-code-dialog.component';
+import {ToastService} from '../../../../services/toast-service'; // Import the Location interface
 
 @Component({
   selector: 'app-edit-event',

@@ -60,6 +60,7 @@ export class ReportsComponent {
     this.userService.suspendUser(this.currentReports.at(this.selectedRowIndex).id).subscribe({
       next: (response: ApiResponse) => {
         this.toastService.showSuccessToast(response.message);
+        this.fetchData();
       },error: (err: HttpErrorResponse) => {
         if (err.status === 404) {
           this.toastService.showErrorToast("Report not found!");

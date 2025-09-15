@@ -5,7 +5,7 @@ import {UserService} from '../user-service';
 import {UserInfoResponse} from '../domain/user.info.response';
 import {MatDialog} from '@angular/material/dialog';
 import {LogoutDialogComponent} from '../../dialogs/logout-dialog/logout-dialog.component';
-import {EventInfoResponse} from '../../event/domain/EventInfoResponse';
+import {EventInfoResponse} from '../../event/domain/dto/EventInfoResponse';
 import {EventService} from '../../services/event-service';
 import {BlockUserDialogComponent} from '../../dialogs/block-user-dialog/block-user-dialog.component';
 import {ToastService} from '../../services/toast-service';

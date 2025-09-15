@@ -9,6 +9,7 @@ import {ToastService} from '../../services/toast-service';
 import {Review} from '../../model/review';
 import {ReviewService} from '../../services/review-service';
 import {UserService} from '../../user/user-service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-event-info',
@@ -24,7 +25,7 @@ export class EventInfoComponent {
   guestClicked: boolean = false;
   locationClicked:  boolean = false;
   isChatVisible:  boolean = false;
-  hoveredRating: number = -1;
+  hoveredRating: number = 0;
 
   alreadySignedUp: boolean = false;
   isFavorite: boolean = false;
@@ -37,9 +38,12 @@ export class EventInfoComponent {
   userId: string;
   organizerId: string;
 
+  feedbackMessage: string = '';
+  feedbackType: 'success' | 'error' | '' = '';
+
   constructor(private route: ActivatedRoute, private eventService: EventService, private router: Router,
               private authService: AuthService, private toastService: ToastService,
-              private reviewService: ReviewService, private userService: UserService) { }
+              private reviewService: ReviewService, private userService: UserService, private snackBar: MatSnackBar,) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -245,11 +249,10 @@ export class EventInfoComponent {
 
   submitRating() {
     if (!this.userComment.trim()) {
-      this.toastService.showToast({
-        message: 'Please enter a comment before submitting.',
-        title: 'Error',
-        type: 'error',
+      this.snackBar.open('Please enter a comment before submitting.', 'Close', {
         duration: 3000,
+        panelClass: ['error-snackbar'],}).onAction().subscribe(() => {
+        this.snackBar.dismiss();
       });
       return;
     }
@@ -263,11 +266,10 @@ export class EventInfoComponent {
 
     this.eventService.submitReview(this.eventID, reviewData).subscribe({
       next: () => {
-        this.toastService.showToast({
-          message: 'Thank you for your feedback!',
-          title: 'Success',
-          type: 'success',
+        this.snackBar.open('Thank you for your feedback!', 'Close', {
           duration: 3000,
+          panelClass: ['success-snackbar'],}).onAction().subscribe(() => {
+          this.snackBar.dismiss();
         });
 
         this.userComment = '';
@@ -276,21 +278,16 @@ export class EventInfoComponent {
       error: (err) => {
         console.error('Error submitting rating:', err);
 
+        let msg = 'Failed to submit your feedback. Please try again later.';
         if (err.status === 400 && err.error.message === 'You have already submitted a review for this event') {
-          this.toastService.showToast({
-            message: 'You have already submitted a review for this event.',
-            title: 'Error',
-            type: 'error',
-            duration: 3000,
-          });
-        } else {
-          this.toastService.showToast({
-            message: 'Failed to submit your feedback. Please try again later.',
-            title: 'Error',
-            type: 'error',
-            duration: 3000,
-          });
+          msg = 'You have already submitted a review for this event.';
         }
+
+        this.snackBar.open(msg, 'Close', {
+          duration: 3000,
+          panelClass: ['error-snackbar'],}).onAction().subscribe(() => {
+          this.snackBar.dismiss();
+        });
       },
     });
   }
@@ -310,6 +307,19 @@ export class EventInfoComponent {
   unfavEvent() {
     this.isFavorite = false;
     this.userService.unaddToFavs(this.userId, this.eventID).subscribe();
+  }
+
+  onHover(n: number) {
+    console.log('hover', n);
+    this.hoveredRating = n;
+  }
+  onLeave() {
+    console.log('leave');
+    this.hoveredRating = 0;
+  }
+  onClick(n: number) {
+    console.log('click', n);
+    this.userRating = n;
   }
 
   protected readonly localStorage = localStorage;

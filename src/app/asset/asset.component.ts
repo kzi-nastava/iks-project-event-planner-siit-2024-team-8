@@ -171,6 +171,10 @@ export class AssetComponent implements OnInit {
       console.log(asset);
       this.reservationDate = new Date(asset.reservationDate);
     }
+    this.assetService.getAssetIdByVersionId(this.asset.id).subscribe(id => {
+      this.originalAssetId = id;
+    });
+
 
     console.log('--- CANCEL BUTTON DEBUG ---');
     console.log('isUtility:', this.isUtility);
@@ -336,14 +340,14 @@ export class AssetComponent implements OnInit {
           comment: this.userComment,
           rating: this.userRating,
         };
-
+        console.log("Resolved originalAssetId:", originalAssetId);
         if (this.isProduct) {
-          this.productService.submitReview(originalAssetId, reviewData).subscribe({
+          this.productService.submitReview(this.asset.id, reviewData).subscribe({
             next: () => this.handleReviewSuccess(),
             error: (err) => this.handleReviewError(err)
           });
         } else if (this.isUtility) {
-          this.utilityService.submitReview(originalAssetId, reviewData).subscribe({
+          this.utilityService.submitReview(this.asset.id, reviewData).subscribe({
             next: () => this.handleReviewSuccess(),
             error: (err) => this.handleReviewError(err)
           });

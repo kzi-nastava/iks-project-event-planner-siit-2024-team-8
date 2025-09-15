@@ -90,11 +90,13 @@
         </div>
       </div>
     </div>
-
+    <div *ngIf="feedbackMessage" class="feedback" [ngClass]="feedbackType">
+      {{ feedbackMessage }}
+    </div>
     <div class="comments-section">
       <p class="see-comments" (click)="loadComments()">{{ showComments ? 'Hide comments' : 'See comments' }}</p>
 
-      <div *ngIf="showComments">
+      <div [hidden]="!showComments">
         <ng-container *ngIf="alreadySignedUp; else joinToComment">
           <div class="comment-input">
             <textarea [(ngModel)]="userComment" placeholder="Leave a comment..."></textarea>
@@ -105,12 +107,10 @@
             <ng-container *ngFor="let star of stars; let i = index">
               <mat-icon
                 class="star"
-                [ngClass]="{
-                'filled': i < (hoveredRating >= 0 ? hoveredRating : userRating)}"
-                (click)="setRating(i + 1)"
-                (mouseenter)="hoveredRating = i + 1"
-                (mouseleave)="hoveredRating = -1">
-
+                [class.filled]="i < (hoveredRating > 0 ? hoveredRating : userRating)"
+                (click)="onClick(i + 1)"
+                (mouseenter)="onHover(i + 1)"
+                (mouseleave)="onLeave()">
                 star
               </mat-icon>
             </ng-container>
@@ -125,7 +125,7 @@
           <p>Join the event to comment and rate it.</p>
         </ng-template>
 
-        <div *ngIf="reviews.length > 0">
+        <div *ngIf="reviews && reviews.length > 0">
           <div class="review" *ngFor="let review of reviews">
             <div class="reviewUserName"> {{ review.userName }} </div>
             <p>{{ review.comment }}</p>

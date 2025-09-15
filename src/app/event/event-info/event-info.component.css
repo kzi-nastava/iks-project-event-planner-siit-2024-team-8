@@ -152,15 +152,25 @@ p {
 
 .star {
   font-size: 24px;
-  color: lightgray;
+  color: lightgray !important;
   cursor: pointer;
   transition: color 0.2s ease-in-out;
 }
 
 .star.filled {
-  color: gold;
+  color: gold !important;
 }
 
 .rating button {
   margin-top: 10px;
+}
+
+.success-snackbar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: white;
 }
